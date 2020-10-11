@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ExtensionModel>
+    <Extension path = "/MonoDevelop/Ide/Commands">
+        <Command id = "MultilingualExtension.MultilingualExtensionCommands.UpdateFiles"
+                 _label = "Synchronizes language files"
+                 _description = "Synchronizes lines from master RESX file"
+                 defaultHandler = "MultilingualExtension.UpdateFilesHandler"
+                  />
+    </Extension>
+     <Extension path = "/MonoDevelop/Ide/Commands">
+        <Command id = "MultilingualExtension.MultilingualExtensionCommands.TranslateFiles"
+                 _label = "Translate files"
+                 _description = "Translate rows where comment = 'New'"
+                 defaultHandler = "MultilingualExtension.TranslateHandler"
+                  />
+    </Extension>
+    
+    <Extension path = "/MonoDevelop/Ide/Commands">
+        <Command id = "MultilingualExtension.MultilingualExtensionCommands.ShowSettings"
+                 _label = "Multilingual Settings"
+                 _description = "Multilingual Settings" 
+                 defaultHandler = "MultilingualExtension.SettingsHandler"
+                 />
+    </Extension>
+    
+    <Extension path = "/MonoDevelop/Ide/ContextMenu/ProjectPad">
+        <Condition id="FileType" fileExtensions=".resx">
+            <CommandItem id="MultilingualExtension.MultilingualExtensionCommands.UpdateFiles" />
+        </Condition>
+    </Extension>
+    <Extension path = "/MonoDevelop/Ide/ContextMenu/ProjectPad">
+        <Condition id="FileType" fileExtensions=".resx">
+            <CommandItem id="MultilingualExtension.MultilingualExtensionCommands.TranslateFiles" />
+        </Condition>
+    </Extension>
+   
+    <Extension path = "/MonoDevelop/Ide/MainMenu/Tools">
+        <CommandItem id="MultilingualExtension.MultilingualExtensionCommands.ShowSettings" />
+    </Extension>
+
+    
+</ExtensionModel>
