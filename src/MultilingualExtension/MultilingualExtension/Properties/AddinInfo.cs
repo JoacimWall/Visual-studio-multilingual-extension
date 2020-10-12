@@ -36,7 +36,7 @@ using Mono.Addins.Description;
 
 [assembly: AddinName("Multilingual Extension")]
 [assembly: AddinCategory("IDE extensions")]
-[assembly: AddinDescription("Synchronization of resx files and auto translation throw Google translate and Microsoft cognitve service.")]
+[assembly: AddinDescription("Synchronization of resx files and auto translation throw Google translate and Microsoft cognitve service")]
 [assembly: AddinAuthor("Joacim Wall")]
 [assembly: AddinDependency("::MonoDevelop.Core", MonoDevelop.BuildInfo.Version)]
 [assembly: AddinDependency("::MonoDevelop.Ide", MonoDevelop.BuildInfo.Version)]
