@@ -3,7 +3,7 @@ using GLib;
 using Gtk;
 using System;
 
-namespace MultilingualExtension
+namespace MultilingualExtension.Helper
 {
     public class ProgressData
     {

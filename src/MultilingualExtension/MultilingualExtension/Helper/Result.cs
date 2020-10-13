@@ -1,5 +1,5 @@
 ﻿using System;
-namespace MultilingualExtension
+namespace MultilingualExtension.Helper
 {
     public class Result<T>
     {

@@ -5,7 +5,7 @@ namespace MultilingualExtension
 {
     public class SettingsWindow : Gtk.Window
     {
-
+        Entry entryMasterLanguageCode;
         RadioButton radiobuttonGoogle;
         RadioButton radiobuttonMicrosoft;
         Entry entryMsoftEndpoint;
@@ -24,15 +24,21 @@ namespace MultilingualExtension
             //box1.PackStart(box2, true, true, 0);
             vbox.Show();
 
+            //Master language code
+            Label labelMasterLanguageCode = new Label("Master language code:");
+            entryMasterLanguageCode = new Entry();
+            entryMasterLanguageCode.SetSizeRequest(580, -1);
 
-           
+            Separator separator1 = new Gtk.HSeparator();
+            separator1.SetSizeRequest(580, -1);
+
             radiobuttonGoogle = new RadioButton(null, "Google translate free (max 100/h)");
             radiobuttonGoogle.Active = true;
            
             Label labelInfoGoogle = new Label("You will only be allowed to translate about 100 words per hour using the free Google API");
            
-            Separator separator = new Gtk.HSeparator();
-            separator.SetSizeRequest(580, -1);
+            Separator separator2 = new Gtk.HSeparator();
+            separator2.SetSizeRequest(580, -1);
             
             radiobuttonMicrosoft = new RadioButton(radiobuttonGoogle, "Microsoft Translation");
             
@@ -68,37 +74,48 @@ namespace MultilingualExtension
 
             int xleft = 5;
             int xleftLab = 10;
-            fix.Put(radiobuttonGoogle, xleft, 10);
-            fix.Put(labelInfoGoogle, xleftLab, 40);
-            fix.Put(separator, xleft, 70);
-            fix.Put(radiobuttonMicrosoft, xleft, 80);
-            fix.Put(labelInfoMsoft, xleftLab, 110);
+            int topValue = 10;
+            int rowHeightEntry = 30;
+            int rowHeightLabel = 15;
+            int rowHeightSeparator = 10;
+            int rowHeightRadioButton = 35;
 
-            fix.Put(labelEndpointMsoft, xleftLab, 140);
-            fix.Put(entryMsoftEndpoint, xleft, 155);
+            fix.Put(labelMasterLanguageCode, xleftLab, topValue);
+            fix.Put(entryMasterLanguageCode, xleft, topValue += rowHeightLabel);
 
-            fix.Put(labelLocationMsoft, xleftLab, 185);
-            fix.Put(entryMsoftLocation, xleft, 200);
+            fix.Put(separator1, xleft, topValue += rowHeightEntry);
 
-            fix.Put(labelKeyMsoft, xleftLab, 230);
-            fix.Put(entryMsoftKey, xleft, 245);
+            fix.Put(radiobuttonGoogle, xleft, topValue += rowHeightSeparator);
+            fix.Put(labelInfoGoogle, xleftLab, topValue += rowHeightRadioButton);
+            fix.Put(separator2, xleft, topValue += rowHeightLabel + 10);
+            fix.Put(radiobuttonMicrosoft, xleft, topValue += rowHeightSeparator);
+            fix.Put(labelInfoMsoft, xleftLab, topValue += rowHeightRadioButton);
 
-            fix.Put(save, 435, 280);
-            fix.Put(close, 510, 280);
+            fix.Put(labelEndpointMsoft, xleftLab, topValue += rowHeightLabel + 10);
+            fix.Put(entryMsoftEndpoint, xleft, topValue += rowHeightLabel);
+
+            fix.Put(labelLocationMsoft, xleftLab, topValue += rowHeightEntry);
+            fix.Put(entryMsoftLocation, xleft, topValue += rowHeightLabel);
+
+            fix.Put(labelKeyMsoft, xleftLab, topValue += rowHeightEntry);
+            fix.Put(entryMsoftKey, xleft, topValue += rowHeightLabel);
+
+            fix.Put(save, 435, topValue += 30);
+            fix.Put(close, 510, topValue );
 
             Add(fix);
 
-
+            entryMasterLanguageCode.Text = Service.SettingsService.MasterLanguageCode;
             //get settings Google is default value 1 
-            if (MonoDevelop.Core.PropertyService.Get<string>(Globals.PROP_TRANSLATIONSERVICE) == "2")
+            if (Service.SettingsService.TranslationService == "2")
             {
                 radiobuttonMicrosoft.Active = true;
             }
            
 
-            entryMsoftEndpoint.Text = MonoDevelop.Core.PropertyService.Get<string>(Globals.PROP_MSOFTENDPOINT); 
-            entryMsoftLocation.Text = MonoDevelop.Core.PropertyService.Get<string>(Globals.PROP_MSOFTLOCATION);
-            entryMsoftKey.Text = MonoDevelop.Core.PropertyService.Get<string>(Globals.PROP_MSOFTKEY);
+            entryMsoftEndpoint.Text = Service.SettingsService.MsoftEndpoint; 
+            entryMsoftLocation.Text = Service.SettingsService.MsoftLocation;
+            entryMsoftKey.Text = Service.SettingsService.MsoftKey;
 
            
             ShowAll();
@@ -112,19 +129,20 @@ namespace MultilingualExtension
 
         private void Save_Clicked(object sender, EventArgs e)
         {
+            Service.SettingsService.MasterLanguageCode = entryMasterLanguageCode.Text;
             //TODO: Save settings
             if (radiobuttonGoogle.Active)
             {
-                MonoDevelop.Core.PropertyService.Set(Globals.PROP_TRANSLATIONSERVICE, "1");
+                Service.SettingsService.TranslationService = "1";
             }
             else
             {
-                MonoDevelop.Core.PropertyService.Set(Globals.PROP_TRANSLATIONSERVICE, "2");
+                Service.SettingsService.TranslationService= "2";
             }
 
-            MonoDevelop.Core.PropertyService.Set(Globals.PROP_MSOFTENDPOINT, entryMsoftEndpoint.Text);
-            MonoDevelop.Core.PropertyService.Set(Globals.PROP_MSOFTLOCATION, entryMsoftLocation.Text);
-            MonoDevelop.Core.PropertyService.Set(Globals.PROP_MSOFTKEY, entryMsoftKey.Text);
+            Service.SettingsService.MsoftEndpoint = entryMsoftEndpoint.Text;
+            Service.SettingsService.MsoftLocation = entryMsoftLocation.Text;
+            Service.SettingsService.MsoftKey = entryMsoftKey.Text;
             HideAll();
         }
 

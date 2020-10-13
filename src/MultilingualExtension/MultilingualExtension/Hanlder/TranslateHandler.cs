@@ -50,10 +50,10 @@ namespace MultilingualExtension
                 //}
             }
         }
-        public async Task<Result<Translations>> GoogleTranslateText(string textToTranslate, string toLanguageCode)
+        public async Task<Helper.Result<Translations>> GoogleTranslateText(string textToTranslate,string fromLanguageCode, string toLanguageCode)
         {
             // Set the language from/to in the url (or pass it into this function)
-            string url = String.Format("https://translate.googleapis.com/translate_a/single?client=gtx&sl={0}&tl={1}&dt=t&q={2}", "en", toLanguageCode, Uri.EscapeUriString(textToTranslate));
+            string url = String.Format("https://translate.googleapis.com/translate_a/single?client=gtx&sl={0}&tl={1}&dt=t&q={2}", fromLanguageCode, toLanguageCode, Uri.EscapeUriString(textToTranslate));
             
 
             using (var client = new HttpClient())
@@ -69,7 +69,7 @@ namespace MultilingualExtension
                 {
                     //You will only be allowed to translate about 100 words per hour using the free API.If you abuse this, Google API will return a 429(Too many requests) error.
                     //TODO: user messsage if more then 100 /h
-                    return new Result<Translations>(responseBody);
+                    return new Helper.Result<Translations>(responseBody);
                 }
                 else
                 {
@@ -77,7 +77,7 @@ namespace MultilingualExtension
                     int seconDoubleQuotesChar = responseBody.IndexOf("\",");
                     var result = responseBody.Substring(firstDoubleQuotesChar + 1, seconDoubleQuotesChar - firstDoubleQuotesChar - 1);
                     Translations responsetext = new Translations { text = result, to = toLanguageCode };
-                    return new Result<Translations>(responsetext);
+                    return new Helper.Result<Translations>(responsetext);
                 }
 
             }
@@ -85,10 +85,10 @@ namespace MultilingualExtension
 
         }
 
-        private async Task<Result<Translations>> MicrosoftTranslateText(string textToTranslate, string toLanguageCode, string endpoint, string location, string key)
+        private async Task<Helper.Result<Translations>> MicrosoftTranslateText(string textToTranslate,string fromLanguageCode, string toLanguageCode, string endpoint, string location, string key)
         {
             
-            string fromLanguageCode = "en";
+           
             string uri = string.Format(endpoint + "{0}?api-version=3.0&from={1}&to={2}", "translate", fromLanguageCode, toLanguageCode);
 
             System.Object[] body = new System.Object[] { new { Text = textToTranslate } };
@@ -108,13 +108,13 @@ namespace MultilingualExtension
                 var responseBody = await response.Content.ReadAsStringAsync();
                 if (response.StatusCode != HttpStatusCode.OK)
                 {
-                    return new Result<Translations>(responseBody);
+                    return new Helper.Result<Translations>(responseBody);
                 }
                 else
                 {
                     var result = JsonConvert.DeserializeObject<IEnumerable<MicrosoftTranslationResponse>>(responseBody).ToList();
 
-                    return new Result<Translations>(result[0].translations[0]);
+                    return new Helper.Result<Translations>(result[0].translations[0]);
                 }
                 // Update the translation field
                 //TranslatedTextLabel.Content = translation;
@@ -125,18 +125,18 @@ namespace MultilingualExtension
 
         protected async override void Run()
         {
-            ProgressBarHelper progress = new ProgressBarHelper("Translate rows where comment has value 'New'");
+            Helper.ProgressBarHelper progress = new Helper.ProgressBarHelper("Translate rows where comment has value 'New'");
             try
             {
                 bool useGoogle = true;
-                if (MonoDevelop.Core.PropertyService.Get<string>(Globals.PROP_TRANSLATIONSERVICE) == "2")
+                if (Service.SettingsService.TranslationService == "2")
                 {
                     useGoogle = false;
                 }
-                string endpoint = MonoDevelop.Core.PropertyService.Get<string>(Globals.PROP_MSOFTENDPOINT);
-                string location = MonoDevelop.Core.PropertyService.Get<string>(Globals.PROP_MSOFTLOCATION);
-                string key = MonoDevelop.Core.PropertyService.Get<string>(Globals.PROP_MSOFTKEY);
-
+                string endpoint = Service.SettingsService.MsoftEndpoint;
+                string location = Service.SettingsService.MsoftLocation;
+                string key = Service.SettingsService.MsoftKey;
+                string masterLanguageCode = Service.SettingsService.MasterLanguageCode;
 
                 ProjectFile selectedItem = (ProjectFile)IdeApp.Workspace.CurrentSelectedItem;
                 string filename = selectedItem.Name;
@@ -184,16 +184,16 @@ namespace MultilingualExtension
                         //  </ data >
                         //TODO: We should get te value for translate from the master resx file.
 
-                        Result<Translations> result;
+                        Helper.Result<Translations> result;
                         var valueNode = dataUpdate.SelectSingleNode("value");
                         if (useGoogle)
                         {
 
-                            result = await GoogleTranslateText(valueNode.InnerText, toLanguageCode);
+                            result = await GoogleTranslateText(valueNode.InnerText, masterLanguageCode, toLanguageCode);
                         }
                         else
                         {
-                            result = await MicrosoftTranslateText(valueNode.InnerText, toLanguageCode, endpoint, location, key);
+                            result = await MicrosoftTranslateText(valueNode.InnerText, masterLanguageCode, toLanguageCode, endpoint, location, key);
                         }
 
                         Console.Write(result);
@@ -202,7 +202,7 @@ namespace MultilingualExtension
                             updatefilechanged = true;
                             //Update text
                             valueNode.InnerText = result.Model.text;
-                            commentNode.InnerText = Globals.STATUS_COMMENT_TRANSLATED;
+                            commentNode.InnerText = Globals.STATUS_COMMENT_NEED_REVIEW;
 
                         }
                         else
@@ -216,7 +216,7 @@ namespace MultilingualExtension
 
                     //TODO:Remove before publish 
                     //Silmulate time 
-                    await Task.Delay(2000);
+                    await Task.Delay(1000);
 
 
 

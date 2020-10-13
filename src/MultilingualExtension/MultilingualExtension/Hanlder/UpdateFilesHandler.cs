@@ -19,7 +19,7 @@ namespace MultilingualExtension
 
         protected async override void Run()
         {
-            ProgressBarHelper progress = new ProgressBarHelper("synchronizes lines from master RESX file.");
+            Helper.ProgressBarHelper progress = new Helper.ProgressBarHelper("synchronizes lines from master RESX file.");
             try
             {
                 
@@ -53,7 +53,7 @@ namespace MultilingualExtension
                 //XmlNamespaceManager nsmgr = new XmlNamespaceManager(doc.NameTable);
                 //nsmgr.AddNamespace("bk", "urn:newbooks-schema");
 
-                // Select all nodes data
+                // Select all nodes data in Master
                 bool updatefilechanged = false;
                 XmlNodeList nodeListMaster = rootMaster.SelectNodes("//data");
                 foreach (XmlNode dataMaster in nodeListMaster)
@@ -91,6 +91,31 @@ namespace MultilingualExtension
                     //TODO:Remove before publish 
                     //Silmulate time 
                     await Task.Delay(2000);
+
+                }
+                //Select all rows data in Updatefile to remove row that not exist in master 
+                XmlNodeList nodeListUpdate = rootUpdate.SelectNodes("//data");
+                foreach (XmlNode dataUpdate in nodeListUpdate)
+                {
+                    // <data name="Select_All" xml:space="preserve">
+                    //< value > Select All </ value >
+                    //<comment>New,Translated,Finish</comment>
+                    //  </ data >
+
+                    XmlNode exist = rootMaster.SelectSingleNode("//data[@name='" + dataUpdate.Attributes.GetNamedItem("name").Value + "']");
+                    if (exist == null)
+                    {
+                        //remove from file
+                        updatefilechanged = true;
+                        rootUpdate.RemoveChild(dataUpdate);
+
+                    }
+
+                    progress.pdata.pbar.Pulse();
+
+                    //TODO:Remove before publish 
+                    //Silmulate time 
+                    await Task.Delay(1000);
 
                 }
                 if (updatefilechanged)
