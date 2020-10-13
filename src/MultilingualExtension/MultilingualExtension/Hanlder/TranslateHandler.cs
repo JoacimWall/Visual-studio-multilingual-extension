@@ -50,7 +50,7 @@ namespace MultilingualExtension
                 //}
             }
         }
-        public async Task<Helper.Result<Translations>> GoogleTranslateText(string textToTranslate,string fromLanguageCode, string toLanguageCode)
+        private async Task<Helper.Result<Translations>> GoogleTranslateText(string textToTranslate,string fromLanguageCode, string toLanguageCode)
         {
             // Set the language from/to in the url (or pass it into this function)
             string url = String.Format("https://translate.googleapis.com/translate_a/single?client=gtx&sl={0}&tl={1}&dt=t&q={2}", fromLanguageCode, toLanguageCode, Uri.EscapeUriString(textToTranslate));

@@ -70,11 +70,10 @@ namespace MultilingualExtension
                         updatefilechanged = true;
                         XmlNode newEntry = updatedoc.ImportNode(dataMaster, true);
                         updatedoc.DocumentElement.AppendChild(newEntry);
-
+                        //check if comment exist from master
                         var commentNode = newEntry.SelectSingleNode("comment");
                         if (commentNode == null)
                         {
-
                             XmlElement elem = updatedoc.CreateElement("comment"); //item1 ,item2..
                             elem.InnerText = Globals.STATUS_COMMENT_NEW;
                             newEntry.AppendChild(elem);
@@ -83,8 +82,23 @@ namespace MultilingualExtension
                         {
                             commentNode.InnerText = Globals.STATUS_COMMENT_NEW;
                         }
-
                     }
+                    else
+                    {
+                        //Check if comment exist or not
+                        var commentNode = exist.SelectSingleNode("comment");
+                        if (commentNode == null)
+                        {
+                            XmlElement elem = updatedoc.CreateElement("comment"); //item1 ,item2..
+                            elem.InnerText = Globals.STATUS_COMMENT_FINAL;
+                            exist.AppendChild(elem);
+                        }
+                        else
+                        {
+                            commentNode.InnerText = Globals.STATUS_COMMENT_FINAL;
+                        }
+                    }
+                    
 
                     progress.pdata.pbar.Pulse();
 
