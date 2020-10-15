@@ -31,8 +31,7 @@ namespace MultilingualExtension
                 string selectedFilename = selectedItem.Name;
 
                 //validate file
-                Regex regex = new Regex(".[a-zA-Z][a-zA-Z]-[a-zA-Z][a-zA-Z].resx");
-                var checkfile = regex.Match(selectedFilename);
+                var checkfile = Helper.RexExHelper.ValidateFilenameIsTargetType(selectedFilename);
                 if (!checkfile.Success)
                 {
                     //TODO: Show message you have selected master .resx file we will update all other resx files in this folder that have the format .sv-SE.resx
@@ -42,7 +41,7 @@ namespace MultilingualExtension
                     string[] fileEntries = Directory.GetFiles(masterFolderPath);
                     foreach (string fileName in fileEntries)
                     {
-                        var checkfileInFolder = regex.Match(fileName);
+                        var checkfileInFolder =  Helper.RexExHelper.ValidateFilenameIsTargetType(fileName);
                         if (checkfileInFolder.Success)
                             SyncFile(selectedFilename, fileName, progress);
 
@@ -175,14 +174,28 @@ namespace MultilingualExtension
         protected override void Update(CommandInfo info)
         {
 
-            //TODO: Check if resx files exist.
+            ProjectFile selectedItem = (ProjectFile)IdeApp.Workspace.CurrentSelectedItem;
+            string selectedFilename = selectedItem.Name;
+
+            //validate file
+            var checkfile = Helper.RexExHelper.ValidateFilenameIsTargetType(selectedFilename);
+            if (!checkfile.Success)
+            {
+                info.Text = "Sync all .xx-xx.resx files with this";
+            }
+            else
+            {
+                info.Text = "Sync this .xx-xx.resx file";
+
+            }
         }
     }
     public enum MultilingualExtensionCommands
     {
         UpdateFiles,
         TranslateFiles,
-        ShowSettings
+        ShowSettings,
+        ExportHandler
     }
 
 }

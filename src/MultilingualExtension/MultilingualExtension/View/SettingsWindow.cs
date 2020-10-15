@@ -1,6 +1,6 @@
 ﻿using System;
 using Gtk;
-using MultilingualExtension; 
+using MultilingualExtension;
 namespace MultilingualExtension
 {
     public class SettingsWindow : Gtk.Window
@@ -13,7 +13,7 @@ namespace MultilingualExtension
         Entry entryMsoftKey;
         //static GLib.SList group = null;
 
-        public SettingsWindow() : base ("Multilingual Settings")
+        public SettingsWindow() : base("Multilingual Settings")
         {
             SetDefaultSize(590, 300);
             SetPosition(Gtk.WindowPosition.Center);
@@ -34,31 +34,31 @@ namespace MultilingualExtension
 
             radiobuttonGoogle = new RadioButton(null, "Google translate free (max 100/h)");
             radiobuttonGoogle.Active = true;
-           
+
             Label labelInfoGoogle = new Label("You will only be allowed to translate about 100 words per hour using the free Google API");
-           
+
             Separator separator2 = new Gtk.HSeparator();
             separator2.SetSizeRequest(580, -1);
-            
+
             radiobuttonMicrosoft = new RadioButton(radiobuttonGoogle, "Microsoft Translation");
-            
+
             Label labelInfoMsoft = new Label("You will need a Azure Cognitive Service (texttranslation service)");
 
             //Endpoint
             Label labelEndpointMsoft = new Label("Endpoint:");
             entryMsoftEndpoint = new Entry();
             entryMsoftEndpoint.SetSizeRequest(580, -1);
-            
+
             //location
             Label labelLocationMsoft = new Label("Location:");
             entryMsoftLocation = new Entry();
             entryMsoftLocation.SetSizeRequest(580, -1);
-          
+
             //Key
             Label labelKeyMsoft = new Label("Key:");
             entryMsoftKey = new Entry();
             entryMsoftKey.SetSizeRequest(580, -1);
-            entryMsoftKey.InvisibleChar = '*'; 
+            entryMsoftKey.InvisibleChar = '*';
             entryMsoftKey.Visibility = false;
 
             Button save = new Button("Save");
@@ -101,7 +101,7 @@ namespace MultilingualExtension
             fix.Put(entryMsoftKey, xleft, topValue += rowHeightLabel);
 
             fix.Put(save, 435, topValue += 30);
-            fix.Put(close, 510, topValue );
+            fix.Put(close, 510, topValue);
 
             Add(fix);
 
@@ -111,13 +111,13 @@ namespace MultilingualExtension
             {
                 radiobuttonMicrosoft.Active = true;
             }
-           
 
-            entryMsoftEndpoint.Text = Service.SettingsService.MsoftEndpoint; 
+
+            entryMsoftEndpoint.Text = Service.SettingsService.MsoftEndpoint;
             entryMsoftLocation.Text = Service.SettingsService.MsoftLocation;
             entryMsoftKey.Text = Service.SettingsService.MsoftKey;
 
-           
+
             ShowAll();
 
         }
@@ -137,7 +137,7 @@ namespace MultilingualExtension
             }
             else
             {
-                Service.SettingsService.TranslationService= "2";
+                Service.SettingsService.TranslationService = "2";
             }
 
             Service.SettingsService.MsoftEndpoint = entryMsoftEndpoint.Text;
@@ -149,7 +149,7 @@ namespace MultilingualExtension
         void OnClicked(object sender, EventArgs args)
         {
 
-           
+
         }
     }
 }

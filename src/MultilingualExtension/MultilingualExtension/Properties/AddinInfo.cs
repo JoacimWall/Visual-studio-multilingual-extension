@@ -30,7 +30,7 @@ using Mono.Addins.Description;
 [assembly: Addin(
     "MultilingualExtension",
     Namespace = "MultilingualExtension",
-    Version = "1.0.4"
+    Version = "1.0.5"
     
 )]
 

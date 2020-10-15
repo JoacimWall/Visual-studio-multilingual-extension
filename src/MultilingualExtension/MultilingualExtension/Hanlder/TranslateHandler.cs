@@ -94,31 +94,29 @@ namespace MultilingualExtension
             System.Object[] body = new System.Object[] { new { Text = textToTranslate } };
             var requestBody = JsonConvert.SerializeObject(body);
 
-            using (var client = new HttpClient())
-            using (var request = new HttpRequestMessage())
+             var client = new HttpClient();
+            var request = new HttpRequestMessage();
+            request.Method = HttpMethod.Post;
+            request.RequestUri = new Uri(uri);
+            request.Content = new StringContent(requestBody, Encoding.UTF8, "application/json");
+            request.Headers.Add("Ocp-Apim-Subscription-Key", key);
+            request.Headers.Add("Ocp-Apim-Subscription-Region", location);
+            request.Headers.Add("X-ClientTraceId", Guid.NewGuid().ToString());
+
+            var response = await client.SendAsync(request);
+            var responseBody = await response.Content.ReadAsStringAsync();
+            if (response.StatusCode != HttpStatusCode.OK)
             {
-                request.Method = HttpMethod.Post;
-                request.RequestUri = new Uri(uri);
-                request.Content = new StringContent(requestBody, Encoding.UTF8, "application/json");
-                request.Headers.Add("Ocp-Apim-Subscription-Key", key);
-                request.Headers.Add("Ocp-Apim-Subscription-Region", location);
-                request.Headers.Add("X-ClientTraceId", Guid.NewGuid().ToString());
-
-                var response = await client.SendAsync(request);
-                var responseBody = await response.Content.ReadAsStringAsync();
-                if (response.StatusCode != HttpStatusCode.OK)
-                {
-                    return new Helper.Result<Translations>(responseBody);
-                }
-                else
-                {
-                    var result = JsonConvert.DeserializeObject<IEnumerable<MicrosoftTranslationResponse>>(responseBody).ToList();
-
-                    return new Helper.Result<Translations>(result[0].translations[0]);
-                }
-                // Update the translation field
-                //TranslatedTextLabel.Content = translation;
+                return new Helper.Result<Translations>(responseBody);
             }
+            else
+            {
+                var result = JsonConvert.DeserializeObject<IEnumerable<MicrosoftTranslationResponse>>(responseBody).ToList();
+
+                return new Helper.Result<Translations>(result[0].translations[0]);
+            }
+            // Update the translation field
+            //TranslatedTextLabel.Content = translation;
             //return translation;
         }
 
@@ -127,7 +125,12 @@ namespace MultilingualExtension
         {
             Helper.ProgressBarHelper progress = new Helper.ProgressBarHelper("Translate rows where comment has value 'New'");
             try
-            {
+            { 
+
+
+
+
+
                 bool useGoogle = true;
                 if (Service.SettingsService.TranslationService == "2")
                 {
@@ -142,8 +145,7 @@ namespace MultilingualExtension
                 string selectedFilename = selectedItem.Name;
 
                 //validate file
-                Regex regex = new Regex(".[a-zA-Z][a-zA-Z]-[a-zA-Z][a-zA-Z].resx");
-                var checkfile = regex.Match(selectedFilename);
+                var checkfile = Helper.RexExHelper.ValidateFilenameIsTargetType(selectedFilename);
                 if (!checkfile.Success)
                 {
                     //TODO: Show message you have selected master .resx file we will update all other resx files in this folder that have the format .sv-SE.resx
@@ -153,7 +155,7 @@ namespace MultilingualExtension
                     string[] fileEntries = Directory.GetFiles(masterFolderPath);
                     foreach (string fileName in fileEntries)
                     {
-                        var checkfileInFolder = regex.Match(fileName);
+                        var checkfileInFolder = Helper.RexExHelper.ValidateFilenameIsTargetType(fileName);
                         if (checkfileInFolder.Success)
                             await TranslateFile(useGoogle, masterLanguageCode, checkfileInFolder.Value.Substring(1, 2), fileName, endpoint, location, key, progress);
 
@@ -259,15 +261,28 @@ namespace MultilingualExtension
         protected override void Update(CommandInfo info)
         {
 
-            //TODO: Check if resx files exist.
+            ProjectFile selectedItem = (ProjectFile)IdeApp.Workspace.CurrentSelectedItem;
+            string selectedFilename = selectedItem.Name;
+
+            //validate file
+            var checkfile = Helper.RexExHelper.ValidateFilenameIsTargetType(selectedFilename);
+            if (!checkfile.Success)
+            {
+                info.Text = "Translate all .xx-xx.resx files";
+            }
+            else
+            {
+                info.Text = "Translate this .xx-xx.resx file";
+
+            }
         }
-        public struct ProgressData
-        {
-            public Gtk.Window window;
-            public Gtk.ProgressBar pbar;
-            public uint timer;
-            public bool activity_mode;
-        }
+        //public struct ProgressData
+        //{
+        //    public Gtk.Window window;
+        //    public Gtk.ProgressBar pbar;
+        //    public uint timer;
+        //    public bool activity_mode;
+        //}
     }
 
 }

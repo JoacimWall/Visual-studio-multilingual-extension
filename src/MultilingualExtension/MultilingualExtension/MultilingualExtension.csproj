@@ -1,15 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net471</TargetFramework>
+ <TargetFramework>net471</TargetFramework>
+   <!--     <TargetFrameworks>netcoreapp2.1;net471</TargetFrameworks>-->
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="MonoDevelop.Addins" Version="0.4.7" />
-    <PackageReference Include="ResXResourceReader.NetStandard" Version="1.0.1" />
+    <PackageReference Include="FileHelpers.ExcelNPOIStorage" Version="3.4.1" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Service\" />
     <Folder Include="Helper\" />
     <Folder Include="View\" />
     <Folder Include="Hanlder\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Net.Http" />
   </ItemGroup>
 </Project>

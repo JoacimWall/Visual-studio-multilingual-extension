@@ -14,7 +14,13 @@
                  defaultHandler = "MultilingualExtension.TranslateHandler"
                   />
     </Extension>
-    
+     <Extension path = "/MonoDevelop/Ide/Commands">
+        <Command id = "MultilingualExtension.MultilingualExtensionCommands.ExportFiles"
+                 _label = "Export files"
+                 _description = "Export rows where comment = 'Need review'"
+                 defaultHandler = "MultilingualExtension.ExportHandler"
+                  />
+    </Extension>
     <Extension path = "/MonoDevelop/Ide/Commands">
         <Command id = "MultilingualExtension.MultilingualExtensionCommands.ShowSettings"
                  _label = "Multilingual Settings"
@@ -33,7 +39,11 @@
             <CommandItem id="MultilingualExtension.MultilingualExtensionCommands.TranslateFiles" />
         </Condition>
     </Extension>
-   
+    <Extension path = "/MonoDevelop/Ide/ContextMenu/ProjectPad">
+        <Condition id="FileType" fileExtensions=".resx">
+            <CommandItem id="MultilingualExtension.MultilingualExtensionCommands.ExportFiles" />
+        </Condition>
+    </Extension>
     <Extension path = "/MonoDevelop/Ide/MainMenu/Tools">
         <CommandItem id="MultilingualExtension.MultilingualExtensionCommands.ShowSettings" />
     </Extension>

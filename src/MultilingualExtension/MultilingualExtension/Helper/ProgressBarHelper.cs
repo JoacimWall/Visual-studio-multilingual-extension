@@ -14,14 +14,14 @@ namespace MultilingualExtension.Helper
     }
     public class ProgressBarHelper
     {
-        public  ProgressData pdata;
+        public ProgressData pdata;
         Gtk.VBox vbox;
         Gtk.HSeparator separator;
         Gtk.Table table;
         Gtk.Label label;
         public ProgressBarHelper(string InfoText)
         {
-            
+
             pdata = new ProgressData();
             pdata.activity_mode = false;
             pdata.window = new Gtk.Window(Gtk.WindowType.Toplevel);
@@ -40,7 +40,7 @@ namespace MultilingualExtension.Helper
 
             /* Create a centering alignment object */
             //Gtk.Alignment align = new Gtk.Alignment(1, 1, 0, 0);
-           // vbox.PackStart(pdata.pbar, true, true, 5);
+            // vbox.PackStart(pdata.pbar, true, true, 5);
             //align.Show();
 
             /* Create the GtkProgressBar */
@@ -71,68 +71,68 @@ namespace MultilingualExtension.Helper
 
             pdata.window.ShowAll();
 
-            
+
 
         }
-        
-        /* Update the value of the progress bar so that we get
-     * some movement */
-         bool progress_timeout()
-        {
-            double new_val;
 
-            if (pdata.activity_mode)
-                pdata.pbar.Pulse();
-            else
-            {
-                /* Calculate the value of the progress bar using the
-                 * value range set in the adjustment object */
-                new_val = pdata.pbar.Fraction + 0.01;
-                if (new_val > 1.0)
-                    new_val = 0.0;
+/* Update the value of the progress bar so that we get
+* some movement */
+bool progress_timeout()
+{
+    double new_val;
 
-                /* Set the new value */
-                pdata.pbar.Fraction = new_val;
-            }
+    if (pdata.activity_mode)
+        pdata.pbar.Pulse();
+    else
+    {
+        /* Calculate the value of the progress bar using the
+         * value range set in the adjustment object */
+        new_val = pdata.pbar.Fraction + 0.01;
+        if (new_val > 1.0)
+            new_val = 0.0;
 
-            /* As this is a timeout function, return TRUE so that it
-             * continues to get called */
+        /* Set the new value */
+        pdata.pbar.Fraction = new_val;
+    }
 
-            return true;
-        }
-        /* Callback that toggles the text display within the progress bar trough */
-         void toggle_show_text(object obj, EventArgs args)
-        {
-            if (pdata.pbar.Text == "")
-                pdata.pbar.Text = "some text";
-            else
-                pdata.pbar.Text = "";
-        }
+    /* As this is a timeout function, return TRUE so that it
+     * continues to get called */
 
-        /* Callback that toggles the activity mode of the progress bar */
-         void toggle_activity_mode(object obj, EventArgs args)
-        {
-            pdata.activity_mode = !pdata.activity_mode;
-            if (pdata.activity_mode)
-                pdata.pbar.Pulse();
-            else
-                pdata.pbar.Fraction = 0.0;
-        }
+    return true;
+}
+/* Callback that toggles the text display within the progress bar trough */
+void toggle_show_text(object obj, EventArgs args)
+{
+    if (pdata.pbar.Text == "")
+        pdata.pbar.Text = "some text";
+    else
+        pdata.pbar.Text = "";
+}
 
-        /* Callback that toggles the orientation of the progress bar */
-         void toggle_orientation(object obj, EventArgs args)
-        {
-            switch (pdata.pbar.Orientation)
-            {
-                case Gtk.ProgressBarOrientation.LeftToRight:
-                    pdata.pbar.Orientation = Gtk.ProgressBarOrientation.RightToLeft;
-                    break;
-                case Gtk.ProgressBarOrientation.RightToLeft:
-                    pdata.pbar.Orientation = Gtk.ProgressBarOrientation.LeftToRight;
-                    break;
-            }
-        }
+/* Callback that toggles the activity mode of the progress bar */
+void toggle_activity_mode(object obj, EventArgs args)
+{
+    pdata.activity_mode = !pdata.activity_mode;
+    if (pdata.activity_mode)
+        pdata.pbar.Pulse();
+    else
+        pdata.pbar.Fraction = 0.0;
+}
 
-        
+/* Callback that toggles the orientation of the progress bar */
+void toggle_orientation(object obj, EventArgs args)
+{
+    switch (pdata.pbar.Orientation)
+    {
+        case Gtk.ProgressBarOrientation.LeftToRight:
+            pdata.pbar.Orientation = Gtk.ProgressBarOrientation.RightToLeft;
+            break;
+        case Gtk.ProgressBarOrientation.RightToLeft:
+            pdata.pbar.Orientation = Gtk.ProgressBarOrientation.LeftToRight;
+            break;
+    }
+}
+
+
     }
 }
