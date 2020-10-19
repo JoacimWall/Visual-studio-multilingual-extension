@@ -146,7 +146,7 @@ namespace MultilingualExtension
             var engine = new FileHelperEngine<TranslationsRow>(System.Text.Encoding.UTF8);
             //get filename
             var checkfile = Helper.RexExHelper.ValidateFilenameIsTargetType(updatePath);
-
+            engine.HeaderText = engine.GetFileHeader();
             engine.WriteFile(masterFolderPath + "Language" + checkfile.Value +  ".csv", rows);
 
         }
