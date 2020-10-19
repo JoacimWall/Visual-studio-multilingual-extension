@@ -195,7 +195,8 @@ namespace MultilingualExtension
         UpdateFiles,
         TranslateFiles,
         ShowSettings,
-        ExportHandler
+        ExportFiles,
+        ImportFiles
     }
 
 }
