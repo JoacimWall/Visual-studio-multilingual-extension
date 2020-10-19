@@ -18,9 +18,11 @@
  ### Synchronization of Resx files
  There are two ways to sync the resx files. 
  Right-click the master file and select "Sync all .xx-x.resx files with this". Then all files that are in the same folder and follow the naming standard .xx-xx.resx  will be synchronized with the master file. 
- <img src="./images/SyncAllFilePopUpDialog.png">
+ <img width=“100” height="400" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/SyncAllFilePopUpDialog.png">
  
 Right-click one of the language files (AppResources.fr-FR.resx) and select "Sync this .xx-x.resx file". This file will then be synchronized with the master file.
+
+<img width=“100” height="400" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/SyncFilePopUpDialog.png">
 
 ### Translation of texts
 By default, this extension uses Google free translation. This is limited to only 100 translations per hour. To use the Microsoft translation service, select tools / multilangual settings in the visual studio and fill in the information from Microsoft. in this dialog you can also change the master language that is en by default.
