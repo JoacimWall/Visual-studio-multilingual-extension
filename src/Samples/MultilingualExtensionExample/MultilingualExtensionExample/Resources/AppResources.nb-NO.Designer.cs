@@ -65,9 +65,21 @@ namespace MultilingualExtensionExample.Resources {
             }
         }
         
-        internal static string Cityl {
+        internal static string Enter_Your_Cat {
             get {
-                return ResourceManager.GetString("Cityl", resourceCulture);
+                return ResourceManager.GetString("Enter_Your_Cat", resourceCulture);
+            }
+        }
+        
+        internal static string CSharp_Is_Love {
+            get {
+                return ResourceManager.GetString("CSharp_Is_Love", resourceCulture);
+            }
+        }
+        
+        internal static string How_Old_Are_You {
+            get {
+                return ResourceManager.GetString("How_Old_Are_You", resourceCulture);
             }
         }
     }

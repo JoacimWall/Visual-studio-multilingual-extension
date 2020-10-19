@@ -13,17 +13,24 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Hello" xml:space="preserve">
-        <value>Hallå</value>
-    <comment>Translated</comment></data>
+        <value>Hej</value>
+    <comment>Final</comment></data>
   <data name="Enter_Your_Email" xml:space="preserve">
-        <value>Ange din e-postadress</value>
-    <comment>Translated</comment></data>
+        <value>Ange din e-post</value>
+    <comment>Final</comment></data>
   <data name="Enter_Your_Password" xml:space="preserve">
         <value>Ange ditt lösenord</value>
-    <comment>Translated</comment>
+    <comment>Final</comment>
     </data>
-  <data name="City" xml:space="preserve">
-        <value>Stad</value>
-    <comment>Translated</comment>
+  <data name="Enter_Your_Cat" xml:space="preserve">
+        <value>Ange din katt</value>
+    <comment>Final</comment>
+        </data>
+  <data name="CSharp_Is_Love" xml:space="preserve">
+        <value>CSharp är kärlek</value>
+    <comment>Final</comment>
     </data>
+  <data name="How_Old_Are_You" xml:space="preserve">
+        <value>Hur gammal är du</value>
+    <comment>Need review</comment></data>
 </root>

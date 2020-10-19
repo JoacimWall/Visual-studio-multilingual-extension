@@ -14,16 +14,23 @@
   </resheader>
   <data name="Hello" xml:space="preserve">
         <value>Hei</value>
-    <comment>Translated</comment></data>
+    <comment>Final</comment></data>
   <data name="Enter_Your_Email" xml:space="preserve">
         <value>Skriv inn e-posten din</value>
-    <comment>Translated</comment></data>
+    <comment>Final</comment></data>
   <data name="Enter_Your_Password" xml:space="preserve">
         <value>Skriv inn passordet ditt</value>
-    <comment>Translated</comment>
+    <comment>Final</comment>
     </data>
-  <data name="Cityl" xml:space="preserve">
-        <value>Byen</value>
-    <comment>Translated</comment>
+  <data name="Enter_Your_Cat" xml:space="preserve">
+        <value>Skriv inn katten din</value>
+    <comment>Final</comment>
+        </data>
+  <data name="CSharp_Is_Love" xml:space="preserve">
+        <value>CSharp er kjærlighet</value>
+    <comment>Final</comment>
     </data>
+  <data name="How_Old_Are_You" xml:space="preserve">
+        <value>hvor gammel er du</value>
+    <comment>Need review</comment></data>
 </root>

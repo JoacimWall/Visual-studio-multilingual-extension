@@ -20,10 +20,16 @@
     </data>
      <data name="Enter_Your_Password" xml:space="preserve">
         <value>Enter your password</value>
+    </data>
+     <data name="Enter_Your_Cat" xml:space="preserve">
+        <value>Enter your cat</value>
+    <comment>bla bla bla</comment>
+        </data>
+    <data name="CSharp_Is_Love" xml:space="preserve">
+        <value>CSharp is love</value>
     <comment>bla bla bla</comment>
     </data>
-     <data name="City" xml:space="preserve">
-        <value>City</value>
-    <comment>Translated</comment>
+ <data name="How_Old_Are_You" xml:space="preserve">
+        <value>how old are you</value>
     </data>
 </root>
