@@ -27,6 +27,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>AppResources.nb-NO.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="Resources\AppResources %28copy%29.sv-SE.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.fr-FR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Resources\AppResources.Designer.cs">
@@ -34,6 +38,12 @@
     </Compile>
     <Compile Update="Resources\AppResources.nb-NO.Designer.cs">
       <DependentUpon>AppResources.nb-NO.resx</DependentUpon>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Resources\AppResources %28copy%29.sv-SE.Designer.cs">
+      <DependentUpon>AppResources %28copy%29.sv-SE.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\AppResources.fr-FR.Designer.cs">
+      <DependentUpon>AppResources.fr-FR.resx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
