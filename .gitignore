@@ -322,6 +322,9 @@ __pycache__/
 *.odx.cs
 *.xsd.cs
 
+# Macfiles
+*.DS_store
+
 # OpenCover UI analysis results
 OpenCover/
 
