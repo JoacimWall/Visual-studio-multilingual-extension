@@ -27,7 +27,7 @@ Right-click one of the language files (AppResources.fr-FR.resx) and select "Sync
 <img width=“100” height="400" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/SyncFilePopUpDialog.png">
 
 ### Translation of texts
-By default, this extension uses Google free translation. This is limited to only 100 translations per hour. To use the Microsoft translation service, select tools / multilangual settings in the visual studio and fill in the information from Microsoft. in this dialog you can also change the master language that is en by default.
+By default, this extension uses Google free translation. This is limited to only 100 translations per hour. To use the Microsoft translation service, select tools / multilangual settings in the visual studio and fill in the information from Microsoft. In this dialog you can also change the master language that is 'en' by default.
 If you also want to handle the stature for the texts in the master resx file, check the 'Add Comment node to master Resx file on sync' in settings dialog.
 
 <img width=“100” height="200" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/MultilingualSettingsDialog.png">
@@ -38,12 +38,12 @@ There are two ways to export the resx files to csv.
  
 <img  width=“100” height="400" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/ExportAllFilePopUpDialog.png">
 
-Right-click one of the language files (AppResources.fr-FR.resx) and select "Export this .xx-x.resx file". then all rows with status 'New' or 'Need review' will be exported to the csv file.
+Right-click one of the language files (AppResources.fr-FR.resx) and select "Export this .xx-x.resx file". Then all rows with status 'New' or 'Need review' will be exported to the csv file.
 
 <img  width=“100” height="400" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/ExportFilePopUpDialog.png">
 
 ### Import of texts
-Right-click one of the csv language files (AppResources.fr-FR.resx.csv) and select "Import translation". then all rows with status 'Final' will be imported to the resx file that are in the same folder. 
+Right-click one of the csv language files (AppResources.fr-FR.resx.csv) and select "Import translation". then all rows with status 'Final' will be imported to the resx file(AppResources.fr-FR.resx) that are in the same folder. 
 
 <img  width=“100” height="400" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/ImportFilePopUpDialog.png">
 
@@ -53,12 +53,14 @@ This extension use the comment field in the target resx files(AppResources.fr-FR
 * Need review
 * Final
 
-New: The row  will get this status after first synchronization. If the data row not exist in the target file,
+New: The row will get this status after first synchronization. If the data row not exist in the target file,
 if it already exists then it gets the status "final"
 
 Need review: This status will it get after translation from one of the translation services.
 
 Final: This status will it get after import from csv file. You can also set this status in the target file if you don't want the row to be exported to external stakholder for translation.
 
+In this first version all files need to be in the same folder, export and import (.csv) should not be renamed if the should work when we will import translations.
+
 ## Converting from windows multilangual toolkit
-if you have used the windows multilangual toolkit before you can use this. The first time you sync the master file with the target files (AppResources.fr-FR.resx) all existings rows in the target file will get status "Final"  
+if you have used the windows multilangual toolkit before you can use this. The first time you sync the master file with the target files (AppResources.fr-FR.resx) all existings rows in the target file will get status "Final".  
