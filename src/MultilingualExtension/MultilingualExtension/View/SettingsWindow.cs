@@ -29,6 +29,10 @@ namespace MultilingualExtension
             entryMasterLanguageCode = new Entry();
             entryMasterLanguageCode.SetSizeRequest(580, -1);
 
+            //Add Status/translation to master file
+            CheckButton checkButtonAddComment = new CheckButton("Add Comment node to master Resx file on sync");
+            checkButtonAddComment.Active = true;
+
             Separator separator1 = new Gtk.HSeparator();
             separator1.SetSizeRequest(580, -1);
 
@@ -83,6 +87,8 @@ namespace MultilingualExtension
             fix.Put(labelMasterLanguageCode, xleftLab, topValue);
             fix.Put(entryMasterLanguageCode, xleft, topValue += rowHeightLabel);
 
+            fix.Put(checkButtonAddComment, xleft, topValue += rowHeightEntry);
+
             fix.Put(separator1, xleft, topValue += rowHeightEntry);
 
             fix.Put(radiobuttonGoogle, xleft, topValue += rowHeightSeparator);
@@ -116,7 +122,7 @@ namespace MultilingualExtension
             entryMsoftEndpoint.Text = Service.SettingsService.MsoftEndpoint;
             entryMsoftLocation.Text = Service.SettingsService.MsoftLocation;
             entryMsoftKey.Text = Service.SettingsService.MsoftKey;
-
+            checkButtonAddComment.Active = Service.SettingsService.AddCommentNodeMasterResx;
 
             ShowAll();
 

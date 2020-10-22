@@ -15,7 +15,7 @@ using MonoDevelop.Projects;
 
 namespace MultilingualExtension
 {
-    class ImortHandler : CommandHandler
+    class ImportHandler : CommandHandler
     {
         protected override void Run()
         {
@@ -27,7 +27,7 @@ namespace MultilingualExtension
                 string selectedFilename = selectedItem.Name;
 
                 //validate file
-                var checkfile = Helper.RexExHelper.ValidateFilenameIsTargetType(selectedFilename);
+                var checkfile = Helper.RexExHelper.ValidateFilenameIsTargetTypeCsv(selectedFilename);
                 if (!checkfile.Success)
                 {
                     //TODO: Show message you select file have the format .sv-SE.resx
@@ -36,8 +36,8 @@ namespace MultilingualExtension
                 }
                 else
                 {
-                    //string masterPath = selectedFilename.Substring(0, checkfile.Index) + ".resx";
-                    //ExportToExcel(masterPath, selectedFilename, progress);
+                    string updatePath = selectedFilename.Substring(0, selectedFilename.Length-4);
+                    ImportCsvToResx(selectedFilename, updatePath, progress);
                 }
 
             }
@@ -62,86 +62,60 @@ namespace MultilingualExtension
             string selectedFilename = selectedItem.Name;
 
             //validate file
-            var checkfile = Helper.RexExHelper.ValidateFilenameIsTargetType(selectedFilename);
+            var checkfile = Helper.RexExHelper.ValidateFilenameIsTargetTypeCsv(selectedFilename);
             if (!checkfile.Success)
             {
                 info.Visible = false;
             }
             else
             {
-                info.Visible = false;
-                info.Text = "Import translations file";
+                info.Visible = true;
+                info.Text = "Import translations";
 
             }
         }
-        //private void ExportToExcel(string masterPath, string updatePath, Helper.ProgressBarHelper progress)
-        //{
-        //    int folderindex = updatePath.LastIndexOf("/");
-        //    string masterFolderPath = updatePath.Substring(0, folderindex + 1);
+        private void ImportCsvToResx(string masterPath, string updatePath, Helper.ProgressBarHelper progress)
+        {
+            
 
 
-        //    XmlDocument updatedoc = new XmlDocument();
-        //    updatedoc.Load(updatePath);
-        //    XmlNode rootUpdate = updatedoc.DocumentElement;
+            XmlDocument updatedoc = new XmlDocument();
+            updatedoc.Load(updatePath);
+            XmlNode rootUpdate = updatedoc.DocumentElement;
 
-        //    XmlDocument masterdoc = new XmlDocument();
-        //    masterdoc.Load(masterPath);
-        //    XmlNode rootMaster = masterdoc.DocumentElement;
+            var engine = new FileHelperEngine<TranslationsRow>();
+            engine.HeaderText = engine.GetFileHeader();
+            var records = engine.ReadFile(masterPath);
+            bool updatefilechanged = false;
+            foreach (var record in records)
+            {
+                if (record.Status == Globals.STATUS_COMMENT_FINAL)
+                {
+                    var dataNode = rootUpdate.SelectSingleNode("//data[@name='" + record.Name + "']");
+                    if (dataNode != null)
+                    {
+                        updatefilechanged = true;
+                        var dataNodeValue = dataNode.SelectSingleNode("value");
+                        var dataNodeComment = dataNode.SelectSingleNode("comment");
+                        if (dataNodeValue != null && dataNodeComment != null)
+                        {
+                            dataNodeValue.InnerText = record.TargetLanguage;
+                            dataNodeComment.InnerText = Globals.STATUS_COMMENT_FINAL;
+                        }
+           
+                    }
 
+                }
+                progress.pdata.pbar.Pulse();
 
-        //    var rows = new List<TranslationsRow>();
+            }
 
-        //    // Select all nodes data
-        //    XmlNodeList nodeListUpdate = rootUpdate.SelectNodes("//data");
-        //    foreach (XmlNode dataUpdate in nodeListUpdate)
-        //    {
-        //        //check if comment exist
-        //        var commentNode = dataUpdate.SelectSingleNode("comment");
-        //        if (commentNode != null && (commentNode.InnerText == Globals.STATUS_COMMENT_NEW || commentNode.InnerText == Globals.STATUS_COMMENT_NEED_REVIEW))
-        //        {
-        //            //Get master value
-        //            XmlNode masterExist = rootMaster.SelectSingleNode("//data[@name='" + dataUpdate.Attributes.GetNamedItem("name").Value + "']");
+            if (updatefilechanged)
+                updatedoc.Save(updatePath);
 
-        //            if (masterExist != null)
-        //            {
-        //                var masterValueNode = masterExist.SelectSingleNode("value");
-        //                if (masterValueNode == null)
-        //                {
-        //                    continue;
-        //                    //TODO: log error    
-        //                }
-        //                var updateValueNode = dataUpdate.SelectSingleNode("value");
-        //                if (updateValueNode == null)
-        //                {
-        //                    continue;
-        //                    //TODO: log error  
+            
 
-        //                }
-
-        //                rows.Add(new TranslationsRow()
-        //                {
-        //                    Name = dataUpdate.Attributes.GetNamedItem("name").Value,
-        //                    SourceLanguage = masterValueNode.InnerText,
-        //                    TargetLanguage = updateValueNode.InnerText,
-        //                    Status = commentNode.InnerText
-        //                });
-
-        //            }
-        //        }
-
-
-               
-
-        //        progress.pdata.pbar.Pulse();
-        //    }
-
-        //    var engine = new FileHelperEngine<TranslationsRow>(System.Text.Encoding.UTF8);
-        //    //get filename
-        //    var checkfile = Helper.RexExHelper.ValidateFilenameIsTargetType(updatePath);
-        //    engine.HeaderText = engine.GetFileHeader();
-        //    engine.WriteFile(masterFolderPath + "Language" + checkfile.Value +  ".csv", rows);
-
-        //}
+        }
 
     }
    

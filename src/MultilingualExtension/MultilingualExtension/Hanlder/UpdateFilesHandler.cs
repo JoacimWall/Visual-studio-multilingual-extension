@@ -26,8 +26,8 @@ namespace MultilingualExtension
                 
 
                 ProjectFile selectedItem = (ProjectFile)IdeApp.Workspace.CurrentSelectedItem;
+                bool addCommentNodeToMasterResx = Service.SettingsService.AddCommentNodeMasterResx;
 
-               
                 string selectedFilename = selectedItem.Name;
 
                 //validate file
@@ -43,7 +43,7 @@ namespace MultilingualExtension
                     {
                         var checkfileInFolder =  Helper.RexExHelper.ValidateFilenameIsTargetType(fileName);
                         if (checkfileInFolder.Success)
-                            SyncFile(selectedFilename, fileName, progress);
+                            SyncFile(selectedFilename, fileName, addCommentNodeToMasterResx, progress);
 
                     }
 
@@ -51,7 +51,7 @@ namespace MultilingualExtension
                 else
                 {
                     string masterPath = selectedFilename.Substring(0, checkfile.Index) + ".resx";
-                    SyncFile(masterPath, selectedFilename, progress);
+                    SyncFile(masterPath, selectedFilename, addCommentNodeToMasterResx, progress);
                 }
 
 
@@ -73,13 +73,13 @@ namespace MultilingualExtension
             //    var d = MonoDevelop.Core.FileService;
             //var w = MonoDevelop.Projects.So.Gui.Wor
         }
-        private  Helper.Result<Boolean> SyncFile(string masterPath,string updatefilePath, Helper.ProgressBarHelper progress)
+        private  Helper.Result<Boolean> SyncFile(string masterfilePath,string updatefilePath,bool addMasterCommentNode, Helper.ProgressBarHelper progress)
         {
 
             
 
             XmlDocument masterdoc = new XmlDocument();
-            masterdoc.Load(masterPath);
+            masterdoc.Load(masterfilePath);
             XmlNode rootMaster = masterdoc.DocumentElement;
 
             XmlDocument updatedoc = new XmlDocument();
@@ -91,20 +91,37 @@ namespace MultilingualExtension
             //nsmgr.AddNamespace("bk", "urn:newbooks-schema");
 
             // Select all nodes data in Master
-            bool updatefilechanged = false;
+            bool updateFileChanged = false;
+            bool masterFileChanged = false;
             XmlNodeList nodeListMaster = rootMaster.SelectNodes("//data");
             foreach (XmlNode dataMaster in nodeListMaster)
             {
-                // <data name="Select_All" xml:space="preserve">
-                //< value > Select All </ value >
-                //<comment>New,Translated,Finish</comment>
-                //  </ data >
+                //Add comment node to master if that is set in settings
+                if (addMasterCommentNode)
+                {
+                    var commentNode = dataMaster.SelectSingleNode("comment");
+                    if (commentNode == null)
+                    {
+                        XmlElement elem = masterdoc.CreateElement("comment"); //item1 ,item2..
+                        elem.InnerText = Globals.STATUS_COMMENT_NEED_REVIEW;
+                        dataMaster.AppendChild(elem);
+                        masterFileChanged = true;
+                    }
+                    else
+                    {
+                        if (commentNode.InnerText != Globals.STATUS_COMMENT_NEED_REVIEW)
+                            masterFileChanged = true;
+
+                        commentNode.InnerText = Globals.STATUS_COMMENT_NEED_REVIEW;
+                    }
+
+                }
 
                 XmlNode exist = rootUpdate.SelectSingleNode("//data[@name='" + dataMaster.Attributes.GetNamedItem("name").Value + "']");
                 if (exist == null)
                 {
                     //Add to file
-                    updatefilechanged = true;
+                    updateFileChanged = true;
                     XmlNode newEntry = updatedoc.ImportNode(dataMaster, true);
                     updatedoc.DocumentElement.AppendChild(newEntry);
                     //check if comment exist from master
@@ -129,9 +146,13 @@ namespace MultilingualExtension
                         XmlElement elem = updatedoc.CreateElement("comment"); //item1 ,item2..
                         elem.InnerText = Globals.STATUS_COMMENT_FINAL;
                         exist.AppendChild(elem);
+                        updateFileChanged = true;
                     }
                     else
                     {
+                        if (commentNode.InnerText != Globals.STATUS_COMMENT_FINAL)
+                            updateFileChanged = true;
+
                         commentNode.InnerText = Globals.STATUS_COMMENT_FINAL;
                     }
                 }
@@ -154,7 +175,7 @@ namespace MultilingualExtension
                 if (exist == null)
                 {
                     //remove from file
-                    updatefilechanged = true;
+                    updateFileChanged = true;
                     rootUpdate.RemoveChild(dataUpdate);
 
                 }
@@ -164,8 +185,11 @@ namespace MultilingualExtension
               
 
             }
-            if (updatefilechanged)
+            if (updateFileChanged)
                 updatedoc.Save(updatefilePath);
+
+            if (masterFileChanged)
+                masterdoc.Save(masterfilePath);
 
             return new Helper.Result<bool>(true);
 

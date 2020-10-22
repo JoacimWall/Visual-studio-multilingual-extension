@@ -52,7 +52,7 @@
         </Condition>
     </Extension>
     <Extension path = "/MonoDevelop/Ide/ContextMenu/ProjectPad">
-        <Condition id="FileType" fileExtensions=".resx">
+        <Condition id="FileType" fileExtensions=".csv">
             <CommandItem id="MultilingualExtension.MultilingualExtensionCommands.ImportFiles" />
         </Condition>
     </Extension>

@@ -1,4 +1,7 @@
 ﻿#Generate new extension package:
-msbuild MultilingualExtension.csproj /target:PackageAddin
+msbuild MultilingualExtension.csproj /p:Configuration=Release /target:PackageAddin
 #support file helper
 https://www.filehelpers.net/examples/
+
+TODO:
+Check for dublicate names in syncfunction 

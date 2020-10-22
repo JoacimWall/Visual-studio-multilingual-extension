@@ -19,7 +19,7 @@
         <value>Ange din e-post</value>
     <comment>Final</comment></data>
   <data name="Enter_Your_Password" xml:space="preserve">
-        <value>Ange ditt lösenord</value>
+        <value>Ange ditt lösenord tack</value>
     <comment>Final</comment>
     </data>
   <data name="Enter_Your_Cat" xml:space="preserve">
@@ -31,6 +31,6 @@
     <comment>Final</comment>
     </data>
   <data name="How_Old_Are_You" xml:space="preserve">
-        <value>Hur gammal är du</value>
-    <comment>Need review</comment></data>
+        <value>Hur gammal är du tror du</value>
+    <comment>Final</comment></data>
 </root>

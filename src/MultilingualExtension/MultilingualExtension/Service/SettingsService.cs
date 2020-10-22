@@ -9,7 +9,28 @@ namespace MultilingualExtension.Service
          const string PROP_MSOFTKEY = "MsoftKey";
          const string PROP_TRANSLATIONSERVICE = "TranslationServcie";
          const string PROP_MASTERLANGUAGECODE = "MasterLanguageCode";
-     
+         const string PROP_ADDCOMMENTNODEMASTERRESX = "AddCommentNodeMasterResx";
+
+        public static bool AddCommentNodeMasterResx
+        {
+            get
+            {
+                //1= Google
+                //2=Microsoift
+                var service = MonoDevelop.Core.PropertyService.Get<string>(PROP_ADDCOMMENTNODEMASTERRESX);
+                if (String.IsNullOrEmpty(service) || service== "1")
+                    return true;
+
+                return false;
+            }
+            set
+            {
+                if (value)
+                    MonoDevelop.Core.PropertyService.Set(PROP_ADDCOMMENTNODEMASTERRESX, "1");
+                else
+                    MonoDevelop.Core.PropertyService.Set(PROP_ADDCOMMENTNODEMASTERRESX, "0");
+            }
+        }
         public static string TranslationService
         {
             get

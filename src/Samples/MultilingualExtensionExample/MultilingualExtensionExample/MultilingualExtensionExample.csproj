@@ -13,24 +13,23 @@
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\AppResources.sv-SE.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>AppResources.sv-SE.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Update="Resources\AppResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\AppResources.sv-SE.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.sv-SE.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\AppResources.nb-NO.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>AppResources.nb-NO.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\AppResources %28copy%29.sv-SE.resx">
+      <EmbeddedResource Update="Resources\AppResources.fr-FR.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>AppResources.fr-FR.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Resources\AppResources.Designer.cs">
@@ -39,14 +38,11 @@
     <Compile Update="Resources\AppResources.nb-NO.Designer.cs">
       <DependentUpon>AppResources.nb-NO.resx</DependentUpon>
     </Compile>
-    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Resources\AppResources %28copy%29.sv-SE.Designer.cs">
-      <DependentUpon>AppResources %28copy%29.sv-SE.resx</DependentUpon>
+    <Compile Update="Resources\AppResources.sv-SE.Designer.cs">
+      <DependentUpon>AppResources.sv-SE.resx</DependentUpon>
     </Compile>
     <Compile Update="Resources\AppResources.fr-FR.Designer.cs">
       <DependentUpon>AppResources.fr-FR.resx</DependentUpon>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="Resources\AppResources.sv-SE" />
   </ItemGroup>
 </Project>
