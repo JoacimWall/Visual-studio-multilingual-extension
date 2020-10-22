@@ -1,6 +1,6 @@
 # Visual Studio For Mac Multilingual Extension
 #### This extension is for handling multilingual support in visual studio for Mac.
-#### For it to work, it requires that you start from a Resx file that is master. Then you name all the other files according to the masterfile name .xx-xx.resx. For example AppResources.resx for master and AppResources.fr-FR.resx for French.
+#### For it to work, it requires that you start from a Resx file that is the master. Then you name all the other files according to the masterfile name .xx-xx.resx. For example AppResources.resx for master and AppResources.fr-FR.resx for French.
 
 <img width=“100” height="200" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/SolutionExample.png">
 
@@ -9,10 +9,9 @@
 * Synchronization of Resx files
 * Translation of texts by Google translate or Microsoft translate
 * Export of translations into csv file for final translation by external stakeholder
-* Import of final translations from external stakholder (this is not implemented yet) 
+* Import of final translations from external stakholder 
 
 ## Roadmapp 
-* Import of csv file
 * posibility to export all rows not only the one that need translations.
 * Cleaning of the Resx files (find translations that are not used anymore anywhere in the code)
 
@@ -29,9 +28,24 @@ Right-click one of the language files (AppResources.fr-FR.resx) and select "Sync
 
 ### Translation of texts
 By default, this extension uses Google free translation. This is limited to only 100 translations per hour. To use the Microsoft translation service, select tools / multilangual settings in the visual studio and fill in the information from Microsoft. in this dialog you can also change the master language that is en by default.
+If you also want to handle the stature for the texts in the master resx file, check the 'Add Comment node to master Resx file on sync' in settings dialog.
 
 <img width=“100” height="200" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/MultilingualSettingsDialog.png">
 
+### Export of texts
+There are two ways to export the resx files to csv. 
+ Right-click the master file and select "Export all .xx-xx.resx files". Then all files that are in the same folder and follow the naming standard .xx-xx.resx will be processed and all rows with status 'New' or 'Need review' will be exported to the csv file.
+ 
+<img  width=“100” height="400" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/ExportAllFilePopUpDialog.png">
+
+Right-click one of the language files (AppResources.fr-FR.resx) and select "Export this .xx-x.resx file". then all rows with status 'New' or 'Need review' will be exported to the csv file.
+
+<img  width=“100” height="400" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/ExportFilePopUpDialog.png">
+
+### Import of texts
+Right-click one of the csv language files (AppResources.fr-FR.resx.csv) and select "Import translation". then all rows with status 'Final' will be imported to the resx file that are in the same folder. 
+
+<img  width=“100” height="400" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/ImportFilePopUpDialog.png">
 
 ## How the extension works 
 This extension use the comment field in the target resx files(AppResources.fr-FR.resx) to keep track of the status of row/translation. It has three different statuses that it can have in it's comment field.
@@ -39,7 +53,7 @@ This extension use the comment field in the target resx files(AppResources.fr-FR
 * Need review
 * Final
 
-New: This status will the row get after first synchronization. if the data row not exist in the target file,
+New: The row  will get this status after first synchronization. If the data row not exist in the target file,
 if it already exists then it gets the status "final"
 
 Need review: This status will it get after translation from one of the translation services.
