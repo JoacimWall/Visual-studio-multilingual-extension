@@ -17,8 +17,8 @@ namespace MultilingualExtension.Service
             {
                 //1= Google
                 //2=Microsoift
-                var service = MonoDevelop.Core.PropertyService.Get<string>(PROP_ADDCOMMENTNODEMASTERRESX);
-                if (String.IsNullOrEmpty(service) || service== "1")
+                var addCommenttoMaster = MonoDevelop.Core.PropertyService.Get<string>(PROP_ADDCOMMENTNODEMASTERRESX);
+                if (String.IsNullOrEmpty(addCommenttoMaster) || addCommenttoMaster == "1")
                     return true;
 
                 return false;

@@ -11,6 +11,7 @@ namespace MultilingualExtension
         Entry entryMsoftEndpoint;
         Entry entryMsoftLocation;
         Entry entryMsoftKey;
+        CheckButton checkButtonAddComment;
         //static GLib.SList group = null;
 
         public SettingsWindow() : base("Multilingual Settings")
@@ -30,7 +31,7 @@ namespace MultilingualExtension
             entryMasterLanguageCode.SetSizeRequest(580, -1);
 
             //Add Status/translation to master file
-            CheckButton checkButtonAddComment = new CheckButton("Add Comment node to master Resx file on sync");
+             checkButtonAddComment = new CheckButton("Add Comment node to master Resx file on sync");
             checkButtonAddComment.Active = true;
 
             Separator separator1 = new Gtk.HSeparator();
@@ -136,6 +137,7 @@ namespace MultilingualExtension
         private void Save_Clicked(object sender, EventArgs e)
         {
             Service.SettingsService.MasterLanguageCode = entryMasterLanguageCode.Text;
+            Service.SettingsService.AddCommentNodeMasterResx = checkButtonAddComment.Active;
             //TODO: Save settings
             if (radiobuttonGoogle.Active)
             {
@@ -152,10 +154,6 @@ namespace MultilingualExtension
             HideAll();
         }
 
-        void OnClicked(object sender, EventArgs args)
-        {
-
-
-        }
+        
     }
 }
