@@ -142,18 +142,19 @@ namespace MultilingualExtension
                     //Check if comment exist or not
                     var commentNode = exist.SelectSingleNode("comment");
                     if (commentNode == null)
-                    {
+                    {   //If comment not exists then we think this is old row that are allredy translated and final
                         XmlElement elem = updatedoc.CreateElement("comment"); //item1 ,item2..
                         elem.InnerText = Globals.STATUS_COMMENT_FINAL;
                         exist.AppendChild(elem);
                         updateFileChanged = true;
                     }
                     else
-                    {
-                        if (commentNode.InnerText != Globals.STATUS_COMMENT_FINAL)
+                    {  //Comment not ok set to need review
+                        if (commentNode.InnerText != Globals.STATUS_COMMENT_NEW && commentNode.InnerText != Globals.STATUS_COMMENT_NEED_REVIEW && commentNode.InnerText != Globals.STATUS_COMMENT_FINAL)
+                        {
                             updateFileChanged = true;
-
-                        commentNode.InnerText = Globals.STATUS_COMMENT_FINAL;
+                            commentNode.InnerText = Globals.STATUS_COMMENT_NEED_REVIEW;
+                        }
                     }
                 }
 

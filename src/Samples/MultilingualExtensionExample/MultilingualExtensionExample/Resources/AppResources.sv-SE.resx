@@ -20,17 +20,14 @@
     <comment>Final</comment></data>
   <data name="Enter_Your_Password" xml:space="preserve">
         <value>Ange ditt lösenord tack</value>
-    <comment>Final</comment>
-    </data>
+    <comment>Final</comment></data>
   <data name="Enter_Your_Cat" xml:space="preserve">
         <value>Ange din katt</value>
-    <comment>Final</comment>
-        </data>
+        <comment>Final</comment></data>
   <data name="CSharp_Is_Love" xml:space="preserve">
         <value>CSharp är kärlek</value>
-    <comment>Final</comment>
-    </data>
+    <comment>Need review</comment></data>
   <data name="How_Old_Are_You" xml:space="preserve">
-        <value>Hur gammal är du tror du</value>
-    <comment>Final</comment></data>
+        <value>Hur gammal är du</value>
+   <comment>Need review</comment></data>
 </root>

@@ -14,22 +14,22 @@
   </resheader>
   <data name="Hello" xml:space="preserve">
         <value>Hello</value>
-   </data>
+   <comment>Need review</comment></data>
   <data name="Enter_Your_Email" xml:space="preserve">
         <value>Enter your email</value>
-   ></data>
+   &gt;<comment>Need review</comment></data>
   <data name="Enter_Your_Password" xml:space="preserve">
         <value>Enter your password</value>
-   ></data>
+   &gt;<comment>Need review</comment></data>
   <data name="Enter_Your_Cat" xml:space="preserve">
         <value>Enter your cat</value>
    
-        </data>
+        <comment>Need review</comment></data>
   <data name="CSharp_Is_Love" xml:space="preserve">
         <value>CSharp is love</value>
    
-    </data>
+    <comment>Need review</comment></data>
   <data name="How_Old_Are_You" xml:space="preserve">
         <value>how old are you</value>
-   </data>
+   <comment>Need review</comment></data>
 </root>
