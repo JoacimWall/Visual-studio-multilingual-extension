@@ -12,8 +12,8 @@
 * Import of final translations from external stakholder 
 
 ## Roadmapp 
-* posibility to export all rows not only the one that need translations.
-* export to xls file.
+* Posibility to export all rows not only the one that need translations.
+* Export to xls file.
 * Cleaning of the Resx files (find translations that are not used anymore anywhere in the code)
 
  ## Explanation of functions
