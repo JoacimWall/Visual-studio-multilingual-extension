@@ -31,9 +31,9 @@
         <value>Hur gammal är du</value>
    <comment>Need review</comment></data>
   <data name="You_Are_Added" xml:space="preserve">
-        <value>You are added</value>
-  <comment>New</comment></data>
+        <value>Du läggs till</value>
+  <comment>Need review</comment></data>
   <data name="I_Am_Old" xml:space="preserve">
-    <value>I am old</value>
-  <comment>New</comment></data>
+    <value>Jag är gammal</value>
+  <comment>Need review</comment></data>
 </root>

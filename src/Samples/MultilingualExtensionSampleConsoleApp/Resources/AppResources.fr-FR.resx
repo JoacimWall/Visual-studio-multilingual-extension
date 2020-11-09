@@ -13,29 +13,29 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Hello" xml:space="preserve">
-        <value>Hello</value>
-   <comment>New</comment></data>
+        <value>Bonjour</value>
+   <comment>Need review</comment></data>
   <data name="Enter_Your_Email" xml:space="preserve">
-        <value>Enter your email</value>
-   &gt;<comment>New</comment></data>
+        <value>Entrez votre e-mail</value>
+   &gt;<comment>Need review</comment></data>
   <data name="Enter_Your_Password" xml:space="preserve">
-        <value>Enter your password</value>
-   &gt;<comment>New</comment></data>
+        <value>Entrez votre mot de passe</value>
+   &gt;<comment>Need review</comment></data>
   <data name="Enter_Your_Cat" xml:space="preserve">
-        <value>Enter your cat</value>
+        <value>Entrez votre chat</value>
    
-        <comment>New</comment></data>
+        <comment>Need review</comment></data>
   <data name="CSharp_Is_Love" xml:space="preserve">
-        <value>CSharp is love</value>
+        <value>CSharp est l’amour</value>
    
-    <comment>New</comment></data>
+    <comment>Need review</comment></data>
   <data name="How_Old_Are_You" xml:space="preserve">
-        <value>how old are you</value>
-   <comment>New</comment></data>
+        <value>Quel âge avez-vous</value>
+   <comment>Need review</comment></data>
   <data name="You_Are_Added" xml:space="preserve">
-        <value>You are added</value>
-  <comment>New</comment></data>
+        <value>Vous êtes ajouté</value>
+  <comment>Need review</comment></data>
   <data name="I_Am_Old" xml:space="preserve">
-    <value>I am old</value>
-  <comment>New</comment></data>
+    <value>Je suis vieux</value>
+  <comment>Need review</comment></data>
 </root>
