@@ -32,4 +32,7 @@
   <data name="How_Old_Are_You" xml:space="preserve">
         <value>how old are you</value>
    <comment>Need review</comment></data>
+  <data name="You_Are_Added" xml:space="preserve">
+        <value>You are added</value>
+  </data>
 </root>

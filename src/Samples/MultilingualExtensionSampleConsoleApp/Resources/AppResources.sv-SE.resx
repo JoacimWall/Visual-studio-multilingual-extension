@@ -30,4 +30,7 @@
   <data name="How_Old_Are_You" xml:space="preserve">
         <value>Hur gammal är du</value>
    <comment>Need review</comment></data>
+  <data name="You_Are_Added" xml:space="preserve">
+        <value>You are added</value>
+  <comment>New</comment></data>
 </root>
