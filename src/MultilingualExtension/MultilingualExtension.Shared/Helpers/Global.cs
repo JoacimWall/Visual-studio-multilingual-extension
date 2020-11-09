@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using FileHelpers;
 
 namespace MultilingualExtension.Shared.Helpers
 {
@@ -29,5 +30,22 @@ namespace MultilingualExtension.Shared.Helpers
         public string text { get; set; }
         public string to { get; set; }
     }
-    
+    /// <summary>
+    /// Layout for a file delimited by ,
+    /// </summary>
+    [DelimitedRecord(";")]
+    public class TranslationsRow
+    {
+
+
+        public string Name;
+
+
+        public string SourceLanguage;
+
+        public string TargetLanguage;
+
+        public string Status;
+    }
+
 }
