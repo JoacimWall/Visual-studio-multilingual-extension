@@ -1,23 +1,18 @@
 ﻿using System;
+using MultilingualExtension.Shared.Helpers;
 namespace MultilingualExtension.Service
 {
-    public static class SettingsService
+    public  class SettingsService : MultilingualExtension.Shared.Interface.ISettingsService
     {
-        //Constants for saved propertys
-         const string PROP_MSOFTENDPOINT = "MsoftEndpoint";
-         const string PROP_MSOFTLOCATION = "MsoftLocation";
-         const string PROP_MSOFTKEY = "MsoftKey";
-         const string PROP_TRANSLATIONSERVICE = "TranslationServcie";
-         const string PROP_MASTERLANGUAGECODE = "MasterLanguageCode";
-         const string PROP_ADDCOMMENTNODEMASTERRESX = "AddCommentNodeMasterResx";
+        
 
-        public static bool AddCommentNodeMasterResx
+        public  bool AddCommentNodeMasterResx
         {
             get
             {
                 //1= Google
                 //2=Microsoift
-                var addCommenttoMaster = MonoDevelop.Core.PropertyService.Get<string>(PROP_ADDCOMMENTNODEMASTERRESX);
+                var addCommenttoMaster = MonoDevelop.Core.PropertyService.Get<string>(Globals.PROP_ADDCOMMENTNODEMASTERRESX);
                 if (String.IsNullOrEmpty(addCommenttoMaster) || addCommenttoMaster == "1")
                     return true;
 
@@ -26,36 +21,36 @@ namespace MultilingualExtension.Service
             set
             {
                 if (value)
-                    MonoDevelop.Core.PropertyService.Set(PROP_ADDCOMMENTNODEMASTERRESX, "1");
+                    MonoDevelop.Core.PropertyService.Set(Globals.PROP_ADDCOMMENTNODEMASTERRESX, "1");
                 else
-                    MonoDevelop.Core.PropertyService.Set(PROP_ADDCOMMENTNODEMASTERRESX, "0");
+                    MonoDevelop.Core.PropertyService.Set(Globals.PROP_ADDCOMMENTNODEMASTERRESX, "0");
             }
         }
-        public static string TranslationService
+        public int TranslationService
         {
             get
             {
                 //1= Google
                 //2=Microsoift
-                var service = MonoDevelop.Core.PropertyService.Get<string>(PROP_TRANSLATIONSERVICE);
+                var service = MonoDevelop.Core.PropertyService.Get<string>(Globals.PROP_TRANSLATIONSERVICE);
                 if (String.IsNullOrEmpty(service))
-                    return "1";
+                    return 1;
 
-                    return service;
+                    return int.Parse(service);
             }
             set
             {
-                if (value == "1" || value == "2")
-                    MonoDevelop.Core.PropertyService.Set(PROP_TRANSLATIONSERVICE, value);
+                if (value == 1 || value == 2)
+                    MonoDevelop.Core.PropertyService.Set(Globals.PROP_TRANSLATIONSERVICE, value.ToString());
             }
         }
 
-        public static string MasterLanguageCode
+        public  string MasterLanguageCode
         {
             get
             {
                 //Default en
-                var value = MonoDevelop.Core.PropertyService.Get<string>(PROP_MASTERLANGUAGECODE);
+                var value = MonoDevelop.Core.PropertyService.Get<string>(Globals.PROP_MASTERLANGUAGECODE);
                 if (String.IsNullOrEmpty(value))
                     return "en";
 
@@ -63,47 +58,47 @@ namespace MultilingualExtension.Service
             }
             set
             {
-                MonoDevelop.Core.PropertyService.Set(PROP_MASTERLANGUAGECODE, value);
+                MonoDevelop.Core.PropertyService.Set(Globals.PROP_MASTERLANGUAGECODE, value);
             }
         }
 
-        public static string MsoftEndpoint
+        public  string MsoftEndpoint
         {
             get
             {
                 //Default en
-                var value = MonoDevelop.Core.PropertyService.Get<string>(PROP_MSOFTENDPOINT);
+                var value = MonoDevelop.Core.PropertyService.Get<string>(Globals.PROP_MSOFTENDPOINT);
                 return value;
             }
             set
             {
-                MonoDevelop.Core.PropertyService.Set(PROP_MSOFTENDPOINT, value);
+                MonoDevelop.Core.PropertyService.Set(Globals.PROP_MSOFTENDPOINT, value);
             }
         }
-        public static string MsoftLocation
+        public  string MsoftLocation
         {
             get
             {
                 //Default en
-                var value = MonoDevelop.Core.PropertyService.Get<string>(PROP_MSOFTLOCATION);
+                var value = MonoDevelop.Core.PropertyService.Get<string>(Globals.PROP_MSOFTLOCATION);
                 return value;
             }
             set
             {
-                MonoDevelop.Core.PropertyService.Set(PROP_MSOFTLOCATION, value);
+                MonoDevelop.Core.PropertyService.Set(Globals.PROP_MSOFTLOCATION, value);
             }
         }
-        public static string MsoftKey
+        public  string MsoftKey
         {
             get
             {
                 //Default en
-                var value = MonoDevelop.Core.PropertyService.Get<string>(PROP_MSOFTKEY);
+                var value = MonoDevelop.Core.PropertyService.Get<string>(Globals.PROP_MSOFTKEY);
                 return value;
             }
             set
             {
-                MonoDevelop.Core.PropertyService.Set(PROP_MSOFTKEY, value);
+                MonoDevelop.Core.PropertyService.Set(Globals.PROP_MSOFTKEY, value);
             }
         }
     }

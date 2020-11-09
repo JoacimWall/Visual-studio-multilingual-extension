@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Threading.Tasks;
 using System.Xml;
 using MultilingualExtension.Shared.Helpers;
 
@@ -9,7 +11,61 @@ namespace MultilingualExtension.Shared.Service
         public SyncFileService()
         {
         }
-        public Shared.Helpers.Result<Boolean> SyncFile(string masterfilePath, string updatefilePath, bool addMasterCommentNode, Shared.Interface.IProgressBar progress)
+        public async Task<Result<Boolean>> SyncFile(string selectedFilename, Interface.IProgressBar progress, Interface.ISettingsService settingsService)
+        {
+            try
+            {
+
+                bool addCommentNodeToMasterResx = settingsService.AddCommentNodeMasterResx;
+
+                //validate file
+                var checkfile = RexExHelper.ValidateFilenameIsTargetType(selectedFilename);
+                if (!checkfile.Success)
+                {
+                    int folderindex;
+
+                    if (System.Environment.OSVersion.Platform == PlatformID.Win32NT)
+                        folderindex = selectedFilename.LastIndexOf("\\");
+                    else
+                        folderindex = selectedFilename.LastIndexOf("/");
+
+                    string masterFolderPath = selectedFilename.Substring(0, folderindex);
+
+                    string[] fileEntries = Directory.GetFiles(masterFolderPath);
+                    foreach (string fileName in fileEntries)
+                    {
+                        var checkfileInFolder = RexExHelper.ValidateFilenameIsTargetType(fileName);
+                        if (checkfileInFolder.Success)
+                           await SyncFileInternal(selectedFilename, fileName, addCommentNodeToMasterResx, progress);
+
+                    }
+
+                }
+                else
+                {
+                    string masterPath = selectedFilename.Substring(0, checkfile.Index) + ".resx";
+                    await SyncFileInternal(masterPath, selectedFilename, addCommentNodeToMasterResx, progress);
+                }
+                return new Result<bool>(true);
+
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+
+            }
+            finally
+            {
+                progress.HideAll();
+                progress = null;
+                Console.WriteLine("Sync file completed");
+            }
+
+
+        }
+
+        private async Task<Result<Boolean>> SyncFileInternal(string masterfilePath, string updatefilePath, bool addMasterCommentNode, Shared.Interface.IProgressBar progress)
         {
 
 

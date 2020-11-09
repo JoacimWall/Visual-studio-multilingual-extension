@@ -13,10 +13,12 @@ namespace MultilingualExtension
         Entry entryMsoftLocation;
         Entry entryMsoftKey;
         CheckButton checkButtonAddComment;
+        Service.SettingsService SettingsService;
         //static GLib.SList group = null;
 
         public SettingsWindow() : base("Multilingual Settings")
         {
+            SettingsService = new Service.SettingsService();
             this.DeleteEvent += delegate { HideAll(); };
             SetDefaultSize(590, 300);
             SetPosition(Gtk.WindowPosition.Center);
@@ -114,18 +116,18 @@ namespace MultilingualExtension
 
             Add(fix);
 
-            entryMasterLanguageCode.Text = Service.SettingsService.MasterLanguageCode;
+            entryMasterLanguageCode.Text = SettingsService.MasterLanguageCode;
             //get settings Google is default value 1 
-            if (Service.SettingsService.TranslationService == "2")
+            if (SettingsService.TranslationService == 2)
             {
                 radiobuttonMicrosoft.Active = true;
             }
 
 
-            entryMsoftEndpoint.Text = Service.SettingsService.MsoftEndpoint;
-            entryMsoftLocation.Text = Service.SettingsService.MsoftLocation;
-            entryMsoftKey.Text = Service.SettingsService.MsoftKey;
-            checkButtonAddComment.Active = Service.SettingsService.AddCommentNodeMasterResx;
+            entryMsoftEndpoint.Text = SettingsService.MsoftEndpoint;
+            entryMsoftLocation.Text = SettingsService.MsoftLocation;
+            entryMsoftKey.Text = SettingsService.MsoftKey;
+            checkButtonAddComment.Active = SettingsService.AddCommentNodeMasterResx;
             
             ShowAll();
 
@@ -138,21 +140,21 @@ namespace MultilingualExtension
 
         private void Save_Clicked(object sender, EventArgs e)
         {
-            Service.SettingsService.MasterLanguageCode = entryMasterLanguageCode.Text;
-            Service.SettingsService.AddCommentNodeMasterResx = checkButtonAddComment.Active;
-            //TODO: Save settings
+            SettingsService.MasterLanguageCode = entryMasterLanguageCode.Text;
+            SettingsService.AddCommentNodeMasterResx = checkButtonAddComment.Active;
+           
             if (radiobuttonGoogle.Active)
             {
-                Service.SettingsService.TranslationService = "1";
+                SettingsService.TranslationService = 1;
             }
             else
             {
-                Service.SettingsService.TranslationService = "2";
+                SettingsService.TranslationService = 2;
             }
 
-            Service.SettingsService.MsoftEndpoint = entryMsoftEndpoint.Text;
-            Service.SettingsService.MsoftLocation = entryMsoftLocation.Text;
-            Service.SettingsService.MsoftKey = entryMsoftKey.Text;
+            SettingsService.MsoftEndpoint = entryMsoftEndpoint.Text;
+            SettingsService.MsoftLocation = entryMsoftLocation.Text;
+            SettingsService.MsoftKey = entryMsoftKey.Text;
             HideAll();
         }
         

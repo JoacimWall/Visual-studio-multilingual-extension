@@ -27,35 +27,13 @@ namespace MultilingualExtension
             try
             {
 
-                SyncFileService syncFileService = new SyncFileService(); 
+                SyncFileService syncFileService = new SyncFileService();
+                Service.SettingsService settingsService = new Service.SettingsService();
                 ProjectFile selectedItem = (ProjectFile)IdeApp.Workspace.CurrentSelectedItem;
-                bool addCommentNodeToMasterResx = Service.SettingsService.AddCommentNodeMasterResx;
 
-                string selectedFilename = selectedItem.Name;
+               var result = await syncFileService.SyncFile(selectedItem.FilePath, progress, settingsService);
 
-                //validate file
-                var checkfile = RexExHelper.ValidateFilenameIsTargetType(selectedFilename);
-                if (!checkfile.Success)
-                {
-                    //TODO: Show message you have selected master .resx file we will update all other resx files in this folder that have the format .sv-SE.resx
-                    int folderindex = selectedFilename.LastIndexOf("/");
-                    string masterFolderPath = selectedFilename.Substring(0, folderindex);
-
-                    string[] fileEntries = Directory.GetFiles(masterFolderPath);
-                    foreach (string fileName in fileEntries)
-                    {
-                        var checkfileInFolder =  RexExHelper.ValidateFilenameIsTargetType(fileName);
-                        if (checkfileInFolder.Success)
-                            syncFileService.SyncFile(selectedFilename, fileName, addCommentNodeToMasterResx, progress);
-
-                    }
-
-                }
-                else
-                {
-                    string masterPath = selectedFilename.Substring(0, checkfile.Index) + ".resx";
-                    syncFileService.SyncFile(masterPath, selectedFilename, addCommentNodeToMasterResx, progress);
-                }
+              
 
 
             }
@@ -70,11 +48,7 @@ namespace MultilingualExtension
                 progress = null;
                 Console.WriteLine("Sync file completed");
             }
-            //TODO: PArse resx file and add row rto other
-            // var p = MonoDevelop.Projects.Services.ProjectService;
-
-            //    var d = MonoDevelop.Core.FileService;
-            //var w = MonoDevelop.Projects.So.Gui.Wor
+          
         }
          protected override void Update(CommandInfo info)
         {
