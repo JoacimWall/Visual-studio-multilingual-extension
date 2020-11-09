@@ -4,8 +4,6 @@ VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultilingualExtension", "MultilingualExtension\MultilingualExtension.csproj", "{12941F4E-9D52-4825-9C8C-31294F3608CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultilingualExtensionWindows", "MultilingualExtensionWindows\MultilingualExtensionWindows.csproj", "{3113E994-721F-48DF-B952-649FC747921E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultilingualExtension.Shared", "MultilingualExtension.Shared\MultilingualExtension.Shared.csproj", "{054BC06B-F618-4090-AA26-10B6925DDC58}"
 EndProject
 Global
