@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
+using MultilingualExtension.Shared.Helpers;
+using MultilingualExtension.Shared.Interface;
+using MultilingualExtension.Shared.Service;
 using Task = System.Threading.Tasks.Task;
 
 namespace MultilingualExtensionWindows
@@ -22,6 +25,7 @@ namespace MultilingualExtensionWindows
         /// </summary>
         public const int CommandIdUpdateFiles = 0x0100;
         public const int CommandIdTranslateFiles = 0x0101;
+        public const int CommandIdShowSettings = 0x0102;
         /// <summary>
         /// Command menu group (command set GUID).
         /// </summary>
@@ -45,12 +49,18 @@ namespace MultilingualExtensionWindows
             this.package = package ?? throw new ArgumentNullException(nameof(package));
             commandService = commandService ?? throw new ArgumentNullException(nameof(commandService));
 
+            //ShowSettings
+            var menuCommandIDShowSettings = new CommandID(CommandSet, CommandIdShowSettings);
+            var menuItemShowSettings = new OleMenuCommand(this.ExecuteShowSettings, menuCommandIDShowSettings);
+            commandService.AddCommand(menuItemShowSettings);
+
+            //Update Files
             var menuCommandIDUpdateFiles = new CommandID(CommandSet, CommandIdUpdateFiles);
             menuItemUpdateFiles = new OleMenuCommand(this.ExecuteUpdateFiles, menuCommandIDUpdateFiles);
             menuItemUpdateFiles.BeforeQueryStatus += MenuItemUpdateFiles_BeforeQueryStatus;
-            
             commandService.AddCommand(menuItemUpdateFiles);
 
+            //Translate
            var menuCommandIDTranslateFiles = new CommandID(CommandSet, CommandIdTranslateFiles);
             var menuItemTranslateFiles = new OleMenuCommand(this.ExecuteTranslateFiles, menuCommandIDTranslateFiles);
             commandService.AddCommand(menuItemTranslateFiles);
@@ -62,125 +72,40 @@ namespace MultilingualExtensionWindows
             var menuCommand = sender as OleMenuCommand;
             if (menuCommand != null)
             {
-                // start by assuming that the menu will not be shown
-                menuCommand.Visible = false;
-                menuCommand.Enabled = false;
-
-                IVsHierarchy hierarchy = null;
-                uint itemid = VSConstants.VSITEMID_NIL;
-
-                if (!IsSingleProjectItemSelection(out hierarchy, out itemid)) return;
                 // Get the file path
-                string itemFullPath = null;
-                ((IVsProject)hierarchy).GetMkDocument(itemid, out itemFullPath);
-                var transformFileInfo = new FileInfo(itemFullPath);
+                var selectedFilename = Helpers.DevfileHelper.GetSelectedFile();
+                if (String.IsNullOrEmpty(selectedFilename)) return;
 
-                // then check if the file is named 'web.config'
-                bool isWebConfig = string.Compare("web.config", transformFileInfo.Name, StringComparison.OrdinalIgnoreCase) == 0;
+                var checkfile = RexExHelper.ValidateFileTypeIsResx(selectedFilename);
+                if (!checkfile.Success)
+                {
+                    menuCommand.Visible = false;
+                    menuCommand.Enabled = false;
+                    return;
+                }
+                else
+                {
+                    menuCommand.Visible = true;
+                    menuCommand.Enabled = true;
+                }
 
-                // if not leave the menu hidden
-                if (!isWebConfig) return;
+                // Get the file path
+                //validate file
+                checkfile = RexExHelper.ValidateFilenameIsTargetType(selectedFilename);
+                if (!checkfile.Success)
+                {
+                    menuCommand.Text = "Sync all .xx-xx.resx files with this";
+                }
+                else
+                {
+                    menuCommand.Text = "Sync this .xx-xx.resx file";
+                }
 
-                menuCommand.Visible = true;
-                menuCommand.Enabled = true;
             }
-            // var sdf = new MultilingualExtension.Shared.
-            //object[] selectedItems = (object[])dte2.ToolWindows.SolutionExplorer.SelectedItems;
-
-            //foreach (EnvDTE.UIHierarchyItem selectedUIHierarchyItem in selectedItems)
-
-            //{
-
-            //    if (selectedUIHierarchyItem.Object is EnvDTE.ProjectItem)
-
-            //    {
-
-            //        EnvDTE.ProjectItem item = selectedUIHierarchyItem.Object as EnvDTE.ProjectItem;
-
-            //        if (item.Name.EndsWith(".cs"))
-
-            //        {
-
-            //            //myCommand.Enabled =   true;
-
-            //            myCommand.Visible = true;
-
-            //        }
-
-            //        else
-
-            //        {
-
-            //            //myCommand.Enabled =   false;
-
-            //            myCommand.Visible = false;
-
-            //        }
-
-            //    }
-
-            //}
+            menuCommand.Visible = true;
+            menuCommand.Enabled = true;
         }
-        public static bool IsSingleProjectItemSelection(out IVsHierarchy hierarchy, out uint itemid)
-        {
-            hierarchy = null;
-            itemid = VSConstants.VSITEMID_NIL;
-            int hr = VSConstants.S_OK;
-
-            var monitorSelection = Package.GetGlobalService(typeof(SVsShellMonitorSelection)) as IVsMonitorSelection;
-            var solution = Package.GetGlobalService(typeof(SVsSolution)) as IVsSolution;
-            if (monitorSelection == null || solution == null)
-            {
-                return false;
-            }
-
-            IVsMultiItemSelect multiItemSelect = null;
-            IntPtr hierarchyPtr = IntPtr.Zero;
-            IntPtr selectionContainerPtr = IntPtr.Zero;
-
-            try
-            {
-                hr = monitorSelection.GetCurrentSelection(out hierarchyPtr, out itemid, out multiItemSelect, out selectionContainerPtr);
-
-                if (ErrorHandler.Failed(hr) || hierarchyPtr == IntPtr.Zero || itemid == VSConstants.VSITEMID_NIL)
-                {
-                    // there is no selection
-                    return false;
-                }
-
-                // multiple items are selected
-                if (multiItemSelect != null) return false;
-
-                // there is a hierarchy root node selected, thus it is not a single item inside a project
-
-                if (itemid == VSConstants.VSITEMID_ROOT) return false;
-
-                hierarchy = Marshal.GetObjectForIUnknown(hierarchyPtr) as IVsHierarchy;
-                if (hierarchy == null) return false;
-
-                Guid guidProjectID = Guid.Empty;
-
-                if (ErrorHandler.Failed(solution.GetGuidOfProject(hierarchy, out guidProjectID)))
-                {
-                    return false; // hierarchy is not a project inside the Solution if it does not have a ProjectID Guid
-                }
-
-                // if we got this far then there is a single project item selected
-                return true;
-            }
-            finally
-            {
-                if (selectionContainerPtr != IntPtr.Zero)
-                {
-                    Marshal.Release(selectionContainerPtr);
-                }
-
-                if (hierarchyPtr != IntPtr.Zero)
-                {
-                    Marshal.Release(hierarchyPtr);
-                }
-            }
-        }
+       
         /// <summary>
         /// Gets the instance of the command.
         /// </summary>
@@ -225,25 +150,75 @@ namespace MultilingualExtensionWindows
         private void ExecuteUpdateFiles(object sender, EventArgs e)
         {
             ThreadHelper.ThrowIfNotOnUIThread();
-            IVsHierarchy hierarchy = null;
-            uint itemid = VSConstants.VSITEMID_NIL;
+            IProgressBar progress = new Helpers.ProgressBarHelper();
+            Services.SettingsService settingsService = new Services.SettingsService();
+            try
+            {
+                // Get the file path
+                var selectedFilename = Helpers.DevfileHelper.GetSelectedFile();
+                if (String.IsNullOrEmpty(selectedFilename)) return;
+               
+               
+                //MultilingualExtension.Shared
+                SyncFileService syncFileService = new SyncFileService();
+                bool addCommentNodeToMasterResx = settingsService.AddCommentNodeMasterResx; // Service.SettingsService.AddCommentNodeMasterResx;
 
-            if (!IsSingleProjectItemSelection(out hierarchy, out itemid)) return;
-            // Get the file path
-            string itemFullPath = null;
-            ((IVsProject)hierarchy).GetMkDocument(itemid, out itemFullPath);
-            var transformFileInfo = new FileInfo(itemFullPath);
-            string message = string.Format(CultureInfo.CurrentCulture, "Inside {0}.MenuItemCallback()", this.GetType().FullName);
-            string title = "Command";
+                
+                //validate file
+                var checkfile = RexExHelper.ValidateFilenameIsTargetType(selectedFilename);
+                if (!checkfile.Success)
+                {
+                    //TODO: Show message you have selected master .resx file we will update all other resx files in this folder that have the format .sv-SE.resx
+                    int folderindex = selectedFilename.LastIndexOf("\\");
+                    string masterFolderPath = selectedFilename.Substring(0, folderindex);
 
-            // Show a message box to prove we were here
-            VsShellUtilities.ShowMessageBox(
-                this.package,
-                message,
-                title,
-                OLEMSGICON.OLEMSGICON_INFO,
-                OLEMSGBUTTON.OLEMSGBUTTON_OK,
-                OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
+                    string[] fileEntries = Directory.GetFiles(masterFolderPath);
+                    foreach (string fileName in fileEntries)
+                    {
+                        var checkfileInFolder = RexExHelper.ValidateFilenameIsTargetType(fileName);
+                        if (checkfileInFolder.Success)
+                            syncFileService.SyncFile(selectedFilename, fileName, addCommentNodeToMasterResx, progress);
+
+                    }
+
+                }
+                else
+                {
+                    string masterPath = selectedFilename.Substring(0, checkfile.Index) + ".resx";
+                    syncFileService.SyncFile(masterPath, selectedFilename, addCommentNodeToMasterResx, progress);
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                VsShellUtilities.ShowMessageBox(
+                    this.package,
+                    ex.Message,
+                    "Multilangiual Extension",
+                    OLEMSGICON.OLEMSGICON_INFO,
+                    OLEMSGBUTTON.OLEMSGBUTTON_OK,
+                    OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
+
+            }
+            finally
+            {
+                progress.HideAll();
+                progress = null;
+                Console.WriteLine("Sync file completed");
+            }
+
+            //string message = string.Format(CultureInfo.CurrentCulture, "Inside {0}.MenuItemCallback()", this.GetType().FullName);
+            //string title = "Command";
+
+            //// Show a message box to prove we were here
+            //VsShellUtilities.ShowMessageBox(
+            //    this.package,
+            //    message,
+            //    title,
+            //    OLEMSGICON.OLEMSGICON_INFO,
+            //    OLEMSGBUTTON.OLEMSGBUTTON_OK,
+            //    OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
         }
         private void ExecuteTranslateFiles(object sender, EventArgs e)
         {
@@ -260,26 +235,13 @@ namespace MultilingualExtensionWindows
                 OLEMSGBUTTON.OLEMSGBUTTON_OK,
                 OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
         }
-        //private static EnvDTE80.DTE2 GetDTE2()
-        //{
-        //    return GetGlobalService(typeof(DTE)) as EnvDTE80.DTE2;
-        //}
-        //private string GetSourceFilePath()
-        //{
-        //    EnvDTE80.DTE2 _applicationObject = GetDTE2();
-        //    UIHierarchy uih = _applicationObject.ToolWindows.SolutionExplorer;
-        //    Array selectedItems = (Array)uih.SelectedItems;
-        //    if (null != selectedItems)
-        //    {
-        //        foreach (UIHierarchyItem selItem in selectedItems)
-        //        {
-        //            ProjectItem prjItem = selItem.Object as ProjectItem;
-        //            string filePath = prjItem.Properties.Item("FullPath").Value.ToString();
-        //            //System.Windows.Forms.MessageBox.Show(selItem.Name + filePath);
-        //            return filePath;
-        //        }
-        //    }
-        //    return string.Empty;
-        //}
+        private void ExecuteShowSettings(object sender, EventArgs e)
+        {
+            ThreadHelper.ThrowIfNotOnUIThread();
+
+            View.SettingsWindow frmSettings = new View.SettingsWindow();
+            frmSettings.ShowDialog();
+        }
+       
     }
 }

@@ -55,19 +55,31 @@
               <CommandFlag>DefaultInvisible</CommandFlag>
               <CommandFlag>DynamicVisibility</CommandFlag>
           If you do not want an image next to your command, remove the Icon node /> -->
-      <Button guid="guidMultilingualExtensionWindowsPackageCmdSet" id="CommandIdUpdateFiles" priority="0x0100" type="Button">
-        <Parent guid="guidMultilingualExtensionWindowsPackageCmdSet" id="MyGroupForSubMenuProjectPad" />
+      
+      <!--Menu settings-->
+      <Button guid="guidMultilingualExtensionWindowsPackageCmdSet" id="CommandIdShowSettings" priority="0x0100" type="Button">
+        <Parent guid="guidMultilingualExtensionWindowsPackageCmdSet" id="MyMenuGroup" />
         <Icon guid="guidImages" id="bmpPic1" />
-       
+
         <Strings>
-          <ButtonText>Synchronizes language files</ButtonText>
+          <ButtonText>Multilinugal settings</ButtonText>
         </Strings>
       </Button>
-      <Button guid="guidMultilingualExtensionWindowsPackageCmdSet" id="CommandIdTranslateFiles" priority="0x0100" type="Button">
+      <!--UpdateFiles-->
+      <Button guid="guidMultilingualExtensionWindowsPackageCmdSet" id="CommandIdUpdateFiles" priority="0x0100" type="Button">
         <Parent guid="guidMultilingualExtensionWindowsPackageCmdSet" id="MyGroupForSubMenuProjectPad" />
         <Icon guid="guidImages" id="bmpPic1" />
         <CommandFlag>DefaultInvisible</CommandFlag>
         <CommandFlag>DynamicVisibility</CommandFlag>
+        <Strings>
+          <ButtonText>Synchronizes language files</ButtonText>
+        </Strings>
+      </Button>
+      <!--Translate-->
+      <Button guid="guidMultilingualExtensionWindowsPackageCmdSet" id="CommandIdTranslateFiles" priority="0x0100" type="Button">
+        <Parent guid="guidMultilingualExtensionWindowsPackageCmdSet" id="MyGroupForSubMenuProjectPad" />
+        <Icon guid="guidImages" id="bmpPic1" />
+       
         <Strings>
           <ButtonText>Translate language files</ButtonText>
         </Strings>
@@ -95,6 +107,7 @@
       <IDSymbol name="MyGroupForSubMenuProjectPad" value="0x1021" />
       <IDSymbol name="CommandIdUpdateFiles" value="0x0100" />
       <IDSymbol name="CommandIdTranslateFiles" value="0x0101" />
+      <IDSymbol name="CommandIdShowSettings" value="0x0102" />
     </GuidSymbol>
 
     <GuidSymbol name="guidImages" value="{e1e1d1d1-81ef-47fb-9d53-4190d8b4edab}" >

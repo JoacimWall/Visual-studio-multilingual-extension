@@ -36,4 +36,7 @@
   <data name="You_Are_Added" xml:space="preserve">
         <value>You are added</value>
   <comment>New</comment></data>
+  <data name="I_Am_Old" xml:space="preserve">
+    <value>I am old</value>
+  <comment>New</comment></data>
 </root>

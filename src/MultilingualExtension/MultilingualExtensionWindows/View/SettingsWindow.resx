@@ -117,34 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Hello" xml:space="preserve">
-    <value>Hello</value>
-    <comment>Need review</comment>
-  </data>
-  <data name="Enter_Your_Email" xml:space="preserve">
-    <value>&gt;</value>
-    <comment>Need review</comment>
-  </data>
-  <data name="Enter_Your_Password" xml:space="preserve">
-    <value>&gt;</value>
-    <comment>Need review</comment>
-  </data>
-  <data name="Enter_Your_Cat" xml:space="preserve">
-    <value>Enter your cat</value>
-    <comment>Need review</comment>
-  </data>
-  <data name="CSharp_Is_Love" xml:space="preserve">
-    <value>CSharp is love</value>
-    <comment>Need review</comment>
-  </data>
-  <data name="How_Old_Are_You" xml:space="preserve">
-    <value>how old are you</value>
-    <comment>Need review</comment>
-  </data>
-  <data name="You_Are_Added" xml:space="preserve">
-    <value>You are added</value>
-  </data>
-  <data name="I_Am_Old" xml:space="preserve">
-    <value>I am old</value>
-  </data>
+  <metadata name="$this.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>
