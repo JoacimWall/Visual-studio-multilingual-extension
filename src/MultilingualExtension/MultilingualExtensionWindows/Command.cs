@@ -26,6 +26,8 @@ namespace MultilingualExtensionWindows
         public const int CommandIdUpdateFiles = 0x0100;
         public const int CommandIdTranslateFiles = 0x0101;
         public const int CommandIdShowSettings = 0x0102;
+        public const int CommandIdExportFiles = 0x0103;
+        public const int CommandIdImportFiles = 0x0104;
         /// <summary>
         /// Command menu group (command set GUID).
         /// </summary>
@@ -64,6 +66,17 @@ namespace MultilingualExtensionWindows
            var menuCommandIDTranslateFiles = new CommandID(CommandSet, CommandIdTranslateFiles);
             var menuItemTranslateFiles = new OleMenuCommand(this.ExecuteTranslateFiles, menuCommandIDTranslateFiles);
             commandService.AddCommand(menuItemTranslateFiles);
+
+            //Export File
+            var menuCommandIDExportFiles = new CommandID(CommandSet, CommandIdExportFiles);
+            var menuItemExportFiles = new OleMenuCommand(this.ExecuteExportFiles, menuCommandIDExportFiles);
+            commandService.AddCommand(menuItemTranslateFiles);
+
+            //Import File
+            var menuCommandIDImportFiles = new CommandID(CommandSet, CommandIdImportFiles);
+            var menuItemImportFiles = new OleMenuCommand(this.ExecuteImportFiles, menuCommandIDImportFiles);
+            commandService.AddCommand(menuItemImportFiles);
+
         }
 
         private void MenuItemUpdateFiles_BeforeQueryStatus(object sender, EventArgs e)
@@ -147,11 +160,20 @@ namespace MultilingualExtensionWindows
         /// </summary>
         /// <param name="sender">Event sender.</param>
         /// <param name="e">Event args.</param>
+        /// 
+        private void ExecuteShowSettings(object sender, EventArgs e)
+        {
+            ThreadHelper.ThrowIfNotOnUIThread();
+
+            View.SettingsWindow frmSettings = new View.SettingsWindow();
+            frmSettings.ShowDialog();
+        }
+
         private void ExecuteUpdateFiles(object sender, EventArgs e)
         {
             ThreadHelper.ThrowIfNotOnUIThread();
             IProgressBar progress = new Helpers.ProgressBarHelper();
-            Services.SettingsService settingsService = new Services.SettingsService();
+            ISettingsService settingsService = new Services.SettingsService();
             try
             {
                 // Get the file path
@@ -161,32 +183,10 @@ namespace MultilingualExtensionWindows
                
                 //MultilingualExtension.Shared
                 SyncFileService syncFileService = new SyncFileService();
-                bool addCommentNodeToMasterResx = settingsService.AddCommentNodeMasterResx; // Service.SettingsService.AddCommentNodeMasterResx;
 
-                
-                //validate file
-                var checkfile = RexExHelper.ValidateFilenameIsTargetType(selectedFilename);
-                if (!checkfile.Success)
-                {
-                    //TODO: Show message you have selected master .resx file we will update all other resx files in this folder that have the format .sv-SE.resx
-                    int folderindex = selectedFilename.LastIndexOf("\\");
-                    string masterFolderPath = selectedFilename.Substring(0, folderindex);
+                syncFileService.SyncFile(selectedFilename, progress, settingsService);
 
-                    string[] fileEntries = Directory.GetFiles(masterFolderPath);
-                    foreach (string fileName in fileEntries)
-                    {
-                        var checkfileInFolder = RexExHelper.ValidateFilenameIsTargetType(fileName);
-                        if (checkfileInFolder.Success)
-                            syncFileService.SyncFile(selectedFilename, fileName, addCommentNodeToMasterResx, progress);
-
-                    }
-
-                }
-                else
-                {
-                    string masterPath = selectedFilename.Substring(0, checkfile.Index) + ".resx";
-                    syncFileService.SyncFile(masterPath, selectedFilename, addCommentNodeToMasterResx, progress);
-                }
+               
 
 
             }
@@ -235,13 +235,88 @@ namespace MultilingualExtensionWindows
                 OLEMSGBUTTON.OLEMSGBUTTON_OK,
                 OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
         }
-        private void ExecuteShowSettings(object sender, EventArgs e)
+        
+        private void ExecuteExportFiles(object sender, EventArgs e)
         {
             ThreadHelper.ThrowIfNotOnUIThread();
+            IProgressBar progress = new Helpers.ProgressBarHelper();
+            
+            try
+            {
+                // Get the file path
+                var selectedFilename = Helpers.DevfileHelper.GetSelectedFile();
+                if (String.IsNullOrEmpty(selectedFilename)) return;
 
-            View.SettingsWindow frmSettings = new View.SettingsWindow();
-            frmSettings.ShowDialog();
+
+                //MultilingualExtension.Shared
+                ExportService exportFileService = new ExportService();
+
+                exportFileService.ExportToFile(selectedFilename, progress);
+
+
+
+
+            }
+            catch (Exception ex)
+            {
+                VsShellUtilities.ShowMessageBox(
+                    this.package,
+                    ex.Message,
+                    "Multilangiual Extension",
+                    OLEMSGICON.OLEMSGICON_INFO,
+                    OLEMSGBUTTON.OLEMSGBUTTON_OK,
+                    OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
+
+            }
+            finally
+            {
+                progress.HideAll();
+                progress = null;
+                Console.WriteLine("Sync file completed");
+            }
+
+            
         }
-       
+        private void ExecuteImportFiles(object sender, EventArgs e)
+        {
+            ThreadHelper.ThrowIfNotOnUIThread();
+            IProgressBar progress = new Helpers.ProgressBarHelper();
+            
+            try
+            {
+                // Get the file path
+                var selectedFilename = Helpers.DevfileHelper.GetSelectedFile();
+                if (String.IsNullOrEmpty(selectedFilename)) return;
+
+
+                //MultilingualExtension.Shared
+                ImportService importFileService = new ImportService();
+
+                importFileService.ImportCsvToResx(selectedFilename, progress);
+
+
+
+
+            }
+            catch (Exception ex)
+            {
+                VsShellUtilities.ShowMessageBox(
+                    this.package,
+                    ex.Message,
+                    "Multilangiual Extension",
+                    OLEMSGICON.OLEMSGICON_INFO,
+                    OLEMSGBUTTON.OLEMSGBUTTON_OK,
+                    OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
+
+            }
+            finally
+            {
+                progress.HideAll();
+                progress = null;
+                Console.WriteLine("Sync file completed");
+            }
+
+           
+        }
     }
 }

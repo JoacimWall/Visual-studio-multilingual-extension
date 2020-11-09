@@ -69,8 +69,6 @@
       <Button guid="guidMultilingualExtensionWindowsPackageCmdSet" id="CommandIdUpdateFiles" priority="0x0100" type="Button">
         <Parent guid="guidMultilingualExtensionWindowsPackageCmdSet" id="MyGroupForSubMenuProjectPad" />
         <Icon guid="guidImages" id="bmpPic1" />
-        <CommandFlag>DefaultInvisible</CommandFlag>
-        <CommandFlag>DynamicVisibility</CommandFlag>
         <Strings>
           <ButtonText>Synchronizes language files</ButtonText>
         </Strings>
@@ -82,6 +80,24 @@
        
         <Strings>
           <ButtonText>Translate language files</ButtonText>
+        </Strings>
+      </Button>
+      <!--Export files-->
+      <Button guid="guidMultilingualExtensionWindowsPackageCmdSet" id="CommandIdExportFiles" priority="0x0100" type="Button">
+        <Parent guid="guidMultilingualExtensionWindowsPackageCmdSet" id="MyGroupForSubMenuProjectPad" />
+        <Icon guid="guidImages" id="bmpPic1" />
+
+        <Strings>
+          <ButtonText>Export Translation</ButtonText>
+        </Strings>
+      </Button>
+      <!--Import files-->
+      <Button guid="guidMultilingualExtensionWindowsPackageCmdSet" id="CommandIdImportFiles" priority="0x0100" type="Button">
+        <Parent guid="guidMultilingualExtensionWindowsPackageCmdSet" id="MyGroupForSubMenuProjectPad" />
+        <Icon guid="guidImages" id="bmpPic1" />
+
+        <Strings>
+          <ButtonText>Import Translation</ButtonText>
         </Strings>
       </Button>
     </Buttons>
@@ -108,6 +124,8 @@
       <IDSymbol name="CommandIdUpdateFiles" value="0x0100" />
       <IDSymbol name="CommandIdTranslateFiles" value="0x0101" />
       <IDSymbol name="CommandIdShowSettings" value="0x0102" />
+      <IDSymbol name="CommandIdExportFiles" value="0x0103" />
+      <IDSymbol name="CommandIdImportFiles" value="0x0104" />
     </GuidSymbol>
 
     <GuidSymbol name="guidImages" value="{e1e1d1d1-81ef-47fb-9d53-4190d8b4edab}" >

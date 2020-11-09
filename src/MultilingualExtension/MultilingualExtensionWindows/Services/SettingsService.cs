@@ -5,9 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Win32;
 using MultilingualExtension.Shared.Helpers;
+using MultilingualExtension.Shared.Interface;
+
 namespace MultilingualExtensionWindows.Services
 {
-    public class SettingsService
+    public class SettingsService : ISettingsService
     {
         //const string PROP_MSOFTENDPOINT = "MsoftEndpoint";
         //const string PROP_MSOFTLOCATION = "MsoftLocation";
@@ -16,7 +18,7 @@ namespace MultilingualExtensionWindows.Services
         //const string PROP_MASTERLANGUAGECODE = "MasterLanguageCode";
       
 
-        private static  RegistryKey UserPrefs;
+        private  RegistryKey UserPrefs;
         public SettingsService()
         {
             UserPrefs = Registry.CurrentUser.OpenSubKey("Walltec\\MultilingualExtension", true);
