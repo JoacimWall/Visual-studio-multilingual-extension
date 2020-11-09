@@ -1,0 +1,7 @@
+﻿<AddinProject appVersion="8.0">
+    <Project platforms="Mac Win32">
+        <AddinFile>MultilingualExtension/bin/Release/net471/MultilingualExtension.dll</AddinFile>
+        <BuildFile>MultilingualExtension.sln</BuildFile>
+        <BuildConfiguration>Release</BuildConfiguration>
+    </Project>
+</AddinProject>

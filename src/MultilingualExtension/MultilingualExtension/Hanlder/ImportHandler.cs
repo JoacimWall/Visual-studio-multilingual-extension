@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.OleDb;
-using System.IO;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Xml;
 using FileHelpers;
 
@@ -12,6 +6,9 @@ using FileHelpers;
 using MonoDevelop.Components.Commands;
 using MonoDevelop.Ide;
 using MonoDevelop.Projects;
+using MultilingualExtension.Helper;
+using MultilingualExtension.Shared;
+using MultilingualExtension.Shared.Helpers;
 
 namespace MultilingualExtension
 {
@@ -19,7 +16,7 @@ namespace MultilingualExtension
     {
         protected override void Run()
         {
-            Helper.ProgressBarHelper progress = new Helper.ProgressBarHelper("Import rows where comment is 'Final'");
+            ProgressBarHelper progress = new ProgressBarHelper("Import rows where comment is 'Final'");
             try
             {
 
@@ -27,7 +24,7 @@ namespace MultilingualExtension
                 string selectedFilename = selectedItem.Name;
 
                 //validate file
-                var checkfile = Helper.RexExHelper.ValidateFilenameIsTargetTypeCsv(selectedFilename);
+                var checkfile = RexExHelper.ValidateFilenameIsTargetTypeCsv(selectedFilename);
                 if (!checkfile.Success)
                 {
                     //TODO: Show message you select file have the format .sv-SE.resx
@@ -49,7 +46,7 @@ namespace MultilingualExtension
             }
             finally
             {
-                progress.pdata.window.HideAll();
+                progress.HideAll();
                 progress = null;
                 Console.WriteLine("Translate file completed");
             }
@@ -62,7 +59,7 @@ namespace MultilingualExtension
             string selectedFilename = selectedItem.Name;
 
             //validate file
-            var checkfile = Helper.RexExHelper.ValidateFilenameIsTargetTypeCsv(selectedFilename);
+            var checkfile = RexExHelper.ValidateFilenameIsTargetTypeCsv(selectedFilename);
             if (!checkfile.Success)
             {
                 info.Visible = false;
@@ -74,10 +71,10 @@ namespace MultilingualExtension
 
             }
         }
-        private void ImportCsvToResx(string masterPath, string updatePath, Helper.ProgressBarHelper progress)
+        private void ImportCsvToResx(string masterPath, string updatePath, ProgressBarHelper progress)
         {
             
-
+            
 
             XmlDocument updatedoc = new XmlDocument();
             updatedoc.Load(updatePath);
@@ -89,7 +86,7 @@ namespace MultilingualExtension
             bool updatefilechanged = false;
             foreach (var record in records)
             {
-                if (record.Status == Globals.STATUS_COMMENT_FINAL)
+                if (record.Status == Shared.Helpers.Globals.STATUS_COMMENT_FINAL)
                 {
                     var dataNode = rootUpdate.SelectSingleNode("//data[@name='" + record.Name + "']");
                     if (dataNode != null)
@@ -100,13 +97,13 @@ namespace MultilingualExtension
                         if (dataNodeValue != null && dataNodeComment != null)
                         {
                             dataNodeValue.InnerText = record.TargetLanguage;
-                            dataNodeComment.InnerText = Globals.STATUS_COMMENT_FINAL;
+                            dataNodeComment.InnerText = Shared.Helpers.Globals.STATUS_COMMENT_FINAL;
                         }
            
                     }
 
                 }
-                progress.pdata.pbar.Pulse();
+                progress.Pulse();
 
             }
 

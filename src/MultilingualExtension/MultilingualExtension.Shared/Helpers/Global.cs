@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MultilingualExtension
+namespace MultilingualExtension.Shared.Helpers
 {
     public static class Globals
     {

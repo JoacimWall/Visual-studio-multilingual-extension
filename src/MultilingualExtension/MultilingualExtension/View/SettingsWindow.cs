@@ -1,4 +1,5 @@
 ﻿using System;
+using Gdk;
 using Gtk;
 using MultilingualExtension;
 namespace MultilingualExtension
@@ -16,6 +17,7 @@ namespace MultilingualExtension
 
         public SettingsWindow() : base("Multilingual Settings")
         {
+            this.DeleteEvent += delegate { HideAll(); };
             SetDefaultSize(590, 300);
             SetPosition(Gtk.WindowPosition.Center);
             DeleteEvent += delegate { Application.Quit(); };
@@ -124,7 +126,7 @@ namespace MultilingualExtension
             entryMsoftLocation.Text = Service.SettingsService.MsoftLocation;
             entryMsoftKey.Text = Service.SettingsService.MsoftKey;
             checkButtonAddComment.Active = Service.SettingsService.AddCommentNodeMasterResx;
-
+            
             ShowAll();
 
         }
@@ -153,7 +155,6 @@ namespace MultilingualExtension
             Service.SettingsService.MsoftKey = entryMsoftKey.Text;
             HideAll();
         }
-
         
-    }
+        }
 }

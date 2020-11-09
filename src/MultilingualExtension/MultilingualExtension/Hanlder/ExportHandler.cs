@@ -12,6 +12,9 @@ using FileHelpers;
 using MonoDevelop.Components.Commands;
 using MonoDevelop.Ide;
 using MonoDevelop.Projects;
+using MultilingualExtension.Helper;
+using MultilingualExtension.Shared;
+using MultilingualExtension.Shared.Helpers;
 
 namespace MultilingualExtension
 {
@@ -19,7 +22,7 @@ namespace MultilingualExtension
     {
         protected override void Run()
         {
-            Helper.ProgressBarHelper progress = new Helper.ProgressBarHelper("export rows where comment is 'New' or 'Need review'");
+           ProgressBarHelper progress = new ProgressBarHelper("export rows where comment is 'New' or 'Need review'");
             try
             {
 
@@ -27,7 +30,7 @@ namespace MultilingualExtension
                 string selectedFilename = selectedItem.Name;
 
                 //validate file
-                var checkfile = Helper.RexExHelper.ValidateFilenameIsTargetType(selectedFilename);
+                var checkfile = RexExHelper.ValidateFilenameIsTargetType(selectedFilename);
                 if (!checkfile.Success)
                 {
                     //TODO: Show message you have selected master .resx file we will update all other resx files in this folder that have the format .sv-SE.resx
@@ -37,7 +40,7 @@ namespace MultilingualExtension
                     string[] fileEntries = Directory.GetFiles(masterFolderPath);
                     foreach (string fileName in fileEntries)
                     {
-                        var checkfileInFolder = Helper.RexExHelper.ValidateFilenameIsTargetType(fileName);
+                        var checkfileInFolder = RexExHelper.ValidateFilenameIsTargetType(fileName);
                         if (checkfileInFolder.Success)
                             ExportToExcel(selectedFilename, fileName, progress);
                     }
@@ -71,7 +74,7 @@ namespace MultilingualExtension
             string selectedFilename = selectedItem.Name;
 
             //validate file
-            var checkfile = Helper.RexExHelper.ValidateFilenameIsTargetType(selectedFilename);
+            var checkfile = RexExHelper.ValidateFilenameIsTargetType(selectedFilename);
             if (!checkfile.Success)
             {
                 info.Text = "Export all .xx-xx.resx files";
@@ -82,7 +85,7 @@ namespace MultilingualExtension
 
             }
         }
-        private void ExportToExcel(string masterPath, string updatePath, Helper.ProgressBarHelper progress)
+        private void ExportToExcel(string masterPath, string updatePath, ProgressBarHelper progress)
         {
             int folderindex = updatePath.LastIndexOf("/");
             string masterFolderPath = updatePath.Substring(0, folderindex + 1);
@@ -145,7 +148,7 @@ namespace MultilingualExtension
 
             var engine = new FileHelperEngine<TranslationsRow>(System.Text.Encoding.UTF8);
             //get filename
-            var checkfile = Helper.RexExHelper.GetFilenameResx(updatePath);
+            var checkfile = RexExHelper.GetFilenameResx(updatePath);
             engine.HeaderText = engine.GetFileHeader();
             engine.WriteFile(masterFolderPath + checkfile.Value +  ".csv", rows);
 
