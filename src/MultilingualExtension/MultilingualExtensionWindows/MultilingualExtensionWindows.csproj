@@ -47,6 +47,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Command.cs" />
+    <Compile Include="Helpers\DevfileHelper.cs" />
+    <Compile Include="Helpers\ProgressBarHelper.cs" />
     <Compile Include="MultilingualExtensionWindowsPackage1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -54,6 +56,13 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MultilingualExtensionWindowsPackage.cs" />
+    <Compile Include="Services\SettingsService.cs" />
+    <Compile Include="View\SettingsWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\SettingsWindow.Designer.cs">
+      <DependentUpon>SettingsWindow.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="source.extension.vsixmanifest">
@@ -86,7 +95,15 @@
     </VSCTCompile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Helpers\" />
+    <EmbeddedResource Include="View\SettingsWindow.resx">
+      <DependentUpon>SettingsWindow.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MultilingualExtension.Shared\MultilingualExtension.Shared.csproj">
+      <Project>{054bc06b-f618-4090-aa26-10b6925ddc58}</Project>
+      <Name>MultilingualExtension.Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\VSSDK\Microsoft.VsSDK.targets" Condition="'$(VSToolsPath)' != ''" />

@@ -30,6 +30,7 @@ namespace MultilingualExtensionWindows
         public const int MyGroupForSubMenuProjectPad = 0x1021;
         public const int CommandIdUpdateFiles = 0x0100;
         public const int CommandIdTranslateFiles = 0x0101;
+        public const int CommandIdShowSettings = 0x0102;
         public const int bmpPic1 = 0x0001;
         public const int bmpPic2 = 0x0002;
         public const int bmpPicSearch = 0x0003;
