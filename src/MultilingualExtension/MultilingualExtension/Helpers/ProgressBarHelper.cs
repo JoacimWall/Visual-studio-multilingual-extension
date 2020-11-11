@@ -1,9 +1,10 @@
 ﻿
 using GLib;
 using Gtk;
+using MultilingualExtension.Shared.Interfaces;
 using System;
 
-namespace MultilingualExtension.Helper
+namespace MultilingualExtension.Helpers
 {
     public class ProgressData 
     {
@@ -14,7 +15,7 @@ namespace MultilingualExtension.Helper
 
         
     }
-    public class ProgressBarHelper: Shared.Interface.IProgressBar
+    public class ProgressBarHelper: IProgressBar
     {
         public ProgressData pdata;
         Gtk.VBox vbox;
