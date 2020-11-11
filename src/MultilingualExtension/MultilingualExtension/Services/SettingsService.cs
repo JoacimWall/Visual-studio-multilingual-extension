@@ -12,10 +12,9 @@ namespace MultilingualExtension.Services
         {
             get
             {
-                //1= Google
-                //2=Microsoift
+                
                 var addCommenttoMaster = MonoDevelop.Core.PropertyService.Get<string>(Globals.PROP_ADDCOMMENTNODEMASTERRESX);
-                if (String.IsNullOrEmpty(addCommenttoMaster) || addCommenttoMaster == "1")
+                if (String.IsNullOrEmpty(addCommenttoMaster) || addCommenttoMaster == "0")
                     return true;
 
                 return false;
@@ -111,7 +110,7 @@ namespace MultilingualExtension.Services
                 //2=excel
                 var service = MonoDevelop.Core.PropertyService.Get<string>(Globals.PROP_EXPORTFILETYPEX);
                 if (String.IsNullOrEmpty(service))
-                    return 1;
+                    return 2;
 
                 return int.Parse(service);
             }
