@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="MultilingualExtensionWindows.74d02615-2463-43e2-9e45-b254a32aa42b" Version="1.0.9" Language="en-US" Publisher="Joacim Wall" />
+        <Identity Id="com.walltec.multilingualextension" Version="1.0.10" Language="en-US" Publisher="Walltec" />
         <DisplayName>Multilingual Extension</DisplayName>
-        <Description xml:space="preserve">This extension is for handling multilingual support in visual studio</Description>
+        <Description xml:space="preserve">This extension is for handling multilingual support in visual studio for Windows and Mac
+
+For it to work, it requires that you start from a Resx file that is the master. Then you name all the other files according to the masterfile name .xx-xx.resx. For example AppResources.resx for master and AppResources.fr-FR.resx for French.
+
+It has four main functions.
+Synchronization of Resx files
+Translation of texts by Google translate or Microsoft translate
+Export of translations into csv or xlsx file for final translation by external stakeholder
+Import of final translations from external stakholder
+</Description>
+        <MoreInfo>https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/README.md</MoreInfo>
         <Icon>icon.png</Icon>
+        <Preview>true</Preview>
     </Metadata>
     <Installation>
         <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[16.0, 17.0)" />

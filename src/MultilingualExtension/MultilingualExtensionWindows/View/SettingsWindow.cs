@@ -19,6 +19,11 @@ namespace MultilingualExtensionWindows.View
             InitializeComponent();
             _settingsService = new Services.SettingsService();
             txtMasterLanguale.Text = _settingsService.MasterLanguageCode;
+            if (_settingsService.ExportFileType == 1)
+                rbCsv.Checked = true;
+            else
+               rbExcel.Checked= true;
+
             if (_settingsService.TranslationService == 1)
                 rbGoogle.Checked = true;
             else
@@ -35,6 +40,12 @@ namespace MultilingualExtensionWindows.View
         private void btnSave_Click(object sender, EventArgs e)
         {
               _settingsService.MasterLanguageCode= txtMasterLanguale.Text;
+
+            if (rbCsv.Checked)
+                _settingsService.ExportFileType = 1;
+            else
+                _settingsService.ExportFileType = 2;
+
             if (rbGoogle.Checked )
                 _settingsService.TranslationService = 1;
             else
@@ -49,6 +60,11 @@ namespace MultilingualExtensionWindows.View
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Hide();
+        }
+
+        private void SettingsWindow_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

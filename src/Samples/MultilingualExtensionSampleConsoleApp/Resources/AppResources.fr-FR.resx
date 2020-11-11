@@ -41,4 +41,7 @@
   <data name="Happy" xml:space="preserve">
     <value>content</value>
   <comment>Need review</comment></data>
+  <data name="Cars_Are_Fun" xml:space="preserve">
+    <value>Les voitures sont amusantes</value>
+  <comment>Need review</comment></data>
 </root>

@@ -122,11 +122,11 @@
     <comment>Need review</comment>
   </data>
   <data name="Enter_Your_Email" xml:space="preserve">
-    <value>&gt;</value>
+    <value>Enter your email</value>
     <comment>Need review</comment>
   </data>
   <data name="Enter_Your_Password" xml:space="preserve">
-    <value>&gt;</value>
+    <value>Enter your password</value>
     <comment>Need review</comment>
   </data>
   <data name="Enter_Your_Cat" xml:space="preserve">
@@ -149,5 +149,8 @@
   </data>
   <data name="Happy" xml:space="preserve">
     <value>Happy</value>
+  </data>
+  <data name="Cars_Are_Fun" xml:space="preserve">
+    <value>Cars are fun</value>
   </data>
 </root>

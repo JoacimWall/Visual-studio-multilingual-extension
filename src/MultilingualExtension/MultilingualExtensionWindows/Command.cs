@@ -10,7 +10,8 @@ using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using MultilingualExtension.Shared.Helpers;
 using MultilingualExtension.Shared.Interfaces;
-using MultilingualExtension.Shared.Service;
+using MultilingualExtension.Shared.Services;
+using MultilingualExtensionWindows.Services;
 using Task = System.Threading.Tasks.Task;
 
 namespace MultilingualExtensionWindows
@@ -184,7 +185,7 @@ namespace MultilingualExtensionWindows
                 //MultilingualExtension.Shared
                 SyncFileService syncFileService = new SyncFileService();
 
-               // syncFileService.SyncFile(selectedFilename, progress, settingsService);
+                syncFileService.SyncFile(selectedFilename, progress, settingsService);
 
                
 
@@ -234,7 +235,7 @@ namespace MultilingualExtensionWindows
                 //MultilingualExtension.Shared
                 TranslationService  translationService  = new TranslationService();
 
-                //translationService.TranslateFile(selectedFilename, progress, settingsService);
+                translationService.TranslateFile(selectedFilename, progress, settingsService);
 
 
 
@@ -272,9 +273,10 @@ namespace MultilingualExtensionWindows
 
 
                 //MultilingualExtension.Shared
-                MultilingualExtension.SharedCode.Service.ExportService exportFileService = new MultilingualExtension.SharedCode.Service.ExportService();
+                ExportService exportFileService = new ExportService();
+                ISettingsService settingsService = new SettingsService();
 
-                exportFileService.ExportToFile(selectedFilename, progress);
+                exportFileService.ExportToFile(selectedFilename, progress, settingsService);
 
 
 
@@ -295,7 +297,7 @@ namespace MultilingualExtensionWindows
             {
                 progress.HideAll();
                 progress = null;
-                Console.WriteLine("Sync file completed");
+                Console.WriteLine("Export file completed");
             }
 
             
@@ -314,8 +316,9 @@ namespace MultilingualExtensionWindows
 
                 //MultilingualExtension.Shared
                 ImportService importFileService = new ImportService();
+                ISettingsService settingsService = new SettingsService();
 
-                //importFileService.ImportCsvToResx(selectedFilename, progress);
+                importFileService.ImportToResx(selectedFilename, progress, settingsService);
 
 
 

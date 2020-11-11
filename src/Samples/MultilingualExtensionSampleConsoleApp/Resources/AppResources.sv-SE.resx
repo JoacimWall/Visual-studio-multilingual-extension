@@ -39,4 +39,7 @@
   <data name="Happy" xml:space="preserve">
     <value>Lycklig</value>
   <comment>Need review</comment></data>
+  <data name="Cars_Are_Fun" xml:space="preserve">
+    <value>Bilar är kul</value>
+  <comment>Need review</comment></data>
 </root>

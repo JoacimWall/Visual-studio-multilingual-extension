@@ -59,7 +59,7 @@
       <!--Menu settings-->
       <Button guid="guidMultilingualExtensionWindowsPackageCmdSet" id="CommandIdShowSettings" priority="0x0100" type="Button">
         <Parent guid="guidMultilingualExtensionWindowsPackageCmdSet" id="MyMenuGroup" />
-        <Icon guid="guidImages" id="bmpPic1" />
+        <!--<Icon guid="guidImages" id="bmpPic1" />-->
 
         <Strings>
           <ButtonText>Multilinugal settings</ButtonText>
@@ -68,7 +68,7 @@
       <!--UpdateFiles-->
       <Button guid="guidMultilingualExtensionWindowsPackageCmdSet" id="CommandIdUpdateFiles" priority="0x0100" type="Button">
         <Parent guid="guidMultilingualExtensionWindowsPackageCmdSet" id="MyGroupForSubMenuProjectPad" />
-        <Icon guid="guidImages" id="bmpPic1" />
+        <!--<Icon guid="guidImages" id="bmpPic1" />-->
         <Strings>
           <ButtonText>Synchronizes language files</ButtonText>
         </Strings>
@@ -76,7 +76,7 @@
       <!--Translate-->
       <Button guid="guidMultilingualExtensionWindowsPackageCmdSet" id="CommandIdTranslateFiles" priority="0x0100" type="Button">
         <Parent guid="guidMultilingualExtensionWindowsPackageCmdSet" id="MyGroupForSubMenuProjectPad" />
-        <Icon guid="guidImages" id="bmpPic1" />
+        <!--<Icon guid="guidImages" id="bmpPic1" />-->
        
         <Strings>
           <ButtonText>Translate language files</ButtonText>
@@ -85,7 +85,7 @@
       <!--Export files-->
       <Button guid="guidMultilingualExtensionWindowsPackageCmdSet" id="CommandIdExportFiles" priority="0x0100" type="Button">
         <Parent guid="guidMultilingualExtensionWindowsPackageCmdSet" id="MyGroupForSubMenuProjectPad" />
-        <Icon guid="guidImages" id="bmpPic1" />
+        <!--<Icon guid="guidImages" id="bmpPic1" />-->
 
         <Strings>
           <ButtonText>Export Translation</ButtonText>
@@ -94,7 +94,7 @@
       <!--Import files-->
       <Button guid="guidMultilingualExtensionWindowsPackageCmdSet" id="CommandIdImportFiles" priority="0x0100" type="Button">
         <Parent guid="guidMultilingualExtensionWindowsPackageCmdSet" id="MyGroupForSubMenuProjectPad" />
-        <Icon guid="guidImages" id="bmpPic1" />
+        <!--<Icon guid="guidImages" id="bmpPic1" />-->
 
         <Strings>
           <ButtonText>Import Translation</ButtonText>

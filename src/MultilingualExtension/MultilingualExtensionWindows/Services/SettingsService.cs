@@ -11,13 +11,7 @@ namespace MultilingualExtensionWindows.Services
 {
     public class SettingsService : ISettingsService
     {
-        //const string PROP_MSOFTENDPOINT = "MsoftEndpoint";
-        //const string PROP_MSOFTLOCATION = "MsoftLocation";
-        //const string PROP_MSOFTKEY = "MsoftKey";
-        //const string PROP_TRANSLATIONSERVICE = "TranslationServcie";
-        //const string PROP_MASTERLANGUAGECODE = "MasterLanguageCode";
-      
-
+        
         private  RegistryKey UserPrefs;
         public SettingsService()
         {
@@ -31,6 +25,7 @@ namespace MultilingualExtensionWindows.Services
                 UserPrefs = Registry.CurrentUser.CreateSubKey("Walltec\\MultilingualExtension");
                 //Set default
                 AddCommentNodeMasterResx = false;
+                ExportFileType = 2;
                 TranslationService = 1;
                 MasterLanguageCode = "en";
                 MsoftEndpoint = "";
@@ -115,8 +110,21 @@ namespace MultilingualExtensionWindows.Services
                 UserPrefs.SetValue(Globals.PROP_MSOFTKEY, value);
             }
         }
-        
 
-        
+        public int ExportFileType
+        {
+            get
+            {
+                //1= Google
+                //2=Microsoift
+                return int.Parse(UserPrefs.GetValue(Globals.PROP_EXPORTFILETYPEX).ToString());
+
+            }
+            set
+            {
+                UserPrefs.SetValue(Globals.PROP_EXPORTFILETYPEX, value);
+            }
+        }
+
     }
 }
