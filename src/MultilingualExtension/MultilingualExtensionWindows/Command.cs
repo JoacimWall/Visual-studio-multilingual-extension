@@ -9,7 +9,7 @@ using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using MultilingualExtension.Shared.Helpers;
-using MultilingualExtension.Shared.Interface;
+using MultilingualExtension.Shared.Interfaces;
 using MultilingualExtension.Shared.Service;
 using Task = System.Threading.Tasks.Task;
 
@@ -23,9 +23,9 @@ namespace MultilingualExtensionWindows
         /// <summary>
         /// Command ID.
         /// </summary>
-        public const int CommandIdUpdateFiles = 0x0100;
-        public const int CommandIdTranslateFiles = 0x0101;
-        public const int CommandIdShowSettings = 0x0102;
+        public const int CommandIdShowSettings = 0x0100;
+        public const int CommandIdUpdateFiles = 0x0101;
+        public const int CommandIdTranslateFiles = 0x0102;
         public const int CommandIdExportFiles = 0x0103;
         public const int CommandIdImportFiles = 0x0104;
         /// <summary>
@@ -70,7 +70,7 @@ namespace MultilingualExtensionWindows
             //Export File
             var menuCommandIDExportFiles = new CommandID(CommandSet, CommandIdExportFiles);
             var menuItemExportFiles = new OleMenuCommand(this.ExecuteExportFiles, menuCommandIDExportFiles);
-            commandService.AddCommand(menuItemTranslateFiles);
+            commandService.AddCommand(menuItemExportFiles);
 
             //Import File
             var menuCommandIDImportFiles = new CommandID(CommandSet, CommandIdImportFiles);
@@ -184,7 +184,7 @@ namespace MultilingualExtensionWindows
                 //MultilingualExtension.Shared
                 SyncFileService syncFileService = new SyncFileService();
 
-                syncFileService.SyncFile(selectedFilename, progress, settingsService);
+               // syncFileService.SyncFile(selectedFilename, progress, settingsService);
 
                
 
@@ -222,18 +222,41 @@ namespace MultilingualExtensionWindows
         }
         private void ExecuteTranslateFiles(object sender, EventArgs e)
         {
-            ThreadHelper.ThrowIfNotOnUIThread();
-            string message = string.Format(CultureInfo.CurrentCulture, "Inside {0}.MenuItemCallback()", this.GetType().FullName);
-            string title = "Command";
+            IProgressBar progress = new Helpers.ProgressBarHelper();
+            ISettingsService settingsService = new Services.SettingsService();
+            try
+            {
+                // Get the file path
+                var selectedFilename = Helpers.DevfileHelper.GetSelectedFile();
+                if (String.IsNullOrEmpty(selectedFilename)) return;
 
-            // Show a message box to prove we were here
-            VsShellUtilities.ShowMessageBox(
-                this.package,
-                message,
-                title,
-                OLEMSGICON.OLEMSGICON_INFO,
-                OLEMSGBUTTON.OLEMSGBUTTON_OK,
-                OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
+
+                //MultilingualExtension.Shared
+                TranslationService  translationService  = new TranslationService();
+
+                //translationService.TranslateFile(selectedFilename, progress, settingsService);
+
+
+
+
+            }
+            catch (Exception ex)
+            {
+                VsShellUtilities.ShowMessageBox(
+                    this.package,
+                    ex.Message,
+                    "Multilangiual Extension",
+                    OLEMSGICON.OLEMSGICON_INFO,
+                    OLEMSGBUTTON.OLEMSGBUTTON_OK,
+                    OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
+
+            }
+            finally
+            {
+                progress.HideAll();
+                progress = null;
+                Console.WriteLine("Sync file completed");
+            }
         }
         
         private void ExecuteExportFiles(object sender, EventArgs e)
@@ -249,7 +272,7 @@ namespace MultilingualExtensionWindows
 
 
                 //MultilingualExtension.Shared
-                ExportService exportFileService = new ExportService();
+                MultilingualExtension.SharedCode.Service.ExportService exportFileService = new MultilingualExtension.SharedCode.Service.ExportService();
 
                 exportFileService.ExportToFile(selectedFilename, progress);
 
@@ -292,7 +315,7 @@ namespace MultilingualExtensionWindows
                 //MultilingualExtension.Shared
                 ImportService importFileService = new ImportService();
 
-                importFileService.ImportCsvToResx(selectedFilename, progress);
+                //importFileService.ImportCsvToResx(selectedFilename, progress);
 
 
 

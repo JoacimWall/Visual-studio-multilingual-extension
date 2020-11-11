@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Win32;
 using MultilingualExtension.Shared.Helpers;
-using MultilingualExtension.Shared.Interface;
-
+using MultilingualExtension.Shared.Interfaces;
+using MultilingualExtension.Shared.Models;
 namespace MultilingualExtensionWindows.Services
 {
     public class SettingsService : ISettingsService

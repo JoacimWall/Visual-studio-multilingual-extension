@@ -38,4 +38,7 @@
   <data name="I_Am_Old" xml:space="preserve">
     <value>Je suis vieux</value>
   <comment>Need review</comment></data>
+  <data name="Happy" xml:space="preserve">
+    <value>content</value>
+  <comment>Need review</comment></data>
 </root>

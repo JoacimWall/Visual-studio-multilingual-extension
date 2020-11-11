@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using MultilingualExtension.Shared.Interfaces;
 namespace MultilingualExtensionWindows.Helpers
 {
-    public class ProgressBarHelper : MultilingualExtension.Shared.Interface.IProgressBar
+    public class ProgressBarHelper : IProgressBar
     {
         public bool HideAll()
         {

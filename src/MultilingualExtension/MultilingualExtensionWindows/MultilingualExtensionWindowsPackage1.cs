@@ -28,9 +28,9 @@ namespace MultilingualExtensionWindows
     {
         public const int MyMenuGroup = 0x1020;
         public const int MyGroupForSubMenuProjectPad = 0x1021;
-        public const int CommandIdUpdateFiles = 0x0100;
-        public const int CommandIdTranslateFiles = 0x0101;
-        public const int CommandIdShowSettings = 0x0102;
+        public const int CommandIdShowSettings = 0x0100;
+        public const int CommandIdUpdateFiles = 0x0101;
+        public const int CommandIdTranslateFiles = 0x0102;
         public const int CommandIdExportFiles = 0x0103;
         public const int CommandIdImportFiles = 0x0104;
         public const int bmpPic1 = 0x0001;

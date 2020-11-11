@@ -147,4 +147,7 @@
   <data name="I_Am_Old" xml:space="preserve">
     <value>I am old</value>
   </data>
+  <data name="Happy" xml:space="preserve">
+    <value>Happy</value>
+  </data>
 </root>

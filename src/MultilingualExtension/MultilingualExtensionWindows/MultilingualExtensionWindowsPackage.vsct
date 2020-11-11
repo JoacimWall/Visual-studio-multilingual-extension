@@ -121,9 +121,10 @@
     <GuidSymbol name="guidMultilingualExtensionWindowsPackageCmdSet" value="{e86c9f19-293d-49ab-8b5b-f4039e5193db}">
       <IDSymbol name="MyMenuGroup" value="0x1020" />
       <IDSymbol name="MyGroupForSubMenuProjectPad" value="0x1021" />
-      <IDSymbol name="CommandIdUpdateFiles" value="0x0100" />
-      <IDSymbol name="CommandIdTranslateFiles" value="0x0101" />
-      <IDSymbol name="CommandIdShowSettings" value="0x0102" />
+      <IDSymbol name="CommandIdShowSettings" value="0x0100" />
+      <IDSymbol name="CommandIdUpdateFiles" value="0x0101" />
+      <IDSymbol name="CommandIdTranslateFiles" value="0x0102" />
+      
       <IDSymbol name="CommandIdExportFiles" value="0x0103" />
       <IDSymbol name="CommandIdImportFiles" value="0x0104" />
     </GuidSymbol>

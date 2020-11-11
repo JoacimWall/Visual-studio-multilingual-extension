@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>f683cbee-6eb9-4b10-bd60-050029bc2f2a</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>MultilingualExtension.SharedCode</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\Global.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\RexExHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IProgressBar.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\ISettingsService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\MicrosoftTranslationResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Result.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Translations.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\TranslationsRow.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ExportService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ImportService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\SyncFileService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\TranslationService.cs" />
+  </ItemGroup>
+</Project>

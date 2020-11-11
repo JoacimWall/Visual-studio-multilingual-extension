@@ -1,51 +1,51 @@
-﻿using System;
-using System.Collections.Generic;
-using FileHelpers;
-
-namespace MultilingualExtension.Shared.Helpers
-{
-    public static class Globals
-    {
-        //Constants for status on translation
-        public const string STATUS_COMMENT_NEW = "New";
-        public const string STATUS_COMMENT_NEED_REVIEW = "Need review";
-        public const string STATUS_COMMENT_TRANSLATED = "Translated";
-        public const string STATUS_COMMENT_FINAL = "Final";
-
-        //Constants for saved propertys
-        public const string PROP_MSOFTENDPOINT = "MsoftEndpoint";
-        public const string PROP_MSOFTLOCATION = "MsoftLocation";
-        public const string PROP_MSOFTKEY = "MsoftKey";
-        public const string PROP_TRANSLATIONSERVICE = "TranslationServcie";
-        public const string PROP_MASTERLANGUAGECODE = "MasterLanguageCode";
-        public const string PROP_ADDCOMMENTNODEMASTERRESX = "AddCommentNodeMasterResx";
-
-    }
-    public class MicrosoftTranslationResponse
-    {
-        public List<Translations> translations { get; set; }
-    }
-    public class Translations
-    {
-        public string text { get; set; }
-        public string to { get; set; }
-    }
-    /// <summary>
-    /// Layout for a file delimited by ,
-    /// </summary>
-    [DelimitedRecord(";")]
-    public class TranslationsRow
-    {
+﻿//using System;
+//using System.Collections.Generic;
 
 
-        public string Name;
+//namespace MultilingualExtension.Shared.Helpers
+//{
+//    public static class Globals
+//    {
+//        //Constants for status on translation
+//        public const string STATUS_COMMENT_NEW = "New";
+//        public const string STATUS_COMMENT_NEED_REVIEW = "Need review";
+//        public const string STATUS_COMMENT_TRANSLATED = "Translated";
+//        public const string STATUS_COMMENT_FINAL = "Final";
+
+//        //Constants for saved propertys
+//        public const string PROP_MSOFTENDPOINT = "MsoftEndpoint";
+//        public const string PROP_MSOFTLOCATION = "MsoftLocation";
+//        public const string PROP_MSOFTKEY = "MsoftKey";
+//        public const string PROP_TRANSLATIONSERVICE = "TranslationServcie";
+//        public const string PROP_MASTERLANGUAGECODE = "MasterLanguageCode";
+//        public const string PROP_ADDCOMMENTNODEMASTERRESX = "AddCommentNodeMasterResx";
+
+//    }
+//    //public class MicrosoftTranslationResponse
+//    //{
+//    //    public List<Translations> translations { get; set; }
+//    //}
+//    //public class Translations
+//    //{
+//    //    public string text { get; set; }
+//    //    public string to { get; set; }
+//    //}
+//    /// <summary>
+//    /// Layout for a file delimited by ,
+//    /// </summary>
+//   // [DelimitedRecord(";")]
+//    public class TranslationsRow
+//    {
 
 
-        public string SourceLanguage;
+//        public string Name;
 
-        public string TargetLanguage;
 
-        public string Status;
-    }
+//        public string SourceLanguage;
 
-}
+//        public string TargetLanguage;
+
+//        public string Status;
+//    }
+
+//}

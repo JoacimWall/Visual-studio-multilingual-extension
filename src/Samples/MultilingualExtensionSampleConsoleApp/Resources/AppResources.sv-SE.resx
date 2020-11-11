@@ -36,4 +36,7 @@
   <data name="I_Am_Old" xml:space="preserve">
     <value>Jag är gammal</value>
   <comment>Need review</comment></data>
+  <data name="Happy" xml:space="preserve">
+    <value>Lycklig</value>
+  <comment>Need review</comment></data>
 </root>
