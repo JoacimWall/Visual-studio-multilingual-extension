@@ -1,5 +1,5 @@
-# Visual Studio For Mac Multilingual Extension
-#### This extension is for handling multilingual support in visual studio for Mac.
+# Visual Studio For Mac/Windows Multilingual Extension
+#### This extension is for handling multilingual support in visual studio.
 #### For it to work, it requires that you start from a Resx file that is the master. Then you name all the other files according to the masterfile name .xx-xx.resx. For example AppResources.resx for master and AppResources.fr-FR.resx for French.
 
 <img width=“100” height="200" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/SolutionExample.png">
@@ -8,12 +8,11 @@
 
 * Synchronization of Resx files
 * Translation of texts by Google translate or Microsoft translate
-* Export of translations into csv file for final translation by external stakeholder
+* Export of translations into csv or xlsx file for final translation by external stakeholder
 * Import of final translations from external stakholder 
 
 ## Roadmapp 
 * Posibility to export all rows not only the one that need translations.
-* Export to xls file.
 * Cleaning of the Resx files (find translations that are not used anymore anywhere in the code)
 
  ## Explanation of functions
@@ -29,13 +28,13 @@ Right-click one of the language files (AppResources.fr-FR.resx) and select "Sync
 
 ### Translation of texts
 By default, this extension uses Google free translation. This is limited to only 100 translations per hour. To use the Microsoft translation service, select tools / multilangual settings in the visual studio and fill in the information from Microsoft. In this dialog you can also change the master language that is 'en' by default.
-If you also want to handle the stature for the texts in the master resx file, check the 'Add Comment node to master Resx file on sync' in settings dialog.
+If you also want to handle the status for the texts in the master resx file, check the 'Add Comment node to master Resx file on sync' in settings dialog.
 
 <img width=“100” height="200" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/MultilingualSettingsDialog.png">
 
-### Export of texts
-There are two ways to export the resx files to csv. 
- Right-click the master file and select "Export all .xx-xx.resx files". Then all files that are in the same folder and follow the naming standard .xx-xx.resx will be processed and all rows with status 'New' or 'Need review' will be exported to the csv file.
+### Export of texts to Excel or csv file
+There are two ways to export the resx files to csv or xlsx. 
+Right-click the master file and select "Export all .xx-xx.resx files". Then all files that are in the same folder and follow the naming standard .xx-xx.resx will be processed and all rows with status 'New' or 'Need review' will be exported. You can change the preferd export file type in the settings dialog click tools/multilangual settings and select the preferd 'Export file type' and click save.  
  
 <img  width=“100” height="400" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/ExportAllFilePopUpDialog.png">
 
@@ -44,7 +43,7 @@ Right-click one of the language files (AppResources.fr-FR.resx) and select "Expo
 <img  width=“100” height="400" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/ExportFilePopUpDialog.png">
 
 ### Import of texts
-Right-click one of the csv language files (AppResources.fr-FR.resx.csv) and select "Import translation". then all rows with status 'Final' will be imported to the resx file(AppResources.fr-FR.resx) that are in the same folder. 
+Right-click one of the csv or xlsx language files (AppResources.fr-FR.resx.csv) and select "Import translation". then all rows with status 'Final' will be imported to the resx file(AppResources.fr-FR.resx) that are in the same folder. 
 
 <img  width=“100” height="400" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/ImportFilePopUpDialog.png">
 
