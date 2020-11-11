@@ -2,8 +2,9 @@
 using MonoDevelop.Components.Commands;
 using MonoDevelop.Ide;
 using MonoDevelop.Projects;
-using MultilingualExtension.Helper;
+
 using MultilingualExtension.Shared.Helpers;
+using MultilingualExtension.Shared.Interfaces;
 using MultilingualExtension.Shared.Service;
 
 namespace MultilingualExtension
@@ -12,7 +13,7 @@ namespace MultilingualExtension
     {
         protected  override async void Run()
         {
-            ProgressBarHelper progress = new ProgressBarHelper("Import rows where comment is 'Final'");
+            IProgressBar progress = new Helpers.ProgressBarHelper("Import rows where comment is 'Final'");
             try
             {
                 ImportService importService = new ImportService();

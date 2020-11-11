@@ -14,6 +14,8 @@ using MonoDevelop.Components.Commands;
 using MonoDevelop.Ide;
 using MonoDevelop.Projects;
 using MultilingualExtension.Shared.Helpers;
+using MultilingualExtension.Shared.Interfaces;
+
 namespace MultilingualExtension
 {
     class TranslateHandler : CommandHandler
@@ -21,7 +23,7 @@ namespace MultilingualExtension
         
         protected async override void Run()
         {
-            Helper.ProgressBarHelper progress = new Helper.ProgressBarHelper("Translate rows where comment has value 'New'");
+            IProgressBar progress = new Helpers.ProgressBarHelper("Translate rows where comment has value 'New'");
             Service.SettingsService settingsService  = new Service.SettingsService();
             try
             {
@@ -41,7 +43,7 @@ namespace MultilingualExtension
             }
             finally
             {
-                progress.pdata.window.HideAll();
+                progress.HideAll();
                 progress = null;
                 Console.WriteLine("Translate file completed");
             }

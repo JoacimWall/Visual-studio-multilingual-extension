@@ -1,13 +1,11 @@
 ﻿using System;
-
-//using DocumentFormat.OpenXml.Packaging;
 using MonoDevelop.Components.Commands;
 using MonoDevelop.Ide;
 using MonoDevelop.Projects;
-using MultilingualExtension.Helper;
-using MultilingualExtension.Shared;
 using MultilingualExtension.Shared.Helpers;
-using MultilingualExtension.Shared.Service;
+
+using MultilingualExtension.Shared.Interfaces;
+using MultilingualExtension.SharedCode.Service;
 
 namespace MultilingualExtension
 {
@@ -15,7 +13,7 @@ namespace MultilingualExtension
     {
         protected async override void Run()
         {
-            ProgressBarHelper progress = new ProgressBarHelper("export rows where comment is 'New' or 'Need review'");
+            IProgressBar progress = new Helpers.ProgressBarHelper("export rows where comment is 'New' or 'Need review'");
             try
             {
                 ExportService exportService = new ExportService();
@@ -33,7 +31,7 @@ namespace MultilingualExtension
             }
             finally
             {
-                progress.pdata.window.HideAll();
+                progress.HideAll();
                 progress = null;
                 Console.WriteLine("Translate file completed");
             }

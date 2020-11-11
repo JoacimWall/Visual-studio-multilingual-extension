@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.IO;
 using MultilingualExtension.Shared.Helpers;
 using MultilingualExtension.Shared.Service;
+using MultilingualExtension.Shared.Interfaces;
 
 namespace MultilingualExtension
 {
@@ -22,7 +23,7 @@ namespace MultilingualExtension
 
         protected async override void Run()
         {
-            Shared.Interface.IProgressBar progress = new Helper.ProgressBarHelper("synchronizes lines from master RESX file.");
+            IProgressBar progress = new Helpers.ProgressBarHelper("synchronizes lines from master RESX file.");
 
             try
             {
