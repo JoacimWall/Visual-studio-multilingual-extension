@@ -5,7 +5,7 @@ using MonoDevelop.Projects;
 
 using MultilingualExtension.Shared.Helpers;
 using MultilingualExtension.Shared.Interfaces;
-using MultilingualExtension.Shared.Service;
+using MultilingualExtension.Shared.Services;
 
 namespace MultilingualExtension
 {
@@ -17,9 +17,10 @@ namespace MultilingualExtension
             try
             {
                 ImportService importService = new ImportService();
+                ISettingsService settingsService = new Services.SettingsService();
                 ProjectFile selectedItem = (ProjectFile)IdeApp.Workspace.CurrentSelectedItem;
                 string selectedFilename = selectedItem.Name;
-                var result = await importService.ImportCsvToResx(selectedFilename, progress);
+                var result = await importService.ImportToResx(selectedFilename, progress, settingsService);
 
 
 
@@ -45,8 +46,9 @@ namespace MultilingualExtension
             string selectedFilename = selectedItem.Name;
 
             //validate file
-            var checkfile = RexExHelper.ValidateFilenameIsTargetTypeCsv(selectedFilename);
-            if (!checkfile.Success)
+            var checkfilecsv = RexExHelper.ValidateFilenameIsTargetTypeCsv(selectedFilename);
+            var checkfilecxlsx = RexExHelper.ValidateFilenameIsTargetTypeXlsx(selectedFilename);
+            if (!checkfilecsv.Success && !checkfilecxlsx.Success)
             {
                 info.Visible = false;
             }

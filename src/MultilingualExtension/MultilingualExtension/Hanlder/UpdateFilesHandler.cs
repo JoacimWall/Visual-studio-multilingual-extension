@@ -12,7 +12,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.IO;
 using MultilingualExtension.Shared.Helpers;
-using MultilingualExtension.Shared.Service;
+using MultilingualExtension.Shared.Services;
 using MultilingualExtension.Shared.Interfaces;
 
 namespace MultilingualExtension
@@ -29,7 +29,7 @@ namespace MultilingualExtension
             {
 
                 SyncFileService syncFileService = new SyncFileService();
-                Service.SettingsService settingsService = new Service.SettingsService();
+                ISettingsService settingsService = new Services.SettingsService();
                 ProjectFile selectedItem = (ProjectFile)IdeApp.Workspace.CurrentSelectedItem;
 
                var result = await syncFileService.SyncFile(selectedItem.FilePath, progress, settingsService);

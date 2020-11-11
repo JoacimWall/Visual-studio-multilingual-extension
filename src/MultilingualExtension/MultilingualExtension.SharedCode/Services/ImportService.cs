@@ -10,7 +10,10 @@ using System.Xml;
 using MultilingualExtension.Shared.Helpers;
 using MultilingualExtension.Shared.Models;
 using MultilingualExtension.Shared.Interfaces;
-namespace MultilingualExtension.Shared.Service
+using FileHelpers;
+using FileHelpers.ExcelNPOIStorage;
+
+namespace MultilingualExtension.Shared.Services
 {
     public class ImportService
     {
@@ -18,24 +21,28 @@ namespace MultilingualExtension.Shared.Service
         {
         }
 
-        public async Task<Result<Boolean>> ImportCsvToResx(string selectedFilename, IProgressBar progress)
+        public async Task<Result<Boolean>> ImportToResx(string selectedFilename, IProgressBar progress, ISettingsService settingsService)
         {
 
             try
             {
 
                 //validate file
-                var checkfile = RexExHelper.ValidateFilenameIsTargetTypeCsv(selectedFilename);
-                if (!checkfile.Success)
+                var checkfilecsv = RexExHelper.ValidateFilenameIsTargetTypeCsv(selectedFilename);
+                var checkfilexlsx = RexExHelper.ValidateFilenameIsTargetTypeXlsx(selectedFilename);
+                if (!checkfilecsv.Success && !checkfilexlsx.Success)
                 {
-                    //TODO: Show message you select file have the format .sv-SE.resx
+                    //TODO: Show message you select file have the format .sv-SE.resx.csv or .sv-SE.resx.xlsx
                     return new Result<bool>("Not valid file");
 
                 }
                 else
                 {
-                    string updatePath = selectedFilename.Substring(0, selectedFilename.Length - 4);
-                    var reslut = await ImportCsvToResxInternal(selectedFilename, updatePath, progress);
+                    //Fix for .csv or .xlsx filetype
+                    int minus = checkfilecsv.Success ? 4 : 5;
+                    int filetype = checkfilecsv.Success ? 1 : 2;
+                    string updatePath = selectedFilename.Substring(0, selectedFilename.Length - minus);
+                    var reslut = await ImportToResxInternal(selectedFilename, updatePath, filetype, progress);
                     return new Result<bool>(true);
                 }
 
@@ -48,50 +55,60 @@ namespace MultilingualExtension.Shared.Service
             }
 
         }
-
-        private async Task<Result<Boolean>> ImportCsvToResxInternal(string masterPath, string updatePath, IProgressBar progress)
+        private async Task<Result<Boolean>> ImportToResxInternal(string masterPath, string updatePath, int exportFileType, IProgressBar progress)
         {
-
-
 
             XmlDocument updatedoc = new XmlDocument();
             updatedoc.Load(updatePath);
             XmlNode rootUpdate = updatedoc.DocumentElement;
+            TranslationsRow[] records;
+            if (exportFileType == 1)
+            {
+                var engine = new FileHelperEngine<TranslationsRow>();
+                engine.HeaderText = engine.GetFileHeader();
+                records = engine.ReadFile(masterPath);
+            }
+            else
+            {
+                var provider = new ExcelNPOIStorage(typeof(TranslationsRow))
+                {
+                    StartRow = 1,
+                    StartColumn = 0,
+                    FileName = masterPath
+                };
+                records = (TranslationsRow[])provider.ExtractRecords();
+                
+            }
+            bool updatefilechanged = false;
+            foreach (var record in records)
+            {
+                if (record.Status == Shared.Helpers.Globals.STATUS_COMMENT_FINAL)
+                {
+                    var dataNode = rootUpdate.SelectSingleNode("//data[@name='" + record.Name + "']");
+                    if (dataNode != null)
+                    {
+                        updatefilechanged = true;
+                        var dataNodeValue = dataNode.SelectSingleNode("value");
+                        var dataNodeComment = dataNode.SelectSingleNode("comment");
+                        if (dataNodeValue != null && dataNodeComment != null)
+                        {
+                            dataNodeValue.InnerText = record.TargetLanguage;
+                            dataNodeComment.InnerText = Globals.STATUS_COMMENT_FINAL;
+                        }
 
-            //var engine = new FileHelperEngine<TranslationsRow>();
-            //engine.HeaderText = engine.GetFileHeader();
-            //var records = engine.ReadFile(masterPath);
-            //bool updatefilechanged = false;
-            //foreach (var record in records)
-            //{
-            //    if (record.Status == Shared.Helpers.Globals.STATUS_COMMENT_FINAL)
-            //    {
-            //        var dataNode = rootUpdate.SelectSingleNode("//data[@name='" + record.Name + "']");
-            //        if (dataNode != null)
-            //        {
-            //            updatefilechanged = true;
-            //            var dataNodeValue = dataNode.SelectSingleNode("value");
-            //            var dataNodeComment = dataNode.SelectSingleNode("comment");
-            //            if (dataNodeValue != null && dataNodeComment != null)
-            //            {
-            //                dataNodeValue.InnerText = record.TargetLanguage;
-            //                dataNodeComment.InnerText = Shared.Helpers.Globals.STATUS_COMMENT_FINAL;
-            //            }
+                    }
 
-            //        }
+                }
+                progress.Pulse();
 
-            //    }
-            //    progress.Pulse();
+            }
 
-            //}
-
-            //if (updatefilechanged)
-            //    updatedoc.Save(updatePath);
+            if (updatefilechanged)
+                updatedoc.Save(updatePath);
 
             return new Result<bool>(true);
 
         }
 
     }
-
 }

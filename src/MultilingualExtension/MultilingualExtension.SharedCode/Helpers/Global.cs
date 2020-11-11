@@ -19,7 +19,8 @@ namespace MultilingualExtension.Shared.Helpers
         public const string PROP_TRANSLATIONSERVICE = "TranslationServcie";
         public const string PROP_MASTERLANGUAGECODE = "MasterLanguageCode";
         public const string PROP_ADDCOMMENTNODEMASTERRESX = "AddCommentNodeMasterResx";
-
+        public const string PROP_EXPORTFILETYPEX = "ExportFileType";
+        
     }
    
 

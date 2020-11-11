@@ -7,18 +7,20 @@ namespace MultilingualExtension
     public class SettingsWindow : Gtk.Window
     {
         Entry entryMasterLanguageCode;
+        RadioButton radioExportFiletypeCsv;
+        RadioButton radioExportFiletypeExcel;
         RadioButton radiobuttonGoogle;
         RadioButton radiobuttonMicrosoft;
         Entry entryMsoftEndpoint;
         Entry entryMsoftLocation;
         Entry entryMsoftKey;
         CheckButton checkButtonAddComment;
-        Service.SettingsService SettingsService;
+        Services.SettingsService SettingsService;
         //static GLib.SList group = null;
 
         public SettingsWindow() : base("Multilingual Settings")
         {
-            SettingsService = new Service.SettingsService();
+            SettingsService = new Services.SettingsService();
             this.DeleteEvent += delegate { HideAll(); };
             SetDefaultSize(590, 300);
             SetPosition(Gtk.WindowPosition.Center);
@@ -37,6 +39,12 @@ namespace MultilingualExtension
             //Add Status/translation to master file
              checkButtonAddComment = new CheckButton("Add Comment node to master Resx file on sync");
             checkButtonAddComment.Active = true;
+
+            //Export file type
+            Label labelExportFileType = new Label("Export file type:");
+            radioExportFiletypeCsv = new RadioButton(null, "CSV file");
+            radioExportFiletypeCsv.Active = true;
+            radioExportFiletypeExcel = new RadioButton(radioExportFiletypeCsv, "Excel file");
 
             Separator separator1 = new Gtk.HSeparator();
             separator1.SetSizeRequest(580, -1);
@@ -92,7 +100,12 @@ namespace MultilingualExtension
             fix.Put(labelMasterLanguageCode, xleftLab, topValue);
             fix.Put(entryMasterLanguageCode, xleft, topValue += rowHeightLabel);
 
-            fix.Put(checkButtonAddComment, xleft, topValue += rowHeightEntry);
+            
+            fix.Put(labelExportFileType, xleftLab, topValue += rowHeightEntry);
+            fix.Put(radioExportFiletypeCsv, xleftLab, topValue + rowHeightLabel);
+            fix.Put(radioExportFiletypeExcel, xleftLab + 100, topValue += rowHeightLabel);
+
+            fix.Put(checkButtonAddComment, xleft, topValue += rowHeightRadioButton);
 
             fix.Put(separator1, xleft, topValue += rowHeightEntry);
 
@@ -122,7 +135,11 @@ namespace MultilingualExtension
             {
                 radiobuttonMicrosoft.Active = true;
             }
-
+            //get settings csv is default value 1 
+            if (SettingsService.ExportFileType == 2)
+            {
+                radioExportFiletypeExcel.Active = true;
+            }
 
             entryMsoftEndpoint.Text = SettingsService.MsoftEndpoint;
             entryMsoftLocation.Text = SettingsService.MsoftLocation;
@@ -141,6 +158,15 @@ namespace MultilingualExtension
         private void Save_Clicked(object sender, EventArgs e)
         {
             SettingsService.MasterLanguageCode = entryMasterLanguageCode.Text;
+            if (radioExportFiletypeCsv.Active)
+            {
+                SettingsService.ExportFileType = 1;
+            }
+            else
+            {
+                SettingsService.ExportFileType = 2;
+            }
+
             SettingsService.AddCommentNodeMasterResx = checkButtonAddComment.Active;
            
             if (radiobuttonGoogle.Active)

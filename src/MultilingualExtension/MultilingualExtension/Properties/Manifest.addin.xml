@@ -52,10 +52,11 @@
         </Condition>
     </Extension>
     <Extension path = "/MonoDevelop/Ide/ContextMenu/ProjectPad">
-        <Condition id="FileType" fileExtensions=".csv">
+        <Condition id="FileType" fileExtensions=".csv,.xlsx">
             <CommandItem id="MultilingualExtension.MultilingualExtensionCommands.ImportFiles" />
         </Condition>
     </Extension>
+    
     <Extension path = "/MonoDevelop/Ide/MainMenu/Tools">
         <CommandItem id="MultilingualExtension.MultilingualExtensionCommands.ShowSettings" />
     </Extension>

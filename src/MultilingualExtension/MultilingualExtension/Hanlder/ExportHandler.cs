@@ -5,7 +5,7 @@ using MonoDevelop.Projects;
 using MultilingualExtension.Shared.Helpers;
 
 using MultilingualExtension.Shared.Interfaces;
-using MultilingualExtension.SharedCode.Service;
+using MultilingualExtension.Shared.Services;
 
 namespace MultilingualExtension
 {
@@ -18,10 +18,11 @@ namespace MultilingualExtension
             {
                 ExportService exportService = new ExportService();
                 ProjectFile selectedItem = (ProjectFile)IdeApp.Workspace.CurrentSelectedItem;
+                ISettingsService settingsService = new Services.SettingsService();
                 string selectedFilename = selectedItem.Name;
 
 
-              var result = await exportService.ExportToFile(selectedFilename, progress);
+              var result = await exportService.ExportToFile(selectedFilename, progress, settingsService);
             }
 
             catch (Exception ex)

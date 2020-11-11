@@ -13,20 +13,21 @@ using MultilingualExtension.Shared.Interfaces;
 using FileHelpers;
 using FileHelpers.ExcelNPOIStorage;
 
-namespace MultilingualExtension.SharedCode.Service
+namespace MultilingualExtension.Shared.Services
 {
     public class ExportService
     {
         public ExportService()
         {
         }
-        public async Task<Result<Boolean>> ExportToFile(string selectedFilename, IProgressBar progress)
+        public async Task<Result<Boolean>> ExportToFile(string selectedFilename, IProgressBar progress, ISettingsService settingsService)
         {
             try
             {
 
                 //validate file
                 var checkfile = RexExHelper.ValidateFilenameIsTargetType(selectedFilename);
+                int exportFileType = settingsService.ExportFileType;
                 if (!checkfile.Success)
                 {
                     int folderindex;
@@ -44,14 +45,14 @@ namespace MultilingualExtension.SharedCode.Service
                     {
                         var checkfileInFolder = RexExHelper.ValidateFilenameIsTargetType(fileName);
                         if (checkfileInFolder.Success)
-                           await ExportToFileInternal(selectedFilename, fileName, progress);
+                           await ExportToFileInternal(selectedFilename, fileName, exportFileType, progress);
                     }
 
                 }
                 else
                 {
                     string masterPath = selectedFilename.Substring(0, checkfile.Index) + ".resx";
-                    await ExportToFileInternal(masterPath, selectedFilename, progress);
+                    await ExportToFileInternal(masterPath, selectedFilename, exportFileType, progress);
                 }
                 return new Result<bool>(true);
 
@@ -70,7 +71,7 @@ namespace MultilingualExtension.SharedCode.Service
 
         }
 
-        private async Task<Result<Boolean>> ExportToFileInternal(string masterPath, string updatePath, IProgressBar progress)
+        private async Task<Result<Boolean>> ExportToFileInternal(string masterPath, string updatePath,int exportFileType, IProgressBar progress)
         {
 
 
@@ -133,28 +134,34 @@ namespace MultilingualExtension.SharedCode.Service
                     }
                 }
 
-
-
-
                 progress.Pulse();
             }
-
-            var engine = new FileHelperEngine<TranslationsRow>(System.Text.Encoding.UTF8);
-            //get filename
             var checkfile = RexExHelper.GetFilenameResx(updatePath);
-            engine.HeaderText = engine.GetFileHeader();
-            engine.WriteFile(masterFolderPath + checkfile.Value + ".csv", rows);
-
-            var provider = new ExcelNPOIStorage(typeof(TranslationsRow))
+            var engine = new FileHelperEngine<TranslationsRow>(System.Text.Encoding.UTF8);
+            if (exportFileType == 1)
             {
-                SheetName = "Translations",
-                FileName = masterFolderPath + checkfile.Value + ".xlsx"
-            };
-            provider.StartRow = 1;
-            provider.StartColumn = 0;
 
+                //get filename
 
-            provider.InsertRecords(rows.ToArray());
+                engine.HeaderText = engine.GetFileHeader();
+                engine.WriteFile(masterFolderPath + checkfile.Value + ".csv", rows);
+            }
+            else
+            {
+                var provider = new ExcelNPOIStorage(typeof(TranslationsRow))
+                {
+                    SheetName = "Translations",
+                    FileName = masterFolderPath + checkfile.Value + ".xlsx"
+                };
+                char[] delimiterChars = {';' };
+                provider.ColumnsHeaders = new List<string>(engine.GetFileHeader().Split(delimiterChars)); 
+                provider.StartRow = 0;
+                provider.StartColumn = 0;
+                //This trigger a system exeption if you debug on break on all arrors 
+                provider.InsertRecords(rows.ToArray());
+            }
+
+            
 
             return new Result<bool>(true);
         }

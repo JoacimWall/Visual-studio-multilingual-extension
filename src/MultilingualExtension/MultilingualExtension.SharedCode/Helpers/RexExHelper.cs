@@ -23,6 +23,12 @@ namespace MultilingualExtension.Shared.Helpers
             return regex.Match(path);
 
         }
+        public static Match ValidateFilenameIsTargetTypeXlsx(string path)
+        {
+            Regex regex = new Regex(@"\w+.[a-zA-Z][a-zA-Z]-[a-zA-Z][a-zA-Z].resx.xlsx$");
+            return regex.Match(path);
+
+        }
         public static Match GetFilenameResx(string path)
         {
             Regex regex = new Regex(@"\w+.[a-zA-Z][a-zA-Z]-[a-zA-Z][a-zA-Z].resx$");

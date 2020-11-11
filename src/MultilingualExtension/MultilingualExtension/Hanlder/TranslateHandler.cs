@@ -15,6 +15,7 @@ using MonoDevelop.Ide;
 using MonoDevelop.Projects;
 using MultilingualExtension.Shared.Helpers;
 using MultilingualExtension.Shared.Interfaces;
+using MultilingualExtension.Shared.Services;
 
 namespace MultilingualExtension
 {
@@ -24,10 +25,10 @@ namespace MultilingualExtension
         protected async override void Run()
         {
             IProgressBar progress = new Helpers.ProgressBarHelper("Translate rows where comment has value 'New'");
-            Service.SettingsService settingsService  = new Service.SettingsService();
+            ISettingsService settingsService  = new Services.SettingsService();
             try
             {
-                Shared.Service.TranslationService translationService = new Shared.Service.TranslationService();
+                TranslationService translationService = new TranslationService();
                 
                 ProjectFile selectedItem = (ProjectFile)IdeApp.Workspace.CurrentSelectedItem;
                 string selectedFilename = selectedItem.Name;
