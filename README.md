@@ -48,6 +48,9 @@ Right-click one of the csv language files (AppResources.fr-FR.resx.csv) and sele
 
 <img  width=“100” height="400" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/ImportFilePopUpDialog.png">
 
+### User cases
+You change the text for one data row and want all the other laguage files to update status to new/need review so you can translate/export it. The extension remove all translations row that not in the master resx file (AppResources.resx) when you select "Sync all .xx-x.resx files with this". To update all transaltions file you can just change the name of the data field for example you have i data filed named 'Hello_World' you just change the name to 'Hello_World_1' now when you select "Sync all .xx-x.resx files with this" the extension will remove the old data tag named 'Hello_World' from all language files. After this change the name back to 'Hello_World' and select "Sync all .xx-x.resx files with this" and now all the laguage files has a new translation with status new.       
+
 ## How the extension works 
 This extension use the comment field in the target resx files(AppResources.fr-FR.resx) to keep track of the status of row/translation. It has three different statuses that it can have in it's comment field.
 * New
@@ -64,4 +67,5 @@ Final: This status will it get after import from csv file. You can also set this
 In this first version all files need to be in the same folder, export and import (.csv) should not be renamed if the should work when we will import translations.
 
 ## Converting from windows multilangual toolkit
-if you have used the windows multilangual toolkit before you can use this. The first time you sync the master file with the target files (AppResources.fr-FR.resx) all existings rows in the target file will get status "Final".  
+if you have used the windows multilangual toolkit before you can use this. The first time you sync the master file with the target files (AppResources.fr-FR.resx) all existings rows in the target file will get status "Final". 
+I am working on a windows version of this extension so you can work i project where uoser are on both mac and windows.  
