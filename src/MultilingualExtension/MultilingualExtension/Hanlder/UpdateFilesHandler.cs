@@ -23,7 +23,7 @@ namespace MultilingualExtension
 
         protected async override void Run()
         {
-            IProgressBar progress = new Helpers.ProgressBarHelper("synchronizes lines from master RESX file.");
+            IProgressBar progress = new Helpers.ProgressBarHelper(Globals.Synchronize_Rows_Info);
 
             try
             {
@@ -61,11 +61,11 @@ namespace MultilingualExtension
             var checkfile = RexExHelper.ValidateFilenameIsTargetType(selectedFilename);
             if (!checkfile.Success)
             {
-                info.Text = "Sync all .xx-xx.resx files with this";
+                info.Text = Globals.Synchronize_All_Files_Title;
             }
             else
             {
-                info.Text = "Sync this .xx-xx.resx file";
+                info.Text = Globals.Synchronize_Seleted_File_Title;
 
             }
         }

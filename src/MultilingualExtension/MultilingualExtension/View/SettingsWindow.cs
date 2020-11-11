@@ -2,6 +2,8 @@
 using Gdk;
 using Gtk;
 using MultilingualExtension;
+using MultilingualExtension.Shared.Helpers;
+
 namespace MultilingualExtension
 {
     public class SettingsWindow : Gtk.Window
@@ -18,7 +20,7 @@ namespace MultilingualExtension
         Services.SettingsService SettingsService;
         //static GLib.SList group = null;
 
-        public SettingsWindow() : base("Multilingual Settings")
+        public SettingsWindow() : base(Globals.Multilingual_Extension_Title)
         {
             SettingsService = new Services.SettingsService();
             this.DeleteEvent += delegate { HideAll(); };
@@ -32,57 +34,57 @@ namespace MultilingualExtension
             vbox.Show();
 
             //Master language code
-            Label labelMasterLanguageCode = new Label("Master language code:");
+            Label labelMasterLanguageCode = new Label(Globals.Master_Language_Code_Title);
             entryMasterLanguageCode = new Entry();
             entryMasterLanguageCode.SetSizeRequest(580, -1);
 
             //Add Status/translation to master file
-             checkButtonAddComment = new CheckButton("Add Comment node to master Resx file on sync");
+             checkButtonAddComment = new CheckButton(Globals.Add_Comment_code_To_Master_Title);
             checkButtonAddComment.Active = true;
 
             //Export file type
-            Label labelExportFileType = new Label("Export file type:");
-            radioExportFiletypeCsv = new RadioButton(null, "CSV file");
+            Label labelExportFileType = new Label(Globals.Export_File_Type_Title);
+            radioExportFiletypeCsv = new RadioButton(null, Globals.CSV_File);
             radioExportFiletypeCsv.Active = true;
-            radioExportFiletypeExcel = new RadioButton(radioExportFiletypeCsv, "Excel file");
+            radioExportFiletypeExcel = new RadioButton(radioExportFiletypeCsv, Globals.Excel_File);
 
             Separator separator1 = new Gtk.HSeparator();
             separator1.SetSizeRequest(580, -1);
 
-            radiobuttonGoogle = new RadioButton(null, "Google translate free (max 100/h)");
+            radiobuttonGoogle = new RadioButton(null, Globals.Google_Translate_Free);
             radiobuttonGoogle.Active = true;
 
-            Label labelInfoGoogle = new Label("You will only be allowed to translate about 100 words per hour using the free Google API");
+            Label labelInfoGoogle = new Label(Globals.Google_Translate_Free_Info);
 
             Separator separator2 = new Gtk.HSeparator();
             separator2.SetSizeRequest(580, -1);
 
-            radiobuttonMicrosoft = new RadioButton(radiobuttonGoogle, "Microsoft Translation");
+            radiobuttonMicrosoft = new RadioButton(radiobuttonGoogle, Globals.Microsoft_Translation);
 
-            Label labelInfoMsoft = new Label("You will need a Azure Cognitive Service (texttranslation service)");
+            Label labelInfoMsoft = new Label(Globals.Microsoft_Translation_Info);
 
             //Endpoint
-            Label labelEndpointMsoft = new Label("Endpoint:");
+            Label labelEndpointMsoft = new Label(Globals.Endpoint_Title);
             entryMsoftEndpoint = new Entry();
             entryMsoftEndpoint.SetSizeRequest(580, -1);
 
             //location
-            Label labelLocationMsoft = new Label("Location:");
+            Label labelLocationMsoft = new Label(Globals.Location_Title);
             entryMsoftLocation = new Entry();
             entryMsoftLocation.SetSizeRequest(580, -1);
 
             //Key
-            Label labelKeyMsoft = new Label("Key:");
+            Label labelKeyMsoft = new Label(Globals.Key_Title);
             entryMsoftKey = new Entry();
             entryMsoftKey.SetSizeRequest(580, -1);
             entryMsoftKey.InvisibleChar = '*';
             entryMsoftKey.Visibility = false;
 
-            Button save = new Button("Save");
+            Button save = new Button(Globals.Save);
             save.SetSizeRequest(70, 30);
             save.Clicked += Save_Clicked;
 
-            Button close = new Button("Close");
+            Button close = new Button(Globals.Close);
             close.SetSizeRequest(70, 30);
             close.Clicked += Close_Clicked;
 

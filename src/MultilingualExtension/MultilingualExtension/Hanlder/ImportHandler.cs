@@ -13,7 +13,7 @@ namespace MultilingualExtension
     {
         protected  override async void Run()
         {
-            IProgressBar progress = new Helpers.ProgressBarHelper("Import rows where comment is 'Final'");
+            IProgressBar progress = new Helpers.ProgressBarHelper(Globals.Import_Rows_Info);
             try
             {
                 ImportService importService = new ImportService();
@@ -55,7 +55,7 @@ namespace MultilingualExtension
             else
             {
                 info.Visible = true;
-                info.Text = "Import translations";
+                info.Text = Globals.Import_Translation_Title;
 
             }
         }

@@ -2,6 +2,7 @@
   <PropertyGroup>
  <TargetFramework>net472</TargetFramework>
    <!--     <TargetFrameworks>netcoreapp2.1;net471</TargetFrameworks>-->
+ <NeutralLanguage>en-US</NeutralLanguage>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="MonoDevelop.Addins" Version="0.4.7" />

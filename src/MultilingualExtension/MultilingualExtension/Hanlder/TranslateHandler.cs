@@ -24,7 +24,7 @@ namespace MultilingualExtension
         
         protected async override void Run()
         {
-            IProgressBar progress = new Helpers.ProgressBarHelper("Translate rows where comment has value 'New'");
+            IProgressBar progress = new Helpers.ProgressBarHelper(Globals.Translate_Rows_Info);
             ISettingsService settingsService  = new Services.SettingsService();
             try
             {
@@ -61,11 +61,11 @@ namespace MultilingualExtension
             var checkfile = RexExHelper.ValidateFilenameIsTargetType(selectedFilename);
             if (!checkfile.Success)
             {
-                info.Text = "Translate all .xx-xx.resx files";
+                info.Text = Globals.Translate_All_Files_Title;
             }
             else
             {
-                info.Text = "Translate this .xx-xx.resx file";
+                info.Text = Globals.Translate_Seleted_File_Title;
 
             }
         }
