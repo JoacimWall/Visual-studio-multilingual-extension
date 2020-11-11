@@ -4,8 +4,6 @@ VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultilingualExtensionWindows", "MultilingualExtensionWindows\MultilingualExtensionWindows.csproj", "{3113E994-721F-48DF-B952-649FC747921E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultilingualExtension.Shared", "MultilingualExtension.Shared\MultilingualExtension.Shared.csproj", "{054BC06B-F618-4090-AA26-10B6925DDC58}"
-EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MultilingualExtension.SharedCode", "MultilingualExtension.SharedCode\MultilingualExtension.SharedCode.shproj", "{F683CBEE-6EB9-4B10-BD60-050029BC2F2A}"
 EndProject
 Global
@@ -21,10 +19,6 @@ Global
 		{3113E994-721F-48DF-B952-649FC747921E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3113E994-721F-48DF-B952-649FC747921E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3113E994-721F-48DF-B952-649FC747921E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{054BC06B-F618-4090-AA26-10B6925DDC58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{054BC06B-F618-4090-AA26-10B6925DDC58}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{054BC06B-F618-4090-AA26-10B6925DDC58}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{054BC06B-F618-4090-AA26-10B6925DDC58}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
