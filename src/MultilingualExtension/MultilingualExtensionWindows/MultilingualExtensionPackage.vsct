@@ -22,7 +22,7 @@
 
   <!--The Commands section is where commands, menus, and menu groups are defined.
       This section uses a Guid to identify the package that provides the command defined inside it. -->
-  <Commands package="guidMultilingualExtensionWindowsPackage">
+  <Commands package="guidMultilingualExtensionPackage">
     <!-- Inside this section we have different sub-sections: one for the menus, another
     for the menu groups, one for the buttons (the actual commands), one for the combos
     and the last one for the bitmaps used. Each element is identified by a command id that
@@ -36,10 +36,10 @@
          group as the part of a menu contained between two lines. The parent of a group
          must be a menu. -->
     <Groups>
-      <Group guid="guidMultilingualExtensionWindowsPackageCmdSet" id="MyMenuGroup" priority="0x0600">
+      <Group guid="guidMultilingualExtensionPackageCmdSet" id="MyMenuGroup" priority="0x0600">
         <Parent guid="guidSHLMainMenu" id="IDM_VS_MENU_TOOLS"/>
       </Group>
-      <Group guid="guidMultilingualExtensionWindowsPackageCmdSet" id="MyGroupForSubMenuProjectPad" priority="0x0600">
+      <Group guid="guidMultilingualExtensionPackageCmdSet" id="MyGroupForSubMenuProjectPad" priority="0x0600">
         <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_ITEMNODE"/>
       </Group>
     </Groups>
@@ -57,45 +57,41 @@
           If you do not want an image next to your command, remove the Icon node /> -->
       
       <!--Menu settings-->
-      <Button guid="guidMultilingualExtensionWindowsPackageCmdSet" id="CommandIdShowSettings" priority="0x0100" type="Button">
-        <Parent guid="guidMultilingualExtensionWindowsPackageCmdSet" id="MyMenuGroup" />
-        <!--<Icon guid="guidImages" id="bmpPic1" />-->
-
+      <Button guid="guidMultilingualExtensionPackageCmdSet" id="CommandIdShowSettings" priority="0x0100" type="Button">
+        <Parent guid="guidMultilingualExtensionPackageCmdSet" id="MyMenuGroup" />
+        <CommandFlag>DynamicVisibility</CommandFlag> 
         <Strings>
           <ButtonText>Multilinugal settings</ButtonText>
         </Strings>
       </Button>
-      <!--UpdateFiles-->
-      <Button guid="guidMultilingualExtensionWindowsPackageCmdSet" id="CommandIdUpdateFiles" priority="0x0100" type="Button">
-        <Parent guid="guidMultilingualExtensionWindowsPackageCmdSet" id="MyGroupForSubMenuProjectPad" />
-        <!--<Icon guid="guidImages" id="bmpPic1" />-->
+      <!--SyncFiles-->
+      <Button guid="guidMultilingualExtensionPackageCmdSet" id="CommandIdUpdateFiles" priority="0x0100" type="Button">
+        <Parent guid="guidMultilingualExtensionPackageCmdSet" id="MyGroupForSubMenuProjectPad" />
+        <CommandFlag>DynamicVisibility</CommandFlag>
         <Strings>
           <ButtonText>Synchronizes language files</ButtonText>
         </Strings>
       </Button>
       <!--Translate-->
-      <Button guid="guidMultilingualExtensionWindowsPackageCmdSet" id="CommandIdTranslateFiles" priority="0x0100" type="Button">
-        <Parent guid="guidMultilingualExtensionWindowsPackageCmdSet" id="MyGroupForSubMenuProjectPad" />
-        <!--<Icon guid="guidImages" id="bmpPic1" />-->
-       
+      <Button guid="guidMultilingualExtensionPackageCmdSet" id="CommandIdTranslateFiles" priority="0x0100" type="Button">
+        <Parent guid="guidMultilingualExtensionPackageCmdSet" id="MyGroupForSubMenuProjectPad" />
+        <CommandFlag>DynamicVisibility</CommandFlag>
         <Strings>
           <ButtonText>Translate language files</ButtonText>
         </Strings>
       </Button>
       <!--Export files-->
-      <Button guid="guidMultilingualExtensionWindowsPackageCmdSet" id="CommandIdExportFiles" priority="0x0100" type="Button">
-        <Parent guid="guidMultilingualExtensionWindowsPackageCmdSet" id="MyGroupForSubMenuProjectPad" />
-        <!--<Icon guid="guidImages" id="bmpPic1" />-->
-
+      <Button guid="guidMultilingualExtensionPackageCmdSet" id="CommandIdExportFiles" priority="0x0100" type="Button">
+        <Parent guid="guidMultilingualExtensionPackageCmdSet" id="MyGroupForSubMenuProjectPad" />
+        <CommandFlag>DynamicVisibility</CommandFlag>
         <Strings>
           <ButtonText>Export Translation</ButtonText>
         </Strings>
       </Button>
       <!--Import files-->
-      <Button guid="guidMultilingualExtensionWindowsPackageCmdSet" id="CommandIdImportFiles" priority="0x0100" type="Button">
-        <Parent guid="guidMultilingualExtensionWindowsPackageCmdSet" id="MyGroupForSubMenuProjectPad" />
-        <!--<Icon guid="guidImages" id="bmpPic1" />-->
-
+      <Button guid="guidMultilingualExtensionPackageCmdSet" id="CommandIdImportFiles" priority="0x0100" type="Button">
+        <Parent guid="guidMultilingualExtensionPackageCmdSet" id="MyGroupForSubMenuProjectPad" />
+        <CommandFlag>DynamicVisibility</CommandFlag>
         <Strings>
           <ButtonText>Import Translation</ButtonText>
         </Strings>
@@ -112,13 +108,28 @@
       <Bitmap guid="guidImages" href="Resources\Command.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough"/>
     </Bitmaps>
   </Commands>
-
+  <VisibilityConstraints>
+    <!-- 
+    This will show or hide the button based on the uiContextSupportedFiles which is specified in
+    the ProvideUIContextRule attribute on the package class in MyPackage.cs. 
+    
+    Note, this only applies when the package hasn't been loaded yet. When loaded, the visibility
+    of the button is controlled by the MenuItemQueryStatus method in MyButton.cs.
+    -->
+    <VisibilityItem guid="guidMultilingualExtensionPackageCmdSet" id="CommandIdUpdateFiles" context="uiContextSupportResxFiles" />
+    <VisibilityItem guid="guidMultilingualExtensionPackageCmdSet" id="CommandIdTranslateFiles" context="uiContextSupportResxFiles" />
+    <VisibilityItem guid="guidMultilingualExtensionPackageCmdSet" id="CommandIdExportFiles" context="uiContextSupportResxFiles" />
+    <VisibilityItem guid="guidMultilingualExtensionPackageCmdSet" id="CommandIdImportFiles" context="uiContextSupportCsvXlsxFiles" />
+  </VisibilityConstraints>
   <Symbols>
+    <!-- This is the UI Context guid that must match the one in MyPackage.cs -->
+    <GuidSymbol name="uiContextSupportResxFiles" value="{24551deb-f034-43e9-a279-0e541241687e}" />
+    <GuidSymbol name="uiContextSupportCsvXlsxFiles" value="{24551deb-f034-43e9-a279-0e541241687f}" />
     <!-- This is the package guid. -->
-    <GuidSymbol name="guidMultilingualExtensionWindowsPackage" value="{a976f7e6-3c4b-4234-80aa-f8f5400443c0}" />
+    <GuidSymbol name="guidMultilingualExtensionPackage" value="{a976f7e6-3c4b-4234-80aa-f8f5400443c0}" />
 
     <!-- This is the guid used to group the menu commands together -->
-    <GuidSymbol name="guidMultilingualExtensionWindowsPackageCmdSet" value="{e86c9f19-293d-49ab-8b5b-f4039e5193db}">
+    <GuidSymbol name="guidMultilingualExtensionPackageCmdSet" value="{e86c9f19-293d-49ab-8b5b-f4039e5193db}">
       <IDSymbol name="MyMenuGroup" value="0x1020" />
       <IDSymbol name="MyGroupForSubMenuProjectPad" value="0x1021" />
       <IDSymbol name="CommandIdShowSettings" value="0x0100" />

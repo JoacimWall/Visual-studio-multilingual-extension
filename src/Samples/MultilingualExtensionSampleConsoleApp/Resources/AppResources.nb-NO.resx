@@ -45,4 +45,7 @@
   <data name="Cars_Are_Fun" xml:space="preserve">
     <value>Biler er morsomme</value>
   <comment>Need review</comment></data>
+  <data name="Dog" xml:space="preserve">
+    <value>Hunden</value>
+  <comment>Need review</comment></data>
 </root>

@@ -12,11 +12,17 @@ namespace MultilingualExtension
     /// </summary>
     internal sealed partial class PackageGuids
     {
-        public const string guidMultilingualExtensionWindowsPackageString = "a976f7e6-3c4b-4234-80aa-f8f5400443c0";
-        public static Guid guidMultilingualExtensionWindowsPackage = new Guid(guidMultilingualExtensionWindowsPackageString);
+        public const string uiContextSupportResxFilesString = "24551deb-f034-43e9-a279-0e541241687e";
+        public static Guid uiContextSupportResxFiles = new Guid(uiContextSupportResxFilesString);
 
-        public const string guidMultilingualExtensionWindowsPackageCmdSetString = "e86c9f19-293d-49ab-8b5b-f4039e5193db";
-        public static Guid guidMultilingualExtensionWindowsPackageCmdSet = new Guid(guidMultilingualExtensionWindowsPackageCmdSetString);
+        public const string uiContextSupportCsvXlsxFilesString = "24551deb-f034-43e9-a279-0e541241687f";
+        public static Guid uiContextSupportCsvXlsxFiles = new Guid(uiContextSupportCsvXlsxFilesString);
+
+        public const string guidMultilingualExtensionPackageString = "a976f7e6-3c4b-4234-80aa-f8f5400443c0";
+        public static Guid guidMultilingualExtensionPackage = new Guid(guidMultilingualExtensionPackageString);
+
+        public const string guidMultilingualExtensionPackageCmdSetString = "e86c9f19-293d-49ab-8b5b-f4039e5193db";
+        public static Guid guidMultilingualExtensionPackageCmdSet = new Guid(guidMultilingualExtensionPackageCmdSetString);
 
         public const string guidImagesString = "e1e1d1d1-81ef-47fb-9d53-4190d8b4edab";
         public static Guid guidImages = new Guid(guidImagesString);

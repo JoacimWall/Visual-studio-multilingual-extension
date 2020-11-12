@@ -1,4 +1,4 @@
-﻿namespace MultilingualExtensionWindows.View
+﻿namespace MultilingualExtension.View
 {
     partial class SettingsWindow
     {

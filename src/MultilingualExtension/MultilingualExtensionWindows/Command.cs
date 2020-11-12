@@ -11,10 +11,10 @@ using Microsoft.VisualStudio.Shell.Interop;
 using MultilingualExtension.Shared.Helpers;
 using MultilingualExtension.Shared.Interfaces;
 using MultilingualExtension.Shared.Services;
-using MultilingualExtensionWindows.Services;
+using MultilingualExtension.Services;
 using Task = System.Threading.Tasks.Task;
 
-namespace MultilingualExtensionWindows
+namespace MultilingualExtension
 {
     /// <summary>
     /// Command handler
@@ -25,7 +25,7 @@ namespace MultilingualExtensionWindows
         /// Command ID.
         /// </summary>
         public const int CommandIdShowSettings = 0x0100;
-        public const int CommandIdUpdateFiles = 0x0101;
+        //public const int CommandIdUpdateFiles = 0x0101;
         public const int CommandIdTranslateFiles = 0x0102;
         public const int CommandIdExportFiles = 0x0103;
         public const int CommandIdImportFiles = 0x0104;
@@ -40,7 +40,7 @@ namespace MultilingualExtensionWindows
         private readonly AsyncPackage package;
 
 
-        private OleMenuCommand menuItemUpdateFiles;
+        //private OleMenuCommand menuItemUpdateFiles;
         /// <summary>
         /// Initializes a new instance of the <see cref="Command"/> class.
         /// Adds our command handlers for menu (commands must exist in the command table file)
@@ -58,13 +58,13 @@ namespace MultilingualExtensionWindows
             commandService.AddCommand(menuItemShowSettings);
 
             //Update Files
-            var menuCommandIDUpdateFiles = new CommandID(CommandSet, CommandIdUpdateFiles);
-            menuItemUpdateFiles = new OleMenuCommand(this.ExecuteUpdateFiles, menuCommandIDUpdateFiles);
-            menuItemUpdateFiles.BeforeQueryStatus += MenuItemUpdateFiles_BeforeQueryStatus;
-            commandService.AddCommand(menuItemUpdateFiles);
+            //var menuCommandIDUpdateFiles = new CommandID(CommandSet, CommandIdUpdateFiles);
+            //menuItemUpdateFiles = new OleMenuCommand(this.ExecuteUpdateFiles, menuCommandIDUpdateFiles);
+            //menuItemUpdateFiles.BeforeQueryStatus += MenuItemUpdateFiles_BeforeQueryStatus;
+            //commandService.AddCommand(menuItemUpdateFiles);
 
             //Translate
-           var menuCommandIDTranslateFiles = new CommandID(CommandSet, CommandIdTranslateFiles);
+            var menuCommandIDTranslateFiles = new CommandID(CommandSet, CommandIdTranslateFiles);
             var menuItemTranslateFiles = new OleMenuCommand(this.ExecuteTranslateFiles, menuCommandIDTranslateFiles);
             commandService.AddCommand(menuItemTranslateFiles);
 
@@ -80,46 +80,7 @@ namespace MultilingualExtensionWindows
 
         }
 
-        private void MenuItemUpdateFiles_BeforeQueryStatus(object sender, EventArgs e)
-        {
-            // get the menu that fired the event
-            var menuCommand = sender as OleMenuCommand;
-            if (menuCommand != null)
-            {
-                // Get the file path
-                var selectedFilename = Helpers.DevfileHelper.GetSelectedFile();
-                if (String.IsNullOrEmpty(selectedFilename)) return;
 
-                var checkfile = RexExHelper.ValidateFileTypeIsResx(selectedFilename);
-                if (!checkfile.Success)
-                {
-                    menuCommand.Visible = false;
-                    menuCommand.Enabled = false;
-                    return;
-                }
-                else
-                {
-                    menuCommand.Visible = true;
-                    menuCommand.Enabled = true;
-                }
-
-                // Get the file path
-                //validate file
-                checkfile = RexExHelper.ValidateFilenameIsTargetType(selectedFilename);
-                if (!checkfile.Success)
-                {
-                    menuCommand.Text = "Sync all .xx-xx.resx files with this";
-                }
-                else
-                {
-                    menuCommand.Text = "Sync this .xx-xx.resx file";
-                }
-
-            }
-            menuCommand.Visible = true;
-            menuCommand.Enabled = true;
-        }
-       
         /// <summary>
         /// Gets the instance of the command.
         /// </summary>
@@ -172,42 +133,42 @@ namespace MultilingualExtensionWindows
 
         private void ExecuteUpdateFiles(object sender, EventArgs e)
         {
-            ThreadHelper.ThrowIfNotOnUIThread();
-            IProgressBar progress = new Helpers.ProgressBarHelper();
-            ISettingsService settingsService = new Services.SettingsService();
-            try
-            {
-                // Get the file path
-                var selectedFilename = Helpers.DevfileHelper.GetSelectedFile();
-                if (String.IsNullOrEmpty(selectedFilename)) return;
-               
-               
-                //MultilingualExtension.Shared
-                SyncFileService syncFileService = new SyncFileService();
-
-                syncFileService.SyncFile(selectedFilename, progress, settingsService);
-
-               
+            //ThreadHelper.ThrowIfNotOnUIThread();
+            //IProgressBar progress = new Helpers.ProgressBarHelper();
+            //ISettingsService settingsService = new Services.SettingsService();
+            //try
+            //{
+            //    // Get the file path
+            //    var selectedFilename = Helpers.DevfileHelper.GetSelectedFile();
+            //    if (String.IsNullOrEmpty(selectedFilename)) return;
 
 
-            }
-            catch (Exception ex)
-            {
-                VsShellUtilities.ShowMessageBox(
-                    this.package,
-                    ex.Message,
-                    "Multilangiual Extension",
-                    OLEMSGICON.OLEMSGICON_INFO,
-                    OLEMSGBUTTON.OLEMSGBUTTON_OK,
-                    OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
+            //    //MultilingualExtension.Shared
+            //    SyncFileService syncFileService = new SyncFileService();
 
-            }
-            finally
-            {
-                progress.HideAll();
-                progress = null;
-                Console.WriteLine("Sync file completed");
-            }
+            //    syncFileService.SyncFile(selectedFilename, progress, settingsService);
+
+
+
+
+            //}
+            //catch (Exception ex)
+            //{
+            //    VsShellUtilities.ShowMessageBox(
+            //        this.package,
+            //        ex.Message,
+            //        "Multilangiual Extension",
+            //        OLEMSGICON.OLEMSGICON_INFO,
+            //        OLEMSGBUTTON.OLEMSGBUTTON_OK,
+            //        OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
+
+            //}
+            //finally
+            //{
+            //    progress.HideAll();
+            //    progress = null;
+            //    Console.WriteLine("Sync file completed");
+            //}
 
             //string message = string.Format(CultureInfo.CurrentCulture, "Inside {0}.MenuItemCallback()", this.GetType().FullName);
             //string title = "Command";
@@ -233,7 +194,7 @@ namespace MultilingualExtensionWindows
 
 
                 //MultilingualExtension.Shared
-                TranslationService  translationService  = new TranslationService();
+                TranslationService translationService = new TranslationService();
 
                 translationService.TranslateFile(selectedFilename, progress, settingsService);
 
@@ -259,12 +220,12 @@ namespace MultilingualExtensionWindows
                 Console.WriteLine("Sync file completed");
             }
         }
-        
+
         private void ExecuteExportFiles(object sender, EventArgs e)
         {
             ThreadHelper.ThrowIfNotOnUIThread();
             IProgressBar progress = new Helpers.ProgressBarHelper();
-            
+
             try
             {
                 // Get the file path
@@ -300,13 +261,13 @@ namespace MultilingualExtensionWindows
                 Console.WriteLine("Export file completed");
             }
 
-            
+
         }
         private void ExecuteImportFiles(object sender, EventArgs e)
         {
             ThreadHelper.ThrowIfNotOnUIThread();
             IProgressBar progress = new Helpers.ProgressBarHelper();
-            
+
             try
             {
                 // Get the file path
@@ -342,7 +303,7 @@ namespace MultilingualExtensionWindows
                 Console.WriteLine("Sync file completed");
             }
 
-           
+
         }
     }
 }

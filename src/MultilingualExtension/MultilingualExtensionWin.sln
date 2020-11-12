@@ -2,7 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultilingualExtensionWindows", "MultilingualExtensionWindows\MultilingualExtensionWindows.csproj", "{3113E994-721F-48DF-B952-649FC747921E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultilingualExtension", "MultilingualExtensionWindows\MultilingualExtension.csproj", "{3113E994-721F-48DF-B952-649FC747921E}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MultilingualExtension.SharedCode", "MultilingualExtension.SharedCode\MultilingualExtension.SharedCode.shproj", "{F683CBEE-6EB9-4B10-BD60-050029BC2F2A}"
 EndProject

@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MultilingualExtensionWindows.View
+namespace MultilingualExtension.View
 {
     public partial class SettingsWindow : Form
     {

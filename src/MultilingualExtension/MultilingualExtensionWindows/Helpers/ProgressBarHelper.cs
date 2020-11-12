@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MultilingualExtension.Shared.Interfaces;
-namespace MultilingualExtensionWindows.Helpers
+namespace MultilingualExtension.Helpers
 {
     public class ProgressBarHelper : IProgressBar
     {

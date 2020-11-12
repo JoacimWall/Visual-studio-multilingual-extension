@@ -153,4 +153,7 @@
   <data name="Cars_Are_Fun" xml:space="preserve">
     <value>Cars are fun</value>
   </data>
+  <data name="Dog" xml:space="preserve">
+    <value>Dog</value>
+  </data>
 </root>

@@ -83,16 +83,21 @@
       <Link>Services\TranslationService.cs</Link>
     </Compile>
     <Compile Include="Command.cs" />
+    <Compile Include="Commands\ImportButton.cs" />
+    <Compile Include="Commands\ExportButton.cs" />
+    <Compile Include="Commands\TranslateButton.cs" />
     <Compile Include="Helpers\DevfileHelper.cs" />
     <Compile Include="Helpers\ProgressBarHelper.cs" />
-    <Compile Include="MultilingualExtensionWindowsPackage1.cs">
+    <Compile Include="MultilingualExtensionPackage1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>MultilingualExtensionWindowsPackage.vsct</DependentUpon>
+      <DependentUpon>MultilingualExtensionPackage.vsct</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MultilingualExtensionWindowsPackage.cs" />
+    <Compile Include="MultilingualExtensionPackage.cs" />
     <Compile Include="Services\SettingsService.cs" />
+    <Compile Include="Commands\ShowSettingsButton.cs" />
+    <Compile Include="Commands\SyncFilesButton.cs" />
     <Compile Include="View\SettingsWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -119,7 +124,10 @@
       <Version>3.4.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.SDK" Version="16.0.206" ExcludeAssets="runtime" />
-    <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="16.7.3069" />
+    <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="16.8.3038">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.png">
@@ -127,10 +135,10 @@
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Content Include="Resources\Command.png" />
-    <VSCTCompile Include="MultilingualExtensionWindowsPackage.vsct">
+    <VSCTCompile Include="MultilingualExtensionPackage.vsct">
       <ResourceName>Menus.ctmenu</ResourceName>
       <Generator>VsctGenerator</Generator>
-      <LastGenOutput>MultilingualExtensionWindowsPackage1.cs</LastGenOutput>
+      <LastGenOutput>MultilingualExtensionPackage1.cs</LastGenOutput>
     </VSCTCompile>
   </ItemGroup>
   <ItemGroup>

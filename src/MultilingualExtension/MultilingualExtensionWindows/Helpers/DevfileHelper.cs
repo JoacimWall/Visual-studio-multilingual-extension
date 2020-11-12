@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MultilingualExtensionWindows.Helpers
+namespace MultilingualExtension.Helpers
 {
     public static class DevfileHelper
     {
@@ -24,7 +24,17 @@ namespace MultilingualExtensionWindows.Helpers
             ((IVsProject)hierarchy).GetMkDocument(itemid, out itemFullPath);
             return new FileInfo(itemFullPath).FullName;
 
+            //var dte = ServiceProvider.GetService(typeof(DTE)) as DTE2;
+            //ProjectItem item = dte.SelectedItems.Item(1)?.ProjectItem;
 
+            //if (item != null)
+            //{
+            //    string fileExtension = Path.GetExtension(item.Name).ToLowerInvariant();
+            //    string[] supportedFiles = new[] { ".cs", ".vb" };
+
+            //    // Show the button only if a supported file is selected
+            //    button.Visible = supportedFiles.Contains(fileExtension);
+            //}
         }
         public static bool IsSingleProjectItemSelection(out IVsHierarchy hierarchy, out uint itemid)
         {
