@@ -13,7 +13,8 @@ namespace MultilingualExtension
     {
         protected async override void Run()
         {
-            IProgressBar progress = new Helpers.ProgressBarHelper("export rows where comment is 'New' or 'Need review'");
+            
+            IProgressBar progress = new Helpers.ProgressBarHelper(Globals.Export_Rows_Info);
             try
             {
                 ExportService exportService = new ExportService();
@@ -48,11 +49,11 @@ namespace MultilingualExtension
             var checkfile = RexExHelper.ValidateFilenameIsTargetType(selectedFilename);
             if (!checkfile.Success)
             {
-                info.Text = "Export all .xx-xx.resx files";
+                info.Text = Globals.Export_All_Files_Title;
             }
             else
             {
-                info.Text = "Export this .xx-xx.resx file";
+                info.Text = Globals.Export_Seleted_File_Title;
 
             }
         }

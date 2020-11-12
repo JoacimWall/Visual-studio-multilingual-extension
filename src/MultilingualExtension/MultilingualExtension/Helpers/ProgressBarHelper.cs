@@ -1,6 +1,7 @@
 ﻿
 using GLib;
 using Gtk;
+using MultilingualExtension.Shared.Helpers;
 using MultilingualExtension.Shared.Interfaces;
 using System;
 
@@ -41,7 +42,7 @@ namespace MultilingualExtension.Helpers
             pdata.window.Resizable = true;
 
             //pdata.window.DeleteEvent += destroy_progress;
-            pdata.window.Title = "Multilingual Extension";
+            pdata.window.Title = Globals.Multilingual_Extension_Title;
             pdata.window.BorderWidth = 2;
             pdata.window.DefaultSize = new Gdk.Size(500, 100);
 
