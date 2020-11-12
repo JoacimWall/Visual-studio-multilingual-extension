@@ -15,6 +15,12 @@
 * Posibility to export all rows not only the one that need translations.
 * Cleaning of the Resx files (find translations that are not used anymore anywhere in the code)
 
+## Install for Mac
+The extension publish function is closed for new users so you need to download the latest release from this page then got to visual studio mac and click "install from file" in the Exstension Mananger.
+
+## Install for windows 
+Go Exstension Manager and serch for Multilingual Extension or walltec and you will find it. 
+
  ## Explanation of functions
  ### Synchronization of Resx files
  There are two ways to sync the resx files. 
