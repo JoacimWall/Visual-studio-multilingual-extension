@@ -1,5 +1,4 @@
-﻿using System;
-using MonoDevelop.Components.Commands;
+﻿using MonoDevelop.Components.Commands;
 using MultilingualExtension.Shared.Helpers;
 
 namespace MultilingualExtension

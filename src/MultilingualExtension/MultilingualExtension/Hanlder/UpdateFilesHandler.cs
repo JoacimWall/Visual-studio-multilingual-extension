@@ -1,16 +1,7 @@
 ﻿using System;
 using MonoDevelop.Components.Commands;
-using Gtk;
 using MonoDevelop.Ide;
-using System.Collections.Generic;
-using System.Resources;
-
 using MonoDevelop.Projects;
-using System.Collections;
-using System.Xml;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.IO;
 using MultilingualExtension.Shared.Helpers;
 using MultilingualExtension.Shared.Services;
 using MultilingualExtension.Shared.Interfaces;
@@ -76,7 +67,8 @@ namespace MultilingualExtension
         TranslateFiles,
         ShowSettings,
         ExportFiles,
-        ImportFiles
+        ImportFiles,
+        TranslateAction
     }
 
 }

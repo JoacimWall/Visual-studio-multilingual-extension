@@ -69,13 +69,7 @@ namespace MultilingualExtension
 
             }
         }
-        //public struct ProgressData
-        //{
-        //    public Gtk.Window window;
-        //    public Gtk.ProgressBar pbar;
-        //    public uint timer;
-        //    public bool activity_mode;
-        //}
+       
     }
 
 }
