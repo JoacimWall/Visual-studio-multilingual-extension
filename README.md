@@ -49,7 +49,7 @@ Right-click one of the language files (AppResources.fr-FR.resx) and select "Expo
 <img  width=“100” height="400" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/ExportFilePopUpDialog.png">
 
 ### Import of texts
-Right-click one of the csv or xlsx language files (AppResources.fr-FR.resx.csv) and select "Import translation". then all rows with status 'Final' will be imported to the resx file(AppResources.fr-FR.resx) that are in the same folder. 
+Right-click one of the csv or xlsx language files (AppResources.fr-FR.resx.csv) and select "Import translation". Then all rows with status 'Final' will be imported to the resx file(AppResources.fr-FR.resx) that are in the same folder. 
 
 <img  width=“100” height="400" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/ImportFilePopUpDialog.png">
 
