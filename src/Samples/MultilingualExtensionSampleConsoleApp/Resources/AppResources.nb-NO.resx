@@ -43,9 +43,18 @@
     <value>glad</value>
   <comment>Need review</comment></data>
   <data name="Cars_Are_Fun" xml:space="preserve">
-    <value>Biler er morsomme</value>
-  <comment>Need review</comment></data>
+    <value>Biler er dårlige</value>
+  <comment>Final</comment></data>
   <data name="Dog" xml:space="preserve">
     <value>Hunden</value>
+  <comment>Need review</comment></data>
+  <data name="Cat" xml:space="preserve">
+    <value>Katten</value>
+  <comment>Need review</comment></data>
+  <data name="Elephant" xml:space="preserve">
+    <value>Elefant</value>
+  <comment>Need review</comment></data>
+  <data name="Tiger" xml:space="preserve">
+    <value>Tiger</value>
   <comment>Need review</comment></data>
 </root>

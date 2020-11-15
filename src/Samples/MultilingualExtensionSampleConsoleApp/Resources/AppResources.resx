@@ -143,17 +143,26 @@
   </data>
   <data name="You_Are_Added" xml:space="preserve">
     <value>You are added</value>
-  </data>
+  <comment>Need review</comment></data>
   <data name="I_Am_Old" xml:space="preserve">
     <value>I am old</value>
-  </data>
+  <comment>Need review</comment></data>
   <data name="Happy" xml:space="preserve">
     <value>Happy</value>
-  </data>
+  <comment>Need review</comment></data>
   <data name="Cars_Are_Fun" xml:space="preserve">
-    <value>Cars are fun</value>
-  </data>
+    <value>Cars are bad</value>
+  <comment>Need review</comment></data>
   <data name="Dog" xml:space="preserve">
     <value>Dog</value>
-  </data>
+  <comment>Need review</comment></data>
+  <data name="Cat" xml:space="preserve">
+    <value>Cat</value>
+  <comment>Need review</comment></data>
+  <data name="Elephant" xml:space="preserve">
+    <value>Elephant</value>
+  <comment>Need review</comment></data>
+  <data name="Tiger" xml:space="preserve">
+    <value>Tiger</value>
+  <comment>Need review</comment></data>
 </root>

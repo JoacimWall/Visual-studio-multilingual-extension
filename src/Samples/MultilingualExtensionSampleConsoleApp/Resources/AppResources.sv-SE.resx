@@ -35,14 +35,23 @@
   <comment>Need review</comment></data>
   <data name="I_Am_Old" xml:space="preserve">
     <value>Jag är inte ung</value>
-  <comment>Final</comment></data>
+  <comment>New</comment></data>
   <data name="Happy" xml:space="preserve">
     <value>Lycklig</value>
   <comment>Need review</comment></data>
   <data name="Cars_Are_Fun" xml:space="preserve">
-    <value>Bilar är kul</value>
-  <comment>Need review</comment></data>
+    <value>Bilar är dåliga</value>
+  <comment>Final</comment></data>
   <data name="Dog" xml:space="preserve">
     <value>Hund</value>
+  <comment>Need review</comment></data>
+  <data name="Cat" xml:space="preserve">
+    <value>Katt</value>
+  <comment>Need review</comment></data>
+  <data name="Elephant" xml:space="preserve">
+    <value>Elefant</value>
+  <comment>Need review</comment></data>
+  <data name="Tiger" xml:space="preserve">
+    <value>Tiger</value>
   <comment>Need review</comment></data>
 </root>

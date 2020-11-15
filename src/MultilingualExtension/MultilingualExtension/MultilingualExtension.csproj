@@ -60,6 +60,9 @@
     <Compile Include="..\MultilingualExtension.SharedCode\Models\UpdateStatusForTranslation.cs">
       <Link>Models\UpdateStatusForTranslation.cs</Link>
     </Compile>
+    <Compile Include="..\MultilingualExtension.SharedCode\Helpers\TextViewHelpers.cs">
+      <Link>Helpers\TextViewHelpers.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AddinReference Include="MonoDevelop.SourceEditor2" />

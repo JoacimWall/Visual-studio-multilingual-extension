@@ -1,44 +1,50 @@
-﻿using MonoDevelop.Components.Commands;
-using Microsoft.VisualStudio.Text;
-using Microsoft.VisualStudio.Text.Editor;
+﻿using System;
+using MonoDevelop.Components.Commands;
 using MonoDevelop.Ide;
-using MultilingualExtension.Shared.Helpers;
 using MonoDevelop.Projects;
+using MultilingualExtension.Shared.Helpers;
 using MultilingualExtension.Shared.Services;
 using MultilingualExtension.Shared.Interfaces;
-using System;
 using MultilingualExtension.Shared.Models;
 
 namespace MultilingualExtension
 {
 
-    public class TranslateActionHandler : CommandHandler
+    class SyncAndTranslateSelectedNodeHandler : CommandHandler
     {
 
-        
-        protected async override void Run(object dataItem)
+        protected async override void Run()
         {
             IProgressBar progress = new Helpers.ProgressBarHelper(Globals.Synchronize_Rows_Info);
 
             try
             {
-                UpdateStatusForTranslation Item = dataItem as UpdateStatusForTranslation;
+                UpdateStatusForTranslation Item = new  UpdateStatusForTranslation(Globals.STATUS_COMMENT_NEW);
                 Item.NodeName = TextViewHelpers.TextViewGetSelectedNodeName();
                 if (!string.IsNullOrEmpty(Item.NodeName))
                 {
                     SyncFileService syncFileService = new SyncFileService();
+                    TranslationService translationService = new TranslationService();
                     ISettingsService settingsService = new Services.SettingsService();
                     ProjectFile selectedItem = (ProjectFile)IdeApp.Workspace.CurrentSelectedItem;
 
                     var resultUpdate = await syncFileService.UpdateNodeStatus(selectedItem.FilePath, Item, progress, settingsService);
-
+                    if (!resultUpdate.WasSuccessful)
+                    {
+                        MessageService.GenericAlert(new GenericMessage { Text = resultUpdate.ErrorMessage });
+                    }
+                    else
+                    {
+                        var resultTrans = await translationService.TranslateNode(selectedItem.FilePath, Item, progress, settingsService);
+                        if (!resultUpdate.WasSuccessful)
+                            MessageService.GenericAlert(new GenericMessage { Text = resultUpdate.ErrorMessage });
+                    }
                 }
-
 
             }
             catch (Exception ex)
             {
-                MonoDevelop.Ide.MessageService.GenericAlert(new GenericMessage { Text = ex.Message });
+                MessageService.GenericAlert(new GenericMessage { Text = ex.Message });
 
             }
             finally
@@ -47,37 +53,33 @@ namespace MultilingualExtension
                 progress = null;
                 Console.WriteLine("Sync status  completed");
             }
-           
+
         }
-         protected override void Update(CommandArrayInfo info)
+         protected override void Update(CommandInfo info)
         {
+
             //Check that we are standing on data row in resx file
             if (string.IsNullOrEmpty(TextViewHelpers.TextViewGetSelectedNodeName()))
-               return;
-            
+            {
+                info.Visible = false;
+                return;
+            }
 
             ProjectFile selectedItem = (ProjectFile)IdeApp.Workspace.CurrentSelectedItem;
             string selectedFilename = selectedItem.Name;
-            var commandSet = new CommandInfoSet();
+           
             //validate file
             var checkfile = RexExHelper.ValidateFilenameIsTargetType(selectedFilename);
             if (checkfile.Success)
-            { //this is master resx
-                commandSet.CommandInfos.Add(new CommandInfo(Globals.STATUS_COMMENT_NEW),  new UpdateStatusForTranslation(Globals.STATUS_COMMENT_NEW));
-                commandSet.CommandInfos.Add(new CommandInfo(Globals.STATUS_COMMENT_NEED_REVIEW), new UpdateStatusForTranslation(Globals.STATUS_COMMENT_NEED_REVIEW));
-                commandSet.CommandInfos.Add(new CommandInfo(Globals.STATUS_COMMENT_FINAL), new UpdateStatusForTranslation(Globals.STATUS_COMMENT_FINAL));
+            {
+                info.Visible = false;
             }
             else
             { //child  resx fiels
-                commandSet.CommandInfos.Add(new CommandInfo("All to " + Globals.STATUS_COMMENT_NEW), new UpdateStatusForTranslation(Globals.STATUS_COMMENT_NEW));
-                commandSet.CommandInfos.Add(new CommandInfo("All to " + Globals.STATUS_COMMENT_TRANSLATED), new UpdateStatusForTranslation(Globals.STATUS_COMMENT_TRANSLATED));
-                commandSet.CommandInfos.Add(new CommandInfo("All to " + Globals.STATUS_COMMENT_FINAL), new UpdateStatusForTranslation(Globals.STATUS_COMMENT_FINAL));
+                info.Visible = true;
             }
-
-            info.Add(commandSet);
-
         }
     }
-    
+   
 
 }

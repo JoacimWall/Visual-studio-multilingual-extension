@@ -22,5 +22,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\SyncFileService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\TranslationService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\UpdateStatusForTranslation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\TextViewHelpers.cs" />
   </ItemGroup>
 </Project>

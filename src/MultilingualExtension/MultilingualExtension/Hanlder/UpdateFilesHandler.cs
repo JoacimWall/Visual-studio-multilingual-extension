@@ -31,7 +31,7 @@ namespace MultilingualExtension
             }
             catch (Exception ex)
             {
-                MonoDevelop.Ide.MessageService.GenericAlert(new GenericMessage { Text = ex.Message });
+                MessageService.GenericAlert(new GenericMessage { Text = ex.Message });
 
             }
             finally
@@ -68,7 +68,8 @@ namespace MultilingualExtension
         ShowSettings,
         ExportFiles,
         ImportFiles,
-        TranslateAction
+        TranslateAction,
+        TranslateSelectedNode
     }
 
 }
