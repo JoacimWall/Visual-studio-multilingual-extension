@@ -80,4 +80,4 @@ In this first version all files need to be in the same folder, export and import
 
 ## Converting from windows multilangual toolkit
 if you have used the windows multilangual toolkit before you can use this. The first time you sync the master file with the target files (AppResources.fr-FR.resx) all existings rows in the target file will get status "Final". 
-I am working on a windows version of this extension so you can work i project where uoser are on both mac and windows.  
+there is a windows version of this extension so you can work i on project where user are on both mac and windows.  
