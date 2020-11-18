@@ -11,7 +11,7 @@
 * Export of translations into csv or xlsx file for final translation by external stakeholder
 * Import of final translations from external stakholder 
 
-## Roadmapp 
+## Road map 
 * Posibility to export all rows not only the one that need translations.
 * Cleaning of the Resx files (find translations that are not used anymore anywhere in the code)
 
