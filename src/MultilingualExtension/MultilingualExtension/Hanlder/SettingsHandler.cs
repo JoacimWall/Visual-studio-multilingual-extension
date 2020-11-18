@@ -14,7 +14,7 @@ namespace MultilingualExtension
         }
         protected override void Update(CommandInfo info)
         {
-            info.Text = Globals.Import_Translation_Title;
+            info.Text = Globals.Show_Setting_Title;
 
         }
         public SettingsHandler()
