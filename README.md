@@ -18,7 +18,7 @@
 ## Install for Mac
 The extension publish function is closed for new users so you need to download the latest release from this page then got to visual studio mac and click "install from file" in the Exstension Mananger.
 
-## Install for windows 
+## Install for Windows 
 Go Exstension Manager and search for Multilingual Extension or Wlltec and you will find it. 
 
  ## Explanation of functions
