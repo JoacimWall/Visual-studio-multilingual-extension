@@ -14,46 +14,8 @@
   </resheader>
   <data name="Hello" xml:space="preserve">
         <value>Bonjour</value>
-   <comment>New</comment></data>
-  <data name="Enter_Your_Email" xml:space="preserve">
-        <value>Entrez votre e-mail</value>
-   &gt;<comment>Need review</comment></data>
-  <data name="Enter_Your_Password" xml:space="preserve">
-        <value>Entrez votre mot de passe</value>
-   &gt;<comment>Need review</comment></data>
-  <data name="Enter_Your_Cat" xml:space="preserve">
-        <value>Entrez votre chat</value>
-   
-        <comment>Need review</comment></data>
-  <data name="CSharp_Is_Love" xml:space="preserve">
-        <value>CSharp est l’amour</value>
-   
-    <comment>Need review</comment></data>
-  <data name="How_Old_Are_You" xml:space="preserve">
-        <value>Quel âge avez-vous</value>
    <comment>Need review</comment></data>
-  <data name="You_Are_Added" xml:space="preserve">
-        <value>Vous êtes ajouté</value>
-  <comment>Need review</comment></data>
-  <data name="I_Am_Old" xml:space="preserve">
-    <value>Je suis vieux</value>
-  <comment>Need review</comment></data>
-  <data name="Happy" xml:space="preserve">
-    <value>content</value>
-  <comment>Need review</comment></data>
-  <data name="Cars_Are_Fun" xml:space="preserve">
-    <value>Les voitures sont mauvaises</value>
-  <comment>Final</comment></data>
-  <data name="Dog" xml:space="preserve">
-    <value>Chien</value>
-  <comment>Need review</comment></data>
-  <data name="Cat" xml:space="preserve">
-    <value>Chat</value>
-  <comment>Need review</comment></data>
-  <data name="Elephant" xml:space="preserve">
-    <value>Éléphant</value>
-  <comment>Need review</comment></data>
-  <data name="Tiger" xml:space="preserve">
-    <value>Tigre</value>
-  <comment>Need review</comment></data>
+  <data name="Enter_Email" xml:space="preserve">
+    <value>Entrez e-mail s’il vous plaît</value>
+  <comment>New</comment></data>
 </root>
