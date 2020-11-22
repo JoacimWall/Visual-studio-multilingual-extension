@@ -12,6 +12,64 @@ namespace MultilingualExtension.Shared.Services
         public SyncFileService()
         {
         }
+        public async Task<Result<Boolean>> UpdateNodeStatus(string selectedFilename, UpdateStatusForTranslation updateStatusForTranslation,  IProgressBar progress, ISettingsService settingsService)
+        {
+            try
+            {
+
+                bool addCommentNodeToMasterResx = settingsService.AddCommentNodeMasterResx;
+
+                //validate file
+                var checkfile = RexExHelper.ValidateFilenameIsTargetType(selectedFilename);
+                if (!checkfile.Success)
+                {
+                    int folderindex;
+
+                    if (System.Environment.OSVersion.Platform == PlatformID.Win32NT)
+                        folderindex = selectedFilename.LastIndexOf("\\");
+                    else
+                        folderindex = selectedFilename.LastIndexOf("/");
+
+                    string masterFolderPath = selectedFilename.Substring(0, folderindex);
+
+                    string[] fileEntries = Directory.GetFiles(masterFolderPath);
+                    foreach (string fileName in fileEntries)
+                    {
+                        var checkfileInFolder = RexExHelper.ValidateFilenameIsTargetType(fileName);
+                        if (checkfileInFolder.Success)
+                        {
+                            var result = await UpdateStatusInternal(selectedFilename, fileName, updateStatusForTranslation, addCommentNodeToMasterResx, progress);
+                            if (!result.WasSuccessful)
+                                return result;
+                        }
+                    }
+
+                }
+                else
+                {
+                    string masterPath = selectedFilename.Substring(0, checkfile.Index) + ".resx";
+                    var result = await UpdateStatusInternal(masterPath, selectedFilename, updateStatusForTranslation, addCommentNodeToMasterResx, progress);
+                    if (!result.WasSuccessful)
+                        return result;
+                }
+                return new Result<bool>(true);
+
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+
+            }
+            finally
+            {
+                progress.HideAll();
+                progress = null;
+                Console.WriteLine("Sync file completed");
+            }
+
+
+        }
         public async Task<Result<Boolean>> SyncFile(string selectedFilename, IProgressBar progress, ISettingsService settingsService)
         {
             try
@@ -184,6 +242,80 @@ namespace MultilingualExtension.Shared.Services
 
             if (masterFileChanged)
                 masterdoc.Save(masterfilePath);
+
+            return new Result<bool>(true);
+
+
+        }
+        private async Task<Result<Boolean>> UpdateStatusInternal(string masterfilePath, string updatefilePath, UpdateStatusForTranslation updateStatusForTranslation, bool addMasterCommentNode, IProgressBar progress)
+        {
+
+            XmlDocument masterdoc = new XmlDocument();
+            masterdoc.Load(masterfilePath);
+            XmlNode rootMaster = masterdoc.DocumentElement;
+
+            XmlDocument updatedoc = new XmlDocument();
+            updatedoc.Load(updatefilePath);
+            XmlNode rootUpdate = updatedoc.DocumentElement;
+
+           
+
+            // Select all nodes data in Master
+            bool updateFileChanged = false;
+
+            XmlNode nodeMaster = rootMaster.SelectSingleNode("//data[@name='" + updateStatusForTranslation.NodeName + "']");
+            if (nodeMaster == null)
+            {
+                return new Result<bool>("Save master resx file before sync"); 
+            }
+
+
+            XmlNode exist = rootUpdate.SelectSingleNode("//data[@name='" + updateStatusForTranslation.NodeName + "']");
+            if (exist == null)
+            {
+                //Add to file
+                updateFileChanged = true;
+                XmlNode newEntry = updatedoc.ImportNode(nodeMaster, true);
+                updatedoc.DocumentElement.AppendChild(newEntry);
+                //check if comment exist from master
+                var commentNode = newEntry.SelectSingleNode("comment");
+                if (commentNode == null)
+                {
+                    XmlElement elem = updatedoc.CreateElement("comment"); //item1 ,item2..
+                    elem.InnerText = updateStatusForTranslation.NewStatus; 
+                    newEntry.AppendChild(elem);
+                }
+                else
+                {
+                    commentNode.InnerText = updateStatusForTranslation.NewStatus;
+                }
+            }
+            else
+            {
+                //Check if comment exist or not
+                var commentNode = exist.SelectSingleNode("comment");
+                if (commentNode == null)
+                {   //If comment not exists then we think this is old row that are allredy translated and final
+                    XmlElement elem = updatedoc.CreateElement("comment"); //item1 ,item2..
+                    elem.InnerText = updateStatusForTranslation.NewStatus;
+                    exist.AppendChild(elem);
+                    updateFileChanged = true;
+                }
+                else
+                {  
+                        updateFileChanged = true;
+                        commentNode.InnerText = updateStatusForTranslation.NewStatus;
+                }
+            }
+
+             progress.Pulse();
+
+
+            
+            if (updateFileChanged)
+                updatedoc.Save(updatefilePath);
+
+           
 
             return new Result<bool>(true);
 

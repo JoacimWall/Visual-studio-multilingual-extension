@@ -57,5 +57,17 @@
     <Compile Include="..\MultilingualExtension.SharedCode\Models\MicrosoftTranslationResponse.cs">
       <Link>Models\MicrosoftTranslationResponse.cs</Link>
     </Compile>
+    <Compile Include="..\MultilingualExtension.SharedCode\Models\UpdateStatusForTranslation.cs">
+      <Link>Models\UpdateStatusForTranslation.cs</Link>
+    </Compile>
+    <Compile Include="..\MultilingualExtension.SharedCode\Helpers\TextViewHelpers.cs">
+      <Link>Helpers\TextViewHelpers.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <AddinReference Include="MonoDevelop.SourceEditor2" />
+    <AddinReference Include="MonoDevelop.CSharpBinding" />
+    <AddinReference Include="MonoDevelop.Refactoring" />
+    <AddinReference Include="MonoDevelop.Xamarin.Ide.Mac" />
   </ItemGroup>
 </Project>

@@ -125,8 +125,6 @@ namespace MultilingualExtension.Shared.Services
         }
         private async Task<Result<Boolean>> TranslateFileInternal(bool useGoogle, string masterLanguageCode, string languageToCode, string updatefilePath, string endpoint, string location, string key, IProgressBar progress)
         {
-
-
             //get language code to translate to
 
             //TODO:Validate if language exist in GetLanguagesForTranslate
@@ -195,6 +193,74 @@ namespace MultilingualExtension.Shared.Services
             return new Result<bool>(true);
             
         }
+        private async Task<Result<Boolean>> TranslateNodeInternal(string masterfilePath,UpdateStatusForTranslation updateStatusForTranslation,bool useGoogle, string masterLanguageCode, string languageToCode, string updatefilePath, string endpoint, string location, string key, IProgressBar progress)
+        {
+            //get language code to translate to
+            XmlDocument masterdoc = new XmlDocument();
+            masterdoc.Load(masterfilePath);
+            XmlNode rootMaster = masterdoc.DocumentElement;
+
+            XmlDocument updatedoc = new XmlDocument();
+            updatedoc.Load(updatefilePath);
+            XmlNode rootUpdate = updatedoc.DocumentElement;
+
+            XmlNode nodeMaster = rootMaster.SelectSingleNode("//data[@name='" + updateStatusForTranslation.NodeName + "']");
+            if (nodeMaster == null)
+            {
+                //TODO: return error that says save master before sync
+            }
+            // Select all nodes data
+            bool updatefilechanged = false;
+            XmlNode nodeUpdate = rootUpdate.SelectSingleNode("//data[@name='" + updateStatusForTranslation.NodeName + "']");
+
+            if (nodeUpdate != null)
+            {
+                updatefilechanged = true;
+                //this will always exist is created syncNode function
+                var commentNode = nodeUpdate.SelectSingleNode("comment");
+                if (commentNode == null)
+                {
+                    //this should never happend if we add the data nodes throw function updatefiles
+                    commentNode = updatedoc.CreateElement("comment"); //item1 ,item2..
+                    commentNode.InnerText = Globals.STATUS_COMMENT_NEW;
+                    nodeUpdate.AppendChild(commentNode);
+                }
+
+                Result<Translations> result;
+                var valueNodeMaster = nodeMaster.SelectSingleNode("value"); 
+                var valueNode = nodeUpdate.SelectSingleNode("value");
+                if (useGoogle)
+                {
+
+                    result = await GoogleTranslateText(valueNodeMaster.InnerText, masterLanguageCode, languageToCode);
+                }
+                else
+                {
+                    result = await MicrosoftTranslateText(valueNodeMaster.InnerText, masterLanguageCode, languageToCode, endpoint, location, key);
+                }
+                Console.Write(result);
+                if (result.WasSuccessful)
+                {
+                    updatefilechanged = true;
+                    //Update text
+                    valueNode.InnerText = result.Model.text;
+                    commentNode.InnerText = Globals.STATUS_COMMENT_NEED_REVIEW;
+
+                }
+                   
+                
+
+                progress.Pulse();
+            }
+
+
+            if (updatefilechanged)
+                updatedoc.Save(updatefilePath);
+
+            return new Result<bool>(true);
+
+        }
+
         public async Task<Result<Boolean>> TranslateFile(string selectedFilename, IProgressBar progress,ISettingsService settingsService)
         {
             try
@@ -255,6 +321,65 @@ namespace MultilingualExtension.Shared.Services
 
 
         }
+        public async Task<Result<Boolean>> TranslateNode(string selectedFilename, UpdateStatusForTranslation updateStatusForTranslation, IProgressBar progress, ISettingsService settingsService)
+        {
+            try
+            {
 
+                bool useGoogle = true;
+                if (settingsService.TranslationService == 2)
+                    useGoogle = false;
+
+                string endpoint = settingsService.MsoftEndpoint;
+                string location = settingsService.MsoftLocation;
+                string key = settingsService.MsoftKey;
+                string masterLanguageCode = settingsService.MasterLanguageCode;
+
+                //validate file
+                var checkfile = RexExHelper.ValidateFilenameIsTargetType(selectedFilename);
+                if (!checkfile.Success)
+                {
+                    int folderindex;
+
+                    if (System.Environment.OSVersion.Platform == PlatformID.Win32NT)
+                        folderindex = selectedFilename.LastIndexOf("\\");
+                    else
+                        folderindex = selectedFilename.LastIndexOf("/");
+
+                    string masterFolderPath = selectedFilename.Substring(0, folderindex);
+
+                    string[] fileEntries = Directory.GetFiles(masterFolderPath);
+                    foreach (string fileName in fileEntries)
+                    {
+                        var checkfileInFolder = RexExHelper.ValidateFilenameIsTargetType(fileName);
+                        if (checkfileInFolder.Success)
+                            await TranslateNodeInternal(selectedFilename,updateStatusForTranslation, useGoogle, masterLanguageCode, checkfileInFolder.Value.Substring(1, 2), fileName, endpoint, location, key, progress);
+
+                    }
+
+                }
+                else
+                {
+                    string masterPath = selectedFilename.Substring(0, checkfile.Index) + ".resx";
+                    await TranslateNodeInternal(selectedFilename,updateStatusForTranslation, useGoogle, masterLanguageCode, checkfile.Value.Substring(1, 2), selectedFilename, endpoint, location, key, progress);
+                }
+                return new Result<bool>(true);
+
+            }
+
+            catch (Exception ex)
+            {
+                throw ex;
+
+            }
+            finally
+            {
+                progress.HideAll();
+                progress = null;
+                Console.WriteLine("Translate file completed");
+            }
+
+
+        }
     }
 }

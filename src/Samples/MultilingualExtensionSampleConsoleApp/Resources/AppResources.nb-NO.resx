@@ -15,37 +15,7 @@
   <data name="Hello" xml:space="preserve">
         <value>Hei</value>
     <comment>Final</comment></data>
-  <data name="Enter_Your_Email" xml:space="preserve">
-        <value>Skriv inn e-posten din</value>
-    <comment>Final</comment></data>
-  <data name="Enter_Your_Password" xml:space="preserve">
-        <value>Skriv inn passordet ditt</value>
-    <comment>Final</comment>
-    </data>
-  <data name="Enter_Your_Cat" xml:space="preserve">
-        <value>Skriv inn katten din</value>
-    <comment>Final</comment>
-        </data>
-  <data name="CSharp_Is_Love" xml:space="preserve">
-        <value>CSharp er kjærlighet</value>
-    <comment>Final</comment>
-    </data>
-  <data name="How_Old_Are_You" xml:space="preserve">
-        <value>hvor gammel er du</value>
-    <comment>Need review</comment></data>
-  <data name="You_Are_Added" xml:space="preserve">
-        <value>Du er lagt til</value>
-  <comment>Need review</comment></data>
-  <data name="I_Am_Old" xml:space="preserve">
-    <value>Jeg er gammel</value>
-  <comment>Need review</comment></data>
-  <data name="Happy" xml:space="preserve">
-    <value>glad</value>
-  <comment>Need review</comment></data>
-  <data name="Cars_Are_Fun" xml:space="preserve">
-    <value>Biler er morsomme</value>
-  <comment>Need review</comment></data>
-  <data name="Dog" xml:space="preserve">
-    <value>Hunden</value>
-  <comment>Need review</comment></data>
+  <data name="Enter_Email" xml:space="preserve">
+    <value>Skriv inn e-post vennligst</value>
+  <comment>New</comment></data>
 </root>

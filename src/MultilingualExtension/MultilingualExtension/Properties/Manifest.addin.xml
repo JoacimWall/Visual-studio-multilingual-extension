@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ExtensionModel>
+    
+    
     <Extension path = "/MonoDevelop/Ide/Commands">
         <Command id = "MultilingualExtension.MultilingualExtensionCommands.UpdateFiles"
                  _label = "Synchronizes language files"
@@ -35,6 +37,20 @@
                  defaultHandler = "MultilingualExtension.SettingsHandler"
                  />
     </Extension>
+   <Extension path = "/MonoDevelop/Ide/Commands">
+        <Command id = "MultilingualExtension.MultilingualExtensionCommands.TranslateAction"
+             _label = "Change Translation Status..."
+             shortcut = "Alt|T"
+                   type="array"
+             _description = "Action that aplay to all child language files"
+               defaultHandler = "MultilingualExtension.TranslateActionHandler"/>
+    </Extension>
+     <Extension path = "/MonoDevelop/Ide/Commands">
+        <Command id = "MultilingualExtension.MultilingualExtensionCommands.SyncAndTranslateSelectedNode"
+             _label = "Sync and translate this node in all .xx-xx.resx files"
+             _description = "Action that aplay to all child language files"
+               defaultHandler = "MultilingualExtension.SyncAndTranslateSelectedNodeHandler"/>
+    </Extension>
     
     <Extension path = "/MonoDevelop/Ide/ContextMenu/ProjectPad">
         <Condition id="FileType" fileExtensions=".resx">
@@ -60,6 +76,17 @@
     <Extension path = "/MonoDevelop/Ide/MainMenu/Tools">
         <CommandItem id="MultilingualExtension.MultilingualExtensionCommands.ShowSettings" />
     </Extension>
-
+   
+     <Extension path = "/MonoDevelop/SourceEditor2/ContextMenu/Editor">
+        <Condition id="FileType" fileExtensions=".resx">
+                 <CommandItem id = "MultilingualExtension.MultilingualExtensionCommands.TranslateAction"/>
+         </Condition>
+    </Extension>
+     <Extension path = "/MonoDevelop/SourceEditor2/ContextMenu/Editor">
+        <Condition id="FileType" fileExtensions=".resx">
+                 <CommandItem id = "MultilingualExtension.MultilingualExtensionCommands.SyncAndTranslateSelectedNode"/>
+         </Condition>
+    </Extension>
+     
     
 </ExtensionModel>

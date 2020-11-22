@@ -14,35 +14,8 @@
   </resheader>
   <data name="Hello" xml:space="preserve">
         <value>Hej</value>
-    <comment>Final</comment></data>
-  <data name="Enter_Your_Email" xml:space="preserve">
-        <value>Ange din e-post</value>
-    <comment>Final</comment></data>
-  <data name="Enter_Your_Password" xml:space="preserve">
-        <value>Ange ditt lösenord tack</value>
-    <comment>Final</comment></data>
-  <data name="Enter_Your_Cat" xml:space="preserve">
-        <value>Ange din katt</value>
-        <comment>Final</comment></data>
-  <data name="CSharp_Is_Love" xml:space="preserve">
-        <value>CSharp är kärlek</value>
     <comment>Need review</comment></data>
-  <data name="How_Old_Are_You" xml:space="preserve">
-        <value>Hur gammal är du</value>
-   <comment>Need review</comment></data>
-  <data name="You_Are_Added" xml:space="preserve">
-        <value>Du läggs till</value>
-  <comment>Need review</comment></data>
-  <data name="I_Am_Old" xml:space="preserve">
-    <value>Jag är inte ung</value>
+  <data name="Enter_Email" xml:space="preserve">
+    <value>Ange e-post vänligen</value>
   <comment>Final</comment></data>
-  <data name="Happy" xml:space="preserve">
-    <value>Lycklig</value>
-  <comment>Need review</comment></data>
-  <data name="Cars_Are_Fun" xml:space="preserve">
-    <value>Bilar är kul</value>
-  <comment>Need review</comment></data>
-  <data name="Dog" xml:space="preserve">
-    <value>Hund</value>
-  <comment>Need review</comment></data>
 </root>
