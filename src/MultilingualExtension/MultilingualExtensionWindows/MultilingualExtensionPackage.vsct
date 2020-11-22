@@ -42,6 +42,9 @@
       <Group guid="guidMultilingualExtensionPackageCmdSet" id="MyGroupForSubMenuProjectPad" priority="0x0600">
         <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_ITEMNODE"/>
       </Group>
+     <Group guid="guidMultilingualExtensionPackageCmdSet" id="MyGroupForEditor" priority="0x0600">
+                <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_CODEWIN"/>
+      </Group>
     </Groups>
 
     <!--Buttons section. -->
@@ -59,15 +62,17 @@
       <!--Menu settings-->
       <Button guid="guidMultilingualExtensionPackageCmdSet" id="CommandIdShowSettings" priority="0x0100" type="Button">
         <Parent guid="guidMultilingualExtensionPackageCmdSet" id="MyMenuGroup" />
-        <CommandFlag>DynamicVisibility</CommandFlag> 
+        <CommandFlag>DynamicVisibility</CommandFlag>
+       
         <Strings>
-          <ButtonText>Multilinugal settings</ButtonText>
+          <ButtonText>Multilingual Settings</ButtonText>
         </Strings>
       </Button>
       <!--SyncFiles-->
       <Button guid="guidMultilingualExtensionPackageCmdSet" id="CommandIdUpdateFiles" priority="0x0100" type="Button">
         <Parent guid="guidMultilingualExtensionPackageCmdSet" id="MyGroupForSubMenuProjectPad" />
         <CommandFlag>DynamicVisibility</CommandFlag>
+         <CommandFlag>DefaultInvisible</CommandFlag>
         <Strings>
           <ButtonText>Synchronizes language files</ButtonText>
         </Strings>
@@ -94,6 +99,14 @@
         <CommandFlag>DynamicVisibility</CommandFlag>
         <Strings>
           <ButtonText>Import Translation</ButtonText>
+        </Strings>
+      </Button>
+    <!--Sync And Translate-->
+      <Button guid="guidMultilingualExtensionPackageCmdSet" id="CommandIdSyncAndTranslateNode" priority="0x0100" type="Button">
+        <Parent guid="guidMultilingualExtensionPackageCmdSet" id="MyGroupForEditor" />
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <Strings>
+          <ButtonText>Sync And Translate</ButtonText>
         </Strings>
       </Button>
     </Buttons>
@@ -132,12 +145,15 @@
     <GuidSymbol name="guidMultilingualExtensionPackageCmdSet" value="{e86c9f19-293d-49ab-8b5b-f4039e5193db}">
       <IDSymbol name="MyMenuGroup" value="0x1020" />
       <IDSymbol name="MyGroupForSubMenuProjectPad" value="0x1021" />
+      <IDSymbol name="MyGroupForEditor" value="0x1022" />
+      
       <IDSymbol name="CommandIdShowSettings" value="0x0100" />
       <IDSymbol name="CommandIdUpdateFiles" value="0x0101" />
       <IDSymbol name="CommandIdTranslateFiles" value="0x0102" />
       
       <IDSymbol name="CommandIdExportFiles" value="0x0103" />
       <IDSymbol name="CommandIdImportFiles" value="0x0104" />
+      <IDSymbol name="CommandIdSyncAndTranslateNode" value="0x0105" />
     </GuidSymbol>
 
     <GuidSymbol name="guidImages" value="{e1e1d1d1-81ef-47fb-9d53-4190d8b4edab}" >

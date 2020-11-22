@@ -3,6 +3,7 @@ using System.ComponentModel.Design;
 using System.Runtime.InteropServices;
 using System.Threading;
 using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.Shell.Interop;
 using MultilingualExtension;
 using Task = System.Threading.Tasks.Task;
 
@@ -38,6 +39,8 @@ namespace MultilingualExtension
         expression: "Csv | Xlsx",
         termNames: new[] { "Csv", "Excel" },
         termValues: new[] { "HierSingleSelectionName:.csv$", "HierSingleSelectionName:.xlsx$" })]
+    [ProvideService(typeof(MultilingualExtensionPackage), IsAsyncQueryable = true)]
+    [ProvideAutoLoad(UIContextGuids80.SolutionExists)]
     public sealed class MultilingualExtensionPackage : AsyncPackage
     {
         private const string _uiContextSupporResxFiles = "24551deb-f034-43e9-a279-0e541241687e"; // Must match guid in VsCommandTable.vsct
@@ -71,6 +74,7 @@ namespace MultilingualExtension
             TranslateButton.Initialize(this, commandService);
             ExportButton.Initialize(this, commandService);
             ImportButton.Initialize(this, commandService);
+            SyncAndTranslateSelectedNodeButton.Initialize(this, commandService);
         }
 
         #endregion

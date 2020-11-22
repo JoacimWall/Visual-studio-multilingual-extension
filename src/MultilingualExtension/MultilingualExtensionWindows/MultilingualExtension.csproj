@@ -85,6 +85,7 @@
     <Compile Include="Command.cs" />
     <Compile Include="Commands\ImportButton.cs" />
     <Compile Include="Commands\ExportButton.cs" />
+    <Compile Include="Commands\SyncAndTranslateSelectedNodeButton.cs" />
     <Compile Include="Commands\TranslateButton.cs" />
     <Compile Include="Helpers\DevfileHelper.cs" />
     <Compile Include="Helpers\ProgressBarHelper.cs" />
