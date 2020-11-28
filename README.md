@@ -4,12 +4,13 @@
 
 <img width=“100” height="200" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/SolutionExample.png">
 
-### It has four main functions.
+### It has five main functions.
 
 * Synchronization of Resx files
 * Translation of texts by Google translate or Microsoft translate
 * Export of translations into csv or xlsx file for final translation by external stakeholder
-* Import of final translations from external stakholder 
+* Import of final translations from external stakholder
+* List all unused translations to keep out resources files clean.
 
 ## Road map 
 * Posibility to export all rows not only the one that need translations.
@@ -52,6 +53,12 @@ Right-click one of the language files (AppResources.fr-FR.resx) and select "Expo
 Right-click one of the csv or xlsx language files (AppResources.fr-FR.resx.csv) and select "Import translation". Then all rows with status 'Final' will be imported to the resx file(AppResources.fr-FR.resx) that are in the same folder. 
 
 <img  width=“100” height="400" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/ImportFilePopUpDialog.png">
+
+### List unused translation
+Right-click the master file and select (AppResources.resx) and select "List unused translations". The extension will search trow all .cs and xaml files and check if the translations in the master file is used. then report alla translations that are not used in the app to search result windows.
+
+<img  width=“300” height="200" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/ListUnusedTransaltions.png">
+
 
 ### Update status for a previously translated node 
 If you change the text in an existing node in the Master resx file and want to change the translation status. Right click somewhere on the <data name = 'xxxxx' node and select "Change Translation Status ..." and chose the status you would like to change to. This will change the status in all language files ((AppResources.fr-FR.resx) to the bew status. If you changed to 'New' then you can right click the master file and select translate to make new translations.    
