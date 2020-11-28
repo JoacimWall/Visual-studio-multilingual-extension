@@ -49,7 +49,7 @@ namespace MultilingualExtension
             string selectedFilename = selectedItem.Name;
 
             //validate file
-            var checkfile = RexExHelper.ValidateFilenameIsTargetType(selectedFilename);
+            var checkfile = RegExHelper.ValidateFilenameIsTargetType(selectedFilename);
             if (!checkfile.Success)
             {
                 info.Text = Globals.Synchronize_All_Files_Title;
@@ -69,7 +69,8 @@ namespace MultilingualExtension
         ExportFiles,
         ImportFiles,
         TranslateAction,
-        TranslateSelectedNode
+        TranslateSelectedNode,
+        ListUnusedTranslations
     }
 
 }

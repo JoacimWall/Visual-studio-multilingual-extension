@@ -12,23 +12,21 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+    <data name="CSharp_Is_Love" xml:space="preserve">
+        <value>CSharp is love</value>
+     <comment>Need review</comment></data>
   <data name="Hello" xml:space="preserve">
         <value>Hello</value>
    <comment>Need review</comment></data>
   <data name="Enter_Your_Email" xml:space="preserve">
-        <value>Enter your email</value>
-   &gt;<comment>Need review</comment></data>
+        <value>Enter your email please</value>
+  <comment>Need review</comment></data>
   <data name="Enter_Your_Password" xml:space="preserve">
         <value>Enter your password</value>
-   &gt;<comment>Need review</comment></data>
+  <comment>Need review</comment></data>
   <data name="Enter_Your_Cat" xml:space="preserve">
         <value>Enter your cat</value>
-   
         <comment>Need review</comment></data>
-  <data name="CSharp_Is_Love" xml:space="preserve">
-        <value>CSharp is love</value>
-   
-    <comment>Need review</comment></data>
   <data name="How_Old_Are_You" xml:space="preserve">
         <value>how old are you</value>
    <comment>Need review</comment></data>

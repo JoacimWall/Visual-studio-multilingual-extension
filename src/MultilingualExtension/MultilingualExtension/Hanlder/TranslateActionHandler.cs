@@ -60,7 +60,7 @@ namespace MultilingualExtension
             string selectedFilename = selectedItem.Name;
             var commandSet = new CommandInfoSet();
             //validate file
-            var checkfile = RexExHelper.ValidateFilenameIsTargetType(selectedFilename);
+            var checkfile = RegExHelper.ValidateFilenameIsTargetType(selectedFilename);
             if (checkfile.Success)
             { //this is master resx
                 commandSet.CommandInfos.Add(new CommandInfo(Globals.STATUS_COMMENT_NEW),  new UpdateStatusForTranslation(Globals.STATUS_COMMENT_NEW));

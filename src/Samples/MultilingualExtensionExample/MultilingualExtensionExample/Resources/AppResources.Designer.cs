@@ -47,6 +47,12 @@ namespace MultilingualExtensionExample.Resources {
             }
         }
         
+        internal static string CSharp_Is_Love {
+            get {
+                return ResourceManager.GetString("CSharp_Is_Love", resourceCulture);
+            }
+        }
+        
         internal static string Hello {
             get {
                 return ResourceManager.GetString("Hello", resourceCulture);
@@ -68,12 +74,6 @@ namespace MultilingualExtensionExample.Resources {
         internal static string Enter_Your_Cat {
             get {
                 return ResourceManager.GetString("Enter_Your_Cat", resourceCulture);
-            }
-        }
-        
-        internal static string CSharp_Is_Love {
-            get {
-                return ResourceManager.GetString("CSharp_Is_Love", resourceCulture);
             }
         }
         

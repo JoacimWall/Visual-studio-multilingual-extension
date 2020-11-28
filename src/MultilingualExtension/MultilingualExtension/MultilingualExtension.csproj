@@ -6,7 +6,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="MonoDevelop.Addins" Version="0.4.7" />
-    <PackageReference Include="FileHelpers.ExcelNPOIStorage" Version="3.4.1" />
+    <PackageReference Include="FileHelpers.ExcelNPOIStorage" Version="3.4.2" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />
@@ -21,8 +21,8 @@
     <Reference Include="GtkSharp, Version=3.22.25.128, Culture=neutral, PublicKeyToken=null" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\MultilingualExtension.SharedCode\Helpers\RexExHelper.cs">
-      <Link>Helpers\RexExHelper.cs</Link>
+    <Compile Include="..\MultilingualExtension.SharedCode\Helpers\RegExHelper.cs">
+      <Link>Helpers\RegExHelper.cs</Link>
     </Compile>
     <Compile Include="..\MultilingualExtension.SharedCode\Helpers\Global.cs">
       <Link>Helpers\Global.cs</Link>

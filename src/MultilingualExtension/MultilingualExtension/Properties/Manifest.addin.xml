@@ -6,36 +6,31 @@
         <Command id = "MultilingualExtension.MultilingualExtensionCommands.UpdateFiles"
                  _label = "Synchronizes language files"
                  _description = "Synchronizes lines from master RESX file"
-                 defaultHandler = "MultilingualExtension.UpdateFilesHandler"
-                  />
+                 defaultHandler = "MultilingualExtension.UpdateFilesHandler"/>
     </Extension>
      <Extension path = "/MonoDevelop/Ide/Commands">
         <Command id = "MultilingualExtension.MultilingualExtensionCommands.TranslateFiles"
                  _label = "Translate files"
                  _description = "Translate rows where comment = 'New'"
-                 defaultHandler = "MultilingualExtension.TranslateHandler"
-                  />
+                 defaultHandler = "MultilingualExtension.TranslateHandler"/>
     </Extension>
      <Extension path = "/MonoDevelop/Ide/Commands">
         <Command id = "MultilingualExtension.MultilingualExtensionCommands.ExportFiles"
                  _label = "Export files"
                  _description = "Export rows where comment = 'Need review'"
-                 defaultHandler = "MultilingualExtension.ExportHandler"
-                  />
+                 defaultHandler = "MultilingualExtension.ExportHandler"/>
     </Extension>
      <Extension path = "/MonoDevelop/Ide/Commands">
         <Command id = "MultilingualExtension.MultilingualExtensionCommands.ImportFiles"
                  _label = "Import files"
                  _description = "import rows where comment = 'Final'"
-                 defaultHandler = "MultilingualExtension.ImportHandler"
-                  />
+                 defaultHandler = "MultilingualExtension.ImportHandler"/>
     </Extension>
     <Extension path = "/MonoDevelop/Ide/Commands">
         <Command id = "MultilingualExtension.MultilingualExtensionCommands.ShowSettings"
                  _label = "Multilingual Settings"
                  _description = "Multilingual Settings" 
-                 defaultHandler = "MultilingualExtension.SettingsHandler"
-                 />
+                 defaultHandler = "MultilingualExtension.SettingsHandler"/>
     </Extension>
    <Extension path = "/MonoDevelop/Ide/Commands">
         <Command id = "MultilingualExtension.MultilingualExtensionCommands.TranslateAction"
@@ -51,7 +46,12 @@
              _description = "Action that aplay to all child language files"
                defaultHandler = "MultilingualExtension.SyncAndTranslateSelectedNodeHandler"/>
     </Extension>
-    
+     <Extension path = "/MonoDevelop/Ide/Commands">
+        <Command id = "MultilingualExtension.MultilingualExtensionCommands.ListUnusedTranslations"
+                 _label = "Multilingual Settings"
+                 _description = "Multilingual Settings" 
+                 defaultHandler = "MultilingualExtension.ListUnusedTranslationsHandler"/>
+    </Extension>
     <Extension path = "/MonoDevelop/Ide/ContextMenu/ProjectPad">
         <Condition id="FileType" fileExtensions=".resx">
             <CommandItem id="MultilingualExtension.MultilingualExtensionCommands.UpdateFiles" />
@@ -72,7 +72,11 @@
             <CommandItem id="MultilingualExtension.MultilingualExtensionCommands.ImportFiles" />
         </Condition>
     </Extension>
-    
+     <Extension path = "/MonoDevelop/Ide/ContextMenu/ProjectPad">
+        <Condition id="FileType" fileExtensions=".resx">
+            <CommandItem id="MultilingualExtension.MultilingualExtensionCommands.ListUnusedTranslations" />
+        </Condition>
+    </Extension>
     <Extension path = "/MonoDevelop/Ide/MainMenu/Tools">
         <CommandItem id="MultilingualExtension.MultilingualExtensionCommands.ShowSettings" />
     </Extension>

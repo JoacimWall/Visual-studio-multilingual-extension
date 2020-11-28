@@ -16,8 +16,8 @@
         <value>Hei</value>
     <comment>Final</comment></data>
   <data name="Enter_Your_Email" xml:space="preserve">
-        <value>Skriv inn e-posten din</value>
-    <comment>Final</comment></data>
+        <value>Skriv inn e-posten din, vennligst</value>
+    <comment>Need review</comment></data>
   <data name="Enter_Your_Password" xml:space="preserve">
         <value>Skriv inn passordet ditt</value>
     <comment>Final</comment>

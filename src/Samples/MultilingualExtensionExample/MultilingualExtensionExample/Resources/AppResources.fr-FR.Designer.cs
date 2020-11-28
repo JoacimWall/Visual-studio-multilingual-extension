@@ -46,5 +46,11 @@ namespace MultilingualExtensionExample.Resources {
                 resourceCulture = value;
             }
         }
+        
+        internal static string Enter_Your_Email {
+            get {
+                return ResourceManager.GetString("Enter_Your_Email", resourceCulture);
+            }
+        }
     }
 }

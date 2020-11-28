@@ -20,7 +20,7 @@ namespace MultilingualExtension.Shared.Services
                 bool addCommentNodeToMasterResx = settingsService.AddCommentNodeMasterResx;
 
                 //validate file
-                var checkfile = RexExHelper.ValidateFilenameIsTargetType(selectedFilename);
+                var checkfile = RegExHelper.ValidateFilenameIsTargetType(selectedFilename);
                 if (!checkfile.Success)
                 {
                     int folderindex;
@@ -35,7 +35,7 @@ namespace MultilingualExtension.Shared.Services
                     string[] fileEntries = Directory.GetFiles(masterFolderPath);
                     foreach (string fileName in fileEntries)
                     {
-                        var checkfileInFolder = RexExHelper.ValidateFilenameIsTargetType(fileName);
+                        var checkfileInFolder = RegExHelper.ValidateFilenameIsTargetType(fileName);
                         if (checkfileInFolder.Success)
                         {
                             var result = await UpdateStatusInternal(selectedFilename, fileName, updateStatusForTranslation, addCommentNodeToMasterResx, progress);
@@ -70,6 +70,7 @@ namespace MultilingualExtension.Shared.Services
 
 
         }
+        
         public async Task<Result<Boolean>> SyncFile(string selectedFilename, IProgressBar progress, ISettingsService settingsService)
         {
             try
@@ -78,7 +79,7 @@ namespace MultilingualExtension.Shared.Services
                 bool addCommentNodeToMasterResx = settingsService.AddCommentNodeMasterResx;
 
                 //validate file
-                var checkfile = RexExHelper.ValidateFilenameIsTargetType(selectedFilename);
+                var checkfile = RegExHelper.ValidateFilenameIsTargetType(selectedFilename);
                 if (!checkfile.Success)
                 {
                     int folderindex;
@@ -93,7 +94,7 @@ namespace MultilingualExtension.Shared.Services
                     string[] fileEntries = Directory.GetFiles(masterFolderPath);
                     foreach (string fileName in fileEntries)
                     {
-                        var checkfileInFolder = RexExHelper.ValidateFilenameIsTargetType(fileName);
+                        var checkfileInFolder = RegExHelper.ValidateFilenameIsTargetType(fileName);
                         if (checkfileInFolder.Success)
                            await SyncFileInternal(selectedFilename, fileName, addCommentNodeToMasterResx, progress);
 
