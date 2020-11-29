@@ -21,9 +21,6 @@
     <Reference Include="GtkSharp, Version=3.22.25.128, Culture=neutral, PublicKeyToken=null" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\MultilingualExtension.SharedCode\Helpers\RegExHelper.cs">
-      <Link>Helpers\RegExHelper.cs</Link>
-    </Compile>
     <Compile Include="..\MultilingualExtension.SharedCode\Helpers\Global.cs">
       <Link>Helpers\Global.cs</Link>
     </Compile>
@@ -62,6 +59,9 @@
     </Compile>
     <Compile Include="..\MultilingualExtension.SharedCode\Helpers\TextViewHelpers.cs">
       <Link>Helpers\TextViewHelpers.cs</Link>
+    </Compile>
+    <Compile Include="..\MultilingualExtension.SharedCode\Helpers\RegExHelper.cs">
+      <Link>Helpers\RegExHelper.cs</Link>
     </Compile>
   </ItemGroup>
   <ItemGroup>

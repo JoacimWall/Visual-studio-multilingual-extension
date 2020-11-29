@@ -69,7 +69,7 @@ namespace MultilingualExtension.Shared.Helpers
             //:AppResources.Email}
             //Code
             //AppResources.Enter_Email; ) ' ' 
-            Regex regex = new Regex(@"([.]\b"+ name + "\\b[;])|([.]\\b" + name + "\\b[)])|([.]\\b" + name + "\\b[\\s][)])|([.]\\b" + name + "\\b[\\s])|([.]\\b" + name + "\\b[}])|([.]\\b" + name + "\\b[\\s][}])");
+            Regex regex = new Regex(@"([.]\b"+ name + "\\b[;])|([.]\\b" + name + "\\b[)])|([.]\\b" + name + "\\b[\\s][)])|([.]\\b" + name + "\\b[\\s])|([.]\\b" + name + "\\b[}])|([.]\\b" + name + "\\b[\\s][}])|([.]\\b" + name + "\\b[,])|([.]\\b" + name + "\\b[\\s][,])");
             return regex.Match(line);
 
         }
