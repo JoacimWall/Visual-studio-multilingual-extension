@@ -64,4 +64,10 @@
       <Link>Helpers\RegExHelper.cs</Link>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
+    <AddinReference Include="MonoDevelop.CSharpBinding" />
+    <AddinReference Include="MonoDevelop.Refactoring" />
+    <AddinReference Include="MonoDevelop.SourceEditor2" />
+    <AddinReference Include="MonoDevelop.Xamarin.Ide.Mac" />
+  </ItemGroup>
 </Project>
