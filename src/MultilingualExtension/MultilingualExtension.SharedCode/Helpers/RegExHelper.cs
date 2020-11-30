@@ -75,9 +75,11 @@ namespace MultilingualExtension.Shared.Helpers
             //:AppResources.Email}
             //Code
             //AppResources.Enter_Email; ) ' '
-            //Regex regex = new Regex(@"([.]\b" + name + "\\b[;])|([.]\b" + name + "\\b[.])|([.]\\b" + name + "\\b[)])|([.]\\b" + name + "\\b[\\s][)])|([.]\\b" + name + "\\b[\\s])|([.]\\b" + name + "\\b[}])|([.]\\b" + name + "\\b[\\s][}])|([.]\\b" + name + "\\b[,])|([.]\\b" + name + "\\b[\\s][,])");
-
-            Regex regex = new Regex(@"(\b"+ name + "\\b[;])|(" + name + "[.])|(" + name + "[)])|(" + name + "b[\\s][)])|(" + name + "[\\s])|(" + name + "[}])|(" + name + "[\\s][}])|(" + name + "[,])|(" + name + "[\\s][,])");
+            //Regex regex Regex(@"([.]\b" + name + "\\b[;])|([.]\b" + name + "\\b[.])|([.]\\b" + name + "\\b[)])|([.]\\b" + name + "\\b[\\s][)])|([.]\\b" + name + "\\b[\\s])|([.]\\b" + name + "\\b[}])|([.]\\b" + name + "\\b[\\s][}])|([.]\\b" + name + "\\b[,])|([.]\\b" + name + "\\b[\\s][,])");
+            string format = "({0}[;])|({0}[.])|({0}[+])|({0}[)])|({0}[,])|({0}[\\s])";
+            format = string.Format(format, name);
+            format = format + "|(" + name + "[}])"; //format can't handle [}]
+            Regex regex = new Regex(format);
             return regex.Match(line);
 
         }
