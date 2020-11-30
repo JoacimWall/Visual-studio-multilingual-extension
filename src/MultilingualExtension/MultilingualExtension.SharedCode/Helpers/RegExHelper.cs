@@ -36,6 +36,12 @@ namespace MultilingualExtension.Shared.Helpers
             return regex.Match(path);
 
         }
+        public static Match GetFilenameMasterResx(string path)
+        {
+            Regex regex = new Regex(@"\w+.resx$");
+            return regex.Match(path);
+
+        }
         public static Match LineContainsDataName(string line)
         { //Regex(@"[<]\bdata name\b[=][""]");
             Regex regex = new Regex(@"<data name=""");
@@ -68,8 +74,10 @@ namespace MultilingualExtension.Shared.Helpers
             //Xaml
             //:AppResources.Email}
             //Code
-            //AppResources.Enter_Email; ) ' ' 
-            Regex regex = new Regex(@"([.]\b"+ name + "\\b[;])|([.]\\b" + name + "\\b[)])|([.]\\b" + name + "\\b[\\s][)])|([.]\\b" + name + "\\b[\\s])|([.]\\b" + name + "\\b[}])|([.]\\b" + name + "\\b[\\s][}])|([.]\\b" + name + "\\b[,])|([.]\\b" + name + "\\b[\\s][,])");
+            //AppResources.Enter_Email; ) ' '
+            //Regex regex = new Regex(@"([.]\b" + name + "\\b[;])|([.]\b" + name + "\\b[.])|([.]\\b" + name + "\\b[)])|([.]\\b" + name + "\\b[\\s][)])|([.]\\b" + name + "\\b[\\s])|([.]\\b" + name + "\\b[}])|([.]\\b" + name + "\\b[\\s][}])|([.]\\b" + name + "\\b[,])|([.]\\b" + name + "\\b[\\s][,])");
+
+            Regex regex = new Regex(@"(\b"+ name + "\\b[;])|(" + name + "[.])|(" + name + "[)])|(" + name + "b[\\s][)])|(" + name + "[\\s])|(" + name + "[}])|(" + name + "[\\s][}])|(" + name + "[,])|(" + name + "[\\s][,])");
             return regex.Match(line);
 
         }

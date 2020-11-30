@@ -73,7 +73,7 @@ namespace MultilingualExtension
             get;
             set;
         }
-       
+
 
         internal bool GetReaderForFileName(bool readBinaryFiles = false)
         {
@@ -88,7 +88,7 @@ namespace MultilingualExtension
                 Source = sr.ReadToEnd();
                 SourceLoade = true;
                 return true;
-                
+
             }
             catch (Exception e)
             {
@@ -101,13 +101,13 @@ namespace MultilingualExtension
     {
         public List<FileProvider> GetFiles(ProgressMonitor monitor)
         {
-            List<FileProvider> returnlist = new List<FileProvider>(); 
+            List<FileProvider> returnlist = new List<FileProvider>();
 
             foreach (var project in IdeApp.Workspace.GetAllProjects())
             {
                 var conf = project.DefaultConfiguration?.Selector;
 
-            foreach (ProjectFile file in project.GetSourceFilesAsync(conf).Result)
+                foreach (ProjectFile file in project.GetSourceFilesAsync(conf).Result)
                 {
                     if ((file.Flags & ProjectItemFlags.Hidden) == ProjectItemFlags.Hidden)
                         continue;
@@ -121,11 +121,11 @@ namespace MultilingualExtension
 
                     returnlist.Add(new FileProvider(file.FilePath, project as Project));
                     Console.WriteLine(file.FilePath);
-                   
+
                 }
             }
             return returnlist;
-           
+
         }
 
         public static CancellationTokenSource searchTokenSource = new CancellationTokenSource();
@@ -135,8 +135,8 @@ namespace MultilingualExtension
 
             try
             {
-               
-               SyncFileService syncFileService = new SyncFileService();
+
+                SyncFileService syncFileService = new SyncFileService();
                 ISettingsService settingsService = new Services.SettingsService();
                 ProjectFile selectedItem = (ProjectFile)IdeApp.Workspace.CurrentSelectedItem;
                 var cancelSource = new CancellationTokenSource();
@@ -146,8 +146,13 @@ namespace MultilingualExtension
                 XmlDocument masterdoc = new XmlDocument();
                 masterdoc.Load(selectedItem.FilePath);
                 XmlNode rootMaster = masterdoc.DocumentElement;
+
                 FileProvider fileProviderMaster = new FileProvider(selectedItem.FilePath);
-                
+
+                var namespaceMatch = RegExHelper.GetFilenameMasterResx(selectedItem.FilePath);
+                string namspacenameMaster = string.Empty;
+                if (namespaceMatch.Success)
+                    namspacenameMaster = namespaceMatch.Value.Substring(0, namespaceMatch.Length - 4);
                 // get all names
                 XmlNodeList nodeListMaster = rootMaster.SelectNodes("//data");
                 List<string> dataValues = new List<string>();
@@ -157,50 +162,74 @@ namespace MultilingualExtension
                     dataValues.Add(dataMaster.Attributes.GetNamedItem("name").Value);
                 }
 
-                 currentTask = Task.Run(delegate
-                {
-                    using (SearchProgressMonitor searchMonitor = IdeApp.Workbench.ProgressMonitors.GetSearchProgressMonitor(true))
-                    {
+                currentTask = Task.Run(delegate
+               {
+                   using (SearchProgressMonitor searchMonitor = IdeApp.Workbench.ProgressMonitors.GetSearchProgressMonitor(true))
+                   {
                         //searchMonitor.
                         var files = GetFiles(searchMonitor);
-                        var results = new List<SearchResult>();
-                        foreach (var transname in dataValues)
-                        {
-                            bool found = false;
-                            foreach (var item in files)
-                            {
-                                if (!item.SourceLoade)
-                                     item.GetReaderForFileName(false);// .GetContent<ITextBuffer>();
+                       var results = new List<SearchResult>();
+                       foreach (var transname in dataValues)
+                       {
+                           bool found = false;
+                           foreach (var item in files)
+                           {
+                               if (!item.SourceLoade)
+                                   item.GetReaderForFileName(false);// .GetContent<ITextBuffer>();
 
-                                
-                                var result = RegExHelper.TranslationNameExistInCode(transname, item.Source);
 
-                                if (result.Success)
-                                {
-                                    found = true;
-                                    break;
-                                }
-                        
-                            }
-                            if (!found)
-                            {
-                                unuseddataValues.Add(transname);
+                                var result = RegExHelper.TranslationNameExistInCode(namspacenameMaster + transname, item.Source);
+
+                               if (result.Success)
+                               {
+                                   found = true;
+                                   break;
+                               }
+
+                           }
+                           if (!found)
+                           {
+                               unuseddataValues.Add(transname);
                                 //results.Add(SearchResult.Create(transname, 1, 1));
                             }
-                        }
-                        fileProviderMaster.GetReaderForFileName(false);
-                        foreach (var item in unuseddataValues)
+                       }
+                       fileProviderMaster.GetReaderForFileName(false);
+                       foreach (var item in unuseddataValues)
                        {
-                          var result =  RegExHelper.LineContainsDataName(item, fileProviderMaster.Source);
-                            if (result.Success)
-                            {
-                                results.Add(SearchResult.Create(selectedItem.FilePath, result.Index, result.Length));
-                            }
-                        }
-                        searchMonitor.ReportResults(results);
+                           var result = RegExHelper.LineContainsDataName(item, fileProviderMaster.Source);
+                           if (result.Success)
+                           {
+                               results.Add(SearchResult.Create(selectedItem.FilePath, result.Index, result.Length));
+                           }
+                       }
+                       searchMonitor.ReportResults(results);
 
-                    }
-                });
+                       if (unuseddataValues.Count > 0)
+                       {
+                           string questionMess = "You have " + dataValues.Count.ToString() + " translations strings and " + unuseddataValues.Count.ToString() +
+                           " of them are not used in any .cs or .xaml file." + Environment.NewLine + Environment.NewLine + "To remove them from the master resx file press 'Yes'." + Environment.NewLine + "Select 'No' to just show them in the search result." + Environment.NewLine +
+                           "Remember to select 'sync all xx-xx.resx ...' translation files to remove unused translations from other language files.";
+                           var question = new QuestionMessage(questionMess);
+                           question.Buttons.Add(new AlertButton("Yes"));
+                           question.Buttons.Add(new AlertButton("No"));
+                           var questionResult = MessageService.AskQuestion(question);
+
+                           if (questionResult.Label == "Yes")
+                           {
+                                //Select all rows data in Updatefile to remove row that not exist in master 
+                                foreach (var removeItem in unuseddataValues)
+                               {
+                                   XmlNode exist = rootMaster.SelectSingleNode("//data[@name='" + removeItem + "']");
+                                   if (exist != null)
+                                   {
+                                        rootMaster.RemoveChild(exist);
+                                   }
+                               }
+                               masterdoc.Save(selectedItem.FilePath);
+                           }
+                       }
+                   }
+               });
             }
             catch (Exception ex)
             {
@@ -209,7 +238,7 @@ namespace MultilingualExtension
             }
             finally
             {
-                
+
                 Console.WriteLine("Check files completed");
             }
 
