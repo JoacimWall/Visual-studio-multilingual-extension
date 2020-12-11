@@ -106,9 +106,11 @@ namespace MultilingualExtension
             foreach (var project in IdeApp.Workspace.GetAllProjects())
             {
                 var conf = project.DefaultConfiguration?.Selector;
-
-                foreach (ProjectFile file in project.GetSourceFilesAsync(conf).Result)
+                var files =  project.GetSourceFilesAsync(monitor, conf).Result;
+                foreach (ProjectFile file in files)
                 {
+                    if (file.Include == null)
+                        continue;
                     if ((file.Flags & ProjectItemFlags.Hidden) == ProjectItemFlags.Hidden)
                         continue;
                     if (!IdeServices.DesktopService.GetFileIsText(file.FilePath))
@@ -147,7 +149,7 @@ namespace MultilingualExtension
                 masterdoc.Load(selectedItem.FilePath);
                 XmlNode rootMaster = masterdoc.DocumentElement;
 
-                FileProvider fileProviderMaster = new FileProvider(selectedItem.FilePath);
+
 
                 var namespaceMatch = RegExHelper.GetFilenameMasterResx(selectedItem.FilePath);
                 string namspacenameMaster = string.Empty;
@@ -156,81 +158,47 @@ namespace MultilingualExtension
                 // get all names
                 XmlNodeList nodeListMaster = rootMaster.SelectNodes("//data");
                 List<string> dataValues = new List<string>();
-                List<string> unuseddataValues = new List<string>();
-                foreach (XmlNode dataMaster in nodeListMaster)
-                {
-                    dataValues.Add(dataMaster.Attributes.GetNamedItem("name").Value);
-                }
-
                 currentTask = Task.Run(delegate
-               {
-                   using (SearchProgressMonitor searchMonitor = IdeApp.Workbench.ProgressMonitors.GetSearchProgressMonitor(true))
-                   {
-                        //searchMonitor.
-                        var files = GetFiles(searchMonitor);
-                       var results = new List<SearchResult>();
-                       foreach (var transname in dataValues)
-                       {
-                           bool found = false;
-                           foreach (var item in files)
-                           {
-                               if (!item.SourceLoade)
-                                   item.GetReaderForFileName(false);// .GetContent<ITextBuffer>();
-
-
-                                var result = RegExHelper.TranslationNameExistInCode(namspacenameMaster + transname, item.Source);
-
-                               if (result.Success)
-                               {
-                                   found = true;
-                                   break;
-                               }
-
-                           }
-                           if (!found)
-                           {
-                               unuseddataValues.Add(transname);
-                                //results.Add(SearchResult.Create(transname, 1, 1));
+                {
+                    {
+                        using (SearchProgressMonitor searchMonitor = IdeApp.Workbench.ProgressMonitors.GetSearchProgressMonitor(true))
+                        {
+                            foreach (XmlNode dataMaster in nodeListMaster)
+                            {
+                                dataValues.Add(dataMaster.Attributes.GetNamedItem("name").Value);
                             }
-                       }
-                       fileProviderMaster.GetReaderForFileName(false);
-                       foreach (var item in unuseddataValues)
-                       {
-                           var result = RegExHelper.LineContainsDataName(item, fileProviderMaster.Source);
-                           if (result.Success)
-                           {
-                               results.Add(SearchResult.Create(selectedItem.FilePath, result.Index, result.Length));
-                           }
-                       }
-                       searchMonitor.ReportResults(results);
 
-                       if (unuseddataValues.Count > 0)
-                       {
-                           string questionMess = "You have " + dataValues.Count.ToString() + " translations strings and " + unuseddataValues.Count.ToString() +
-                           " of them are not used in any .cs or .xaml file." + Environment.NewLine + Environment.NewLine + "To remove them from the master resx file press 'Yes'." + Environment.NewLine + "Select 'No' to just show them in the search result." + Environment.NewLine +
-                           "Remember to select 'sync all xx-xx.resx ...' translation files to remove unused translations from other language files.";
-                           var question = new QuestionMessage(questionMess);
-                           question.Buttons.Add(new AlertButton("Yes"));
-                           question.Buttons.Add(new AlertButton("No"));
-                           var questionResult = MessageService.AskQuestion(question);
+                            var result = AnalyzeFiles(dataValues, namspacenameMaster, selectedItem, searchMonitor);
+                            if (result.Count > 0)
+                            {
+                                string questionMess = "You have " + dataValues.Count.ToString() + " translations strings and " + result.Count.ToString() +
+                                " of them are not used in any .cs or .xaml file." + Environment.NewLine + Environment.NewLine + "To remove them from the master resx file press 'Yes'." + Environment.NewLine + "Select 'No' to just show them in the search result." + Environment.NewLine +
+                                "Remember to select 'sync all xx-xx.resx ...' translation files to remove unused translations from other language files.";
+                                var question = new QuestionMessage(questionMess);
+                                question.Buttons.Add(new AlertButton("Yes"));
+                                question.Buttons.Add(new AlertButton("No"));
+                                var questionResult = MessageService.AskQuestion(question);
 
-                           if (questionResult.Label == "Yes")
-                           {
-                                //Select all rows data in Updatefile to remove row that not exist in master 
-                                foreach (var removeItem in unuseddataValues)
-                               {
-                                   XmlNode exist = rootMaster.SelectSingleNode("//data[@name='" + removeItem + "']");
-                                   if (exist != null)
-                                   {
-                                        rootMaster.RemoveChild(exist);
-                                   }
-                               }
-                               masterdoc.Save(selectedItem.FilePath);
-                           }
-                       }
-                   }
-               });
-            }
+                                if (questionResult.Label == "Yes")
+                                {
+                                    //Select all rows data in Updatefile to remove row that not exist in master 
+                                    foreach (var removeItem in result)
+                                    {
+                                        XmlNode exist = rootMaster.SelectSingleNode("//data[@name='" + removeItem + "']");
+                                        if (exist != null)
+                                        {
+                                            rootMaster.RemoveChild(exist);
+                                        }
+                                    }
+                                    masterdoc.Save(selectedItem.FilePath);
+                                }
+                            }
+                            else
+                                MessageService.GenericAlert(new GenericMessage { Text = "Did not find any unused translations." });
+                        }
+                    }
+                });
+                }
             catch (Exception ex)
             {
                 MessageService.GenericAlert(new GenericMessage { Text = ex.Message });
@@ -241,6 +209,59 @@ namespace MultilingualExtension
 
                 Console.WriteLine("Check files completed");
             }
+
+        }
+        private List<string> AnalyzeFiles(List<string> dataValues, string namspacenameMaster, ProjectFile selectedItem, SearchProgressMonitor searchMonitor)
+        {
+
+
+            //searchMonitor.
+            var files =  GetFiles(searchMonitor);
+            var results = new List<SearchResult>();
+            List<string> unuseddataValues = new List<string>();
+            FileProvider fileProviderMaster = new FileProvider(selectedItem.FilePath);
+            foreach (var transname in dataValues)
+            {
+                bool found = false;
+                foreach (var item in files)
+                {
+                    if (!item.SourceLoade)
+                        item.GetReaderForFileName(false);// .GetContent<ITextBuffer>();
+
+
+                    var result = RegExHelper.TranslationNameExistInCode(namspacenameMaster + transname, item.Source);
+
+                    if (result.Success)
+                    {
+                        found = true;
+                        break;
+                    }
+
+                }
+                if (!found)
+                {
+                    unuseddataValues.Add(transname);
+                    //results.Add(SearchResult.Create(transname, 1, 1));
+                }
+            }
+            fileProviderMaster.GetReaderForFileName(false);
+            foreach (var item in unuseddataValues)
+            {
+                var result = RegExHelper.LineContainsDataName(item, fileProviderMaster.Source);
+                if (result.Success)
+                {
+                    results.Add(SearchResult.Create(selectedItem.FilePath, result.Index, result.Length));
+                }
+            }
+            searchMonitor.ReportResults(results);
+            return unuseddataValues;
+
+
+
+
+
+
+
 
         }
         protected override void Update(CommandInfo info)
