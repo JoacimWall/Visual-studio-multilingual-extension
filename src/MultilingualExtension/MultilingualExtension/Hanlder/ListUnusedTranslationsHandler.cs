@@ -167,7 +167,7 @@ namespace MultilingualExtension
                             {
                                 dataValues.Add(dataMaster.Attributes.GetNamedItem("name").Value);
                             }
-
+                            
                             var result = AnalyzeFiles(dataValues, namspacenameMaster, selectedItem, searchMonitor);
                             if (result.Count > 0)
                             {
@@ -197,8 +197,13 @@ namespace MultilingualExtension
                                 MessageService.GenericAlert(new GenericMessage { Text = "Did not find any unused translations." });
                         }
                     }
+                }).ContinueWith((t) =>
+                {
+                    if (t.IsFaulted)
+                        MessageService.GenericAlert(new GenericMessage { Text = t.Exception.Message });
+                    //if (t.IsCompleted) //optionally do some work);
                 });
-                }
+            }
             catch (Exception ex)
             {
                 MessageService.GenericAlert(new GenericMessage { Text = ex.Message });
