@@ -10,11 +10,11 @@
 * Translation of texts by Google translate or Microsoft translate
 * Export of translations into csv or xlsx file for final translation by external stakeholder
 * Import of final translations from external stakholder
-* List all unused translations to keep out resources files clean.
+* List all unused translations to keep out resources files clean and remove them.
 
 ## Road map 
 * Posibility to export all rows not only the one that need translations.
-* Cleaning of the Resx files (find translations that are not used anymore anywhere in the code)
+
 
 ## Install for Mac
 The extension publish function is closed for new users so you need to download the latest release from this page then got to visual studio mac and click "install from file" in the Exstension Mananger.
