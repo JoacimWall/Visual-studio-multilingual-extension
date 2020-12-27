@@ -2,7 +2,10 @@
 #### This extension is for handling multilingual support in visual studio.
 #### For it to work, it requires that you start from a Resx file that is the master. Then you name all the other files according to the masterfile name .xx-xx.resx. For example AppResources.resx for master and AppResources.fr-FR.resx for French.
 
-<img width=“100” height="200" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/SolutionExample.png">
+### View introduction video
+
+[![IMAGE ALT TEXT HERE](https://i9.ytimg.com/vi/4OAhHpUpXmA/mq2.jpg?sqp=CLDSof8F&rs=AOn4CLAexsPpQzbUEi8Ud_7YgThQFXFwPg)](https://youtu.be/4OAhHpUpXmA)
+
 
 ### It has five main functions.
 
@@ -11,6 +14,9 @@
 * Export of translations into csv or xlsx file for final translation by external stakeholder
 * Import of final translations from external stakholder
 * List all unused translations to keep out resources files clean and remove them.
+
+<img width=“100” height="200" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/SolutionExample.png">
+
 
 ## Road map 
 * Posibility to export all rows not only the one that need translations.
