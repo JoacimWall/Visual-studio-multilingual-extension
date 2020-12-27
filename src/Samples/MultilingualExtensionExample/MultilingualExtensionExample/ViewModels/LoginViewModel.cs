@@ -1,4 +1,5 @@
-﻿using MultilingualExtensionExample.Views;
+﻿using MultilingualExtensionExample.Resources;
+using MultilingualExtensionExample.Views;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,12 +14,20 @@ namespace MultilingualExtensionExample.ViewModels
         public LoginViewModel()
         {
             LoginCommand = new Command(OnLoginClicked);
+            TranslationTest(AppResources.Enter_Your_Cat, AppResources.How_Old_Are_You);
+            string test3 = AppResources.Hi_ + "you";
+            string uppercaseword = AppResources.Enter_Your_Email.ToUpper();
         }
 
         private async void OnLoginClicked(object obj)
         {
             // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
             await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
+        }
+        private void TranslationTest(string tans1, string tarans2)
+        {
+
+
         }
     }
 }

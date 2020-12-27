@@ -30,4 +30,7 @@
   <data name="How_Old_Are_You" xml:space="preserve">
         <value>Hur gammal är du</value>
    <comment>Need review</comment></data>
+  <data name="Youtube_Is_Nice_For_Videos" xml:space="preserve">
+        <value>Youtube är trevligt för videor och musik</value>
+   <comment>Need review</comment></data>
 </root>

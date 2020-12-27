@@ -47,9 +47,45 @@ namespace MultilingualExtensionExample.Resources {
             }
         }
         
+        internal static string CSharp_Is_Love {
+            get {
+                return ResourceManager.GetString("CSharp_Is_Love", resourceCulture);
+            }
+        }
+        
+        internal static string Hello {
+            get {
+                return ResourceManager.GetString("Hello", resourceCulture);
+            }
+        }
+        
         internal static string Enter_Your_Email {
             get {
                 return ResourceManager.GetString("Enter_Your_Email", resourceCulture);
+            }
+        }
+        
+        internal static string Enter_Your_Password {
+            get {
+                return ResourceManager.GetString("Enter_Your_Password", resourceCulture);
+            }
+        }
+        
+        internal static string Enter_Your_Cat {
+            get {
+                return ResourceManager.GetString("Enter_Your_Cat", resourceCulture);
+            }
+        }
+        
+        internal static string How_Old_Are_You {
+            get {
+                return ResourceManager.GetString("How_Old_Are_You", resourceCulture);
+            }
+        }
+        
+        internal static string Youtube_Is_Nice_For_Videos {
+            get {
+                return ResourceManager.GetString("Youtube_Is_Nice_For_Videos", resourceCulture);
             }
         }
     }

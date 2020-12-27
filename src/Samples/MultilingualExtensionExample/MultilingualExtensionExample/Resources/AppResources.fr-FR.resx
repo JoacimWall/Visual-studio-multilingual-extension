@@ -12,7 +12,24 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CSharp_Is_Love" xml:space="preserve">
+        <value>CSharp, c’est l’amour</value>
+  <comment>Final</comment></data>
+  <data name="Hello" xml:space="preserve">
+        <value>Bonjour</value>
+  <comment>Final</comment></data>
   <data name="Enter_Your_Email" xml:space="preserve">
         <value>Entrez votre e-mail s’il vous plaît</value>
-  <comment>Need review</comment></data>
+  <comment>Final</comment></data>
+  <data name="Enter_Your_Password" xml:space="preserve">
+        <value>Entrez votre mot de passe</value><comment>Final</comment></data>
+  <data name="Enter_Your_Cat" xml:space="preserve">
+        <value>Entrez votre chat</value>
+  <comment>Final</comment></data>
+  <data name="How_Old_Are_You" xml:space="preserve">
+        <value>Quel âge avez-vous</value>
+  <comment>Final</comment></data>
+  <data name="Youtube_Is_Nice_For_Videos" xml:space="preserve">
+        <value>Youtube est agréable pour les vidéos et la musique</value>
+   <comment>Final</comment></data>
 </root>

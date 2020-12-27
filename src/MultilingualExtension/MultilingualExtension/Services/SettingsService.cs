@@ -15,9 +15,9 @@ namespace MultilingualExtension.Services
                 
                 var addCommenttoMaster = MonoDevelop.Core.PropertyService.Get<string>(Globals.PROP_ADDCOMMENTNODEMASTERRESX);
                 if (String.IsNullOrEmpty(addCommenttoMaster) || addCommenttoMaster == "0")
-                    return true;
+                    return false;
 
-                return false;
+                return true;
             }
             set
             {
