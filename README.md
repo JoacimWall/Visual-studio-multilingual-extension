@@ -13,7 +13,7 @@
 * Translation of texts by Google translate or Microsoft translate
 * Export of translations into csv or xlsx file for final translation by external stakeholder
 * Import of final translations from external stakholder
-* List all unused translations to keep out resources files clean and remove them.
+* List all unused translations to keep out resources files clean.
 
 <img width=“100” height="200" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/SolutionExample.png">
 
@@ -26,7 +26,7 @@
 The extension publish function is closed for new users so you need to download the latest release from this page then got to visual studio mac and click "install from file" in the Exstension Mananger.
 
 ## Install for Windows 
-Go Exstension Manager and search for Multilingual Extension or Wlltec and you will find it. 
+Go Exstension Manager and search for Multilingual Extension or Walltec and you will find it. 
 
  ## Explanation of functions
  ### Synchronization of Resx files
@@ -40,7 +40,7 @@ Right-click one of the language files (AppResources.fr-FR.resx) and select "Sync
 <img width=“100” height="400" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/SyncFilePopUpDialog.png">
 
 ### Translation of texts
-By default, this extension uses Google free translation. This is limited to only 100 translations per hour. To use the Microsoft translation service, select tools / multilangual settings in the visual studio and fill in the information from Microsoft. In this dialog you can also change the master language that is 'en' by default.
+By default, this extension use Google's free translation. This is limited to only 100 translations per hour. To use the Microsoft translation service, select tools/multilangual settings in the visual studio and fill in the information from Microsoft. In this dialog you can also change the master language that is 'en' by default.
 If you also want to handle the status for the texts in the master resx file, check the 'Add Comment node to master Resx file on sync' in settings dialog.
 
 <img width=“150” height="300" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/MultilingualSettingsDialog.png">
