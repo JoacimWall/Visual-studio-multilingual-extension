@@ -49,8 +49,8 @@
     <Compile Include="..\MultilingualExtension.SharedCode\Helpers\Global.cs">
       <Link>Helpers\Global.cs</Link>
     </Compile>
-    <Compile Include="..\MultilingualExtension.SharedCode\Helpers\RexExHelper.cs">
-      <Link>Helpers\RexExHelper.cs</Link>
+    <Compile Include="..\MultilingualExtension.SharedCode\Helpers\RegExHelper.cs">
+      <Link>Helpers\RegExHelper.cs</Link>
     </Compile>
     <Compile Include="..\MultilingualExtension.SharedCode\Interfaces\IProgressBar.cs">
       <Link>Interfaces\IProgressBar.cs</Link>
@@ -70,6 +70,9 @@
     <Compile Include="..\MultilingualExtension.SharedCode\Models\TranslationsRow.cs">
       <Link>Models\TranslationsRow.cs</Link>
     </Compile>
+    <Compile Include="..\MultilingualExtension.SharedCode\Models\UpdateStatusForTranslation.cs">
+      <Link>Models\UpdateStatusForTranslation.cs</Link>
+    </Compile>
     <Compile Include="..\MultilingualExtension.SharedCode\Services\ExportService.cs">
       <Link>Services\ExportService.cs</Link>
     </Compile>
@@ -82,6 +85,9 @@
     <Compile Include="..\MultilingualExtension.SharedCode\Services\TranslationService.cs">
       <Link>Services\TranslationService.cs</Link>
     </Compile>
+    <Compile Include="AsyncPackageHelpers\AsyncPackageRegistrationAttribute.cs" />
+    <Compile Include="AsyncPackageHelpers\ExtensionMethods.cs" />
+    <Compile Include="AsyncPackageHelpers\ProvideAutoLoadAttribute.cs" />
     <Compile Include="Command.cs" />
     <Compile Include="Commands\ImportButton.cs" />
     <Compile Include="Commands\ExportButton.cs" />

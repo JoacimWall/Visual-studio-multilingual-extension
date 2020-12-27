@@ -102,13 +102,13 @@
         </Strings>
       </Button>
     <!--Sync And Translate-->
-      <Button guid="guidMultilingualExtensionPackageCmdSet" id="CommandIdSyncAndTranslateNode" priority="0x0100" type="Button">
+      <!--<Button guid="guidMultilingualExtensionPackageCmdSet" id="CommandIdSyncAndTranslateNode" priority="0x0100" type="Button">
         <Parent guid="guidMultilingualExtensionPackageCmdSet" id="MyGroupForEditor" />
         <CommandFlag>DynamicVisibility</CommandFlag>
         <Strings>
           <ButtonText>Sync And Translate</ButtonText>
         </Strings>
-      </Button>
+      </Button>-->
     </Buttons>
 
     <!--The bitmaps section is used to define the bitmaps that are used for the commands.-->
