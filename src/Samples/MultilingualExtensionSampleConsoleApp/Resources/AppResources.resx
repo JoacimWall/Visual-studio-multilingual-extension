@@ -123,4 +123,7 @@
   <data name="Enter_Email" xml:space="preserve">
     <value>Enter email please!</value>
   </data>
+  <data name="Enter_Email_To_Be_The_Next_User_To_Be_Able_To_Login_To_The_Best_Office_System_In_The_World" xml:space="preserve">
+    <value>Enter email please!</value>
+  </data>
 </root>

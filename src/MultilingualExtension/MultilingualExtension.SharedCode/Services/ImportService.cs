@@ -28,8 +28,8 @@ namespace MultilingualExtension.Shared.Services
             {
 
                 //validate file
-                var checkfilecsv = RexExHelper.ValidateFilenameIsTargetTypeCsv(selectedFilename);
-                var checkfilexlsx = RexExHelper.ValidateFilenameIsTargetTypeXlsx(selectedFilename);
+                var checkfilecsv = RegExHelper.ValidateFilenameIsTargetTypeCsv(selectedFilename);
+                var checkfilexlsx = RegExHelper.ValidateFilenameIsTargetTypeXlsx(selectedFilename);
                 if (!checkfilecsv.Success && !checkfilexlsx.Success)
                 {
                     //TODO: Show message you select file have the format .sv-SE.resx.csv or .sv-SE.resx.xlsx

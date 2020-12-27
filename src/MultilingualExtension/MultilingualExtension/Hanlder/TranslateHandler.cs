@@ -58,7 +58,7 @@ namespace MultilingualExtension
             string selectedFilename = selectedItem.Name;
 
             //validate file
-            var checkfile = RexExHelper.ValidateFilenameIsTargetType(selectedFilename);
+            var checkfile = RegExHelper.ValidateFilenameIsTargetType(selectedFilename);
             if (!checkfile.Success)
             {
                 info.Text = Globals.Translate_All_Files_Title;

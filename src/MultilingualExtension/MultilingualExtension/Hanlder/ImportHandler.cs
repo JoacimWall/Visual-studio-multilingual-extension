@@ -45,8 +45,8 @@ namespace MultilingualExtension
             string selectedFilename = selectedItem.Name;
 
             //validate file
-            var checkfilecsv = RexExHelper.ValidateFilenameIsTargetTypeCsv(selectedFilename);
-            var checkfilecxlsx = RexExHelper.ValidateFilenameIsTargetTypeXlsx(selectedFilename);
+            var checkfilecsv = RegExHelper.ValidateFilenameIsTargetTypeCsv(selectedFilename);
+            var checkfilecxlsx = RegExHelper.ValidateFilenameIsTargetTypeXlsx(selectedFilename);
             if (!checkfilecsv.Success && !checkfilecxlsx.Success)
             {
                 info.Visible = false;

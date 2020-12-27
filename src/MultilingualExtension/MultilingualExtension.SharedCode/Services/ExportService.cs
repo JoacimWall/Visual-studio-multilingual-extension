@@ -26,7 +26,7 @@ namespace MultilingualExtension.Shared.Services
             {
 
                 //validate file
-                var checkfile = RexExHelper.ValidateFilenameIsTargetType(selectedFilename);
+                var checkfile = RegExHelper.ValidateFilenameIsTargetType(selectedFilename);
                 int exportFileType = settingsService.ExportFileType;
                 if (!checkfile.Success)
                 {
@@ -43,7 +43,7 @@ namespace MultilingualExtension.Shared.Services
                     string[] fileEntries = Directory.GetFiles(masterFolderPath);
                     foreach (string fileName in fileEntries)
                     {
-                        var checkfileInFolder = RexExHelper.ValidateFilenameIsTargetType(fileName);
+                        var checkfileInFolder = RegExHelper.ValidateFilenameIsTargetType(fileName);
                         if (checkfileInFolder.Success)
                            await ExportToFileInternal(selectedFilename, fileName, exportFileType, progress);
                     }
@@ -136,7 +136,7 @@ namespace MultilingualExtension.Shared.Services
 
                 progress.Pulse();
             }
-            var checkfile = RexExHelper.GetFilenameResx(updatePath);
+            var checkfile = RegExHelper.GetFilenameResx(updatePath);
             var engine = new FileHelperEngine<TranslationsRow>(System.Text.Encoding.UTF8);
             if (exportFileType == 1)
             {

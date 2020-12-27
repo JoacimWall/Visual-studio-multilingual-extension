@@ -276,7 +276,7 @@ namespace MultilingualExtension.Shared.Services
                 string masterLanguageCode = settingsService.MasterLanguageCode;
 
                 //validate file
-                var checkfile = RexExHelper.ValidateFilenameIsTargetType(selectedFilename);
+                var checkfile = RegExHelper.ValidateFilenameIsTargetType(selectedFilename);
                 if (!checkfile.Success)
                 {
                     int folderindex;
@@ -291,7 +291,7 @@ namespace MultilingualExtension.Shared.Services
                     string[] fileEntries = Directory.GetFiles(masterFolderPath);
                     foreach (string fileName in fileEntries)
                     {
-                        var checkfileInFolder = RexExHelper.ValidateFilenameIsTargetType(fileName);
+                        var checkfileInFolder = RegExHelper.ValidateFilenameIsTargetType(fileName);
                         if (checkfileInFolder.Success)
                             await TranslateFileInternal(useGoogle, masterLanguageCode, checkfileInFolder.Value.Substring(1, 2), fileName, endpoint, location, key, progress);
 
@@ -336,7 +336,7 @@ namespace MultilingualExtension.Shared.Services
                 string masterLanguageCode = settingsService.MasterLanguageCode;
 
                 //validate file
-                var checkfile = RexExHelper.ValidateFilenameIsTargetType(selectedFilename);
+                var checkfile = RegExHelper.ValidateFilenameIsTargetType(selectedFilename);
                 if (!checkfile.Success)
                 {
                     int folderindex;
@@ -351,7 +351,7 @@ namespace MultilingualExtension.Shared.Services
                     string[] fileEntries = Directory.GetFiles(masterFolderPath);
                     foreach (string fileName in fileEntries)
                     {
-                        var checkfileInFolder = RexExHelper.ValidateFilenameIsTargetType(fileName);
+                        var checkfileInFolder = RegExHelper.ValidateFilenameIsTargetType(fileName);
                         if (checkfileInFolder.Success)
                             await TranslateNodeInternal(selectedFilename,updateStatusForTranslation, useGoogle, masterLanguageCode, checkfileInFolder.Value.Substring(1, 2), fileName, endpoint, location, key, progress);
 

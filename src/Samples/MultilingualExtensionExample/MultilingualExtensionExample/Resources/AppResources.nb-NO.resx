@@ -16,8 +16,8 @@
         <value>Hei</value>
     <comment>Final</comment></data>
   <data name="Enter_Your_Email" xml:space="preserve">
-        <value>Skriv inn e-posten din</value>
-    <comment>Final</comment></data>
+        <value>Skriv inn e-posten din, vennligst</value>
+    <comment>Need review</comment></data>
   <data name="Enter_Your_Password" xml:space="preserve">
         <value>Skriv inn passordet ditt</value>
     <comment>Final</comment>
@@ -33,4 +33,7 @@
   <data name="How_Old_Are_You" xml:space="preserve">
         <value>hvor gammel er du</value>
     <comment>Need review</comment></data>
+  <data name="Youtube_Is_Nice_For_Videos" xml:space="preserve">
+        <value>Youtube er fint for videoer og musikk</value>
+   <comment>Need review</comment></data>
 </root>

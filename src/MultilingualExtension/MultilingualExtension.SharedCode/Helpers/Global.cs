@@ -54,6 +54,8 @@ namespace MultilingualExtension.Shared.Helpers
         public const string Synchronize_Rows_Info = "Synchronizes lines from master Resx file.";
         public const string Synchronize_All_Files_Title = "Sync all .xx-xx.resx files with this";
         public const string Synchronize_Seleted_File_Title = "Sync this .xx-xx.resx file";
+
+        public const string List_Unused_Translatations = "List unused translations";
     }
 
 

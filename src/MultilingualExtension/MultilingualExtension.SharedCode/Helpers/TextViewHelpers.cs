@@ -15,7 +15,7 @@ namespace MultilingualExtension.Shared.Helpers
                 ITextSnapshotLine line = textView.Caret.Position.BufferPosition.GetContainingLine();
                 string lineText = line.GetText();
 
-                var result = RexExHelper.LineContainsDataName(lineText);
+                var result = RegExHelper.LineContainsDataName(lineText);
 
                 if (result.Success)
                 {
@@ -35,5 +35,7 @@ namespace MultilingualExtension.Shared.Helpers
             }
             return string.Empty;
         }
+        
     }
 }
+

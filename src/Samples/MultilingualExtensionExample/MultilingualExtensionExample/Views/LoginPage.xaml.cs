@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MultilingualExtensionExample.Resources;
 using MultilingualExtensionExample.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -16,6 +17,7 @@ namespace MultilingualExtensionExample.Views
         {
             InitializeComponent();
             this.BindingContext = new LoginViewModel();
+            Loginbutton.Text =AppResources.CSharp_Is_Love;
         }
     }
 }

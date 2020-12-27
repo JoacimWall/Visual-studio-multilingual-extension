@@ -10,7 +10,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Global.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Helpers\RexExHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IProgressBar.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Interfaces\ISettingsService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\MicrosoftTranslationResponse.cs" />
@@ -23,5 +22,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\TranslationService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\UpdateStatusForTranslation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\TextViewHelpers.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)..\MultilingualExtension.SharedCode\Helpers\RegExHelper.cs">
+      <Link>Helpers\RegExHelper.cs</Link>
+    </Compile>
   </ItemGroup>
 </Project>
