@@ -2,7 +2,10 @@
 #### This extension is for handling multilingual support in visual studio.
 #### For it to work, it requires that you start from a Resx file that is the master. Then you name all the other files according to the masterfile name .xx-xx.resx. For example AppResources.resx for master and AppResources.fr-FR.resx for French.
 
-<img width=“100” height="200" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/SolutionExample.png">
+### View introduction video
+
+[![IMAGE ALT TEXT HERE](https://i9.ytimg.com/vi/4OAhHpUpXmA/mq2.jpg?sqp=CLDSof8F&rs=AOn4CLAexsPpQzbUEi8Ud_7YgThQFXFwPg)](https://youtu.be/4OAhHpUpXmA)
+
 
 ### It has five main functions.
 
@@ -12,15 +15,18 @@
 * Import of final translations from external stakholder
 * List all unused translations to keep out resources files clean.
 
+<img width=“100” height="200" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/SolutionExample.png">
+
+
 ## Road map 
 * Posibility to export all rows not only the one that need translations.
-* Cleaning of the Resx files (find translations that are not used anymore anywhere in the code)
+
 
 ## Install for Mac
 The extension publish function is closed for new users so you need to download the latest release from this page then got to visual studio mac and click "install from file" in the Exstension Mananger.
 
 ## Install for Windows 
-Go Exstension Manager and search for Multilingual Extension or Wlltec and you will find it. 
+Go Exstension Manager and search for Multilingual Extension or Walltec and you will find it. 
 
  ## Explanation of functions
  ### Synchronization of Resx files
@@ -34,7 +40,7 @@ Right-click one of the language files (AppResources.fr-FR.resx) and select "Sync
 <img width=“100” height="400" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/SyncFilePopUpDialog.png">
 
 ### Translation of texts
-By default, this extension uses Google free translation. This is limited to only 100 translations per hour. To use the Microsoft translation service, select tools / multilangual settings in the visual studio and fill in the information from Microsoft. In this dialog you can also change the master language that is 'en' by default.
+By default, this extension use Google's free translation. This is limited to only 100 translations per hour. To use the Microsoft translation service, select tools/multilangual settings in the visual studio and fill in the information from Microsoft. In this dialog you can also change the master language that is 'en' by default.
 If you also want to handle the status for the texts in the master resx file, check the 'Add Comment node to master Resx file on sync' in settings dialog.
 
 <img width=“150” height="300" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/MultilingualSettingsDialog.png">
