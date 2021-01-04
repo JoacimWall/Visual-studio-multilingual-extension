@@ -13,7 +13,7 @@
 * Translation of texts by Google translate or Microsoft translate
 * Export of translations into csv or xlsx file for final translation by external stakeholder
 * Import of final translations from external stakholder
-* List all unused translations to keep out resources files clean.
+* List all unused translations to keep your resource files clean.
 
 <img width=“100” height="200" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/SolutionExample.png">
 
@@ -23,10 +23,10 @@
 
 
 ## Install for Mac
-The extension publish function is closed for new users so you need to download the latest release from this page then got to visual studio mac and click "install from file" in the Exstension Mananger.
+The Visual studio for Mac team has closed the signup for new developers to publish extension. So you need to download the latest release from this page then got to visual studio mac and click "install from file" in the Exstension Mananger.
 
 ## Install for Windows 
-Go Exstension Manager and search for Multilingual Extension or Walltec and you will find it. 
+Go to Extension Manager and search for Multilingual Extension or Walltec and you will find it. 
 
  ## Explanation of functions
  ### Synchronization of Resx files
