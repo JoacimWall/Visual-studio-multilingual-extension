@@ -2,10 +2,12 @@
 #### This extension is for handling multilingual support in visual studio.
 #### For it to work, it requires that you start from a Resx file that is the master. Then you name all the other files according to the masterfile name .xx-xx.resx. For example AppResources.resx for master and AppResources.fr-FR.resx for French.
 
-### View introduction video
+### View introduction video or download the sample app
 
 [![YouTube](https://i9.ytimg.com/vi/4OAhHpUpXmA/mq2.jpg?sqp=CLDSof8F&rs=AOn4CLAexsPpQzbUEi8Ud_7YgThQFXFwPg)](https://youtu.be/4OAhHpUpXmA)
 
+
+Under src/sample you will find a Xamarin forms sample. In this solution you will see how you can implement multilingual support for Xamarin and how to access the translation from code and in xaml.
 
 ### It has five main functions.
 
