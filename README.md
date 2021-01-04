@@ -7,7 +7,7 @@
 [![YouTube](https://i9.ytimg.com/vi/4OAhHpUpXmA/mq2.jpg?sqp=CLDSof8F&rs=AOn4CLAexsPpQzbUEi8Ud_7YgThQFXFwPg)](https://youtu.be/4OAhHpUpXmA)
 
 
-Under src/sample you will find a Xamarin forms sample. In this solution you will see how you can implement multilingual support for Xamarin and how to access the translation from code and in xaml.
+Under src/sample you will find a Xamarin forms sample. In this solution you will see how you can implement multilingual support for Xamarin and how to access the translation from code and in xaml. this is standard implementation of multilangual suport. If you install the extension you can test the translation features of the extension.
 
 ### It has five main functions.
 
@@ -43,6 +43,7 @@ Right-click one of the language files (AppResources.fr-FR.resx) and select "Sync
 
 ### Translation of texts
 By default, this extension use Google's free translation. This is limited to only 100 translations per hour. To use the Microsoft translation service, select tools/multilangual settings in the visual studio and fill in the information from Microsoft. In this dialog you can also change the master language that is 'en' by default.
+Here should you also select your preferd export format, csv or xslt.
 If you also want to handle the status for the texts in the master resx file, check the 'Add Comment node to master Resx file on sync' in settings dialog.
 
 <img width=“150” height="300" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/MultilingualSettingsDialog.png">
@@ -70,29 +71,31 @@ Right-click the master(AppResources.resx) file and select "List unused translati
 
 ### Update status for a previously translated node 
 If you change the text in an existing node in the Master resx file and want to change the translation status. Right click somewhere on the <data name = 'xxxxx' node and select "Change Translation Status ..." and chose the status you would like to change to. This will change the status in all language files ((AppResources.fr-FR.resx) to the bew status. If you changed to 'New' then you can right click the master file and select translate to make new translations.    
+This feature is only iplemented on mac in current version.
 
 <img  width=“100” height="200" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/ChangeStatusOnExisting.png">
 
 ### Retranslate of a previously translated node 
 If you change the text in an existing node or add a new node in the Master resx file and want to sync and translate this to all the language files. Right click somewhere on the <data name = 'xxxxx' node and select "Sync and translate this node in all .xx-xx.resx files". This will translate this node in all language files ((AppResources.fr-FR.resx) and change status to need review.
+This feature is only implemented on mac in current version.
 
 <img  width=“100” height="200" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/SyncAndTranslateThisNode.png">
 
 ## How the extension works 
-This extension use the comment field in the target resx files(AppResources.fr-FR.resx) to keep track of the status of row/translation. It has three different statuses that it can have in it's comment field.
+This extension use the comment field in the target resx files(AppResources.fr-FR.resx) to keep track of the status of row/translation. It has three different status that it can have in it's comment field.
 * New
 * Need review
 * Final
 
-New: The row will get this status after first synchronization. If the data row not exist in the target file,
-if it already exists then it gets the status "final"
+New: The row will get this status after first synchronization. If the data row not exist in the target file.
+if the translation already exists then it gets the status "final" this is so you can start using this extension if you allredy have translation files that are translated.
 
 Need review: This status will it get after translation from one of the translation services.
 
-Final: This status will it get after import from csv file. You can also set this status in the target file if you don't want the row to be exported to external stakholder for translation.
+Final: This status will it get after import from csv/xslt file where the status column bin changed to final. You can also set this status in the target file if you don't want the row to be exported to external stakholder for translation.
 
-In this first version all files need to be in the same folder, export and import (.csv) should not be renamed if the should work when we will import translations.
+In this first version all files need to be in the same folder, export and import (.csv) should not be renamed if it should work when we will import translations.
 
 ## Converting from windows multilangual toolkit
 if you have used the windows multilangual toolkit before you can use this. The first time you sync the master file with the target files (AppResources.fr-FR.resx) all existings rows in the target file will get status "Final". 
-There is a Windows version of this extension also so you can work i projects where user are on both Mac and Windows.  
+There is a Windows version of this extension also so you can work i projects where users are on both Mac and Windows.  
