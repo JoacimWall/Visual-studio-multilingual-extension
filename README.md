@@ -7,7 +7,7 @@
 [![YouTube](https://i9.ytimg.com/vi/4OAhHpUpXmA/mq2.jpg?sqp=CLDSof8F&rs=AOn4CLAexsPpQzbUEi8Ud_7YgThQFXFwPg)](https://youtu.be/4OAhHpUpXmA)
 
 
-Under src/sample you will find a Xamarin forms sample. In this solution you will see how you can implement multilingual support for Xamarin and how to access the translation from code and in xaml. this is standard implementation of multilangual suport. If you install the extension you can test the translation features of the extension.
+Under src/sample you will find a Xamarin forms sample. In this solution you will see how you can implement multilingual support for Xamarin and how to access the translation from code and in xaml. This is a standard implementation of multilangual suport. If you install the extension you can test the translation features of the extension.
 
 ### It has five main functions.
 
@@ -20,15 +20,25 @@ Under src/sample you will find a Xamarin forms sample. In this solution you will
 <img width=“100” height="200" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/SolutionExample.png">
 
 
-## Road map 
-* Posibility to export all rows not only the one that need translations.
-
-
 ## Install for Mac
 The Visual studio for Mac team has closed the signup for new developers to publish extension. So you need to download the latest release from this page then got to visual studio mac and click "install from file" in the Exstension Mananger.
 
 ## Install for Windows 
 Go to Extension Manager and search for Multilingual Extension or Walltec and you will find it. 
+
+## Naming convention of language files
+You need to include a resx file for each culture you wish to support. These are added to the project in the same location as the master resx file, and must follow a strict naming convention.
+
+The name of the resx file needs to include both the country code and language, for example:
+
+* Resources.fr-FR.resx for French (in France)
+* Resources.fr-CA.resx for French (in Canada)
+* Resources.es-ES.resx for Spanish (in Spain)
+* Resources.es-MX.resx for Spanish (in Mexico)
+
+A list of culture codes
+https://docs.microsoft.com/en-us/previous-versions/commerce-server/ee825488(v=cs.20)?redirectedfrom=MSDN
+
 
  ## Explanation of functions
  ### Synchronization of Resx files
@@ -40,6 +50,8 @@ Go to Extension Manager and search for Multilingual Extension or Walltec and you
 Right-click one of the language files (AppResources.fr-FR.resx) and select "Sync this .xx-x.resx file". This file will then be synchronized with the master file.
 
 <img width=“100” height="400" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/SyncFilePopUpDialog.png">
+
+the synchronization will not only add translations to the language files it will also remove translation that are not present in the master file.
 
 ### Translation of texts
 By default, this extension use Google's free translation. This is limited to only 100 translations per hour. To use the Microsoft translation service, select tools/multilangual settings in the visual studio and fill in the information from Microsoft. In this dialog you can also change the master language that is 'en' by default.
@@ -64,7 +76,7 @@ Right-click one of the csv or xlsx language files (AppResources.fr-FR.resx.csv) 
 <img  width=“100” height="400" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/ImportFilePopUpDialog.png">
 
 ### List unused translation
-Right-click the master(AppResources.resx) file and select "List unused translations". The extension will search trow all .cs and .xaml files and check if the translations in the master file is used. When done it will report alla translations that are not used in the app to search result windows.
+Right-click the master(AppResources.resx) file and select "List unused translations". The extension will search trow all .cs and .xaml files and check if the translations in the master file is used. When done it will report alla translations that are not used in the app to search result windows and promt you with dialog asking if you whant to remove all unused translations.
 
 <img  width=“400” height="400" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/ListUnusedTransaltions.png">
 
