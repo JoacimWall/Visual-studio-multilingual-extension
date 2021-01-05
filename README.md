@@ -21,7 +21,7 @@ Under src/sample you will find a Xamarin forms sample. In this solution you will
 
 
 ## Install for Mac
-The Visual studio for Mac team has closed the signup for new developers to publish extension. So you need to download the latest release from this page then got to visual studio mac and click "install from file" in the Exstension Mananger.
+The Visual studio for Mac team has closed the signup for new developers to publish extensions. So you need to download the latest release from this page then got to visual studio mac and click "install from file" in the Exstension Mananger.
 
 ## Install for Windows 
 Go to Extension Manager and search for Multilingual Extension or Walltec and you will find it. 
