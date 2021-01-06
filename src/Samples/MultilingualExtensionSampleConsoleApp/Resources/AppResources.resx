@@ -141,4 +141,7 @@
 	<data name="Cat" xml:space="preserve">
     <value>Cat</value>
   </data>
+    <data name="Bird" xml:space="preserve">
+    <value>Birds</value>
+  </data>
 </root>

@@ -18,6 +18,7 @@ namespace MultilingualExtension
             try
             {
                 ExportService exportService = new ExportService();
+                await IdeApp.Workbench.SaveAllAsync();
                 ProjectFile selectedItem = (ProjectFile)IdeApp.Workspace.CurrentSelectedItem;
                 ISettingsService settingsService = new Services.SettingsService();
                 string selectedFilename = selectedItem.Name;

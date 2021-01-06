@@ -31,9 +31,12 @@
     <value>Hund</value>
   <comment>Need review</comment></data>
   <data name="Cat" xml:space="preserve">
-    <value>Cat</value>
-  <comment>New</comment></data>
+    <value>Katt</value>
+  <comment>Need review</comment></data>
   <data name="Press_Any_Key_To_Exit" xml:space="preserve">
-    <value>Press any key to exit</value>
+    <value>Tryck på valfri tangent för att avsluta</value>
+  <comment>Need review</comment></data>
+  <data name="Bird" xml:space="preserve">
+    <value>Fåglar</value>
   <comment>New</comment></data>
 </root>

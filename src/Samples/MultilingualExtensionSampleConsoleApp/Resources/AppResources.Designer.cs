@@ -95,5 +95,11 @@ namespace MultilingualExtensionSampleConsoleApp.Resources {
                 return ResourceManager.GetString("Cat", resourceCulture);
             }
         }
+        
+        public static string Bird {
+            get {
+                return ResourceManager.GetString("Bird", resourceCulture);
+            }
+        }
     }
 }

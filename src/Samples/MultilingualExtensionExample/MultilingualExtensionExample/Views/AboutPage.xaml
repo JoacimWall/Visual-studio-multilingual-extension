@@ -30,7 +30,7 @@
                 <Label Text="{x:Static resource:AppResources.Hello}"/>
                 <Label Text="{Binding TranslationFromViewModel}" />
                 <Label Text="Start developing now" FontSize="Title" />
-                <Label Text="Make changes to your XAML file and save to see your UI update in the running app with XAML Hot Reload. Give it a try!" FontSize="16" Padding="0,0,0,0" />
+                <Label Text="For a sample on how to hard set translation that not need to be the same as on device se AppShell.xaml.cs contructor" FontSize="16" Padding="0,0,0,0" />
                 <Label FontSize="16" Padding="0,24,0,0">
                     <Label.FormattedText>
                         <FormattedString>
