@@ -15,7 +15,7 @@ namespace MultilingualExtensionExample.ViewModels
         {
             LoginCommand = new Command(OnLoginClicked);
             TranslationTest(AppResources.Enter_Your_Cat, AppResources.How_Old_Are_You);
-            string test3 = AppResources.Hi_ + "you";
+          
             string uppercaseword = AppResources.Enter_Your_Email.ToUpper();
         }
 

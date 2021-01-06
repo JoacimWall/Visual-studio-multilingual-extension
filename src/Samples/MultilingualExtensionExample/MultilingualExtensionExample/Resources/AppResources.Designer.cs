@@ -88,5 +88,11 @@ namespace MultilingualExtensionExample.Resources {
                 return ResourceManager.GetString("Youtube_Is_Nice_For_Videos", resourceCulture);
             }
         }
+        
+        internal static string Dog {
+            get {
+                return ResourceManager.GetString("Dog", resourceCulture);
+            }
+        }
     }
 }

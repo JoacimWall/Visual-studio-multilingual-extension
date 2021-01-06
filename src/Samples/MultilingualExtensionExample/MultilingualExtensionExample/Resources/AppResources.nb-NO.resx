@@ -36,4 +36,7 @@
   <data name="Youtube_Is_Nice_For_Videos" xml:space="preserve">
         <value>Youtube er fint for videoer og musikk</value>
    <comment>Need review</comment></data>
+  <data name="Dog" xml:space="preserve">
+        <value>Dog</value>
+   <comment>New</comment></data>
 </root>
