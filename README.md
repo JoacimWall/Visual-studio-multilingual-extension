@@ -21,10 +21,12 @@ Under src/sample you will find a Xamarin forms sample. In this solution you will
 
 
 ## Install for Mac
-The Visual studio for Mac team has closed the signup for new developers to publish extensions. So you need to download the latest release from this page then got to visual studio mac and click "install from file" in the Exstension Mananger.
+The Visual studio for Mac team has closed the signup for new developers to publish extensions. So you need to download the latest release from this page then go to visual studio mac and click "install from file" in the Exstension Mananger.  
+[Latest release](https://github.com/JoacimWall/Visual-studio-multilingual-extension/releases)
 
 ## Install for Windows 
-Go to Extension Manager and search for Multilingual Extension or Walltec and you will find it. 
+Go to Extension Manager and search for Multilingual Extension or Walltec and you will find it or use the link below.   
+[Multilingual extension](https://marketplace.visualstudio.com/items?itemName=Walltec.MultilingualExtension)
 
 ## Naming convention of language files
 You need to include a resx file for each culture you wish to support. These are added to the project in the same location as the master resx file, and must follow a strict naming convention.
