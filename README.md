@@ -43,7 +43,7 @@ https://docs.microsoft.com/en-us/previous-versions/commerce-server/ee825488(v=cs
 
 
  ## Explanation of functions
- ### Translation of texts
+ ### Setting the preferred property's for the extension
 By default, this extension use Google's free translation. This is limited to only 100 translations per hour. To use the Microsoft translation service, select tools/multilingual settings in the visual studio and fill in the information from Microsoft. In this dialog you can also change the master language that is 'en' by default.
 Here should you also select your preferred export format, csv or xslt.
 If you also want to handle the status for the texts in the master resx file, check the 'Add Comment node to master Resx file on sync' in settings dialog.
@@ -61,6 +61,19 @@ Right-click one of the language files (AppResources.fr-FR.resx) and select "Sync
 <img width=“100” height="400" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/SyncFilePopUpDialog.png">
 
 the synchronization will not only add translations to the language files it will also remove translation that are not present in the master file.
+
+## Translate of Resx Files
+There are two ways to translate the resx files. 
+Right-click the master file and select "Translate all .xx-x.resx files this".  
+Then all files that are in the same folder and follow the naming standard .xx-xx.resx  will be Translated. The extension will only translate values that has comment value set to "New".  
+
+<img width=“100” height="400" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/TranslateAllFilePopUpDialog.png">
+ 
+Right-click one of the language files (AppResources.fr-FR.resx) and select "Translate this .xx-x.resx file".   
+This file will then be Translate with the master file. The extension will only translate values that has comment value set to "New".
+
+<img width=“100” height="400" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/TranslateFilePopUpDialog.png">
+
 
 ### Export of texts to Excel or csv file
 There are two ways to export the resx files to csv or xlsx. 
