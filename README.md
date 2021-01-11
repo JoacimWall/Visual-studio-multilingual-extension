@@ -21,7 +21,7 @@ Under src/sample you will find a Xamarin forms sample. In this solution you will
 
 
 ## Install for Mac
-The Visual studio for Mac team has closed the signup for new developers to publish extensions. So you need to download the latest release from this page then go to visual studio mac and click "install from file" in the Exstension Mananger.  
+The Visual studio for Mac team has closed the signup for new developers to publish extensions. So you need to download the latest release from this page then go to visual studio mac and click "install from file" in the Exstension Mananger. Remember to restart you visual studio after install for the extension to load.
 [Latest release](https://github.com/JoacimWall/Visual-studio-multilingual-extension/releases)
 
 ## Install for Windows 
