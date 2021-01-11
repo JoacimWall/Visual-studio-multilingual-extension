@@ -45,7 +45,7 @@ https://docs.microsoft.com/en-us/previous-versions/commerce-server/ee825488(v=cs
  ## Explanation of functions
  ### Translation of texts
 By default, this extension use Google's free translation. This is limited to only 100 translations per hour. To use the Microsoft translation service, select tools/multilingual settings in the visual studio and fill in the information from Microsoft. In this dialog you can also change the master language that is 'en' by default.
-Here should you also select your preferd export format, csv or xslt.
+Here should you also select your preferred export format, csv or xslt.
 If you also want to handle the status for the texts in the master resx file, check the 'Add Comment node to master Resx file on sync' in settings dialog.
 
 <img width=“150” height="300" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/MultilingualSettingsDialog.png">
