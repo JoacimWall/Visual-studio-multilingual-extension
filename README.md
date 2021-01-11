@@ -64,7 +64,7 @@ the synchronization will not only add translations to the language files it will
 
 ## Translate of Resx Files
 There are two ways to translate the resx files. 
-Right-click the master file and select "Translate all .xx-x.resx files this".  
+Right-click the master file and select "Translate all .xx-x.resx files".  
 Then all files that are in the same folder and follow the naming standard .xx-xx.resx  will be Translated. The extension will only translate values that has comment value set to "New".  
 
 <img width=“100” height="400" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/TranslateAllFilePopUpDialog.png">
