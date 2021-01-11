@@ -102,11 +102,11 @@ This extension use the comment field in the target resx files(AppResources.fr-FR
 * Final
 
 New: The row will get this status after first synchronization. If the data row not exist in the target file.
-if the translation already exists then it gets the status "final" this is so you can start using this extension if you allredy have translation files that are translated.
+if the translation already exists then it gets the status "final" this is so you can start using this extension if you alredy have translation files that are translated.
 
 Need review: This status will it get after translation from one of the translation services.
 
-Final: This status will it get after import from csv/xslt file where the status column bin changed to final. You can also set this status in the target file if you don't want the row to be exported to external stakholder for translation.
+Final: This status will it get after import from csv/xslt file where the status column bin changed to final. You can also set this status in the target file if you don't want the row to be exported to external stakeholder for translation.
 
 In this first version all files need to be in the same folder, export and import (.csv) should not be renamed if it should work when we will import translations.
 
