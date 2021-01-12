@@ -91,7 +91,7 @@ Right-click one of the csv or xlsx language files (AppResources.fr-FR.resx.csv) 
 <img  width=“100” height="400" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/ImportFilePopUpDialog.png">
 
 ### List unused translation
-Right-click the master(AppResources.resx) file and select "List unused translations". The extension will search trow all .cs and .xaml files and check if the translations in the master file is used. When done it will report alla translations that are not used in the app to the search result windows and promt you with dialog asking if you whant to remove all unused translations.
+Right-click the master(AppResources.resx) file and select "List unused translations". The extension will search trow all .cs and .xaml files and check if the translations in the master file is used. When done it will report all translations that are not used in the app to the search result windows and prompt you with dialog asking if you want to remove all unused translations.
 
 <img  width=“400” height="400" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/ListUnusedTransaltions.png">
 
