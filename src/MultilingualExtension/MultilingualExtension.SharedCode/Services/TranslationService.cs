@@ -274,35 +274,38 @@ namespace MultilingualExtension.Shared.Services
                 string location = settingsService.MsoftLocation;
                 string key = settingsService.MsoftKey;
                 string masterLanguageCode = settingsService.MasterLanguageCode;
-
-                //validate file
-                var checkfile = RegExHelper.ValidateFilenameIsTargetType(selectedFilename);
-                if (!checkfile.Success)
+                //------------------------- ResW files --------------------------------------------------------------------
+                var checkfileResw = RegExHelper.ValidateFileTypeIsResw(selectedFilename);
+                if (checkfileResw.Success)
                 {
-                    int folderindex;
+                    var resultResw = ReswHelpers.GetBasInfo(settingsService.MasterLanguageCode, selectedFilename);
+                    if (!resultResw.WasSuccessful)
+                        return new Result<bool>(resultResw.ErrorMessage);
 
-                    if (System.Environment.OSVersion.Platform == PlatformID.Win32NT)
-                       folderindex = selectedFilename.LastIndexOf("\\");
-                    else
-                        folderindex = selectedFilename.LastIndexOf("/");
-
-                    string masterFolderPath = selectedFilename.Substring(0, folderindex);
-
-                    string[] fileEntries = Directory.GetFiles(masterFolderPath);
-                    foreach (string fileName in fileEntries)
+                    foreach (var updatePath in resultResw.Model.UpdateFilepaths)
                     {
-                        var checkfileInFolder = RegExHelper.ValidateFilenameIsTargetType(fileName);
+                        int indexfolderend = updatePath.IndexOf(resultResw.Model.MasterFilename);
+                        var checkfileInFolder = RegExHelper.ValidatePathReswIsTargetType(updatePath.Substring(0, indexfolderend - 1));
                         if (checkfileInFolder.Success)
-                            await TranslateFileInternal(useGoogle, masterLanguageCode, checkfileInFolder.Value.Substring(1, 2), fileName, endpoint, location, key, progress);
-
+                            await TranslateFileInternal(useGoogle, masterLanguageCode.Substring(0, 2), checkfileInFolder.Value.Substring(1, 2), updatePath, endpoint, location, key, progress);
                     }
 
+                    return new Result<bool>(true);
                 }
-                else
+
+                // -------------------- ResX files --------------------------------------------------------
+                //validate file
+                var resultResx = ResxHelpers.GetBasInfo(selectedFilename);
+                if (!resultResx.WasSuccessful)
+                    return new Result<bool>(resultResx.ErrorMessage);
+
+                foreach (var updatePath in resultResx.Model.UpdateFilepaths)
                 {
-                    string masterPath = selectedFilename.Substring(0, checkfile.Index) + ".resx";
-                    await TranslateFileInternal(useGoogle, masterLanguageCode, checkfile.Value.Substring(1, 2), selectedFilename, endpoint, location, key, progress);
+                    var checkfileInFolder = RegExHelper.ValidateFilenameIsTargetType(updatePath);
+                    if (checkfileInFolder.Success)
+                        await TranslateFileInternal(useGoogle, masterLanguageCode, checkfileInFolder.Value.Substring(1, 2), updatePath, endpoint, location, key, progress);
                 }
+
                 return new Result<bool>(true);
 
             }
@@ -325,6 +328,7 @@ namespace MultilingualExtension.Shared.Services
         {
             try
             {
+                string folderSeperator = Environment.OSVersion.Platform == PlatformID.Win32NT ? "\\" : "/";
 
                 bool useGoogle = true;
                 if (settingsService.TranslationService == 2)
@@ -334,18 +338,32 @@ namespace MultilingualExtension.Shared.Services
                 string location = settingsService.MsoftLocation;
                 string key = settingsService.MsoftKey;
                 string masterLanguageCode = settingsService.MasterLanguageCode;
+                //------------------------- ResW files --------------------------------------------------------------------
+                //var checkfileResw = RegExHelper.ValidateFileTypeIsResw(selectedFilename);
+                //if (checkfileResw.Success)
+                //{
+                //    var resultResw = ReswHelpers.GetBasInfo(settingsService.MasterLanguageCode, selectedFilename);
+                //    if (!resultResw.WasSuccessful)
+                //        return new Result<bool>(resultResw.ErrorMessage);
 
+                //    foreach (var updatePath in resultResw.Model.UpdateFilepaths)
+                //    {
+                //        int indexfolderend = updatePath.IndexOf(resultResw.Model.MasterFilename);
+                //        var checkfileInFolder = RegExHelper.ValidatePathReswIsTargetType(updatePath.Substring(indexfolderend - 1));
+                //        if (checkfileInFolder.Success)
+                //            await TranslateNodeInternal(resultResw.Model.MasterFilepath, updateStatusForTranslation,  useGoogle, masterLanguageCode.Substring(0,2), checkfileInFolder.Value.Substring(1, 2), updatePath, endpoint, location, key, progress);
+
+                //    }
+
+                //    return new Result<bool>(true);
+                //}
+
+                // -------------------- ResX files --------------------------------------------------------
                 //validate file
                 var checkfile = RegExHelper.ValidateFilenameIsTargetType(selectedFilename);
                 if (!checkfile.Success)
                 {
-                    int folderindex;
-
-                    if (System.Environment.OSVersion.Platform == PlatformID.Win32NT)
-                        folderindex = selectedFilename.LastIndexOf("\\");
-                    else
-                        folderindex = selectedFilename.LastIndexOf("/");
-
+                    int folderindex = selectedFilename.LastIndexOf(folderSeperator);
                     string masterFolderPath = selectedFilename.Substring(0, folderindex);
 
                     string[] fileEntries = Directory.GetFiles(masterFolderPath);

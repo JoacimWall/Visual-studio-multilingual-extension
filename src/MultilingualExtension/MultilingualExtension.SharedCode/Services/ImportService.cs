@@ -28,9 +28,11 @@ namespace MultilingualExtension.Shared.Services
             {
 
                 //validate file
-                var checkfilecsv = RegExHelper.ValidateFilenameIsTargetTypeCsv(selectedFilename);
-                var checkfilexlsx = RegExHelper.ValidateFilenameIsTargetTypeXlsx(selectedFilename);
-                if (!checkfilecsv.Success && !checkfilexlsx.Success)
+                var checkfileResxCsv = RegExHelper.ValidateFilenameIsTargetTypeResx_Csv(selectedFilename);
+                var checkfileResxXlsx = RegExHelper.ValidateFilenameIsTargetTypeResx_Xlsx(selectedFilename);
+                var checkfileReswCsv = RegExHelper.ValidateFilenameIsTargetTypeResw_Csv(selectedFilename);
+                var checkfileReswXlsx = RegExHelper.ValidateFilenameIsTargetTypeResw_Xlsx(selectedFilename);
+                if (!checkfileResxCsv.Success && !checkfileResxXlsx.Success && !checkfileReswCsv.Success && !checkfileReswXlsx.Success)
                 {
                     //TODO: Show message you select file have the format .sv-SE.resx.csv or .sv-SE.resx.xlsx
                     return new Result<bool>("Not valid file");
@@ -39,8 +41,8 @@ namespace MultilingualExtension.Shared.Services
                 else
                 {
                     //Fix for .csv or .xlsx filetype
-                    int minus = checkfilecsv.Success ? 4 : 5;
-                    int filetype = checkfilecsv.Success ? 1 : 2;
+                    int minus = checkfileResxCsv.Success || checkfileReswCsv.Success ? 4 : 5;
+                    int filetype = checkfileResxCsv.Success || checkfileReswCsv.Success ? 1 : 2;
                     string updatePath = selectedFilename.Substring(0, selectedFilename.Length - minus);
                     var reslut = await ImportToResxInternal(selectedFilename, updatePath, filetype, progress);
                     return new Result<bool>(true);

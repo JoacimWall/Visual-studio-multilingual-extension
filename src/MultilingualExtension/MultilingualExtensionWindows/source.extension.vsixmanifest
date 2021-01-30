@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="com.walltec.multilingualextension" Version="1.0.23" Language="en-US" Publisher="Walltec" />
+        <Identity Id="com.walltec.multilingualextension" Version="1.0.24" Language="en-US" Publisher="Walltec" />
         <DisplayName>Multilingual Extension</DisplayName>
         <Description xml:space="preserve">This extension is for handling multilingual support in visual studio for Windows and Mac
 
-For it to work, it requires that you start from a Resx file that is the master. Then you name all the other files according to the masterfile name .xx-xx.resx. For example AppResources.resx for master and AppResources.fr-FR.resx for French.
+For it to work, it requires that you start from a Resx or Resw file that is the master.
+Resx files use the filename for language recognize. You name all the other files according to the masterfile name .xx-xx.resx. For example AppResources.resx for master and AppResources.fr-FR.resx for French.
+Resw use the name of the folders for language recognize. if you have a masterfile in flder strings\en-US\Resources.resw then you shold put french file in strings\fr-FR\Resources.resw
 
 It has four main functions.
-Synchronization of Resx files
+Synchronization of language files
 Translation of texts by Google translate or Microsoft translate
 Export of translations into csv or xlsx file for final translation by external stakeholder
 Import of final translations from external stakholder
 </Description>
         <MoreInfo>https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/README.md</MoreInfo>
+        <ReleaseNotes>Added support for Resw files</ReleaseNotes>
         <Icon>icon.png</Icon>
     </Metadata>
     <Installation>

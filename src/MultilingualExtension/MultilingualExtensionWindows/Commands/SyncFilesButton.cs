@@ -76,7 +76,7 @@ namespace MultilingualExtension
             if (item != null)
             {
                 string fileExtension = Path.GetExtension(item.Name).ToLowerInvariant();
-                string[] supportedFiles = new[] { ".resx" };
+                string[] supportedFiles = new[] { ".resx", ".resw" };
 
                 // Show the button only if a supported file is selected
                 button.Visible = supportedFiles.Contains(fileExtension);
@@ -100,7 +100,19 @@ namespace MultilingualExtension
                 //MultilingualExtension.Shared
                 SyncFileService syncFileService = new SyncFileService();
 
-                syncFileService.SyncFile(selectedFilename, progress, settingsService);
+               var result =  syncFileService.SyncFile(selectedFilename, progress, settingsService);
+
+                if (!result.Result.WasSuccessful)
+                {
+
+                    VsShellUtilities.ShowMessageBox(
+                       _package,
+                       result.Result.ErrorMessage,
+                       "Multilangiual Extension",
+                       OLEMSGICON.OLEMSGICON_INFO,
+                       OLEMSGBUTTON.OLEMSGBUTTON_OK,
+                       OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
+                }
 
             }
             catch (Exception ex)

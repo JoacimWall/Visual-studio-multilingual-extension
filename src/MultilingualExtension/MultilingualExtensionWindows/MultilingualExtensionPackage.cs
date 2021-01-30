@@ -31,14 +31,14 @@ namespace MultilingualExtension
     [Guid(MultilingualExtensionPackage.PackageGuidString)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [ProvideUIContextRule(_uiContextSupporResxFiles,
-        name: "Support resx",
-        expression: "Resource",
-        termNames: new[] { "Resource" },
-        termValues: new[] { "HierSingleSelectionName:.resx$" })]
+        name: "Support resx and resw",
+        expression: "Resx | Resw",
+        termNames: new[] { "Resx", "Resw" },
+        termValues: new[] { "HierSingleSelectionName:.resx$", "HierSingleSelectionName:.resw$" })]
     [ProvideUIContextRule(_uiContextSupporCsvXlsxFiles,
         name: "Support csv and xlsx",
         expression: "Csv | Xlsx",
-        termNames: new[] { "Csv", "Excel" },
+        termNames: new[] { "Csv", "Xlsx" },
         termValues: new[] { "HierSingleSelectionName:.csv$", "HierSingleSelectionName:.xlsx$" })]
     [ProvideService(typeof(MultilingualExtensionPackage), IsAsyncQueryable = true)]
    // [ProvideAutoLoad(UIContextGuids80.SolutionExists)]

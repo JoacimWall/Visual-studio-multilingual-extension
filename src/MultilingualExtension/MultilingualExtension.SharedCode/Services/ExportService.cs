@@ -24,37 +24,43 @@ namespace MultilingualExtension.Shared.Services
         {
             try
             {
-
-                //validate file
-                var checkfile = RegExHelper.ValidateFilenameIsTargetType(selectedFilename);
                 int exportFileType = settingsService.ExportFileType;
-                if (!checkfile.Success)
+                //------------------------- ResW files --------------------------------------------------------------------
+                var checkfileResw = RegExHelper.ValidateFileTypeIsResw(selectedFilename);
+                if (checkfileResw.Success)
                 {
-                    int folderindex;
+                    var resultResw = ReswHelpers.GetBasInfo(settingsService.MasterLanguageCode, selectedFilename);
+                    if (!resultResw.WasSuccessful)
+                        return new Result<bool>(resultResw.ErrorMessage);
 
-                    if (System.Environment.OSVersion.Platform == PlatformID.Win32NT)
-                        folderindex = selectedFilename.LastIndexOf("\\");
-                    else
-                        folderindex = selectedFilename.LastIndexOf("/");
-
-
-                    string masterFolderPath = selectedFilename.Substring(0, folderindex);
-
-                    string[] fileEntries = Directory.GetFiles(masterFolderPath);
-                    foreach (string fileName in fileEntries)
+                    foreach (var updatePath in resultResw.Model.UpdateFilepaths)
                     {
-                        var checkfileInFolder = RegExHelper.ValidateFilenameIsTargetType(fileName);
-                        if (checkfileInFolder.Success)
-                           await ExportToFileInternal(selectedFilename, fileName, exportFileType, progress);
+                        await ExportToFileInternal(resultResw.Model.MasterFilepath, updatePath, resultResw.Model.MasterFilename, exportFileType, progress);
                     }
 
+                    if (settingsService.AddCommentNodeMasterResx)
+                        await ExportToFileInternal(resultResw.Model.MasterFilepath, resultResw.Model.MasterFilepath, resultResw.Model.MasterFilename, exportFileType, progress);
+                    return new Result<bool>(true);
                 }
-                else
+                // -------------------- ResX files --------------------------------------------------------
+                //validate file
+                var checkfile = RegExHelper.ValidateFilenameIsTargetType(selectedFilename);
+                var resultResx = ResxHelpers.GetBasInfo(selectedFilename);
+                if (!resultResx.WasSuccessful)
+                    return new Result<bool>(resultResx.ErrorMessage);
+
+                foreach (var updatePath in resultResx.Model.UpdateFilepaths)
                 {
-                    string masterPath = selectedFilename.Substring(0, checkfile.Index) + ".resx";
-                    await ExportToFileInternal(masterPath, selectedFilename, exportFileType, progress);
+                    var checkfileInFolder = RegExHelper.ValidateFilenameIsTargetType(updatePath);
+                    if (checkfileInFolder.Success)
+                        await ExportToFileInternal(resultResx.Model.MasterFilepath, updatePath, resultResx.Model.MasterFilename, exportFileType, progress);
                 }
+                //export Master
+                if (settingsService.AddCommentNodeMasterResx)
+                    await ExportToFileInternal(resultResx.Model.MasterFilepath, resultResx.Model.MasterFilepath, resultResx.Model.MasterFilename, exportFileType, progress);
+
                 return new Result<bool>(true);
+              
 
             }
             catch (Exception ex)
@@ -71,17 +77,11 @@ namespace MultilingualExtension.Shared.Services
 
         }
 
-        private async Task<Result<Boolean>> ExportToFileInternal(string masterPath, string updatePath,int exportFileType, IProgressBar progress)
+        private async Task<Result<Boolean>> ExportToFileInternal(string masterPath, string updatePath,string masterFilename, int exportFileType, IProgressBar progress)
         {
+            string folderSeperator = Environment.OSVersion.Platform == PlatformID.Win32NT ? "\\" : "/";
+            int folderindex = updatePath.LastIndexOf(folderSeperator);
 
-
-            int folderindex;
-            if (System.Environment.OSVersion.Platform == PlatformID.Win32NT)
-                folderindex = updatePath.LastIndexOf("\\");
-            else
-                folderindex = updatePath.LastIndexOf("/");
-
-            
             string masterFolderPath = updatePath.Substring(0, folderindex + 1);
 
 
@@ -138,20 +138,19 @@ namespace MultilingualExtension.Shared.Services
             }
             var checkfile = RegExHelper.GetFilenameResx(updatePath);
             var engine = new FileHelperEngine<TranslationsRow>(System.Text.Encoding.UTF8);
+            string exportFileName = string.IsNullOrEmpty(masterFilename) ? masterFolderPath + checkfile.Value : masterFolderPath + masterFilename ;
             if (exportFileType == 1)
             {
-
                 //get filename
-
                 engine.HeaderText = engine.GetFileHeader();
-                engine.WriteFile(masterFolderPath + checkfile.Value + ".csv", rows);
+                engine.WriteFile(exportFileName + ".csv", rows);
             }
             else
             {
                 var provider = new ExcelNPOIStorage(typeof(TranslationsRow))
                 {
                     SheetName = "Translations",
-                    FileName = masterFolderPath + checkfile.Value + ".xlsx"
+                    FileName = exportFileName + ".xlsx"
                 };
                 char[] delimiterChars = {';' };
                 provider.ColumnsHeaders = new List<string>(engine.GetFileHeader().Split(delimiterChars)); 

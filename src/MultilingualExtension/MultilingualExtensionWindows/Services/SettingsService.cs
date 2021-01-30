@@ -27,7 +27,7 @@ namespace MultilingualExtension.Services
                 AddCommentNodeMasterResx = false;
                 ExportFileType = 2;
                 TranslationService = 1;
-                MasterLanguageCode = "en";
+                MasterLanguageCode = "en-US";
                 MsoftEndpoint = "";
                 MsoftLocation = "";
                 MsoftKey = "";

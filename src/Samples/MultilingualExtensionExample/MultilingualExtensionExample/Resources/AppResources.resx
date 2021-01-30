@@ -14,23 +14,26 @@
   </resheader>
   <data name="CSharp_Is_Love" xml:space="preserve">
         <value>CSharp is love</value>
-  </data>
+  <comment>Need review</comment></data>
   <data name="Hello" xml:space="preserve">
         <value>Hello</value>
-  </data>
+  <comment>Need review</comment></data>
   <data name="Enter_Your_Email" xml:space="preserve">
         <value>Enter your email please</value>
-  </data>
+  <comment>Need review</comment></data>
   <data name="Enter_Your_Password" xml:space="preserve">
         <value>Enter your password</value>
-  </data>
+  <comment>Need review</comment></data>
   <data name="Enter_Your_Cat" xml:space="preserve">
         <value>Enter your cat</value>
-  </data>
+  <comment>Need review</comment></data>
   <data name="How_Old_Are_You" xml:space="preserve">
         <value>how old are you</value>
-   </data>
-      <data name="Youtube_Is_Nice_For_Videos" xml:space="preserve">
+   <comment>Need review</comment></data>
+  <data name="Youtube_Is_Nice_For_Videos" xml:space="preserve">
         <value>Youtube is nice for videos and music</value>
-   </data>
+   <comment>Need review</comment></data>
+  <data name="Hello_My_Friend" xml:space="preserve">
+        <value>Hello my friend</value>
+   <comment>Need review</comment></data>
 </root>

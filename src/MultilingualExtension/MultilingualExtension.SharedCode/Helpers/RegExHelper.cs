@@ -5,7 +5,12 @@ namespace MultilingualExtension.Shared.Helpers
 {
     public static class RegExHelper
     {
-        //.resx
+        public static Match ValidateFileTypeIsResw(string path)
+        {
+            Regex regex = new Regex(@".resw$");
+            return regex.Match(path);
+
+        }//.resx
         public static Match ValidateFileTypeIsResx(string path)
         {
             Regex regex = new Regex(@".resx$");
@@ -17,16 +22,34 @@ namespace MultilingualExtension.Shared.Helpers
             Regex regex = new Regex(@".[a-zA-Z][a-zA-Z]-[a-zA-Z][a-zA-Z].resx$");
             return regex.Match(path);
 
+        }
+        public static Match ValidatePathReswIsTargetType(string path)
+        {
+            Regex regex = new Regex(@".[a-zA-Z][a-zA-Z]-[a-zA-Z][a-zA-Z]$");
+            return regex.Match(path);
+
         }//AppResources.se-SE.resx.csv
-        public static Match ValidateFilenameIsTargetTypeCsv(string path)
+        public static Match ValidateFilenameIsTargetTypeResx_Csv(string path)
         {
             Regex regex = new Regex(@"\w+.[a-zA-Z][a-zA-Z]-[a-zA-Z][a-zA-Z].resx.csv$");
             return regex.Match(path);
 
+        } //Resources.resw.csv
+        public static Match ValidateFilenameIsTargetTypeResw_Csv(string path)
+        {
+            Regex regex = new Regex(@"\w+.resw.csv$");
+            return regex.Match(path);
+
         }//AppResources.se-SE.resx.slsx
-        public static Match ValidateFilenameIsTargetTypeXlsx(string path)
+        public static Match ValidateFilenameIsTargetTypeResx_Xlsx(string path)
         {
             Regex regex = new Regex(@"\w+.[a-zA-Z][a-zA-Z]-[a-zA-Z][a-zA-Z].resx.xlsx$");
+            return regex.Match(path);
+
+        }//Resources.resw.slsx
+        public static Match ValidateFilenameIsTargetTypeResw_Xlsx(string path)
+        {
+            Regex regex = new Regex(@"\w+.resw.xlsx$");
             return regex.Match(path);
 
         }

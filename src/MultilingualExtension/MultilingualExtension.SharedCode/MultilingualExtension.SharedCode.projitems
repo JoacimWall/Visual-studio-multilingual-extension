@@ -10,10 +10,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Global.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\ReswHelpers.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\ResxHelpers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IProgressBar.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Interfaces\ISettingsService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\MicrosoftTranslationResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Result.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Res_Files.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Translations.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\TranslationsRow.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ExportService.cs" />

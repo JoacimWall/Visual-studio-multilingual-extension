@@ -28,6 +28,10 @@ namespace MultilingualExtension.View
                 rbGoogle.Checked = true;
             else
                 rbMicrosoft.Checked = true;
+            if (_settingsService.AddCommentNodeMasterResx)
+                chkAddCommentToMaster.Checked = true;
+            else
+                chkAddCommentToMaster.Checked = false;
 
             txtMsoftEndpoint.Text = _settingsService.MsoftEndpoint;
             txtMsoftLocation.Text = _settingsService.MsoftLocation;
@@ -50,6 +54,11 @@ namespace MultilingualExtension.View
                 _settingsService.TranslationService = 1;
             else
                 _settingsService.TranslationService = 2;
+
+            if (chkAddCommentToMaster.Checked)
+                _settingsService.AddCommentNodeMasterResx = true;
+            else
+                _settingsService.AddCommentNodeMasterResx = false;
 
             _settingsService.MsoftEndpoint= txtMsoftEndpoint.Text;
              _settingsService.MsoftLocation = txtMsoftLocation.Text ;

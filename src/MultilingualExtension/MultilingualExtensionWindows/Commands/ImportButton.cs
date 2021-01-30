@@ -77,7 +77,7 @@ namespace MultilingualExtension
             if (item != null)
             {
                 string fileExtension = Path.GetExtension(item.Name).ToLowerInvariant();
-                string[] supportedFiles = new[] { ".resx" };
+                string[] supportedFiles = new[] { ".resx", ".resw" };
 
                 // Show the button only if a supported file is selected
                 button.Visible = supportedFiles.Contains(fileExtension);

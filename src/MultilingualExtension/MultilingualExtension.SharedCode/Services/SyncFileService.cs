@@ -5,6 +5,8 @@ using System.Xml;
 using MultilingualExtension.Shared.Helpers;
 using MultilingualExtension.Shared.Interfaces;
 using MultilingualExtension.Shared.Models;
+using System.Linq;
+
 namespace MultilingualExtension.Shared.Services
 {
     public class SyncFileService
@@ -23,13 +25,9 @@ namespace MultilingualExtension.Shared.Services
                 var checkfile = RegExHelper.ValidateFilenameIsTargetType(selectedFilename);
                 if (!checkfile.Success)
                 {
-                    int folderindex;
-
-                    if (System.Environment.OSVersion.Platform == PlatformID.Win32NT)
-                        folderindex = selectedFilename.LastIndexOf("\\");
-                    else
-                        folderindex = selectedFilename.LastIndexOf("/");
-
+                    string folderSeperator = Environment.OSVersion.Platform == PlatformID.Win32NT ? "\\" : "/";
+                    int folderindex = selectedFilename.LastIndexOf(folderSeperator);
+                    
                     string masterFolderPath = selectedFilename.Substring(0, folderindex);
 
                     string[] fileEntries = Directory.GetFiles(masterFolderPath);
@@ -75,45 +73,37 @@ namespace MultilingualExtension.Shared.Services
         {
             try
             {
-
                 bool addCommentNodeToMasterResx = settingsService.AddCommentNodeMasterResx;
-
-                //validate file
-                var checkfile = RegExHelper.ValidateFilenameIsTargetType(selectedFilename);
-                if (!checkfile.Success)
+                var checkfileResw = RegExHelper.ValidateFileTypeIsResw(selectedFilename);
+                if (checkfileResw.Success)
                 {
-                    int folderindex;
+                    var resultResw = ReswHelpers.GetBasInfo(settingsService.MasterLanguageCode, selectedFilename);
+                    if (!resultResw.WasSuccessful)
+                        return new Result<bool>(resultResw.ErrorMessage);
 
-                    if (System.Environment.OSVersion.Platform == PlatformID.Win32NT)
-                        folderindex = selectedFilename.LastIndexOf("\\");
-                    else
-                        folderindex = selectedFilename.LastIndexOf("/");
-
-                    string masterFolderPath = selectedFilename.Substring(0, folderindex);
-
-                    string[] fileEntries = Directory.GetFiles(masterFolderPath);
-                    foreach (string fileName in fileEntries)
+                    foreach (var updatePath in resultResw.Model.UpdateFilepaths)
                     {
-                        var checkfileInFolder = RegExHelper.ValidateFilenameIsTargetType(fileName);
-                        if (checkfileInFolder.Success)
-                           await SyncFileInternal(selectedFilename, fileName, addCommentNodeToMasterResx, progress);
-
+                        await SyncFileInternal(resultResw.Model.MasterFilepath, updatePath, addCommentNodeToMasterResx, progress);
                     }
 
+                   return new Result<bool>(true);
                 }
-                else
+                //------------------ RESX failes -------------------------------------------------// 
+                //validate file
+                var resultResx = ResxHelpers.GetBasInfo(selectedFilename);
+                if (!resultResx.WasSuccessful)
+                    return new Result<bool>(resultResx.ErrorMessage);
+
+                foreach (var updatePath in resultResx.Model.UpdateFilepaths)
                 {
-                    string masterPath = selectedFilename.Substring(0, checkfile.Index) + ".resx";
-                    await SyncFileInternal(masterPath, selectedFilename, addCommentNodeToMasterResx, progress);
+                    await SyncFileInternal(resultResx.Model.MasterFilepath, updatePath, addCommentNodeToMasterResx, progress);
                 }
+
                 return new Result<bool>(true);
-
-
             }
             catch (Exception ex)
             {
-                throw ex;
-
+                return new Result<bool>(ex.Message);
             }
             finally
             {
@@ -127,9 +117,6 @@ namespace MultilingualExtension.Shared.Services
 
         private async Task<Result<Boolean>> SyncFileInternal(string masterfilePath, string updatefilePath, bool addMasterCommentNode, IProgressBar progress)
         {
-
-
-
             XmlDocument masterdoc = new XmlDocument();
             masterdoc.Load(masterfilePath);
             XmlNode rootMaster = masterdoc.DocumentElement;

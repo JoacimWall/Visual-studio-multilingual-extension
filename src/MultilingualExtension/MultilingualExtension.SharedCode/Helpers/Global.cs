@@ -56,6 +56,10 @@ namespace MultilingualExtension.Shared.Helpers
         public const string Synchronize_Seleted_File_Title = "Sync this .xx-xx.resx file";
 
         public const string List_Unused_Translatations = "List unused translations";
+
+        //resw text
+        public const string Resw_Masterlang_Need_Exist_As_Folder = "Your Master language from 'Tools/Multilingual settings' needs to exist as a folder under Strings folder.";
+        public const string Resw_Masterlang_Need_Be_Format_xx_XX = "When you work with Resw files the master language code need to be in the format of 'en-US'";
     }
 
 
