@@ -35,4 +35,7 @@
   <data name="Dog" xml:space="preserve">
         <value>Dog</value>
    <comment>New</comment></data>
+  <data name="Snake" xml:space="preserve">
+        <value>Snake</value>
+   <comment>New</comment></data>
 </root>

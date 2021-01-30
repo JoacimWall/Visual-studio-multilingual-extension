@@ -63,6 +63,15 @@
     <Compile Include="..\MultilingualExtension.SharedCode\Helpers\RegExHelper.cs">
       <Link>Helpers\RegExHelper.cs</Link>
     </Compile>
+    <Compile Include="..\MultilingualExtension.SharedCode\Helpers\ResxHelpers.cs">
+      <Link>Helpers\ResxHelpers.cs</Link>
+    </Compile>
+    <Compile Include="..\MultilingualExtension.SharedCode\Helpers\ReswHelpers.cs">
+      <Link>Helpers\ReswHelpers.cs</Link>
+    </Compile>
+    <Compile Include="..\MultilingualExtension.SharedCode\Models\Res_Files.cs">
+      <Link>Models\Res_Files.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AddinReference Include="MonoDevelop.CSharpBinding" />
