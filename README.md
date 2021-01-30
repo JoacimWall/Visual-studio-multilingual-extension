@@ -2,7 +2,7 @@
 #### This extension is for handling multilingual support in visual studio.
 #### For it to work, it requires that you start from a Resx or Resw file that is the master.
 #### Resx files use the filename for language recognize. You name all the other files according to the masterfile name .xx-xx.resx. For example AppResources.resx for master and AppResources.fr-FR.resx for French.  
-#### Resw use the name of the folders for language recognize. if you have a masterfile in flder strings\en-US\Resources.resw then you shold put french file in strings\fr-FR\Resources.resw 
+#### Resw use the name of the folders for language recognize. If you have a masterfile in folder strings\en-US\Resources.resw then you shold put french file in strings\fr-FR\Resources.resw 
 
 ### View introduction video or download the sample app
 
