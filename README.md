@@ -1,6 +1,8 @@
 # Visual Studio For Mac/Windows Multilingual Extension
 #### This extension is for handling multilingual support in visual studio.
-#### For it to work, it requires that you start from a Resx file that is the master. Then you name all the other files according to the masterfile name .xx-xx.resx. For example AppResources.resx for master and AppResources.fr-FR.resx for French.
+#### For it to work, it requires that you start from a Resx or Resw file that is the master.
+#### Resx files use the filename for language recognize. You name all the other files according to the masterfile name .xx-xx.resx. For example AppResources.resx for master and AppResources.fr-FR.resx for French.  
+#### Resw use the name of the folders for language recognize. if you have a masterfile in flder strings\en-US\Resources.resw then you shold put french file in strings\fr-FR\Resources.resw 
 
 ### View introduction video or download the sample app
 
@@ -11,7 +13,7 @@ Under src/sample you will find a Xamarin forms sample. In this solution you will
 
 ### It has five main functions.
 
-* Synchronization of Resx files
+* Synchronization of Resx and Resw files
 * Translation of texts by Google translate or Microsoft translate
 * Export of translations into csv or xlsx file for final translation by external stakeholder
 * Import of final translations from external stakholder
@@ -50,7 +52,7 @@ If you also want to handle the status for the texts in the master resx file, che
 
 <img width=“150” height="300" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/MultilingualSettingsDialog.png">
 
- ### Synchronization of Resx files
+ ### Synchronization of Resx or Resw files
  There are two ways to sync the resx files. 
  Right-click the master file and select "Sync all .xx-x.resx files with this". Then all files that are in the same folder and follow the naming standard .xx-xx.resx  will be synchronized with the master file. 
 
@@ -62,7 +64,7 @@ Right-click one of the language files (AppResources.fr-FR.resx) and select "Sync
 
 the synchronization will not only add translations to the language files it will also remove translation that are not present in the master file.
 
-## Translate of Resx Files
+## Translate of Resx or Resw Files
 There are two ways to translate the resx files. 
 Right-click the master file and select "Translate all .xx-x.resx files".  
 Then all files that are in the same folder and follow the naming standard .xx-xx.resx  will be Translated. The extension will only translate values that has comment value set to "New".  
