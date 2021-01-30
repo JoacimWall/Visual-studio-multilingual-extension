@@ -13,7 +13,7 @@ Under src/sample you will find a Xamarin forms sample. In this solution you will
 
 ### It has five main functions.
 
-* Synchronization of Resx and Resw files
+* Synchronization of language files
 * Translation of texts by Google translate or Microsoft translate
 * Export of translations into csv or xlsx file for final translation by external stakeholder
 * Import of final translations from external stakholder
@@ -31,7 +31,7 @@ Go to Extension Manager and search for Multilingual Extension or Walltec and you
 [Multilingual extension](https://marketplace.visualstudio.com/items?itemName=Walltec.MultilingualExtension)
 
 ## Naming convention of language files
-You need to include a resx file for each culture you wish to support. These are added to the project in the same location as the master resx file, and must follow a strict naming convention.
+You need to include a resx or resw file for each culture you wish to support. Resx files are added to the project in the same location as the master resx file, and must follow a strict naming convention.
 
 The name of the resx file needs to include both the country code and language, for example:
 
@@ -43,6 +43,12 @@ The name of the resx file needs to include both the country code and language, f
 A list of culture codes
 https://docs.microsoft.com/en-us/previous-versions/commerce-server/ee825488(v=cs.20)?redirectedfrom=MSDN
 
+For resw files you use the folder structure to specify the languages. for example:  
+Strings\fr-FR\Resources.resw for French (in France)  
+Strings\fr-CA\Resources.resw for French (in Canada)
+
+Remember to set your master language in the menu Tools/multilinugal settings to you preferd mater language for example en-US. 
+
 
  ## Explanation of functions
  ### Setting the preferred property's for the extension
@@ -53,7 +59,7 @@ If you also want to handle the status for the texts in the master resx file, che
 <img width=“150” height="300" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/MultilingualSettingsDialog.png">
 
  ### Synchronization of Resx or Resw files
- There are two ways to sync the resx files. 
+ There are two ways to sync the language files. 
  Right-click the master file and select "Sync all .xx-x.resx files with this". Then all files that are in the same folder and follow the naming standard .xx-xx.resx  will be synchronized with the master file. 
 
 <img width=“100” height="400" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/SyncAllFilePopUpDialog.png">
