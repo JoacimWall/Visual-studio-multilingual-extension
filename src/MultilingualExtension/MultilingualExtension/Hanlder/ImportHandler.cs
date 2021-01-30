@@ -17,6 +17,7 @@ namespace MultilingualExtension
             {
                 ImportService importService = new ImportService();
                 ISettingsService settingsService = new Services.SettingsService();
+                await IdeApp.Workbench.SaveAllAsync();
                 ProjectFile selectedItem = (ProjectFile)IdeApp.Workspace.CurrentSelectedItem;
                 string selectedFilename = selectedItem.Name;
                 var result = await importService.ImportToResx(selectedFilename, progress, settingsService);

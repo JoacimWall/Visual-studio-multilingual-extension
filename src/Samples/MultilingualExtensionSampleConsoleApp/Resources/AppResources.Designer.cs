@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MultilingualExtensionExample.Resources {
+namespace MultilingualExtensionSampleConsoleApp.Resources {
     using System;
     using System.Reflection;
     
@@ -16,21 +16,21 @@ namespace MultilingualExtensionExample.Resources {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class AppResources_fr_FR {
+    public class AppResources {
         
         private static System.Resources.ResourceManager resourceMan;
         
         private static System.Globalization.CultureInfo resourceCulture;
         
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal AppResources_fr_FR() {
+        internal AppResources() {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static System.Resources.ResourceManager ResourceManager {
+        public static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("MultilingualExtensionExample.Resources.AppResources.fr-FR", typeof(AppResources_fr_FR).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("MultilingualExtensionSampleConsoleApp.Resources.AppResources", typeof(AppResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -38,7 +38,7 @@ namespace MultilingualExtensionExample.Resources {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static System.Globalization.CultureInfo Culture {
+        public static System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -47,45 +47,58 @@ namespace MultilingualExtensionExample.Resources {
             }
         }
         
-        internal static string CSharp_Is_Love {
-            get {
-                return ResourceManager.GetString("CSharp_Is_Love", resourceCulture);
-            }
-        }
-        
-        internal static string Hello {
+        public static string Hello {
             get {
                 return ResourceManager.GetString("Hello", resourceCulture);
             }
         }
         
-        internal static string Enter_Your_Email {
+        public static string Press_Any_Key_To_Exit {
             get {
-                return ResourceManager.GetString("Enter_Your_Email", resourceCulture);
+                return ResourceManager.GetString("Press_Any_Key_To_Exit", resourceCulture);
             }
         }
         
-        internal static string Enter_Your_Password {
+        public static string Enter_Email {
             get {
-                return ResourceManager.GetString("Enter_Your_Password", resourceCulture);
+                return ResourceManager.GetString("Enter_Email", resourceCulture);
             }
         }
         
-        internal static string Enter_Your_Cat {
+        public static string Enter_Email_To_Be_The_Next_User_To_Be_Able_To_Login_To_The_Best_Office_System_In_The_World {
             get {
-                return ResourceManager.GetString("Enter_Your_Cat", resourceCulture);
+                return ResourceManager.GetString("Enter_Email_To_Be_The_Next_User_To_Be_Able_To_Login_To_The_Best_Office_System_In_" +
+                        "The_World", resourceCulture);
             }
         }
         
-        internal static string How_Old_Are_You {
+        public static string Password {
             get {
-                return ResourceManager.GetString("How_Old_Are_You", resourceCulture);
+                return ResourceManager.GetString("Password", resourceCulture);
             }
         }
         
-        internal static string Youtube_Is_Nice_For_Videos {
+        public static string Home {
             get {
-                return ResourceManager.GetString("Youtube_Is_Nice_For_Videos", resourceCulture);
+                return ResourceManager.GetString("Home", resourceCulture);
+            }
+        }
+        
+        public static string Dog {
+            get {
+                return ResourceManager.GetString("Dog", resourceCulture);
+            }
+        }
+        
+        public static string Cat {
+            get {
+                return ResourceManager.GetString("Cat", resourceCulture);
+            }
+        }
+        
+        public static string Bird {
+            get {
+                return ResourceManager.GetString("Bird", resourceCulture);
             }
         }
     }

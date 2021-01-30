@@ -29,7 +29,7 @@ namespace MultilingualExtension
             try
             {
                 TranslationService translationService = new TranslationService();
-                
+                await IdeApp.Workbench.SaveAllAsync();
                 ProjectFile selectedItem = (ProjectFile)IdeApp.Workspace.CurrentSelectedItem;
                 string selectedFilename = selectedItem.Name;
 

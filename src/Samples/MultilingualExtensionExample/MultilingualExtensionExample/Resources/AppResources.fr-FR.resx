@@ -32,7 +32,7 @@
   <data name="Youtube_Is_Nice_For_Videos" xml:space="preserve">
         <value>Youtube est agréable pour les vidéos et la musique</value>
    <comment>Final</comment></data>
-  <data name="Hello_My_Friend" xml:space="preserve">
-        <value>Hello my friend</value>
+  <data name="Dog" xml:space="preserve">
+        <value>Dog</value>
    <comment>New</comment></data>
 </root>

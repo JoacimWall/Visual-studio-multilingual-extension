@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using MultilingualExtensionExample.ViewModels;
-using MultilingualExtensionExample.Views;
-using Xamarin.Forms;
+﻿using System.Globalization;
+using System.Threading;
 
 namespace MultilingualExtensionExample
 {
@@ -11,8 +8,11 @@ namespace MultilingualExtensionExample
         public AppShell()
         {
             InitializeComponent();
-            Routing.RegisterRoute(nameof(ItemDetailPage), typeof(ItemDetailPage));
-            Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
+            //sample of hard set language that not need to match language on device
+            //Thread.CurrentThread.CurrentUICulture = new CultureInfo("nb-NO");
+            //Thread.CurrentThread.CurrentCulture = Thread.CurrentThread.CurrentUICulture;
+            //MultilingualExtensionExample.Resources.AppResources.Culture = Thread.CurrentThread.CurrentUICulture;
+
         }
 
     }

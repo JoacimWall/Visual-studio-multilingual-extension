@@ -31,6 +31,12 @@
     <value>Chien</value>
   <comment>Need review</comment></data>
   <data name="Cat" xml:space="preserve">
-    <value>Cat</value>
+    <value>Chat</value>
+  <comment>Need review</comment></data>
+  <data name="Press_Any_Key_To_Exit" xml:space="preserve">
+    <value>Appuyez sur n’importe quelle clé pour sortir</value>
+  <comment>Need review</comment></data>
+  <data name="Bird" xml:space="preserve">
+    <value>Oiseaux</value>
   <comment>New</comment></data>
 </root>

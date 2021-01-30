@@ -1,8 +1,6 @@
-﻿using System;
+﻿
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using MultilingualExtensionExample.Services;
-using MultilingualExtensionExample.Views;
+
 
 namespace MultilingualExtensionExample
 {
@@ -13,7 +11,6 @@ namespace MultilingualExtensionExample
         {
             InitializeComponent();
 
-            DependencyService.Register<MockDataStore>();
             MainPage = new AppShell();
         }
 

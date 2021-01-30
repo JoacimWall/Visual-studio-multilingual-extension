@@ -120,6 +120,9 @@
   <data name="Hello" xml:space="preserve">
     <value>Hello</value>
   <comment>Need review</comment></data>
+  <data name="Press_Any_Key_To_Exit" xml:space="preserve">
+    <value>Press any key to exit</value>
+  </data>
   <data name="Enter_Email" xml:space="preserve">
     <value>Enter email please!</value>
   </data>
@@ -137,5 +140,8 @@
   </data>
 	<data name="Cat" xml:space="preserve">
     <value>Cat</value>
+  </data>
+    <data name="Bird" xml:space="preserve">
+    <value>Birds</value>
   </data>
 </root>

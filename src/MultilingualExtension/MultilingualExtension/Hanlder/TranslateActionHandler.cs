@@ -28,6 +28,7 @@ namespace MultilingualExtension
                 {
                     SyncFileService syncFileService = new SyncFileService();
                     ISettingsService settingsService = new Services.SettingsService();
+                    await IdeApp.Workbench.SaveAllAsync();
                     ProjectFile selectedItem = (ProjectFile)IdeApp.Workspace.CurrentSelectedItem;
 
                     var resultUpdate = await syncFileService.UpdateNodeStatus(selectedItem.FilePath, Item, progress, settingsService);
