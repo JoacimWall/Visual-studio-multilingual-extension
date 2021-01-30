@@ -20,7 +20,7 @@ Under src/sample you will find a Xamarin forms sample. In this solution you will
 * List all unused translations to keep your resource files clean.
 
 <img width=“100” height="200" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/SolutionExample.png">
-
+<img width=“100” height="200" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/SolutionExample_win.png">
 
 ## Install for Mac
 The Visual studio for Mac team has closed the signup for new developers to publish extensions. So you need to download the latest release from this page then go to visual studio mac and click "install from file" in the Exstension Mananger. Remember to restart you visual studio after install for the extension to load.  
