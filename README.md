@@ -9,7 +9,7 @@
 [![YouTube](https://i9.ytimg.com/vi/4OAhHpUpXmA/mq2.jpg?sqp=CLDSof8F&rs=AOn4CLAexsPpQzbUEi8Ud_7YgThQFXFwPg)](https://youtu.be/4OAhHpUpXmA)
 
 
-Under src/sample you will find a Xamarin forms sample. In this solution you will see how you can implement multilingual support for Xamarin and how to access the translation from code and in xaml. This is a standard implementation of multilangual suport. If you install the extension you can test the translation features of the extension.
+Under src/sample you will find a Xamarin forms sample and a UWP sample. In the xamarin sample you will see how you can implement multilingual support for Xamarin and how to access the translation from code and in xaml. This is a standard implementation of multilangual suport. If you install the extension you can test the translation features of the extension.
 
 ### It has five main functions.
 
@@ -47,12 +47,12 @@ For resw files you use the folder structure to specify the languages. for exampl
 Strings\fr-FR\Resources.resw for French (in France)  
 Strings\fr-CA\Resources.resw for French (in Canada)
 
-Remember to set your master language in the menu Tools/multilinugal settings to you preferd mater language for example en-US. 
+Remember to set your master language in the menu Tools/multilinugal settings to you preferd master language for example en-US. 
 
 
  ## Explanation of functions
  ### Setting the preferred property's for the extension
-By default, this extension use Google's free translation. This is limited to only 100 translations per hour. To use the Microsoft translation service, select tools/multilingual settings in the visual studio and fill in the information from Microsoft. In this dialog you can also change the master language that is 'en' by default.
+By default, this extension use Google's free translation. This is limited to only 100 translations per hour. To use the Microsoft translation service, select tools/multilingual settings in the visual studio and fill in the information from Microsoft. In this dialog you can also change the master language that is 'en-US' by default.
 Here should you also select your preferred export format, csv or xslt.
 If you also want to handle the status for the texts in the master resx file, check the 'Add Comment node to master Resx file on sync' in settings dialog.
 
