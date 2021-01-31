@@ -39,8 +39,8 @@ namespace MultilingualExtension.Shared.Helpers
         public const string Close = "Close";
 
         public const string Export_Rows_Info = "Export rows where comment is 'New' or 'Need review'";
-        public const string Export_All_Files_Title = "Export all.xx-xx.resx files";
-        public const string Export_Seleted_File_Title = "Export this .xx-xx.resx file";
+        public const string Export_All_Files_Title = "Export language files";
+        public const string Export_Seleted_File_Title = "Export this language file";
 
         public const string Import_Rows_Info = "Import rows where comment is 'Final'";
         public const string Import_Translation_Title = "Import translations";
@@ -48,12 +48,12 @@ namespace MultilingualExtension.Shared.Helpers
         public const string Show_Setting_Title = "Multilingual Settings";
 
         public const string Translate_Rows_Info = "Translate rows where comment has value 'New'";
-        public const string Translate_All_Files_Title = "Translate all .xx-xx.resx files";
-        public const string Translate_Seleted_File_Title = "Translate this .xx-xx.resx file";
+        public const string Translate_All_Files_Title = "Translate all language files";
+        public const string Translate_Seleted_File_Title = "Translate this language file";
 
         public const string Synchronize_Rows_Info = "Synchronizes lines from master Resx file.";
-        public const string Synchronize_All_Files_Title = "Sync all .xx-xx.resx files with this";
-        public const string Synchronize_Seleted_File_Title = "Sync this .xx-xx.resx file";
+        public const string Synchronize_All_Files_Title = "Sync all language files with this";
+        public const string Synchronize_Seleted_File_Title = "Sync this language file";
 
         public const string List_Unused_Translatations = "List unused translations";
 

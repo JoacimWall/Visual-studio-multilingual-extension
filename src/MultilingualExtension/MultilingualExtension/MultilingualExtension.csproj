@@ -72,6 +72,12 @@
     <Compile Include="..\MultilingualExtension.SharedCode\Models\Res_Files.cs">
       <Link>Models\Res_Files.cs</Link>
     </Compile>
+    <Compile Include="..\MultilingualExtension.SharedCode\Models\Res_Fileinfo.cs">
+      <Link>Models\Res_Fileinfo.cs</Link>
+    </Compile>
+    <Compile Include="..\MultilingualExtension.SharedCode\Helpers\Res_Helpers.cs">
+      <Link>Helpers\Res_Helpers.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AddinReference Include="MonoDevelop.CSharpBinding" />

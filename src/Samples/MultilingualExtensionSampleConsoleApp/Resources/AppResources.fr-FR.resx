@@ -37,6 +37,9 @@
     <value>Appuyez sur n’importe quelle clé pour sortir</value>
   <comment>Need review</comment></data>
   <data name="Bird" xml:space="preserve">
-    <value>Oiseaux</value>
-  <comment>New</comment></data>
+    <value>Oiseau</value>
+  <comment>Need review</comment></data>
+  <data name="Cow" xml:space="preserve">
+    <value>Vache</value>
+  <comment>Need review</comment></data>
 </root>

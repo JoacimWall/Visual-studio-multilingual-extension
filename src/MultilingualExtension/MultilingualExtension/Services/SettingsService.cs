@@ -53,7 +53,7 @@ namespace MultilingualExtension.Services
                 //Default en
                 var value = MonoDevelop.Core.PropertyService.Get<string>(Globals.PROP_MASTERLANGUAGECODE);
                 if (String.IsNullOrEmpty(value))
-                    return "en";
+                    return "en-US";
 
                 return value;
             }

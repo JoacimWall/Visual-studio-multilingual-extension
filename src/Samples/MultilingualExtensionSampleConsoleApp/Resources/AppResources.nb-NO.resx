@@ -37,6 +37,9 @@
     <value>Trykk på en tast for å avslutte</value>
   <comment>Need review</comment></data>
   <data name="Bird" xml:space="preserve">
-    <value>Fugler</value>
-  <comment>New</comment></data>
+    <value>Fuglen</value>
+  <comment>Need review</comment></data>
+  <data name="Cow" xml:space="preserve">
+    <value>Kua</value>
+  <comment>Need review</comment></data>
 </root>

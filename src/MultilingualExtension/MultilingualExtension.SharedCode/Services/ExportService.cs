@@ -35,11 +35,11 @@ namespace MultilingualExtension.Shared.Services
 
                     foreach (var updatePath in resultResw.Model.UpdateFilepaths)
                     {
-                        await ExportToFileInternal(resultResw.Model.MasterFilepath, updatePath, resultResw.Model.MasterFilename, exportFileType, progress);
+                        await ExportToFileInternal(false,resultResw.Model.MasterFilepath, updatePath, resultResw.Model.MasterFilename, exportFileType, progress);
                     }
 
                     if (settingsService.AddCommentNodeMasterResx)
-                        await ExportToFileInternal(resultResw.Model.MasterFilepath, resultResw.Model.MasterFilepath, resultResw.Model.MasterFilename, exportFileType, progress);
+                        await ExportToFileInternal(true,resultResw.Model.MasterFilepath, resultResw.Model.MasterFilepath, resultResw.Model.MasterFilename, exportFileType, progress);
                     return new Result<bool>(true);
                 }
                 // -------------------- ResX files --------------------------------------------------------
@@ -53,11 +53,11 @@ namespace MultilingualExtension.Shared.Services
                 {
                     var checkfileInFolder = RegExHelper.ValidateFilenameIsTargetType(updatePath);
                     if (checkfileInFolder.Success)
-                        await ExportToFileInternal(resultResx.Model.MasterFilepath, updatePath, resultResx.Model.MasterFilename, exportFileType, progress);
+                        await ExportToFileInternal(false,resultResx.Model.MasterFilepath, updatePath, resultResx.Model.MasterFilename, exportFileType, progress);
                 }
                 //export Master
                 if (settingsService.AddCommentNodeMasterResx)
-                    await ExportToFileInternal(resultResx.Model.MasterFilepath, resultResx.Model.MasterFilepath, resultResx.Model.MasterFilename, exportFileType, progress);
+                    await ExportToFileInternal(true,resultResx.Model.MasterFilepath, resultResx.Model.MasterFilepath, resultResx.Model.MasterFilename, exportFileType, progress);
 
                 return new Result<bool>(true);
               
@@ -77,7 +77,7 @@ namespace MultilingualExtension.Shared.Services
 
         }
 
-        private async Task<Result<Boolean>> ExportToFileInternal(string masterPath, string updatePath,string masterFilename, int exportFileType, IProgressBar progress)
+        private async Task<Result<Boolean>> ExportToFileInternal(bool isMasterFile,string masterPath, string updatePath,string masterFilename, int exportFileType, IProgressBar progress)
         {
             string folderSeperator = Environment.OSVersion.Platform == PlatformID.Win32NT ? "\\" : "/";
             int folderindex = updatePath.LastIndexOf(folderSeperator);
@@ -138,7 +138,7 @@ namespace MultilingualExtension.Shared.Services
             }
             var checkfile = RegExHelper.GetFilenameResx(updatePath);
             var engine = new FileHelperEngine<TranslationsRow>(System.Text.Encoding.UTF8);
-            string exportFileName = string.IsNullOrEmpty(masterFilename) ? masterFolderPath + checkfile.Value : masterFolderPath + masterFilename ;
+            string exportFileName = !isMasterFile ? masterFolderPath + checkfile.Value : masterFolderPath + masterFilename ;
             if (exportFileType == 1)
             {
                 //get filename

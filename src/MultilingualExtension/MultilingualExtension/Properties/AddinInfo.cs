@@ -30,13 +30,13 @@ using Mono.Addins.Description;
 [assembly: Addin(
     "MultilingualExtension",
     Namespace = "MultilingualExtension",
-    Version = "1.0.24"
+    Version = "1.0.25"
     
 )]
 
 [assembly: AddinName("Multilingual Extension")]
 [assembly: AddinCategory("IDE extensions")]
-[assembly: AddinDescription("Synchronization of resx files and auto translation throw Google translate and Microsoft cognitve service")]
+[assembly: AddinDescription("Synchronization of resx or resw files and auto translation throw Google translate and Microsoft cognitve service")]
 [assembly: AddinAuthor("Joacim Wall")]
 [assembly: AddinDependency("::MonoDevelop.Core", MonoDevelop.BuildInfo.Version)]
 [assembly: AddinDependency("::MonoDevelop.Ide", MonoDevelop.BuildInfo.Version)]

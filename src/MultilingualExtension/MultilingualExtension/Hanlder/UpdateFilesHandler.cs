@@ -27,8 +27,11 @@ namespace MultilingualExtension
                
                var result = await syncFileService.SyncFile(selectedItem.FilePath, progress, settingsService);
 
-              
+                if (!result.WasSuccessful)
+                {
+                    MessageService.GenericAlert(new GenericMessage { Text = result.ErrorMessage });
 
+                }
 
             }
             catch (Exception ex)
@@ -51,8 +54,10 @@ namespace MultilingualExtension
             string selectedFilename = selectedItem.Name;
 
             //validate file
-            var checkfile = RegExHelper.ValidateFilenameIsTargetType(selectedFilename);
-            if (!checkfile.Success)
+            ISettingsService settingsService = new Services.SettingsService();
+            var res_Info = Res_Helpers.FileInfo(settingsService.MasterLanguageCode, selectedFilename);
+           
+            if (res_Info.Model.IsMasterFile)
             {
                 info.Text = Globals.Synchronize_All_Files_Title;
             }

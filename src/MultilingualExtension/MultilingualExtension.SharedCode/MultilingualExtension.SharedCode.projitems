@@ -28,5 +28,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)..\MultilingualExtension.SharedCode\Helpers\RegExHelper.cs">
       <Link>Helpers\RegExHelper.cs</Link>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Res_Fileinfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\Res_Helpers.cs" />
   </ItemGroup>
 </Project>

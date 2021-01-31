@@ -146,16 +146,17 @@ namespace MultilingualExtension
                 searchTokenSource = cancelSource;
                 var token = cancelSource.Token;
 
+                var res_Info = Res_Helpers.FileInfo(settingsService.MasterLanguageCode, selectedItem.Name);
+
+               
                 XmlDocument masterdoc = new XmlDocument();
                 masterdoc.Load(selectedItem.FilePath);
                 XmlNode rootMaster = masterdoc.DocumentElement;
 
 
 
-                var namespaceMatch = RegExHelper.GetFilenameMasterResx(selectedItem.FilePath);
-                string namspacenameMaster = string.Empty;
-                if (namespaceMatch.Success)
-                    namspacenameMaster = namespaceMatch.Value.Substring(0, namespaceMatch.Length - 4);
+               
+                string namspacenameMaster = res_Info.Model.MasterFilename.Substring(0, res_Info.Model.MasterFilename.Length - 4);
                 // get all names
                 XmlNodeList nodeListMaster = rootMaster.SelectNodes("//data");
                 List<string> dataValues = new List<string>();
@@ -174,7 +175,7 @@ namespace MultilingualExtension
                             {
                                 string questionMess = "You have " + dataValues.Count.ToString() + " translations strings and " + result.Count.ToString() +
                                 " of them are not used in any .cs or .xaml file." + Environment.NewLine + Environment.NewLine + "To remove them from the master resx file press 'Yes'." + Environment.NewLine + "Select 'No' to just show them in the search result." + Environment.NewLine +
-                                "Remember to select 'sync all xx-xx.resx ...' translation files to remove unused translations from other language files.";
+                                "Remember to select 'sync all Langiage ...' translation files to remove unused translations from other language files.";
                                 var question = new QuestionMessage(questionMess);
                                 question.Buttons.Add(new AlertButton("Yes"));
                                 question.Buttons.Add(new AlertButton("No"));
@@ -275,10 +276,10 @@ namespace MultilingualExtension
 
             ProjectFile selectedItem = (ProjectFile)IdeApp.Workspace.CurrentSelectedItem;
             string selectedFilename = selectedItem.Name;
+            ISettingsService settingsService = new Services.SettingsService();
+            var res_Info = Res_Helpers.FileInfo(settingsService.MasterLanguageCode, selectedFilename);
 
-            //validate file
-            var checkfile = RegExHelper.ValidateFilenameIsTargetType(selectedFilename);
-            if (!checkfile.Success)
+            if (res_Info.Model.IsMasterFile)
             {
                 info.Visible = true;
                 info.Text = Globals.List_Unused_Translatations;

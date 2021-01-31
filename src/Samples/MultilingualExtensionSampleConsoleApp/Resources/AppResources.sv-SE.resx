@@ -37,6 +37,9 @@
     <value>Tryck på valfri tangent för att avsluta</value>
   <comment>Need review</comment></data>
   <data name="Bird" xml:space="preserve">
-    <value>Fåglar</value>
-  <comment>New</comment></data>
+    <value>Fågel</value>
+  <comment>Need review</comment></data>
+  <data name="Cow" xml:space="preserve">
+    <value>Ko</value>
+  <comment>Final</comment></data>
 </root>

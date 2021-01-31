@@ -48,7 +48,10 @@ namespace MultilingualExtension
             //validate file
             var checkfilecsv = RegExHelper.ValidateFilenameIsTargetTypeResx_Csv(selectedFilename);
             var checkfilecxlsx = RegExHelper.ValidateFilenameIsTargetTypeResx_Xlsx(selectedFilename);
-            if (!checkfilecsv.Success && !checkfilecxlsx.Success)
+            var checkfilecsv_resw = RegExHelper.ValidateFilenameIsTargetTypeResw_Csv(selectedFilename);
+            var checkfilecxlsx_resw = RegExHelper.ValidateFilenameIsTargetTypeResw_Xlsx(selectedFilename);
+
+            if (!checkfilecsv.Success && !checkfilecxlsx.Success && !checkfilecsv_resw.Success && !checkfilecxlsx_resw.Success)
             {
                 info.Visible = false;
             }

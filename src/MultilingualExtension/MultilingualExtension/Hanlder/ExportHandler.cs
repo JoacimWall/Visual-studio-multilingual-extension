@@ -46,9 +46,10 @@ namespace MultilingualExtension
             ProjectFile selectedItem = (ProjectFile)IdeApp.Workspace.CurrentSelectedItem;
             string selectedFilename = selectedItem.Name;
 
-            //validate file
-            var checkfile = RegExHelper.ValidateFilenameIsTargetType(selectedFilename);
-            if (!checkfile.Success)
+            ISettingsService settingsService = new Services.SettingsService();
+            var res_Info = Res_Helpers.FileInfo(settingsService.MasterLanguageCode, selectedFilename);
+
+            if (res_Info.Model.IsMasterFile)
             {
                 info.Text = Globals.Export_All_Files_Title;
             }
@@ -57,6 +58,7 @@ namespace MultilingualExtension
                 info.Text = Globals.Export_Seleted_File_Title;
 
             }
+            
         }
 
     }
