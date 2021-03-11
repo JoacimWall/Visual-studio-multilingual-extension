@@ -82,12 +82,12 @@
     </Extension>
    
      <Extension path = "/MonoDevelop/SourceEditor2/ContextMenu/Editor">
-        <Condition id="FileType" fileExtensions=".resx,.resw">
+        <Condition id="FileType" fileExtensions=".resx">
                  <CommandItem id = "MultilingualExtension.MultilingualExtensionCommands.TranslateAction"/>
          </Condition>
     </Extension>
      <Extension path = "/MonoDevelop/SourceEditor2/ContextMenu/Editor">
-        <Condition id="FileType" fileExtensions=".resx,.resw">
+        <Condition id="FileType" fileExtensions=".resx">
                  <CommandItem id = "MultilingualExtension.MultilingualExtensionCommands.SyncAndTranslateSelectedNode"/>
          </Condition>
     </Extension>

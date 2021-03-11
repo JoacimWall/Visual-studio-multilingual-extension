@@ -39,4 +39,7 @@
     <data name="Snake" xml:space="preserve">
         <value>Snake</value>
    </data>
+    <data name="Monkey" xml:space="preserve">
+        <value>Monkey</value>
+   </data>
 </root>

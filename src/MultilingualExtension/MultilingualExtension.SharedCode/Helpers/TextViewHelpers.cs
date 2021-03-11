@@ -25,7 +25,7 @@ namespace MultilingualExtension.Shared.Helpers
                 }
 
             }
-            catch (Exception ex)
+            catch 
             {
 
             }

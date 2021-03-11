@@ -100,5 +100,11 @@ namespace MultilingualExtensionExample.Resources {
                 return ResourceManager.GetString("Snake", resourceCulture);
             }
         }
+        
+        public static string Monkey {
+            get {
+                return ResourceManager.GetString("Monkey", resourceCulture);
+            }
+        }
     }
 }
