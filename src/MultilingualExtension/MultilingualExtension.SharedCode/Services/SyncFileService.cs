@@ -90,7 +90,7 @@ namespace MultilingualExtension.Shared.Services
                 }
                 //------------------ RESX failes -------------------------------------------------// 
                 //validate file
-                var resultResx = ResxHelpers.GetBasInfo(selectedFilename);
+                var resultResx = ResxHelpers.GetBasInfo(selectedFilename, settingsService.MasterLanguageCode);
                 if (!resultResx.WasSuccessful)
                     return new Result<bool>(resultResx.ErrorMessage);
 

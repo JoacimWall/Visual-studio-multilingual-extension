@@ -12,7 +12,11 @@ namespace MultilingualExtension
 
     class SyncAndTranslateSelectedNodeHandler : CommandHandler
     {
+        public SyncAndTranslateSelectedNodeHandler()
+        {
 
+
+        }
         protected async override void Run()
         {
             IProgressBar progress = new Helpers.ProgressBarHelper(Globals.Synchronize_Rows_Info);

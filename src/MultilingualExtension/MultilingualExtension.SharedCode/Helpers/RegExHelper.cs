@@ -16,14 +16,21 @@ namespace MultilingualExtension.Shared.Helpers
             Regex regex = new Regex(@".resx$");
             return regex.Match(path);
 
-        }//AppResources.se-SE.resx
+        }//AppResources.se-SE.resx or //AppResources.se.resx
         public static Match ValidateFilenameIsTargetType(string path)
         {
-            Regex regex = new Regex(@".[a-zA-Z][a-zA-Z]-[a-zA-Z][a-zA-Z].resx$");
+            Regex regex = new Regex(@"([.][a-zA-Z][a-zA-Z]-[a-zA-Z][a-zA-Z].resx$)|([.][a-zA-Z][a-zA-Z].resx$)");
+            return regex.Match(path);
+
+        
+        }//AppResources.se-SE.resx or //AppResources.se.resx
+        public static Match ValidateFilenameIsMasterTargetType(string path)
+        {
+            Regex regex = new Regex(@"[.][a-zA-Z][a-zA-Z].resx$");
             return regex.Match(path);
 
         }
-        public static Match ValidatePathReswIsTargetType(string path)
+    public static Match ValidatePathReswIsTargetType(string path)
         {
             Regex regex = new Regex(@".[a-zA-Z][a-zA-Z]-[a-zA-Z][a-zA-Z]$");
             return regex.Match(path);
@@ -31,7 +38,7 @@ namespace MultilingualExtension.Shared.Helpers
         }//AppResources.se-SE.resx.csv
         public static Match ValidateFilenameIsTargetTypeResx_Csv(string path)
         {
-            Regex regex = new Regex(@"\w+.[a-zA-Z][a-zA-Z]-[a-zA-Z][a-zA-Z].resx.csv$");
+            Regex regex = new Regex(@"(\w+.[a-zA-Z][a-zA-Z]-[a-zA-Z][a-zA-Z].resx.csv$)|(\w+.[a-zA-Z][a-zA-Z].resx.csv$)");
             return regex.Match(path);
 
         } //Resources.resw.csv
@@ -43,7 +50,7 @@ namespace MultilingualExtension.Shared.Helpers
         }//AppResources.se-SE.resx.slsx
         public static Match ValidateFilenameIsTargetTypeResx_Xlsx(string path)
         {
-            Regex regex = new Regex(@"\w+.[a-zA-Z][a-zA-Z]-[a-zA-Z][a-zA-Z].resx.xlsx$");
+            Regex regex = new Regex(@"(\w+.[a-zA-Z][a-zA-Z]-[a-zA-Z][a-zA-Z].resx.xlsx$)|(\w+.[a-zA-Z][a-zA-Z].resx.xlsx$)");
             return regex.Match(path);
 
         }//Resources.resw.slsx
@@ -55,7 +62,7 @@ namespace MultilingualExtension.Shared.Helpers
         }
         public static Match GetFilenameResx(string path)
         {
-            Regex regex = new Regex(@"\w+.[a-zA-Z][a-zA-Z]-[a-zA-Z][a-zA-Z].resx$");
+            Regex regex = new Regex(@"(\w+.[a-zA-Z][a-zA-Z]-[a-zA-Z][a-zA-Z].resx$)|(\w+.[a-zA-Z][a-zA-Z].resx$)");
             return regex.Match(path);
 
         }

@@ -56,16 +56,16 @@ namespace MultilingualExtension
             //validate file
             ISettingsService settingsService = new Services.SettingsService();
             var res_Info = Res_Helpers.FileInfo(settingsService.MasterLanguageCode, selectedFilename);
-           
+
             if (res_Info.Model.IsMasterFile)
             {
                 info.Text = Globals.Synchronize_All_Files_Title;
             }
-            else
+            else 
             {
                 info.Text = Globals.Synchronize_Seleted_File_Title;
-
             }
+           
         }
     }
     public enum MultilingualExtensionCommands

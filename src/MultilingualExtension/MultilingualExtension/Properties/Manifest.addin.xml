@@ -42,7 +42,7 @@
     </Extension>
      <Extension path = "/MonoDevelop/Ide/Commands">
         <Command id = "MultilingualExtension.MultilingualExtensionCommands.SyncAndTranslateSelectedNode"
-             _label = "Sync and translate this node in all language files"
+             _label = "Sync and translate"
              _description = "Action that aplay to all child language files"
                defaultHandler = "MultilingualExtension.SyncAndTranslateSelectedNodeHandler"/>
     </Extension>

@@ -295,7 +295,7 @@ namespace MultilingualExtension.Shared.Services
 
                 // -------------------- ResX files --------------------------------------------------------
                 //validate file
-                var resultResx = ResxHelpers.GetBasInfo(selectedFilename);
+                var resultResx = ResxHelpers.GetBasInfo(selectedFilename, settingsService.MasterLanguageCode);
                 if (!resultResx.WasSuccessful)
                     return new Result<bool>(resultResx.ErrorMessage);
 
