@@ -135,11 +135,16 @@ namespace MultilingualExtension.Shared.Services
             XmlNodeList nodeListMaster = rootMaster.SelectNodes("//data");
             foreach (XmlNode dataMaster in nodeListMaster)
             {
+                var masterCommentNode = dataMaster.SelectSingleNode("comment");
+                //Check if we are shold not translat this node
+                if (masterCommentNode != null && masterCommentNode.InnerText != Globals.STATUS_COMMENT_NO_TRANSLATION)
+                    continue;
+
                 //Add comment node to master if that is set in settings
+
                 if (addMasterCommentNode)
                 {
-                    var commentNode = dataMaster.SelectSingleNode("comment");
-                    if (commentNode == null)
+                    if (masterCommentNode == null)
                     {
                         XmlElement elem = masterdoc.CreateElement("comment"); //item1 ,item2..
                         elem.InnerText = Globals.STATUS_COMMENT_NEED_REVIEW;
@@ -148,10 +153,10 @@ namespace MultilingualExtension.Shared.Services
                     }
                     else
                     {
-                        if (commentNode.InnerText != Globals.STATUS_COMMENT_NEED_REVIEW)
+                        if (masterCommentNode.InnerText != Globals.STATUS_COMMENT_NEED_REVIEW)
                             masterFileChanged = true;
 
-                        commentNode.InnerText = Globals.STATUS_COMMENT_NEED_REVIEW;
+                        masterCommentNode.InnerText = Globals.STATUS_COMMENT_NEED_REVIEW;
                     }
 
                 }
@@ -164,8 +169,8 @@ namespace MultilingualExtension.Shared.Services
                     XmlNode newEntry = updatedoc.ImportNode(dataMaster, true);
                     updatedoc.DocumentElement.AppendChild(newEntry);
                     //check if comment exist from master
-                    var commentNode = newEntry.SelectSingleNode("comment");
-                    if (commentNode == null)
+                    var updateCommentNode = newEntry.SelectSingleNode("comment");
+                    if (updateCommentNode == null)
                     {
                         XmlElement elem = updatedoc.CreateElement("comment"); //item1 ,item2..
                         elem.InnerText = Globals.STATUS_COMMENT_NEW;
@@ -173,14 +178,14 @@ namespace MultilingualExtension.Shared.Services
                     }
                     else
                     {
-                        commentNode.InnerText = Globals.STATUS_COMMENT_NEW;
+                        updateCommentNode.InnerText = Globals.STATUS_COMMENT_NEW;
                     }
                 }
                 else
                 {
                     //Check if comment exist or not
-                    var commentNode = exist.SelectSingleNode("comment");
-                    if (commentNode == null)
+                    var updateCommentNode = exist.SelectSingleNode("comment");
+                    if (updateCommentNode == null)
                     {   //If comment not exists then we think this is old row that are allredy translated and final
                         XmlElement elem = updatedoc.CreateElement("comment"); //item1 ,item2..
                         elem.InnerText = Globals.STATUS_COMMENT_FINAL;
@@ -189,10 +194,10 @@ namespace MultilingualExtension.Shared.Services
                     }
                     else
                     {  //Comment not ok set to need review
-                        if (commentNode.InnerText != Globals.STATUS_COMMENT_NEW && commentNode.InnerText != Globals.STATUS_COMMENT_NEED_REVIEW && commentNode.InnerText != Globals.STATUS_COMMENT_FINAL)
+                        if (updateCommentNode.InnerText != Globals.STATUS_COMMENT_NEW && updateCommentNode.InnerText != Globals.STATUS_COMMENT_NEED_REVIEW && updateCommentNode.InnerText != Globals.STATUS_COMMENT_FINAL)
                         {
                             updateFileChanged = true;
-                            commentNode.InnerText = Globals.STATUS_COMMENT_NEED_REVIEW;
+                            updateCommentNode.InnerText = Globals.STATUS_COMMENT_NEED_REVIEW;
                         }
                     }
                 }

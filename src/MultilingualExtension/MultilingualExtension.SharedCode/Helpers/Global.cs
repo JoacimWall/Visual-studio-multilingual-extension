@@ -9,7 +9,7 @@ namespace MultilingualExtension.Shared.Helpers
         //Constants for status on translation
         public const string STATUS_COMMENT_NEW = "New";
         public const string STATUS_COMMENT_NEED_REVIEW = "Need review";
-        public const string STATUS_COMMENT_TRANSLATED = "Translated";
+        public const string STATUS_COMMENT_NO_TRANSLATION = "No transaltion";
         public const string STATUS_COMMENT_FINAL = "Final";
 
         //Constants for saved propertys

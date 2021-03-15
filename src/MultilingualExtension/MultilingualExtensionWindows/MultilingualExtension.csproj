@@ -58,6 +58,9 @@
     <Compile Include="..\MultilingualExtension.SharedCode\Helpers\ResxHelpers.cs">
       <Link>Helpers\ResxHelpers.cs</Link>
     </Compile>
+    <Compile Include="..\MultilingualExtension.SharedCode\Helpers\Res_Helpers.cs">
+      <Link>Helpers\Res_Helpers.cs</Link>
+    </Compile>
     <Compile Include="..\MultilingualExtension.SharedCode\Interfaces\IProgressBar.cs">
       <Link>Interfaces\IProgressBar.cs</Link>
     </Compile>
@@ -69,6 +72,9 @@
     </Compile>
     <Compile Include="..\MultilingualExtension.SharedCode\Models\Result.cs">
       <Link>Models\Result.cs</Link>
+    </Compile>
+    <Compile Include="..\MultilingualExtension.SharedCode\Models\Res_Fileinfo.cs">
+      <Link>Models\Res_Fileinfo.cs</Link>
     </Compile>
     <Compile Include="..\MultilingualExtension.SharedCode\Models\Res_Files.cs">
       <Link>Models\Res_Files.cs</Link>

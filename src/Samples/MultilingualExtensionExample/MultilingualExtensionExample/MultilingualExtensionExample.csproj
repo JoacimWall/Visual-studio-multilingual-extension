@@ -20,6 +20,8 @@
   <ItemGroup>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Resources\AppResources.Designer.cs">
       <DependentUpon>AppResources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
   </ItemGroup>
 </Project>
