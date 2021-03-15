@@ -3,7 +3,7 @@
 #### For it to work, it requires that you start from a Resx or Resw file that is the master.
 #### Resx files use the filename for language recognize. You name all the other files according to the masterfile name .xx-xx.resx or .xx.resx. For example AppResources.resx for master and AppResources.fr.resx for shared translations for French. And AppResources.fr-FR.resx,AppResources.fr-CA.resx if you would like to have different translation for France or Canadian culture. 
 
-#### If you have a row in master file (AppResources.resx) that you want to be public and not translate you can add a comment value of 'No transaltion'.
+#### If you have a row in master file (AppResources.resx) that you want to be public and not translate you can add a comment value of 'No translation'.
 
 #### Resw use the name of the folders for language recognize. If you have a masterfile in folder strings\en-US\Resources.resw then you shold put french file in strings\fr-FR\Resources.resw  
 
