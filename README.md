@@ -1,7 +1,7 @@
 # Visual Studio For Mac/Windows Multilingual Extension
 #### This extension is for handling multilingual support in visual studio.
 #### For it to work, it requires that you start from a Resx or Resw file that is the master.
-#### Resx files use the filename for language recognize. You name all the other files according to the masterfile name .xx-xx.resx or .xx.resx. For example AppResources.resx for master and AppResources.fr.resx for shared translations for French. And AppResources.fr-FR.resx,AppResources.fr-CA.resx if you would like to have different translation for France or Canadian culture.
+#### Resx files use the filename for language recognize. You name all the other files according to the masterfile name .xx-xx.resx or .xx.resx. For example AppResources.resx for master and AppResources.fr.resx for shared translations for French. And AppResources.fr-FR.resx,AppResources.fr-CA.resx if you would like to have different translation for France or Canadian culture. If you have a row in master file (AppResources.resx) that you want to be public and not translate you can add a comment value of 'No transaltion'.
 
 #### Resw use the name of the folders for language recognize. If you have a masterfile in folder strings\en-US\Resources.resw then you shold put french file in strings\fr-FR\Resources.resw  
 
@@ -121,7 +121,7 @@ This feature is only implemented on mac in current version.
 This extension use the comment field in the target resx files(AppResources.fr-FR.resx) to keep track of the status of row/translation. It has three different status that it can have in it's comment field.
 * New
 * Need review
-* Final
+* Final   
 
 New: The row will get this status after first synchronization. If the data row not exist in the target file.
 if the translation already exists then it gets the status "final" this is so you can start using this extension if you alredy have translation files that are translated.
@@ -129,6 +129,9 @@ if the translation already exists then it gets the status "final" this is so you
 Need review: This status will it get after translation from one of the translation services.
 
 Final: This status will it get after import from csv/xslt file where the status column bin changed to final. You can also set this status in the target file if you don't want the row to be exported to external stakeholder for translation.
+
+To make a transaltion row public for all language you can add the value 'No translation' in the comment filed in the master resx file.  
+* No translation
 
 In this first version all files need to be in the same folder, export and import (.csv) should not be renamed if it should work when we will import translations.
 
