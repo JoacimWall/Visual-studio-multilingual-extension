@@ -146,6 +146,7 @@
     <comment>Need review</comment>
   </data>
   <data name="Dog" xml:space="preserve">
+<<<<<<< Updated upstream
     <value>Dog</value>
     <comment>New</comment>
   </data>
@@ -161,4 +162,17 @@
     <value>Ant</value>
     <comment>New</comment>
   </data>
+=======
+        <value>Hund</value>
+   <comment>Need review</comment></data>
+  <data name="Snake" xml:space="preserve">
+        <value>Orm</value>
+   <comment>Need review</comment></data>
+  <data name="Monkey" xml:space="preserve">
+        <value>Apa</value>
+   <comment>Need review</comment></data>
+  <data name="Cat" xml:space="preserve">
+        <value>Katt</value>
+   <comment>Need review</comment></data>
+>>>>>>> Stashed changes
 </root>

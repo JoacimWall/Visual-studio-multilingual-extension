@@ -167,5 +167,11 @@ namespace MultilingualExtensionExample.Resources {
                 return ResourceManager.GetString("Youtube_Is_Nice_For_Videos", resourceCulture);
             }
         }
+        
+        public static string Cat {
+            get {
+                return ResourceManager.GetString("Cat", resourceCulture);
+            }
+        }
     }
 }

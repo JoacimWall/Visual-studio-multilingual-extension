@@ -71,7 +71,7 @@ namespace MultilingualExtension
             else
             { //child  resx fiels
                 commandSet.CommandInfos.Add(new CommandInfo("All to " + Globals.STATUS_COMMENT_NEW), new UpdateStatusForTranslation(Globals.STATUS_COMMENT_NEW));
-                commandSet.CommandInfos.Add(new CommandInfo("All to " + Globals.STATUS_COMMENT_TRANSLATED), new UpdateStatusForTranslation(Globals.STATUS_COMMENT_TRANSLATED));
+                commandSet.CommandInfos.Add(new CommandInfo("All to " + Globals.STATUS_COMMENT_NEED_REVIEW), new UpdateStatusForTranslation(Globals.STATUS_COMMENT_NEED_REVIEW));
                 commandSet.CommandInfos.Add(new CommandInfo("All to " + Globals.STATUS_COMMENT_FINAL), new UpdateStatusForTranslation(Globals.STATUS_COMMENT_FINAL));
             }
 

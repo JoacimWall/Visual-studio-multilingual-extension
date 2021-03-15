@@ -33,15 +33,23 @@
         <value>Youtube est agréable pour les vidéos et la musique</value>
    <comment>Final</comment></data>
   <data name="Dog" xml:space="preserve">
-        <value>Dog</value>
-   <comment>New</comment></data>
+        <value>Chien</value>
+   <comment>Need review</comment></data>
   <data name="Snake" xml:space="preserve">
-        <value>Snake</value>
-   <comment>New</comment></data>
+        <value>Serpent</value>
+   <comment>Need review</comment></data>
   <data name="Monkey" xml:space="preserve">
+<<<<<<< Updated upstream
         <value>Monkey</value>
    <comment>New</comment></data>
   <data name="Ant" xml:space="preserve">
     <value>Ant</value>
   <comment>New</comment></data>
+=======
+        <value>Singe</value>
+   <comment>Need review</comment></data>
+  <data name="Cat" xml:space="preserve">
+        <value>Chat</value>
+   <comment>Final</comment></data>
+>>>>>>> Stashed changes
 </root>
