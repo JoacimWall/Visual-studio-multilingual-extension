@@ -20,7 +20,7 @@ namespace MultilingualExtension.Shared.Services
         public ExportService()
         {
         }
-        public async Task<Result<Boolean>> ExportToFile(string selectedFilename, IProgressBar progress, ISettingsService settingsService)
+        public async Task<Result<Boolean>> ExportToFile(string selectedFilename, string statusToExport, IProgressBar progress, ISettingsService settingsService)
         {
             try
             {
@@ -35,11 +35,11 @@ namespace MultilingualExtension.Shared.Services
 
                     foreach (var updatePath in resultResw.Model.UpdateFilepaths)
                     {
-                        await ExportToFileInternal(false,resultResw.Model.MasterFilepath, updatePath, resultResw.Model.MasterFilename, exportFileType, progress);
+                        await ExportToFileInternal(false, resultResw.Model.MasterFilepath, updatePath, resultResw.Model.MasterFilename, statusToExport, exportFileType, progress);
                     }
 
                     if (settingsService.AddCommentNodeMasterResx)
-                        await ExportToFileInternal(true,resultResw.Model.MasterFilepath, resultResw.Model.MasterFilepath, resultResw.Model.MasterFilename, exportFileType, progress);
+                        await ExportToFileInternal(true, resultResw.Model.MasterFilepath, resultResw.Model.MasterFilepath, resultResw.Model.MasterFilename, statusToExport, exportFileType, progress);
                     return new Result<bool>(true);
                 }
                 // -------------------- ResX files --------------------------------------------------------
@@ -53,14 +53,14 @@ namespace MultilingualExtension.Shared.Services
                 {
                     var checkfileInFolder = RegExHelper.ValidateFilenameIsTargetType(updatePath);
                     if (checkfileInFolder.Success)
-                        await ExportToFileInternal(false,resultResx.Model.MasterFilepath, updatePath, resultResx.Model.MasterFilename, exportFileType, progress);
+                        await ExportToFileInternal(false, resultResx.Model.MasterFilepath, updatePath, resultResx.Model.MasterFilename, statusToExport, exportFileType, progress);
                 }
                 //export Master
                 if (settingsService.AddCommentNodeMasterResx)
-                    await ExportToFileInternal(true,resultResx.Model.MasterFilepath, resultResx.Model.MasterFilepath, resultResx.Model.MasterFilename, exportFileType, progress);
+                    await ExportToFileInternal(true, resultResx.Model.MasterFilepath, resultResx.Model.MasterFilepath, resultResx.Model.MasterFilename, statusToExport, exportFileType, progress);
 
                 return new Result<bool>(true);
-              
+
 
             }
             catch (Exception ex)
@@ -77,7 +77,7 @@ namespace MultilingualExtension.Shared.Services
 
         }
 
-        private async Task<Result<Boolean>> ExportToFileInternal(bool isMasterFile,string masterPath, string updatePath,string masterFilename, int exportFileType, IProgressBar progress)
+        private async Task<Result<Boolean>> ExportToFileInternal(bool isMasterFile, string masterPath, string updatePath, string masterFilename, string statusToExport, int exportFileType, IProgressBar progress)
         {
             string folderSeperator = Environment.OSVersion.Platform == PlatformID.Win32NT ? "\\" : "/";
             int folderindex = updatePath.LastIndexOf(folderSeperator);
@@ -92,7 +92,7 @@ namespace MultilingualExtension.Shared.Services
             XmlDocument masterdoc = new XmlDocument();
             masterdoc.Load(masterPath);
             XmlNode rootMaster = masterdoc.DocumentElement;
-            
+
 
             var rows = new List<TranslationsRow>();
 
@@ -102,35 +102,70 @@ namespace MultilingualExtension.Shared.Services
             {
                 //check if comment exist
                 var commentNode = dataUpdate.SelectSingleNode("comment");
-                if (commentNode != null && (commentNode.InnerText == Globals.STATUS_COMMENT_NEW || commentNode.InnerText == Globals.STATUS_COMMENT_NEED_REVIEW))
+
+                //commandSet.CommandInfos.Add(new CommandInfo(Globals.STATUS_COMMENT_NEW_OR_NEED_REVIEW), Globals.STATUS_COMMENT_NEW_OR_NEED_REVIEW);
+                //commandSet.CommandInfos.Add(new CommandInfo(Globals.STATUS_COMMENT_NEW), Globals.STATUS_COMMENT_NEW);
+                //commandSet.CommandInfos.Add(new CommandInfo(Globals.STATUS_COMMENT_NEED_REVIEW), Globals.STATUS_COMMENT_NEED_REVIEW);
+                //commandSet.CommandInfos.Add(new CommandInfo(Globals.STATUS_COMMENT_FINAL), Globals.STATUS_COMMENT_FINAL);
+                //commandSet.CommandInfos.Add(new CommandInfo(Globals.STATUS_COMMENT_ALL_ROWS), Globals.STATUS_COMMENT_ALL_ROWS);
+                // commandSet.CommandInfos.Add(new CommandInfo(Globals.STATUS_COMMENT_NO_TRANSLATION), Globals.STATUS_COMMENT_NO_TRANSLATION);
+
+                    if (commentNode != null)
                 {
-                    //Get master value
-                    XmlNode masterExist = rootMaster.SelectSingleNode("//data[@name='" + dataUpdate.Attributes.GetNamedItem("name").Value + "']");
+                    bool exportNode = false;
 
-                    if (masterExist != null)
+                    switch (statusToExport)
                     {
-                        var masterValueNode = masterExist.SelectSingleNode("value");
-                        if (masterValueNode == null)
+                        case Globals.STATUS_COMMENT_NEW_OR_NEED_REVIEW:
+                            exportNode = (commentNode.InnerText == Globals.STATUS_COMMENT_NEW || commentNode.InnerText == Globals.STATUS_COMMENT_NEED_REVIEW);
+                            break;
+                        case Globals.STATUS_COMMENT_NEW:
+                            exportNode = commentNode.InnerText == Globals.STATUS_COMMENT_NEW;
+                            break;
+                        case Globals.STATUS_COMMENT_NEED_REVIEW:
+                            exportNode = commentNode.InnerText == Globals.STATUS_COMMENT_NEED_REVIEW;
+                            break;
+                        case Globals.STATUS_COMMENT_FINAL:
+                            exportNode = commentNode.InnerText == Globals.STATUS_COMMENT_FINAL;
+                            break;
+                        case Globals.STATUS_COMMENT_ALL_ROWS:
+                            exportNode = (commentNode.InnerText == Globals.STATUS_COMMENT_NEW || commentNode.InnerText == Globals.STATUS_COMMENT_NEED_REVIEW || commentNode.InnerText == Globals.STATUS_COMMENT_FINAL);
+                            break;
+                        default:
+                            break;
+                    }
+
+                    
+                    if (exportNode)
+                    {
+                        //Get master value
+                        XmlNode masterExist = rootMaster.SelectSingleNode("//data[@name='" + dataUpdate.Attributes.GetNamedItem("name").Value + "']");
+
+                        if (masterExist != null)
                         {
-                            continue;
-                            //TODO: log error    
-                        }
-                        var updateValueNode = dataUpdate.SelectSingleNode("value");
-                        if (updateValueNode == null)
-                        {
-                            continue;
-                            //TODO: log error  
+                            var masterValueNode = masterExist.SelectSingleNode("value");
+                            if (masterValueNode == null)
+                            {
+                                continue;
+                                //TODO: log error    
+                            }
+                            var updateValueNode = dataUpdate.SelectSingleNode("value");
+                            if (updateValueNode == null)
+                            {
+                                continue;
+                                //TODO: log error  
+
+                            }
+
+                            rows.Add(new TranslationsRow()
+                            {
+                                Name = dataUpdate.Attributes.GetNamedItem("name").Value,
+                                SourceLanguage = masterValueNode.InnerText,
+                                TargetLanguage = updateValueNode.InnerText,
+                                Status = commentNode.InnerText
+                            });
 
                         }
-
-                        rows.Add(new TranslationsRow()
-                        {
-                            Name = dataUpdate.Attributes.GetNamedItem("name").Value,
-                            SourceLanguage = masterValueNode.InnerText,
-                            TargetLanguage = updateValueNode.InnerText,
-                            Status = commentNode.InnerText
-                        });
-
                     }
                 }
 
@@ -138,7 +173,7 @@ namespace MultilingualExtension.Shared.Services
             }
             var checkfile = RegExHelper.GetFilenameResx(updatePath);
             var engine = new FileHelperEngine<TranslationsRow>(System.Text.Encoding.UTF8);
-            string exportFileName = !isMasterFile ? masterFolderPath + checkfile.Value : masterFolderPath + masterFilename ;
+            string exportFileName = !isMasterFile ? masterFolderPath + checkfile.Value : masterFolderPath + masterFilename;
             if (exportFileType == 1)
             {
                 //get filename
@@ -152,15 +187,15 @@ namespace MultilingualExtension.Shared.Services
                     SheetName = "Translations",
                     FileName = exportFileName + ".xlsx"
                 };
-                char[] delimiterChars = {';' };
-                provider.ColumnsHeaders = new List<string>(engine.GetFileHeader().Split(delimiterChars)); 
+                char[] delimiterChars = { ';' };
+                provider.ColumnsHeaders = new List<string>(engine.GetFileHeader().Split(delimiterChars));
                 provider.StartRow = 0;
                 provider.StartColumn = 0;
                 //This trigger a system exeption if you debug on break on all arrors 
                 provider.InsertRecords(rows.ToArray());
             }
 
-            
+
 
             return new Result<bool>(true);
         }

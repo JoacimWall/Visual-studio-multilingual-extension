@@ -137,7 +137,7 @@ namespace MultilingualExtension.Shared.Services
             {
                 var masterCommentNode = dataMaster.SelectSingleNode("comment");
                 //Check if we are shold not translat this node
-                if (masterCommentNode != null && masterCommentNode.InnerText != Globals.STATUS_COMMENT_NO_TRANSLATION)
+                if (masterCommentNode != null && masterCommentNode.InnerText == Globals.STATUS_COMMENT_NO_TRANSLATION)
                     continue;
 
                 //Add comment node to master if that is set in settings

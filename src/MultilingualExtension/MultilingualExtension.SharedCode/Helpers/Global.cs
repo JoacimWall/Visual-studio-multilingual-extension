@@ -12,6 +12,9 @@ namespace MultilingualExtension.Shared.Helpers
         public const string STATUS_COMMENT_NO_TRANSLATION = "No transaltion";
         public const string STATUS_COMMENT_FINAL = "Final";
 
+        //this is used for export filter 
+        public const string STATUS_COMMENT_ALL_ROWS = "All Rows";
+        public const string STATUS_COMMENT_NEW_OR_NEED_REVIEW = "New or Need review";
         //Constants for saved propertys
         public const string PROP_MSOFTENDPOINT = "MsoftEndpoint";
         public const string PROP_MSOFTLOCATION = "MsoftLocation";
@@ -39,8 +42,8 @@ namespace MultilingualExtension.Shared.Helpers
         public const string Close = "Close";
 
         public const string Export_Rows_Info = "Export rows where comment is 'New' or 'Need review'";
-        public const string Export_All_Files_Title = "Export language files";
-        public const string Export_Seleted_File_Title = "Export this language file";
+        public const string Export_All_Files_Title = "Export all rows with status";
+        public const string Export_Seleted_File_Title = "Export rows with status";
 
         public const string Import_Rows_Info = "Import rows where comment is 'Final'";
         public const string Import_Translation_Title = "Import translations";

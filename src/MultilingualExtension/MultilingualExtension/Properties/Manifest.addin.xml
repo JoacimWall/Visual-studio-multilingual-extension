@@ -18,6 +18,7 @@
         <Command id = "MultilingualExtension.MultilingualExtensionCommands.ExportFiles"
                  _label = "Export files"
                  _description = "Export rows where comment = 'Need review'"
+                 type="array"
                  defaultHandler = "MultilingualExtension.ExportHandler"/>
     </Extension>
      <Extension path = "/MonoDevelop/Ide/Commands">
@@ -36,7 +37,7 @@
         <Command id = "MultilingualExtension.MultilingualExtensionCommands.TranslateAction"
              _label = "Change Translation Status..."
              shortcut = "Alt|T"
-                   type="array"
+             type="array"
              _description = "Action that aplay to all child language files"
                defaultHandler = "MultilingualExtension.TranslateActionHandler"/>
     </Extension>
