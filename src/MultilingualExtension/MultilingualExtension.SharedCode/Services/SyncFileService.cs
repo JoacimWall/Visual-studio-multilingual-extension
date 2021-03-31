@@ -151,14 +151,6 @@ namespace MultilingualExtension.Shared.Services
                         dataMaster.AppendChild(elem);
                         masterFileChanged = true;
                     }
-                    else
-                    {
-                        if (masterCommentNode.InnerText != Globals.STATUS_COMMENT_NEED_REVIEW)
-                            masterFileChanged = true;
-
-                        masterCommentNode.InnerText = Globals.STATUS_COMMENT_NEED_REVIEW;
-                    }
-
                 }
 
                 XmlNode exist = rootUpdate.SelectSingleNode("//data[@name='" + dataMaster.Attributes.GetNamedItem("name").Value + "']");

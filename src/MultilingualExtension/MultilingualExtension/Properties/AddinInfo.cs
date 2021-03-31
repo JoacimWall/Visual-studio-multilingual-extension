@@ -30,7 +30,7 @@ using Mono.Addins.Description;
 [assembly: Addin(
     "MultilingualExtension",
     Namespace = "MultilingualExtension",
-    Version = "1.0.29"
+    Version = "1.0.30"
     
 )]
 
@@ -40,4 +40,7 @@ using Mono.Addins.Description;
 [assembly: AddinAuthor("Joacim Wall")]
 [assembly: AddinDependency("::MonoDevelop.Core", MonoDevelop.BuildInfo.Version)]
 [assembly: AddinDependency("::MonoDevelop.Ide", MonoDevelop.BuildInfo.Version)]
+[assembly: AddinDependency("::MonoDevelop.SourceEditor2", MonoDevelop.BuildInfo.Version)]
+[assembly: AddinDependency("::MonoDevelop.CSharpBinding", MonoDevelop.BuildInfo.Version)]
+
 

@@ -12,27 +12,24 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CSharp_Is_Love" xml:space="preserve">
+    <value>CSharp er kjærlighet</value>
+  <comment>Need review</comment></data>
   <data name="Hello" xml:space="preserve">
-        <value>Hei</value>
-    <comment>Final</comment></data>
+        <value>Hallo</value>
+  <comment>Need review</comment></data>
   <data name="Enter_Your_Email" xml:space="preserve">
-        <value>Skriv inn e-posten din, vennligst</value>
-    <comment>Need review</comment></data>
+        <value>Skriv inn e-postadressen din</value>
+  <comment>Need review</comment></data>
   <data name="Enter_Your_Password" xml:space="preserve">
         <value>Skriv inn passordet ditt</value>
-    <comment>Final</comment>
-    </data>
+  <comment>Need review</comment></data>
   <data name="Enter_Your_Cat" xml:space="preserve">
         <value>Skriv inn katten din</value>
-    <comment>Final</comment>
-        </data>
-  <data name="CSharp_Is_Love" xml:space="preserve">
-        <value>CSharp er kjærlighet</value>
-    <comment>Final</comment>
-    </data>
+  <comment>Need review</comment></data>
   <data name="How_Old_Are_You" xml:space="preserve">
         <value>hvor gammel er du</value>
-    <comment>Need review</comment></data>
+   <comment>Need review</comment></data>
   <data name="Youtube_Is_Nice_For_Videos" xml:space="preserve">
         <value>Youtube er fint for videoer og musikk</value>
    <comment>Need review</comment></data>
@@ -40,20 +37,12 @@
         <value>Hund</value>
    <comment>Need review</comment></data>
   <data name="Snake" xml:space="preserve">
-        <value>Slange</value>
+    <value>Slange</value>
    <comment>Need review</comment></data>
   <data name="Monkey" xml:space="preserve">
-<<<<<<< Updated upstream
-        <value>Monkey</value>
-   <comment>New</comment></data>
+        <value>Ape</value>
+   <comment>Need review</comment></data>
   <data name="Ant" xml:space="preserve">
     <value>Ant</value>
   <comment>New</comment></data>
-=======
-        <value>Ape</value>
-   <comment>Need review</comment></data>
-  <data name="Cat" xml:space="preserve">
-        <value>Katt</value>
-   <comment>Need review</comment></data>
->>>>>>> Stashed changes
 </root>
