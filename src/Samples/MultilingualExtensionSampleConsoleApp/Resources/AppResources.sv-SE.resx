@@ -42,4 +42,8 @@
   <data name="Cow" xml:space="preserve">
     <value>Ko</value>
   <comment>Final</comment></data>
+  <data name="Love_Is" xml:space="preserve">
+    <value>Kärlek är</value>
+    <comment>Need review</comment>
+  </data>
 </root>

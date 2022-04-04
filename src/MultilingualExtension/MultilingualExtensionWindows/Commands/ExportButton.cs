@@ -88,6 +88,27 @@ namespace MultilingualExtension
         private void Execute(object sender, EventArgs e)
         {
             ThreadHelper.ThrowIfNotOnUIThread();
+
+
+            //IProgressBar progress = new Helpers.ProgressBarHelper(Globals.Export_Rows_Info);
+            //            try
+            //            {
+            //                string statusToExport = dataItem as string;
+            //                ExportService exportService = new ExportService();
+            //                await IdeApp.Workbench.SaveAllAsync();
+            //                ProjectFile selectedItem = (ProjectFile)IdeApp.Workspace.CurrentSelectedItem;
+            //                ISettingsService settingsService = new Services.SettingsService();
+            //                string selectedFilename = selectedItem.Name;
+
+
+            //              var result = await exportService.ExportToFile(selectedFilename, statusToExport, progress, settingsService);
+            //            }
+
+
+
+
+
+
             IProgressBar progress = new Helpers.ProgressBarHelper();
 
             try
@@ -100,8 +121,9 @@ namespace MultilingualExtension
                 //MultilingualExtension.Shared
                 ExportService exportFileService = new ExportService();
                 ISettingsService settingsService = new SettingsService();
+               
 
-                exportFileService.ExportToFile(selectedFilename, progress, settingsService);
+                exportFileService.ExportToFile(selectedFilename, Shared.Helpers.Globals.STATUS_COMMENT_NEW_OR_NEED_REVIEW, progress, settingsService).GetAwaiter().GetResult();
 
 
 

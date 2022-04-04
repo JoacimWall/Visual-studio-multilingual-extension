@@ -42,7 +42,7 @@ namespace MultilingualExtension
         termValues: new[] { "HierSingleSelectionName:.csv$", "HierSingleSelectionName:.xlsx$" })]
     [ProvideService(typeof(MultilingualExtensionPackage), IsAsyncQueryable = true)]
    // [ProvideAutoLoad(UIContextGuids80.SolutionExists)]
-    [Microsoft.VisualStudio.AsyncPackageHelpers.ProvideAutoLoad(VSConstants.UICONTEXT.SolutionExists_string, (Microsoft.VisualStudio.AsyncPackageHelpers.PackageAutoLoadFlags)PackageAutoLoadFlags.BackgroundLoad)]
+    [ProvideAutoLoad(VSConstants.UICONTEXT.SolutionExists_string, PackageAutoLoadFlags.BackgroundLoad)]
     public sealed class MultilingualExtensionPackage : AsyncPackage
     {
         private const string _uiContextSupporResxFiles = "24551deb-f034-43e9-a279-0e541241687e"; // Must match guid in VsCommandTable.vsct
