@@ -46,4 +46,12 @@
     <value>Kärlek är</value>
     <comment>Need review</comment>
   </data>
+  <data name="Country" xml:space="preserve">
+    <value>Land</value>
+    <comment>Need review</comment>
+  </data>
+  <data name="Road" xml:space="preserve">
+    <value>Väg</value>
+    <comment>Need review</comment>
+  </data>
 </root>

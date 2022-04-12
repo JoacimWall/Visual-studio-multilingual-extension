@@ -85,4 +85,7 @@
     <AddinReference Include="MonoDevelop.SourceEditor2" />
     <AddinReference Include="MonoDevelop.Xamarin.Ide.Mac" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="GtkSharp" />
+  </ItemGroup>
 </Project>

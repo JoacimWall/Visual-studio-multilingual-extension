@@ -25,17 +25,21 @@ namespace MultilingualExtension.Helpers
         Gtk.Label label;
         public  bool HideAll()
         {
+            if (pdata == null)
+                return true;
             pdata.window.Hide(); //.HideAll();
             return true; 
         }
         public bool Pulse()
         {
-           pdata.pbar.Pulse();
+            if (pdata == null)
+                return true;
+            pdata.pbar.Pulse();
             return true;
         }
         public ProgressBarHelper(string InfoText)
         {
-
+            return; 
             pdata = new ProgressData();
             pdata.activity_mode = false;
             pdata.window = new Gtk.Window(Gtk.WindowType.Toplevel);
