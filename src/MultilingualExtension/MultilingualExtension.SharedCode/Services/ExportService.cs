@@ -3,7 +3,7 @@ using MultilingualExtension.Shared.Helpers;
 using MultilingualExtension.Shared.Models;
 using MultilingualExtension.Shared.Interfaces;
 using ICG.NetCore.Utilities.Spreadsheet;
-
+using Microsoft.Extensions.DependencyInjection;
 
 namespace MultilingualExtension.Shared.Services
 {
@@ -188,13 +188,14 @@ namespace MultilingualExtension.Shared.Services
             //}
 
 
-            //var services = new ServiceCollection();
-            //services.UseIcgNetCoreUtilitiesSpreadsheet();
-            // provider = services.BuildServiceProvider();
+            var services = new ServiceCollection();
+            services.UseIcgNetCoreUtilitiesSpreadsheet();
+            var provider = services.BuildServiceProvider();
             string exportFileName = !isMasterFile ? masterFolderPath + checkfile.Value : masterFolderPath + masterFilename;
 
             //Get our generator and export
-            var exportGenerator = new OpenXmlSpreadsheetGenerator();
+            //var exportGenerator = new OpenXmlSpreadsheetGenerator();
+            var exportGenerator = provider.GetService<ISpreadsheetGenerator>();
             var exportDefinition = new SpreadsheetConfiguration<TranslationsRow>
             {
                 RenderTitle = true,

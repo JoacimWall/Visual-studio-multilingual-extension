@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
@@ -11,21 +11,6 @@
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
 		<WarningLevel>4</WarningLevel>
 	</PropertyGroup>
-	<ItemGroup>
-		<None Remove="Microsoft.VisualStudioMac.Sdk" />
-		<None Remove="Properties\" />
-		<None Remove="Handlers\" />
-		<None Remove="Helpers\" />
-		<None Remove="Interfaces\" />
-		<None Remove="Services\" />
-		<None Remove="Models\" />
-		<None Remove="ICG.NetCore.Utilities.Spreadsheet" />
-		<None Remove="Microsoft.Extensions.DependencyInjection.Abstractions" />
-		<None Remove="Microsoft.Extensions.DependencyInjection" />
-	</ItemGroup>
-	<ItemGroup>
-		<PackageReference Include="Microsoft.VisualStudioMac.Sdk" Version="17.0.0" />
-	</ItemGroup>
 	<ItemGroup>
 		<Folder Include="Properties\" />
 		<Folder Include="Handlers\" />
@@ -88,6 +73,11 @@
 		</Compile>
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\..\NetCore.Utilities.Spreadsheet\NetCore.Utilities.Spreadsheet.csproj" />
+	  <None Remove="Microsoft.VisualStudioMac.Sdk" />
+	  <None Remove="ICG.NetCore.Utilities.Spreadsheet" />
+	</ItemGroup>
+	<ItemGroup>
+	  <PackageReference Include="Microsoft.VisualStudioMac.Sdk" Version="17.0.0" />
+	  <PackageReference Include="ICG.NetCore.Utilities.Spreadsheet" Version="6.1.1" />
 	</ItemGroup>
 </Project>

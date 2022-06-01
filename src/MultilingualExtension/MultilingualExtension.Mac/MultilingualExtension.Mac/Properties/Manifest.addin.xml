@@ -1,15 +1,13 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ExtensionModel>
     <!-- Register with Visual Studio for Mac -->
-    <Runtime>
+    <!--<Runtime>
         <Import assembly="MultilingualExtension.dll" />
-        <Import assembly="NetCore.Utilities.Spreadsheet.dll" />
-    </Runtime>
+    </Runtime>-->
      <!-- Register with Managed Extensibility Framework (MEF) -->
-    <Extension path="/MonoDevelop/Ide/Composition">
+   <!-- <Extension path="/MonoDevelop/Ide/Composition">
         <Assembly file="MultilingualExtension.dll" />
-        <Assembly file="NetCore.Utilities.Spreadsheet.dll" />
-    </Extension>
+    </Extension>-->
     <Extension path = "/MonoDevelop/Ide/Commands">
         <Command id = "MultilingualExtension.UpdateFiles"
                  _label = "Synchronizes language files"
