@@ -164,4 +164,8 @@
     <value>Test</value>
     <comment>New</comment>
   </data>
+  <data name="House" xml:space="preserve">
+    <value>House</value>
+    <comment>New</comment>
+  </data>
 </root>

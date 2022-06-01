@@ -3,8 +3,13 @@
     <!-- Register with Visual Studio for Mac -->
     <Runtime>
         <Import assembly="MultilingualExtension.dll" />
+        <Import assembly="NetCore.Utilities.Spreadsheet.dll" />
     </Runtime>
-    
+     <!-- Register with Managed Extensibility Framework (MEF) -->
+    <Extension path="/MonoDevelop/Ide/Composition">
+        <Assembly file="MultilingualExtension.dll" />
+        <Assembly file="NetCore.Utilities.Spreadsheet.dll" />
+    </Extension>
     <Extension path = "/MonoDevelop/Ide/Commands">
         <Command id = "MultilingualExtension.UpdateFiles"
                  _label = "Synchronizes language files"
@@ -16,20 +21,31 @@
             <CommandItem id="MultilingualExtension.UpdateFiles" />
         </Condition>
     </Extension>
-
-    <!-- <Extension path = "/MonoDevelop/Ide/Commands">
-        <Command id = "MultilingualExtension.MultilingualExtensionCommands.TranslateFiles"
+    <Extension path = "/MonoDevelop/Ide/Commands">
+        <Command id = "MultilingualExtension.TranslateFiles"
                  _label = "Translate files"
                  _description = "Translate rows where comment = 'New'"
                  defaultHandler = "MultilingualExtension.TranslateHandler"/>
     </Extension>
-     <Extension path = "/MonoDevelop/Ide/Commands">
-        <Command id = "MultilingualExtension.MultilingualExtensionCommands.ExportFiles"
+     <Extension path = "/MonoDevelop/Ide/ContextMenu/ProjectPad">
+        <Condition id="FileType" fileExtensions=".resx,.resw">
+            <CommandItem id="MultilingualExtension.TranslateFiles" />
+        </Condition>
+    </Extension>
+    <Extension path = "/MonoDevelop/Ide/Commands">
+        <Command id = "MultilingualExtension.ExportFiles"
                  _label = "Export files"
                  _description = "Export rows where comment = 'Need review'"
                  type="array"
                  defaultHandler = "MultilingualExtension.ExportHandler"/>
     </Extension>
+     <Extension path = "/MonoDevelop/Ide/ContextMenu/ProjectPad">
+        <Condition id="FileType" fileExtensions=".resx,.resw">
+            <CommandItem id="MultilingualExtension.ExportFiles" />
+        </Condition>
+    </Extension>
+    <!-- 
+     
      <Extension path = "/MonoDevelop/Ide/Commands">
         <Command id = "MultilingualExtension.MultilingualExtensionCommands.ImportFiles"
                  _label = "Import files"
@@ -67,16 +83,8 @@
             <CommandItem id="MultilingualExtension.MultilingualExtensionCommands.UpdateFiles" />
         </Condition>
     </Extension>
-    <Extension path = "/MonoDevelop/Ide/ContextMenu/ProjectPad">
-        <Condition id="FileType" fileExtensions=".resx,.resw">
-            <CommandItem id="MultilingualExtension.MultilingualExtensionCommands.TranslateFiles" />
-        </Condition>
-    </Extension>
-    <Extension path = "/MonoDevelop/Ide/ContextMenu/ProjectPad">
-        <Condition id="FileType" fileExtensions=".resx,.resw">
-            <CommandItem id="MultilingualExtension.MultilingualExtensionCommands.ExportFiles" />
-        </Condition>
-    </Extension>
+   
+   
     <Extension path = "/MonoDevelop/Ide/ContextMenu/ProjectPad">
         <Condition id="FileType" fileExtensions=".csv,.xlsx">
             <CommandItem id="MultilingualExtension.MultilingualExtensionCommands.ImportFiles" />

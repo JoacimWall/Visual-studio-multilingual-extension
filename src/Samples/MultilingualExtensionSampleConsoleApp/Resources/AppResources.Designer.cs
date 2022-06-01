@@ -140,6 +140,15 @@ namespace MultilingualExtensionSampleConsoleApp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to House.
+        /// </summary>
+        public static string House {
+            get {
+                return ResourceManager.GetString("House", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Love is.
         /// </summary>
         public static string Love_Is {

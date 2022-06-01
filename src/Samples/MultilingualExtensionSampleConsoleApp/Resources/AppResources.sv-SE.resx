@@ -55,7 +55,11 @@
     <comment>Need review</comment>
   </data>
   <data name="Test" xml:space="preserve">
-    <value>Test</value>
-    <comment>New</comment>
+    <value>Testa</value>
+    <comment>Need review</comment>
+  </data>
+  <data name="House" xml:space="preserve">
+    <value>Hus</value>
+    <comment>Need review</comment>
   </data>
 </root>

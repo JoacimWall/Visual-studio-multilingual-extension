@@ -5,6 +5,8 @@ VisualStudioVersion = 25.0.1700.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultilingualExtension", "MultilingualExtension.Mac\MultilingualExtension.csproj", "{6BD226CA-EE95-4527-9A0C-913369062901}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCore.Utilities.Spreadsheet", "..\NetCore.Utilities.Spreadsheet\NetCore.Utilities.Spreadsheet.csproj", "{51B522A1-EC9B-4800-BF28-68E4A43134C2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{6BD226CA-EE95-4527-9A0C-913369062901}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6BD226CA-EE95-4527-9A0C-913369062901}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6BD226CA-EE95-4527-9A0C-913369062901}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51B522A1-EC9B-4800-BF28-68E4A43134C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51B522A1-EC9B-4800-BF28-68E4A43134C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51B522A1-EC9B-4800-BF28-68E4A43134C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51B522A1-EC9B-4800-BF28-68E4A43134C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
