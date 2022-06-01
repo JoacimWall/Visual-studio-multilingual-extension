@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 25.0.1700.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultilingualExtensionMac", "MultilingualExtensionMac.csproj", "{26FE8E75-13F6-4CBD-AC4E-CB33C3B628EF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultilingualExtension", "MultilingualExtension.Mac\MultilingualExtension.csproj", "{6BD226CA-EE95-4527-9A0C-913369062901}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{26FE8E75-13F6-4CBD-AC4E-CB33C3B628EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{26FE8E75-13F6-4CBD-AC4E-CB33C3B628EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{26FE8E75-13F6-4CBD-AC4E-CB33C3B628EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{26FE8E75-13F6-4CBD-AC4E-CB33C3B628EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BD226CA-EE95-4527-9A0C-913369062901}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BD226CA-EE95-4527-9A0C-913369062901}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BD226CA-EE95-4527-9A0C-913369062901}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BD226CA-EE95-4527-9A0C-913369062901}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {D6D0948E-7095-4C55-ABD1-26F0DFC2EBB1}
+		SolutionGuid = {9CF7FFE1-4519-4962-ADD1-8F289ACBEDAD}
 	EndGlobalSection
 EndGlobal

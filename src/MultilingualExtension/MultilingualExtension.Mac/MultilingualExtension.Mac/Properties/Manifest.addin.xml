@@ -1,14 +1,23 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ExtensionModel>
-    
+    <!-- Register with Visual Studio for Mac -->
+    <Runtime>
+        <Import assembly="MultilingualExtension.dll" />
+    </Runtime>
     
     <Extension path = "/MonoDevelop/Ide/Commands">
-        <Command id = "MultilingualExtension.MultilingualExtensionCommands.UpdateFiles"
+        <Command id = "MultilingualExtension.UpdateFiles"
                  _label = "Synchronizes language files"
                  _description = "Synchronizes lines from master language file"
                  defaultHandler = "MultilingualExtension.UpdateFilesHandler"/>
     </Extension>
-     <Extension path = "/MonoDevelop/Ide/Commands">
+    <Extension path = "/MonoDevelop/Ide/ContextMenu/ProjectPad">
+        <Condition id="FileType" fileExtensions=".resx,.resw">
+            <CommandItem id="MultilingualExtension.UpdateFiles" />
+        </Condition>
+    </Extension>
+
+    <!-- <Extension path = "/MonoDevelop/Ide/Commands">
         <Command id = "MultilingualExtension.MultilingualExtensionCommands.TranslateFiles"
                  _label = "Translate files"
                  _description = "Translate rows where comment = 'New'"
@@ -91,7 +100,7 @@
         <Condition id="FileType" fileExtensions=".resx">
                  <CommandItem id = "MultilingualExtension.MultilingualExtensionCommands.SyncAndTranslateSelectedNode"/>
          </Condition>
-    </Extension>
+    </Extension>-->
      
     
 </ExtensionModel>

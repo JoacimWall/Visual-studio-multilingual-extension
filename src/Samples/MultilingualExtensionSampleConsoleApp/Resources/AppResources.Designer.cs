@@ -174,5 +174,14 @@ namespace MultilingualExtensionSampleConsoleApp.Resources {
                 return ResourceManager.GetString("Road", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Test.
+        /// </summary>
+        public static string Test {
+            get {
+                return ResourceManager.GetString("Test", resourceCulture);
+            }
+        }
     }
 }

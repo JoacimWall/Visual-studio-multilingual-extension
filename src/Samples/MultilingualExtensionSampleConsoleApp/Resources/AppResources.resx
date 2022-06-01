@@ -160,4 +160,8 @@
     <value>Road</value>
     <comment>New</comment>
   </data>
+   <data name="Test" xml:space="preserve">
+    <value>Test</value>
+    <comment>New</comment>
+  </data>
 </root>
