@@ -7,9 +7,15 @@
 		<TargetFramework>net6.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
+		<IsAddin>True</IsAddin>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+	  <DebugType>full</DebugType>
 		<WarningLevel>4</WarningLevel>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+	  <DebugType></DebugType>
+	  <WarningLevel>4</WarningLevel>
 	</PropertyGroup>
 	<ItemGroup>
 		<Folder Include="Properties\" />
@@ -18,6 +24,8 @@
 		<Folder Include="Interfaces\" />
 		<Folder Include="Services\" />
 		<Folder Include="Models\" />
+		<Folder Include="RefDll\" />
+		<Folder Include="Views\" />
 	</ItemGroup>
 	<ItemGroup>
 		<Compile Include="..\..\MultilingualExtension.SharedCode\Helpers\Global.cs">
@@ -71,13 +79,53 @@
 		<Compile Include="..\..\MultilingualExtension.SharedCode\Services\ExportService.cs">
 			<Link>Services\ExportService.cs</Link>
 		</Compile>
+		<Compile Include="..\..\MultilingualExtension.SharedCode\Services\ImportService.cs">
+		  <Link>Services\ImportService.cs</Link>
+		</Compile>
 	</ItemGroup>
 	<ItemGroup>
 	  <None Remove="Microsoft.VisualStudioMac.Sdk" />
 	  <None Remove="ICG.NetCore.Utilities.Spreadsheet" />
+	  <None Remove="Microsoft.Extensions.DependencyInjection" />
+	  <None Remove="Microsoft.Extensions.DependencyInjection.Abstractions" />
+	  <None Remove="System.IO.Packaging" />
+	  <None Remove="RefDll\" />
+	  <None Remove="DocumentFormat.OpenXml" />
+	  <None Remove="NetCore.Utilities.Spreadsheet" />
+	  <None Remove="NetCore.Utilities.SpreadsheetExample" />
+	  <None Remove="Views\" />
+	  <None Remove="AtkSharp" />
+	  <None Remove="CairoSharp" />
+	  <None Remove="GdkSharp" />
+	  <None Remove="GioSharp" />
+	  <None Remove="GLibSharp" />
+	  <None Remove="GtkSharp" />
+	  <None Remove="PangoSharp" />
 	</ItemGroup>
 	<ItemGroup>
 	  <PackageReference Include="Microsoft.VisualStudioMac.Sdk" Version="17.0.0" />
-	  <PackageReference Include="ICG.NetCore.Utilities.Spreadsheet" Version="6.1.1" />
+	</ItemGroup>
+	<ItemGroup>
+   <!-- <AddinReference Include="ICG.NetCore.Utilities.Spreadsheet" Version="7.0.0" />-->
+  </ItemGroup>
+	<ItemGroup>
+	  <Reference Include="DocumentFormat.OpenXml">
+	    <HintPath>RefDll\DocumentFormat.OpenXml.dll</HintPath>
+	  </Reference>
+	  <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions">
+	    <HintPath>RefDll\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+	  </Reference>
+	  <Reference Include="Microsoft.Extensions.DependencyInjection">
+	    <HintPath>RefDll\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+	  </Reference>
+	  <Reference Include="NetCore.Utilities.Spreadsheet">
+	    <HintPath>RefDll\NetCore.Utilities.Spreadsheet.dll</HintPath>
+	  </Reference>
+	  <Reference Include="NetCore.Utilities.SpreadsheetExample">
+	    <HintPath>RefDll\NetCore.Utilities.SpreadsheetExample.dll</HintPath>
+	  </Reference>
+	  <Reference Include="System.IO.Packaging">
+	    <HintPath>RefDll\System.IO.Packaging.dll</HintPath>
+	  </Reference>
 	</ItemGroup>
 </Project>

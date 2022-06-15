@@ -47,7 +47,7 @@
     <comment>Need review</comment>
   </data>
   <data name="Country" xml:space="preserve">
-    <value>Land</value>
+    <value>Landet</value>
     <comment>Need review</comment>
   </data>
   <data name="Road" xml:space="preserve">
@@ -55,8 +55,8 @@
     <comment>Need review</comment>
   </data>
   <data name="Test" xml:space="preserve">
-    <value>Testa</value>
-    <comment>Need review</comment>
+    <value>Testa translated</value>
+    <comment>Final</comment>
   </data>
   <data name="House" xml:space="preserve">
     <value>Hus</value>

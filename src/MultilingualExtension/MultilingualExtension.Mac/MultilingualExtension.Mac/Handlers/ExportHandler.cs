@@ -38,7 +38,7 @@ namespace MultilingualExtension
             {
                 progress.HideAll();
                 progress = null;
-                Console.WriteLine("Translate file completed");
+                Console.WriteLine("Export file completed");
             }
 
         }

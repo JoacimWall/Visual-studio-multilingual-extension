@@ -194,13 +194,13 @@ namespace MultilingualExtension.Shared.Services
             string exportFileName = !isMasterFile ? masterFolderPath + checkfile.Value : masterFolderPath + masterFilename;
 
             //Get our generator and export
-            //var exportGenerator = new OpenXmlSpreadsheetGenerator();
+            //var exportGenerator = new OpenXmlSpreadsheetGenerator();cd G  
             var exportGenerator = provider.GetService<ISpreadsheetGenerator>();
             var exportDefinition = new SpreadsheetConfiguration<TranslationsRow>
             {
-                RenderTitle = true,
+                RenderTitle = false,
                 DocumentTitle = "Translation export",
-                RenderSubTitle = true,
+                RenderSubTitle = false,
                 DocumentSubTitle = "translation",
                 ExportData = rows,
                 WorksheetName = "Transaltions"

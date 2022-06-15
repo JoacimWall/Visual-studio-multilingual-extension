@@ -1,4 +1,6 @@
-﻿namespace MultilingualExtension.Shared.Models
+﻿using ICG.NetCore.Utilities.Spreadsheet;
+
+namespace MultilingualExtension.Shared.Models
 {
     /// <summary>
     /// Layout for a file delimited by ,
@@ -7,14 +9,16 @@
     public class TranslationsRow
     {
 
+        [SpreadsheetImportColumn(1)]
+        public string Name { get; set; }
 
-        public string Name;
+        [SpreadsheetImportColumn(2)]
+        public string SourceLanguage { get; set; }
 
+        [SpreadsheetImportColumn(3)]
+        public string TargetLanguage { get; set; }
 
-        public string SourceLanguage;
-
-        public string TargetLanguage;
-
-        public string Status;
+        [SpreadsheetImportColumn(4)]
+        public string Status { get; set; }
     }
 }
