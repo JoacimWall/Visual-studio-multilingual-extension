@@ -49,4 +49,7 @@
   <data name="House" xml:space="preserve">
     <value>Hus</value>
   <comment>Need review</comment></data>
+  <data name="Street" xml:space="preserve">
+    <value>Gata</value>
+  <comment>Need review</comment></data>
 </root>

@@ -76,15 +76,6 @@ namespace MultilingualExtensionSampleConsoleApp.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Country.
-        /// </summary>
-        public static string Country {
-            get {
-                return ResourceManager.GetString("Country", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Cow.
         /// </summary>
         public static string Cow {
@@ -176,20 +167,11 @@ namespace MultilingualExtensionSampleConsoleApp.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Road.
+        ///   Looks up a localized string similar to Street.
         /// </summary>
-        public static string Road {
+        public static string Street {
             get {
-                return ResourceManager.GetString("Road", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Test.
-        /// </summary>
-        public static string Test {
-            get {
-                return ResourceManager.GetString("Test", resourceCulture);
+                return ResourceManager.GetString("Street", resourceCulture);
             }
         }
     }

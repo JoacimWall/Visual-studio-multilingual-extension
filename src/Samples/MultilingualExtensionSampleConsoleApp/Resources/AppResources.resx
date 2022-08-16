@@ -155,4 +155,7 @@
   <data name="House" xml:space="preserve">
     <value>House</value>
   </data>
+    <data name="Street" xml:space="preserve">
+    <value>Street</value>
+  </data>
 </root>

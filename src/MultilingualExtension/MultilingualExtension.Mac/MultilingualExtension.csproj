@@ -104,28 +104,9 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <PackageReference Include="Microsoft.VisualStudioMac.Sdk" Version="17.0.0" />
+	  <PackageReference Include="ICG.NetCore.Utilities.Spreadsheet" Version="7.0.0" />
 	</ItemGroup>
 	<ItemGroup>
    <!-- <AddinReference Include="ICG.NetCore.Utilities.Spreadsheet" Version="7.0.0" />-->
   </ItemGroup>
-	<ItemGroup>
-	  <Reference Include="DocumentFormat.OpenXml">
-	    <HintPath>RefDll\DocumentFormat.OpenXml.dll</HintPath>
-	  </Reference>
-	  <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions">
-	    <HintPath>RefDll\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
-	  </Reference>
-	  <Reference Include="Microsoft.Extensions.DependencyInjection">
-	    <HintPath>RefDll\Microsoft.Extensions.DependencyInjection.dll</HintPath>
-	  </Reference>
-	  <Reference Include="NetCore.Utilities.Spreadsheet">
-	    <HintPath>RefDll\NetCore.Utilities.Spreadsheet.dll</HintPath>
-	  </Reference>
-	  <Reference Include="NetCore.Utilities.SpreadsheetExample">
-	    <HintPath>RefDll\NetCore.Utilities.SpreadsheetExample.dll</HintPath>
-	  </Reference>
-	  <Reference Include="System.IO.Packaging">
-	    <HintPath>RefDll\System.IO.Packaging.dll</HintPath>
-	  </Reference>
-	</ItemGroup>
 </Project>
