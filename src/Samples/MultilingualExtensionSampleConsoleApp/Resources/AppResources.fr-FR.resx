@@ -43,7 +43,10 @@
     <value>Vache</value>
   <comment>Need review</comment></data>
   <data name="Love_Is" xml:space="preserve">
-    <value>Love is</value>
-    <comment>New</comment>
+    <value>L'amour c'est</value>
+    <comment>Need review</comment>
   </data>
+  <data name="House" xml:space="preserve">
+    <value>Loger</value>
+  <comment>Need review</comment></data>
 </root>

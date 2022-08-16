@@ -152,4 +152,7 @@
     <value>Love is</value>
     <comment>New</comment>
   </data>
+  <data name="House" xml:space="preserve">
+    <value>House</value>
+  </data>
 </root>

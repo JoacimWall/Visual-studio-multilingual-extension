@@ -46,4 +46,7 @@
     <value>Kärlek är</value>
     <comment>Need review</comment>
   </data>
+  <data name="House" xml:space="preserve">
+    <value>Hus</value>
+  <comment>Need review</comment></data>
 </root>
