@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,5 +21,12 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Microsoft.VisualStudioMac.Sdk" />
+    <None Remove="ICG.NetCore.Utilities.Spreadsheet" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="ICG.NetCore.Utilities.Spreadsheet" Version="7.0.0" />
   </ItemGroup>
 </Project>

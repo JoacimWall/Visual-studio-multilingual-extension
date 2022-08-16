@@ -1,9 +1,12 @@
-﻿#Generate new extension package:
-Build release copy fron fomder to market place
-old relase --msbuild MultilingualExtension.csproj /p:Configuration=Release /target:PackageAddin
+#Generate new extension package:
+Build release copy from folder to market place
+Release
+dotnet msbuild MultilingualExtension.csproj /p:Configuration=Release /target:PackageAddin
+
 #support file helper
 https://www.filehelpers.net/examples/
 
 TODO:
 Check for dublicate names in syncfunction
 
+Referenser till andra dll funkar inte lägger den i mappen RefDll och sedan som assemblies referenser  

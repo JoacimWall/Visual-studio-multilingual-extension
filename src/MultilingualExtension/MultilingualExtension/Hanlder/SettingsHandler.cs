@@ -1,4 +1,5 @@
-﻿using MonoDevelop.Components.Commands;
+﻿using System;
+using MonoDevelop.Components.Commands;
 using MultilingualExtension.Shared.Helpers;
 
 namespace MultilingualExtension
@@ -7,6 +8,8 @@ namespace MultilingualExtension
     {
         protected async override void Run()
         {
+            Console.WriteLine("Sorry Visual studio 2022 does not support GTK. You need to run the settings Dialog from Visual studio 2019.");
+            return;
             SettingsWindow settingsWindow = new SettingsWindow();
             
 
