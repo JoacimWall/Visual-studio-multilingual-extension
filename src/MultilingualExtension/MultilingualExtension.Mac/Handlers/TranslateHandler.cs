@@ -47,7 +47,7 @@ namespace MultilingualExtension
 
             //validate file
             ISettingsService settingsService = new Services.SettingsService();
-            var res_Info = Res_Helpers.FileInfo(settingsService.MasterLanguageCode, selectedFilename);
+            var res_Info = Res_Helpers.FileInfo(settingsService.ExtensionSettings.MasterLanguageCode, selectedFilename);
            
             if (res_Info.Model.IsMasterFile)
             {

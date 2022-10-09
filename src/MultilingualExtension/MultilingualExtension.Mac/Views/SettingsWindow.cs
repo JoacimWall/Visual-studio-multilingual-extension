@@ -2,6 +2,7 @@
 using Gdk;
 using Gtk;
 using MultilingualExtension;
+using MultilingualExtension.Services;
 using MultilingualExtension.Shared.Helpers;
 
 namespace MultilingualExtension
@@ -131,22 +132,22 @@ namespace MultilingualExtension
 
             Add(fix);
 
-            entryMasterLanguageCode.Text = SettingsService.MasterLanguageCode;
+            entryMasterLanguageCode.Text = SettingsService.ExtensionSettings.MasterLanguageCode;
             //get settings Google is default value 1 
-            if (SettingsService.TranslationService == 2)
+            if (SettingsService.ExtensionSettings.TranslationService == 2)
             {
                 radiobuttonMicrosoft.Active = true;
             }
             //get settings csv is default value 1 
-            if (SettingsService.ExportFileType == 2)
+            if (SettingsService.ExtensionSettings.ExportFileType == 2)
             {
                 radioExportFiletypeExcel.Active = true;
             }
 
-            entryMsoftEndpoint.Text = SettingsService.MsoftEndpoint;
-            entryMsoftLocation.Text = SettingsService.MsoftLocation;
-            entryMsoftKey.Text = SettingsService.MsoftKey;
-            checkButtonAddComment.Active = SettingsService.AddCommentNodeMasterResx;
+            entryMsoftEndpoint.Text = SettingsService.ExtensionSettings.TranslationServiceMsoftEndpoint;
+            entryMsoftLocation.Text = SettingsService.ExtensionSettings.TranslationServiceMsoftLocation;
+            entryMsoftKey.Text = SettingsService.ExtensionSettings.TranslationServiceMsoftKey;
+            checkButtonAddComment.Active = SettingsService.ExtensionSettings.ExportMasterFileOnExport;
             
             ShowAll();
 
@@ -159,30 +160,30 @@ namespace MultilingualExtension
 
         private void Save_Clicked(object sender, EventArgs e)
         {
-            SettingsService.MasterLanguageCode = entryMasterLanguageCode.Text;
+            SettingsService.ExtensionSettings.MasterLanguageCode = entryMasterLanguageCode.Text;
             if (radioExportFiletypeCsv.Active)
             {
-                SettingsService.ExportFileType = 1;
+                SettingsService.ExtensionSettings.ExportFileType = 1;
             }
             else
             {
-                SettingsService.ExportFileType = 2;
+                SettingsService.ExtensionSettings.ExportFileType = 2;
             }
 
-            SettingsService.AddCommentNodeMasterResx = checkButtonAddComment.Active;
+            SettingsService.ExtensionSettings.ExportMasterFileOnExport = checkButtonAddComment.Active;
            
             if (radiobuttonGoogle.Active)
             {
-                SettingsService.TranslationService = 1;
+                SettingsService.ExtensionSettings.TranslationService = 1;
             }
             else
             {
-                SettingsService.TranslationService = 2;
+                SettingsService.ExtensionSettings.TranslationService = 2;
             }
 
-            SettingsService.MsoftEndpoint = entryMsoftEndpoint.Text;
-            SettingsService.MsoftLocation = entryMsoftLocation.Text;
-            SettingsService.MsoftKey = entryMsoftKey.Text;
+            SettingsService.ExtensionSettings.TranslationServiceMsoftEndpoint = entryMsoftEndpoint.Text;
+            SettingsService.ExtensionSettings.TranslationServiceMsoftLocation = entryMsoftLocation.Text;
+            SettingsService.ExtensionSettings.TranslationServiceMsoftKey = entryMsoftKey.Text;
             HideAll();
         }
         

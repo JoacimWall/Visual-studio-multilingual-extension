@@ -4,6 +4,7 @@ using MultilingualExtension.Shared.Models;
 using MultilingualExtension.Shared.Interfaces;
 using ICG.NetCore.Utilities.Spreadsheet;
 using Microsoft.Extensions.DependencyInjection;
+using MultilingualExtension.Services;
 
 namespace MultilingualExtension.Shared.Services
 {
@@ -16,12 +17,12 @@ namespace MultilingualExtension.Shared.Services
         {
             try
             {
-                int exportFileType = settingsService.ExportFileType;
+                int exportFileType = settingsService.ExtensionSettings.ExportFileType;
                 //------------------------- ResW files --------------------------------------------------------------------
                 var checkfileResw = RegExHelper.ValidateFileTypeIsResw(selectedFilename);
                 if (checkfileResw.Success)
                 {
-                    var resultResw = ReswHelpers.GetBasInfo(settingsService.MasterLanguageCode, selectedFilename);
+                    var resultResw = ReswHelpers.GetBasInfo(settingsService.ExtensionSettings.MasterLanguageCode, selectedFilename);
                     if (!resultResw.WasSuccessful)
                         return new Result<bool>(resultResw.ErrorMessage);
 
@@ -30,14 +31,14 @@ namespace MultilingualExtension.Shared.Services
                         await ExportToFileInternal(false, resultResw.Model.MasterFilepath, updatePath, resultResw.Model.MasterFilename, statusToExport, exportFileType, progress);
                     }
 
-                    if (settingsService.AddCommentNodeMasterResx)
+                    if (settingsService.ExtensionSettings.ExportMasterFileOnExport)
                         await ExportToFileInternal(true, resultResw.Model.MasterFilepath, resultResw.Model.MasterFilepath, resultResw.Model.MasterFilename, statusToExport, exportFileType, progress);
                     return new Result<bool>(true);
                 }
                 // -------------------- ResX files --------------------------------------------------------
                 //validate file
                 var checkfile = RegExHelper.ValidateFilenameIsTargetType(selectedFilename);
-                var resultResx = ResxHelpers.GetBasInfo(selectedFilename, settingsService.MasterLanguageCode);
+                var resultResx = ResxHelpers.GetBasInfo(selectedFilename, settingsService.ExtensionSettings.MasterLanguageCode);
                 if (!resultResx.WasSuccessful)
                     return new Result<bool>(resultResx.ErrorMessage);
 
@@ -48,7 +49,7 @@ namespace MultilingualExtension.Shared.Services
                         await ExportToFileInternal(false, resultResx.Model.MasterFilepath, updatePath, resultResx.Model.MasterFilename, statusToExport, exportFileType, progress);
                 }
                 //export Master
-                if (settingsService.AddCommentNodeMasterResx)
+                if (settingsService.ExtensionSettings.ExportMasterFileOnExport)
                     await ExportToFileInternal(true, resultResx.Model.MasterFilepath, resultResx.Model.MasterFilepath, resultResx.Model.MasterFilename, statusToExport, exportFileType, progress);
 
                 return new Result<bool>(true);
