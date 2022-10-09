@@ -1,11 +1,11 @@
 ﻿using System;
 using System.IO;
 using System.Text.Json;
-//using MonoDevelop.Ide;
 using MultilingualExtension.Shared.Helpers;
 using MultilingualExtension.Shared.Interfaces;
+using System.Text.Json;
 
-namespace MultilingualExtension.Shared.Services
+namespace MultilingualExtension.Services
 {
     public class ExtensionSettings
     {
@@ -22,6 +22,7 @@ namespace MultilingualExtension.Shared.Services
     {
         private string filename = "MultiLingualExtensionSettings.json";
         public ExtensionSettings ExtensionSettings { get; set; } 
+
         public SettingsService(string pathProj)
         {
             //var path = IdeApp.Workspace.CurrentSelectedProject.BaseDirectory.FullPath;

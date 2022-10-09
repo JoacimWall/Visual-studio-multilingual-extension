@@ -8,6 +8,7 @@ using EnvDTE80;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using MultilingualExtension.Helpers;
+using MultilingualExtension.Services;
 using MultilingualExtension.Shared.Interfaces;
 using MultilingualExtension.Shared.Services;
 using VSLangProj;
