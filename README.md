@@ -60,14 +60,19 @@ Remember to set your master language in the menu Tools/multilinugal settings to 
 #### MasterLanguageCode
 Master language that is 'en-US' by default. This is the language code for the MasterFile and is used in the trnaslation service to specify the input language to be translated.
 #### TranslationService
-1 = Googele (default)
+1 = Googele (Default)
+
 2 = Microsoft translation service
-Google's free translation. This is limited to only 100 translations per hour. To use the Microsoft translation service
+
+Google's translation. This is limited to only 100 translations per hour. To use the Microsoft translation service
 you need fill in the information from Microsoft in the fields (TranslationServiceMsoftEndpoint,TranslationServiceMsoftLocation,TranslationServiceMsoftKey).
 #### ExportFileType
 your preferred export format, csv or xslt.
+
 1 = Csv
+
 2 = Excel (Default)
+
 #### ExportMasterFileOnExport
 If you also want to handle the status for the texts in the master resx file then sett this to true.
 This will add Comment node to master Resx file on sync and also export the master Resx on export.
