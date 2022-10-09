@@ -174,5 +174,14 @@ namespace MultilingualExtensionSampleConsoleApp.Resources {
                 return ResourceManager.GetString("Street", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Street and House and Room. later this day i was so sad that i jumped .
+        /// </summary>
+        public static string Street_And_House1 {
+            get {
+                return ResourceManager.GetString("Street_And_House1", resourceCulture);
+            }
+        }
     }
 }

@@ -52,4 +52,7 @@
   <data name="Street" xml:space="preserve">
     <value>Gata</value>
   <comment>Need review</comment></data>
+  <data name="Street_And_House1" xml:space="preserve">
+    <value>Gata och Hus och Rum. senare denna dag var jag så ledsen att jag hoppade</value>
+  <comment>Need review</comment></data>
 </root>
