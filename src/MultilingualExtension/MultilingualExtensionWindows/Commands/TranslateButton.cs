@@ -10,6 +10,7 @@ using Microsoft.VisualStudio.Shell.Interop;
 using MultilingualExtension.Helpers;
 using MultilingualExtension.Shared.Interfaces;
 using MultilingualExtension.Shared.Services;
+using VSLangProj;
 
 namespace MultilingualExtension
 {
@@ -88,7 +89,10 @@ namespace MultilingualExtension
         {
             ThreadHelper.ThrowIfNotOnUIThread();
             IProgressBar progress = new Helpers.ProgressBarHelper();
-            ISettingsService settingsService = new Services.SettingsService();
+           
+            var dte = ServiceProvider.GetService(typeof(DTE)) as DTE2;
+            var projPath = System.IO.Path.GetDirectoryName(dte.Solution.FullName);
+            ISettingsService settingsService = new SettingsService(projPath);
             try
             {
                 // Get the file path

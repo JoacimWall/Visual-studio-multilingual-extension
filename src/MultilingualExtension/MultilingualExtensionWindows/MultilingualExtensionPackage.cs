@@ -71,7 +71,7 @@ namespace MultilingualExtension
             // When initialized asynchronously, the current thread may be a background thread at this point.
             // Do any initialization that requires the UI thread after switching to the UI thread.
             await this.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
-            ShowSettingsButton.Initialize(this, commandService);
+            //ShowSettingsButton.Initialize(this, commandService);
             SyncFilesButton.Initialize(this, commandService);
             TranslateButton.Initialize(this, commandService);
             ExportButton.Initialize(this, commandService);

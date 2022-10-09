@@ -99,7 +99,9 @@ namespace MultilingualExtension
 
                 //MultilingualExtension.Shared
                 ImportService importFileService = new ImportService();
-                ISettingsService settingsService = new SettingsService();
+                var dte = ServiceProvider.GetService(typeof(DTE)) as DTE2;
+                var projPath = System.IO.Path.GetDirectoryName(dte.Solution.FullName);
+                ISettingsService settingsService = new SettingsService(projPath);
 
                 importFileService.ImportToResx(selectedFilename, progress, settingsService);
 

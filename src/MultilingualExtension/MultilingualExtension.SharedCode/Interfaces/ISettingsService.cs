@@ -1,5 +1,6 @@
 ﻿using System;
 using MultilingualExtension.Services;
+using MultilingualExtension.Shared.Services;
 
 namespace MultilingualExtension.Shared.Interfaces
 {

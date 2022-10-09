@@ -89,7 +89,9 @@ namespace MultilingualExtension
 
             ThreadHelper.ThrowIfNotOnUIThread();
             IProgressBar progress = new ProgressBarHelper();
-            ISettingsService settingsService = new Services.SettingsService();
+            var dte = ServiceProvider.GetService(typeof(DTE)) as DTE2;
+            var projPath = System.IO.Path.GetDirectoryName(dte.Solution.FullName);
+            ISettingsService settingsService = new SettingsService(projPath);
             try
             {
                 // Get the file path

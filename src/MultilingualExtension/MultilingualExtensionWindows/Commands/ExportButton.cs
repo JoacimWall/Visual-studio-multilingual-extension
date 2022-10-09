@@ -120,7 +120,9 @@ namespace MultilingualExtension
 
                 //MultilingualExtension.Shared
                 ExportService exportFileService = new ExportService();
-                ISettingsService settingsService = new SettingsService();
+                var dte = ServiceProvider.GetService(typeof(DTE)) as DTE2;
+                var projPath = System.IO.Path.GetDirectoryName(dte.Solution.FullName);
+                ISettingsService settingsService = new SettingsService(projPath);
                
 
                 exportFileService.ExportToFile(selectedFilename, Shared.Helpers.Globals.STATUS_COMMENT_NEW_OR_NEED_REVIEW, progress, settingsService).GetAwaiter().GetResult();

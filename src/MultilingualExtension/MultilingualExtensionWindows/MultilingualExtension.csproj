@@ -82,17 +82,11 @@
     <Compile Include="..\MultilingualExtension.SharedCode\Models\Translations.cs">
       <Link>Models\Translations.cs</Link>
     </Compile>
-    <Compile Include="..\MultilingualExtension.SharedCode\Models\TranslationsRow.cs">
-      <Link>Models\TranslationsRow.cs</Link>
-    </Compile>
     <Compile Include="..\MultilingualExtension.SharedCode\Models\UpdateStatusForTranslation.cs">
       <Link>Models\UpdateStatusForTranslation.cs</Link>
     </Compile>
-    <Compile Include="..\MultilingualExtension.SharedCode\Services\ExportService.cs">
-      <Link>Services\ExportService.cs</Link>
-    </Compile>
-    <Compile Include="..\MultilingualExtension.SharedCode\Services\ImportService.cs">
-      <Link>Services\ImportService.cs</Link>
+    <Compile Include="..\MultilingualExtension.SharedCode\Services\SettingsService.cs">
+      <Link>Services\SettingsService.cs</Link>
     </Compile>
     <Compile Include="..\MultilingualExtension.SharedCode\Services\SyncFileService.cs">
       <Link>Services\SyncFileService.cs</Link>
@@ -110,6 +104,7 @@
     <Compile Include="Commands\TranslateButton.cs" />
     <Compile Include="Helpers\DevfileHelper.cs" />
     <Compile Include="Helpers\ProgressBarHelper.cs" />
+    <Compile Include="Models\TranslationsRow.cs" />
     <Compile Include="MultilingualExtensionPackage1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -117,12 +112,11 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MultilingualExtensionPackage.cs" />
-    <Compile Include="Services\SettingsService.cs" />
+    <Compile Include="Services\ExportService.cs" />
     <Compile Include="Commands\ShowSettingsButton.cs" />
     <Compile Include="Commands\SyncFilesButton.cs" />
-    <Compile Include="View\SettingsWindow.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Services\ImportService.cs" />
+    <Compile Include="View\SettingsWindow.cs" />
     <Compile Include="View\SettingsWindow.Designer.cs">
       <DependentUpon>SettingsWindow.cs</DependentUpon>
     </Compile>
