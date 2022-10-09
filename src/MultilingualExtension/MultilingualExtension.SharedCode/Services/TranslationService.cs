@@ -83,12 +83,14 @@ namespace MultilingualExtension.Shared.Services
                     string[] linesText = responseBody.Split(new string[] { "],[" }, StringSplitOptions.RemoveEmptyEntries);
                     foreach (var line in linesText)
                     {
-                        if (line.Contains("\",\"") && line.Contains("null") && line != linesText[linesText.Count() -1])
+                        if ((line.Contains("\",\"") && line.Contains("null") && line != linesText[linesText.Count() -1])
+                            || (linesText.Count() == 1))
                         { 
                         int firstDoubleQuotesChar = line.IndexOf("\"");
                         int seconDoubleQuotesChar = line.IndexOf("\",");
                          result = result + line.Substring(firstDoubleQuotesChar + 1, seconDoubleQuotesChar - firstDoubleQuotesChar - 1);
                         }
+                        
                     }
                     Translations responsetext = new Translations { text = result, to = toLanguageCode };
                     return new Result<Translations>(responsetext);

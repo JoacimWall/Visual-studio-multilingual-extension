@@ -79,6 +79,15 @@ namespace MultilingualExtensionSampleConsoleApp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Computer.
+        /// </summary>
+        public static string Computer {
+            get {
+                return ResourceManager.GetString("Computer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cow.
         /// </summary>
         public static string Cow {

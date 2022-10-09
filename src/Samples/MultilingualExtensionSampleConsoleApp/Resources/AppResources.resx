@@ -173,4 +173,8 @@
     <value>Street and House and Room. later this day i was so sad that i jumped </value>
     <comment>Need review</comment>
   </data>
+  <data name="Computer" xml:space="preserve">
+    <value>Computer</value>
+    <comment>Need review</comment>
+  </data>
 </root>

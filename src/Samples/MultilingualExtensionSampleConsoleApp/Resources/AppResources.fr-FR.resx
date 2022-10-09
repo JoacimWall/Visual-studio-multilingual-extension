@@ -53,7 +53,11 @@
     <value>Rue</value>
   <comment>Need review</comment></data>
   <data name="Street_And_House2" xml:space="preserve">
-    <value>Street and House and Room. later this day i was so sad that i jumped </value>
-    <comment>New</comment>
+    <value>Rue et maison et chambre. plus tard ce jour-là, j'étais si triste que j'ai sauté</value>
+    <comment>Need review</comment>
+  </data>
+  <data name="Computer" xml:space="preserve">
+    <value></value>
+    <comment>Need review</comment>
   </data>
 </root>
