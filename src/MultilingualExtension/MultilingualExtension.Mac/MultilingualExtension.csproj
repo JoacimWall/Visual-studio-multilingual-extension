@@ -28,58 +28,58 @@
 		<Folder Include="Views\" />
 	</ItemGroup>
 	<ItemGroup>
-		<Compile Include="..\..\MultilingualExtension.SharedCode\Helpers\Global.cs">
+		<Compile Include="..\MultilingualExtension.SharedCode\Helpers\Global.cs">
 			<Link>Helpers\Global.cs</Link>
 		</Compile>
-		<Compile Include="..\..\MultilingualExtension.SharedCode\Interfaces\ISettingsService.cs">
+		<Compile Include="..\MultilingualExtension.SharedCode\Interfaces\ISettingsService.cs">
 			<Link>Interfaces\ISettingsService.cs</Link>
 		</Compile>
-		<Compile Include="..\..\MultilingualExtension.SharedCode\Helpers\ResxHelpers.cs">
+		<Compile Include="..\MultilingualExtension.SharedCode\Helpers\ResxHelpers.cs">
 			<Link>Helpers\ResxHelpers.cs</Link>
 		</Compile>
-		<Compile Include="..\..\MultilingualExtension.SharedCode\Helpers\ReswHelpers.cs">
+		<Compile Include="..\MultilingualExtension.SharedCode\Helpers\ReswHelpers.cs">
 			<Link>Helpers\ReswHelpers.cs</Link>
 		</Compile>
-		<Compile Include="..\..\MultilingualExtension.SharedCode\Helpers\Res_Helpers.cs">
+		<Compile Include="..\MultilingualExtension.SharedCode\Helpers\Res_Helpers.cs">
 			<Link>Helpers\Res_Helpers.cs</Link>
 		</Compile>
-		<Compile Include="..\..\MultilingualExtension.SharedCode\Helpers\RegExHelper.cs">
+		<Compile Include="..\MultilingualExtension.SharedCode\Helpers\RegExHelper.cs">
 			<Link>Helpers\RegExHelper.cs</Link>
 		</Compile>
-		<Compile Include="..\..\MultilingualExtension.SharedCode\Models\TranslationsRow.cs">
+		<Compile Include="..\MultilingualExtension.SharedCode\Models\TranslationsRow.cs">
 			<Link>Models\TranslationsRow.cs</Link>
 		</Compile>
-		<Compile Include="..\..\MultilingualExtension.SharedCode\Models\UpdateStatusForTranslation.cs">
+		<Compile Include="..\MultilingualExtension.SharedCode\Models\UpdateStatusForTranslation.cs">
 			<Link>Models\UpdateStatusForTranslation.cs</Link>
 		</Compile>
-		<Compile Include="..\..\MultilingualExtension.SharedCode\Models\Translations.cs">
+		<Compile Include="..\MultilingualExtension.SharedCode\Models\Translations.cs">
 			<Link>Models\Translations.cs</Link>
 		</Compile>
-		<Compile Include="..\..\MultilingualExtension.SharedCode\Models\Result.cs">
+		<Compile Include="..\MultilingualExtension.SharedCode\Models\Result.cs">
 			<Link>Models\Result.cs</Link>
 		</Compile>
-		<Compile Include="..\..\MultilingualExtension.SharedCode\Models\Res_Files.cs">
+		<Compile Include="..\MultilingualExtension.SharedCode\Models\Res_Files.cs">
 			<Link>Models\Res_Files.cs</Link>
 		</Compile>
-		<Compile Include="..\..\MultilingualExtension.SharedCode\Models\Res_Fileinfo.cs">
+		<Compile Include="..\MultilingualExtension.SharedCode\Models\Res_Fileinfo.cs">
 			<Link>Models\Res_Fileinfo.cs</Link>
 		</Compile>
-		<Compile Include="..\..\MultilingualExtension.SharedCode\Models\MicrosoftTranslationResponse.cs">
+		<Compile Include="..\MultilingualExtension.SharedCode\Models\MicrosoftTranslationResponse.cs">
 			<Link>Models\MicrosoftTranslationResponse.cs</Link>
 		</Compile>
-		<Compile Include="..\..\MultilingualExtension.SharedCode\Services\SyncFileService.cs">
+		<Compile Include="..\MultilingualExtension.SharedCode\Services\SyncFileService.cs">
 			<Link>Services\SyncFileService.cs</Link>
 		</Compile>
-		<Compile Include="..\..\MultilingualExtension.SharedCode\Interfaces\IProgressBar.cs">
+		<Compile Include="..\MultilingualExtension.SharedCode\Interfaces\IProgressBar.cs">
 			<Link>Interfaces\IProgressBar.cs</Link>
 		</Compile>
-		<Compile Include="..\..\MultilingualExtension.SharedCode\Services\TranslationService.cs">
+		<Compile Include="..\MultilingualExtension.SharedCode\Services\TranslationService.cs">
 			<Link>Services\TranslationService.cs</Link>
 		</Compile>
-		<Compile Include="..\..\MultilingualExtension.SharedCode\Services\ExportService.cs">
+		<Compile Include="..\MultilingualExtension.SharedCode\Services\ExportService.cs">
 			<Link>Services\ExportService.cs</Link>
 		</Compile>
-		<Compile Include="..\..\MultilingualExtension.SharedCode\Services\ImportService.cs">
+		<Compile Include="..\MultilingualExtension.SharedCode\Services\ImportService.cs">
 		  <Link>Services\ImportService.cs</Link>
 		</Compile>
 	</ItemGroup>
@@ -109,20 +109,24 @@
    <!-- <AddinReference Include="ICG.NetCore.Utilities.Spreadsheet" Version="7.0.0" />-->
   </ItemGroup>
 	<ItemGroup>
-	  <Reference Include="DocumentFormat.OpenXml">
-	    <HintPath>RefDll\DocumentFormat.OpenXml.dll</HintPath>
-	  </Reference>
-	  <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions">
-	    <HintPath>RefDll\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
-	  </Reference>
-	  <Reference Include="Microsoft.Extensions.DependencyInjection">
-	    <HintPath>RefDll\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+		<Reference Include="Xamarin.Mac">
+        <HintPath>\Applications\Visual Studio %28Preview%29.app\Contents\MonoBundle\Xamarin.Mac.dll</HintPath>
+        <Private>False</Private>
+    </Reference>
+	  <Reference Include="NetCore.Utilities.SpreadsheetExample">
+	    <HintPath>RefDll\NetCore.Utilities.SpreadsheetExample.dll</HintPath>
 	  </Reference>
 	  <Reference Include="NetCore.Utilities.Spreadsheet">
 	    <HintPath>RefDll\NetCore.Utilities.Spreadsheet.dll</HintPath>
 	  </Reference>
-	  <Reference Include="NetCore.Utilities.SpreadsheetExample">
-	    <HintPath>RefDll\NetCore.Utilities.SpreadsheetExample.dll</HintPath>
+	  <Reference Include="Microsoft.Extensions.DependencyInjection">
+	    <HintPath>RefDll\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+	  </Reference>
+	  <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions">
+	    <HintPath>RefDll\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+	  </Reference>
+	  <Reference Include="DocumentFormat.OpenXml">
+	    <HintPath>RefDll\DocumentFormat.OpenXml.dll</HintPath>
 	  </Reference>
 	  <Reference Include="System.IO.Packaging">
 	    <HintPath>RefDll\System.IO.Packaging.dll</HintPath>

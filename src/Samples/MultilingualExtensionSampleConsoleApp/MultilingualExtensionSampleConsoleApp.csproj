@@ -26,7 +26,4 @@
     <None Remove="Microsoft.VisualStudioMac.Sdk" />
     <None Remove="ICG.NetCore.Utilities.Spreadsheet" />
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="ICG.NetCore.Utilities.Spreadsheet" Version="7.0.0" />
-  </ItemGroup>
 </Project>

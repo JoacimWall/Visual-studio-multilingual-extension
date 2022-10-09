@@ -5,16 +5,17 @@ using MonoDevelop.Projects;
 using MultilingualExtension.Shared.Helpers;
 using MultilingualExtension.Shared.Services;
 using MultilingualExtension.Shared.Interfaces;
+using MultilingualExtension.Services;
 
 namespace MultilingualExtension
 {
-
-    class UpdateFilesHandler : CommandHandler
+          
+    internal class UpdateFilesHandler : CommandHandler
     {
 
         protected async override void Run()
         {
-            IProgressBar progress = new Helpers.ProgressBarHelper(Globals.Synchronize_Rows_Info);
+            IProgressBar progress = new ProgressBar(Globals.Synchronize_Rows_Info);
 
             try
             {
@@ -22,10 +23,10 @@ namespace MultilingualExtension
                 SyncFileService syncFileService = new SyncFileService();
                 ISettingsService settingsService = new Services.SettingsService();
                 await IdeApp.Workbench.SaveAllAsync();
-                
+
                 ProjectFile selectedItem = (ProjectFile)IdeApp.Workspace.CurrentSelectedItem;
-               
-               var result = await syncFileService.SyncFile(selectedItem.FilePath, progress, settingsService);
+
+                var result = await syncFileService.SyncFile(selectedItem.FilePath, progress, settingsService);
 
                 if (!result.WasSuccessful)
                 {
@@ -45,7 +46,7 @@ namespace MultilingualExtension
                 progress = null;
                 Console.WriteLine("Sync file completed");
             }
-          
+
         }
          protected override void Update(CommandInfo info)
         {
@@ -55,17 +56,17 @@ namespace MultilingualExtension
 
             //validate file
             ISettingsService settingsService = new Services.SettingsService();
-            var res_Info = Res_Helpers.FileInfo(settingsService.MasterLanguageCode, selectedFilename);
+            var res_Info = Res_Helpers.FileInfo(settingsService.ExtensionSettings.MasterLanguageCode, selectedFilename);
 
             if (res_Info.Model.IsMasterFile)
             {
                 info.Text = Globals.Synchronize_All_Files_Title;
             }
-            else 
+            else
             {
                 info.Text = Globals.Synchronize_Seleted_File_Title;
             }
-           
+
         }
     }
     public enum MultilingualExtensionCommands

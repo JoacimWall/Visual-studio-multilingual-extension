@@ -49,7 +49,7 @@ namespace MultilingualExtension
             string selectedFilename = selectedItem.Name;
             var commandSet = new CommandInfoSet();
             ISettingsService settingsService = new Services.SettingsService();
-            var res_Info = Res_Helpers.FileInfo(settingsService.MasterLanguageCode, selectedFilename);
+            var res_Info = Res_Helpers.FileInfo(settingsService.ExtensionSettings.MasterLanguageCode, selectedFilename);
 
             commandSet.CommandInfos.Add(new CommandInfo(Globals.STATUS_COMMENT_NEW_OR_NEED_REVIEW), Globals.STATUS_COMMENT_NEW_OR_NEED_REVIEW);
             commandSet.CommandInfos.Add(new CommandInfo(Globals.STATUS_COMMENT_NEW), Globals.STATUS_COMMENT_NEW);

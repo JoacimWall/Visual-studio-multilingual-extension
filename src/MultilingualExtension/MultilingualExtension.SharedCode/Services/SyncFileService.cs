@@ -19,7 +19,7 @@ namespace MultilingualExtension.Shared.Services
             try
             {
 
-                bool addCommentNodeToMasterResx = settingsService.AddCommentNodeMasterResx;
+                bool addCommentNodeToMasterResx = settingsService.ExtensionSettings.ExportMasterFileOnExport;
 
                 //validate file
                 var checkfile = RegExHelper.ValidateFilenameIsTargetType(selectedFilename);
@@ -73,11 +73,11 @@ namespace MultilingualExtension.Shared.Services
         {
             try
             {
-                bool addCommentNodeToMasterResx = settingsService.AddCommentNodeMasterResx;
+                bool addCommentNodeToMasterResx = settingsService.ExtensionSettings.ExportMasterFileOnExport;
                 var checkfileResw = RegExHelper.ValidateFileTypeIsResw(selectedFilename);
                 if (checkfileResw.Success)
                 {
-                    var resultResw = ReswHelpers.GetBasInfo(settingsService.MasterLanguageCode, selectedFilename);
+                    var resultResw = ReswHelpers.GetBasInfo(settingsService.ExtensionSettings.MasterLanguageCode, selectedFilename);
                     if (!resultResw.WasSuccessful)
                         return new Result<bool>(resultResw.ErrorMessage);
 
@@ -90,7 +90,7 @@ namespace MultilingualExtension.Shared.Services
                 }
                 //------------------ RESX failes -------------------------------------------------// 
                 //validate file
-                var resultResx = ResxHelpers.GetBasInfo(selectedFilename, settingsService.MasterLanguageCode);
+                var resultResx = ResxHelpers.GetBasInfo(selectedFilename, settingsService.ExtensionSettings.MasterLanguageCode);
                 if (!resultResx.WasSuccessful)
                     return new Result<bool>(resultResx.ErrorMessage);
 

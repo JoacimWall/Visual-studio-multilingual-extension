@@ -1,16 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Xml;
-using Gtk;
-using MonoDevelop.Components.Commands;
+﻿using MonoDevelop.Components.Commands;
 using MonoDevelop.Ide;
 using MonoDevelop.Projects;
 using MultilingualExtension.Shared.Helpers;
@@ -24,7 +12,7 @@ namespace MultilingualExtension
         
         protected async override void Run()
         {
-            IProgressBar progress = new Helpers.ProgressBarHelper(Globals.Translate_Rows_Info);
+            IProgressBar progress = new Services.ProgressBar(Globals.Translate_Rows_Info);
             ISettingsService settingsService  = new Services.SettingsService();
             try
             {
@@ -59,7 +47,7 @@ namespace MultilingualExtension
 
             //validate file
             ISettingsService settingsService = new Services.SettingsService();
-            var res_Info = Res_Helpers.FileInfo(settingsService.MasterLanguageCode, selectedFilename);
+            var res_Info = Res_Helpers.FileInfo(settingsService.ExtensionSettings.MasterLanguageCode, selectedFilename);
            
             if (res_Info.Model.IsMasterFile)
             {

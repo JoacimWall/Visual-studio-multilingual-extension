@@ -77,9 +77,19 @@ namespace MultilingualExtension.Shared.Services
                 }
                 else
                 {
-                    int firstDoubleQuotesChar = responseBody.IndexOf("\"");
-                    int seconDoubleQuotesChar = responseBody.IndexOf("\",");
-                    var result = responseBody.Substring(firstDoubleQuotesChar + 1, seconDoubleQuotesChar - firstDoubleQuotesChar - 1);
+                    // [[["Gata. ","Street.",null,null,2],["Och House","And House",null,null,3,null,null,[[]],[[["c20f075da290ff4ebe2bae43bebf89e7","tea_GermanicA_en2afdaislbnosvfyyiiw_2021q3.md"]]]]],null,"en",null,null,null,null,[]]
+                    string result = "";
+                    //string[] linesText = responseBody.Split(Convert.ToChar("],["));
+                    string[] linesText = responseBody.Split(new string[] { "],[" }, StringSplitOptions.RemoveEmptyEntries);
+                    foreach (var line in linesText)
+                    {
+                        if (line.Contains("\",\"") && line.Contains("null") && line != linesText[linesText.Count() -1])
+                        { 
+                        int firstDoubleQuotesChar = line.IndexOf("\"");
+                        int seconDoubleQuotesChar = line.IndexOf("\",");
+                         result = result + line.Substring(firstDoubleQuotesChar + 1, seconDoubleQuotesChar - firstDoubleQuotesChar - 1);
+                        }
+                    }
                     Translations responsetext = new Translations { text = result, to = toLanguageCode };
                     return new Result<Translations>(responsetext);
                 }
@@ -88,7 +98,6 @@ namespace MultilingualExtension.Shared.Services
 
 
         }
-
         private async Task<Result<Translations>> MicrosoftTranslateText(string textToTranslate, string fromLanguageCode, string toLanguageCode, string endpoint, string location, string key)
         {
 
@@ -267,18 +276,18 @@ namespace MultilingualExtension.Shared.Services
             {
                 
                 bool useGoogle = true;
-                if (settingsService.TranslationService == 2)
+                if (settingsService.ExtensionSettings.TranslationService == 2)
                     useGoogle = false;
 
-                string endpoint = settingsService.MsoftEndpoint;
-                string location = settingsService.MsoftLocation;
-                string key = settingsService.MsoftKey;
-                string masterLanguageCode = settingsService.MasterLanguageCode;
+                string endpoint = settingsService.ExtensionSettings.TranslationServiceMsoftEndpoint;
+                string location = settingsService.ExtensionSettings.TranslationServiceMsoftLocation;
+                string key = settingsService.ExtensionSettings.TranslationServiceMsoftKey;
+                string masterLanguageCode = settingsService.ExtensionSettings.MasterLanguageCode;
                 //------------------------- ResW files --------------------------------------------------------------------
                 var checkfileResw = RegExHelper.ValidateFileTypeIsResw(selectedFilename);
                 if (checkfileResw.Success)
                 {
-                    var resultResw = ReswHelpers.GetBasInfo(settingsService.MasterLanguageCode, selectedFilename);
+                    var resultResw = ReswHelpers.GetBasInfo(settingsService.ExtensionSettings.MasterLanguageCode, selectedFilename);
                     if (!resultResw.WasSuccessful)
                         return new Result<bool>(resultResw.ErrorMessage);
 
@@ -295,7 +304,7 @@ namespace MultilingualExtension.Shared.Services
 
                 // -------------------- ResX files --------------------------------------------------------
                 //validate file
-                var resultResx = ResxHelpers.GetBasInfo(selectedFilename, settingsService.MasterLanguageCode);
+                var resultResx = ResxHelpers.GetBasInfo(selectedFilename, settingsService.ExtensionSettings.MasterLanguageCode);
                 if (!resultResx.WasSuccessful)
                     return new Result<bool>(resultResx.ErrorMessage);
 
@@ -331,13 +340,13 @@ namespace MultilingualExtension.Shared.Services
                 string folderSeperator = Environment.OSVersion.Platform == PlatformID.Win32NT ? "\\" : "/";
 
                 bool useGoogle = true;
-                if (settingsService.TranslationService == 2)
+                if (settingsService.ExtensionSettings.TranslationService == 2)
                     useGoogle = false;
 
-                string endpoint = settingsService.MsoftEndpoint;
-                string location = settingsService.MsoftLocation;
-                string key = settingsService.MsoftKey;
-                string masterLanguageCode = settingsService.MasterLanguageCode;
+                string endpoint = settingsService.ExtensionSettings.TranslationServiceMsoftEndpoint;
+                string location = settingsService.ExtensionSettings.TranslationServiceMsoftLocation;
+                string key = settingsService.ExtensionSettings.TranslationServiceMsoftKey;
+                string masterLanguageCode = settingsService.ExtensionSettings.MasterLanguageCode;
                 //------------------------- ResW files --------------------------------------------------------------------
                 //var checkfileResw = RegExHelper.ValidateFileTypeIsResw(selectedFilename);
                 //if (checkfileResw.Success)

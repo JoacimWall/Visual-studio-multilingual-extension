@@ -123,36 +123,42 @@
   </data>
   <data name="Press_Any_Key_To_Exit" xml:space="preserve">
     <value>Press any key to exit</value>
-  </data>
+  <comment>Need review</comment></data>
   <data name="Enter_Email" xml:space="preserve">
     <value>Enter email please!</value>
-  </data>
+  <comment>Need review</comment></data>
   <data name="Enter_Email_To_Be_The_Next_User_To_Be_Able_To_Login_To_The_Best_Office_System_In_The_World" xml:space="preserve">
     <value>Enter email please!</value>
-  </data>
+  <comment>Need review</comment></data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
-  </data>
+  <comment>Need review</comment></data>
   <data name="Home" xml:space="preserve">
     <value>Home</value>
-  </data>
+  <comment>Need review</comment></data>
   <data name="Dog" xml:space="preserve">
     <value>Dog</value>
-  </data>
+  <comment>Need review</comment></data>
   <data name="Cat" xml:space="preserve">
     <value>Cat</value>
-  </data>
+  <comment>Need review</comment></data>
   <data name="Bird" xml:space="preserve">
     <value>Bird</value>
-  </data>
+  <comment>Need review</comment></data>
   <data name="Cow" xml:space="preserve">
     <value>Cow</value>
-  </data>
+  <comment>Need review</comment></data>
   <data name="Love_Is" xml:space="preserve">
     <value>Love is</value>
     <comment>New</comment>
   </data>
   <data name="House" xml:space="preserve">
     <value>House</value>
-  </data>
+  <comment>Need review</comment></data>
+  <data name="Street" xml:space="preserve">
+    <value>Street</value>
+  <comment>Need review</comment></data>
+ <data name="Street_And_House1" xml:space="preserve">
+    <value>Street and House and Room. later this day i was so sad that i jumped </value>
+  <comment>Need review</comment></data>
 </root>
