@@ -177,4 +177,8 @@
     <value>Dator</value>
     <comment>Need review</comment>
   </data>
+  <data name="Cup" xml:space="preserve">
+    <value>Kopp</value>
+    <comment>Need review</comment>
+  </data>
 </root>

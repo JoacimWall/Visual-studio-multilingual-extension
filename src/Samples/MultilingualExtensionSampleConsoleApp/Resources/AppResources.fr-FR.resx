@@ -60,4 +60,8 @@
     <value></value>
     <comment>Need review</comment>
   </data>
+  <data name="Cup" xml:space="preserve">
+    <value>Tasse</value>
+    <comment>Need review</comment>
+  </data>
 </root>

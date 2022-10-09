@@ -177,4 +177,8 @@
     <value>Computer</value>
     <comment>Need review</comment>
   </data>
+      <data name="Cup" xml:space="preserve">
+    <value>Cup</value>
+    <comment>Need review</comment>
+  </data>
 </root>
