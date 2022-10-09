@@ -66,6 +66,7 @@ Google's free translation. This is limited to only 100 translations per hour. To
 you need fill in the information from Microsoft in the fields (TranslationServiceMsoftEndpoint,TranslationServiceMsoftLocation,TranslationServiceMsoftKey).
 #### ExportFileType
 your preferred export format, csv or xslt.
+
 1 = Csv
 2 = Excel (Default)
 #### ExportMasterFileOnExport
