@@ -19,7 +19,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Res_Files.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Translations.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\TranslationsRow.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\ExportService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SettingsService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SyncFileService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\TranslationService.cs" />
