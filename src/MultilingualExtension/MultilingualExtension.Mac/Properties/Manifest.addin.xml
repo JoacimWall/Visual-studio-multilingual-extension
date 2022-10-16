@@ -47,15 +47,7 @@
         </Condition>
     </Extension>
 
-<!--     <Extension path = "/MonoDevelop/Ide/Commands">
-        <Command id = "MultilingualExtension.ShowSettings"
-                 _label = "Multilingual Settings"
-                 _description = "Multilingual Settings" 
-                 defaultHandler = "MultilingualExtension.SettingsHandler"/>
-    </Extension>
-    <Extension path = "/MonoDevelop/Ide/MainMenu/Tools">
-        <CommandItem id="MultilingualExtension.ShowSettings" />
-    </Extension>-->
+
 
      <Extension path = "/MonoDevelop/Ide/Commands">
         <Command id = "MultilingualExtension.ImportFiles"
@@ -68,8 +60,29 @@
             <CommandItem id="MultilingualExtension.ImportFiles" />
         </Condition>
     </Extension>
+
+
+    <!-- <Extension path = "/MonoDevelop/Ide/Commands">
+        <Command id = "MultilingualExtension.ListUnusedTranslations"
+                 _label = "List unused Ttranslations"
+                 _description = "List unused Ttranslations" 
+                 defaultHandler = "MultilingualExtension.ListUnusedTranslationsHandler"/>
+    </Extension>
+     <Extension path = "/MonoDevelop/Ide/ContextMenu/ProjectPad">
+        <Condition id="FileType" fileExtensions=".resx,.resw">
+            <CommandItem id="MultilingualExtension.ListUnusedTranslations" />
+        </Condition>
+    </Extension>-->
     <!-- 
-     
+      <Extension path = "/MonoDevelop/Ide/Commands">
+        <Command id = "MultilingualExtension.ShowSettings"
+                 _label = "Multilingual Settings"
+                 _description = "Multilingual Settings" 
+                 defaultHandler = "MultilingualExtension.SettingsHandler"/>
+    </Extension>
+    <Extension path = "/MonoDevelop/Ide/MainMenu/Tools">
+        <CommandItem id="MultilingualExtension.ShowSettings" />
+    </Extension>
   
    
    <Extension path = "/MonoDevelop/Ide/Commands">
@@ -86,12 +99,7 @@
              _description = "Action that aplay to all child language files"
                defaultHandler = "MultilingualExtension.SyncAndTranslateSelectedNodeHandler"/>
     </Extension>
-     <Extension path = "/MonoDevelop/Ide/Commands">
-        <Command id = "MultilingualExtension.MultilingualExtensionCommands.ListUnusedTranslations"
-                 _label = "Multilingual Settings"
-                 _description = "Multilingual Settings" 
-                 defaultHandler = "MultilingualExtension.ListUnusedTranslationsHandler"/>
-    </Extension>
+
     <Extension path = "/MonoDevelop/Ide/ContextMenu/ProjectPad">
         <Condition id="FileType" fileExtensions=".resx,.resw">
             <CommandItem id="MultilingualExtension.MultilingualExtensionCommands.UpdateFiles" />
@@ -100,11 +108,7 @@
    
    
    
-     <Extension path = "/MonoDevelop/Ide/ContextMenu/ProjectPad">
-        <Condition id="FileType" fileExtensions=".resx,.resw">
-            <CommandItem id="MultilingualExtension.MultilingualExtensionCommands.ListUnusedTranslations" />
-        </Condition>
-    </Extension>
+    
     
    
      <Extension path = "/MonoDevelop/SourceEditor2/ContextMenu/Editor">

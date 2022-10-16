@@ -53,7 +53,7 @@ namespace MultilingualExtension
 
             ProjectFile selectedItem = (ProjectFile)IdeApp.Workspace.CurrentSelectedItem;
             string selectedFilename = selectedItem.Name;
-
+            
             //validate file
             ISettingsService settingsService = new Services.SettingsService();
             var res_Info = Res_Helpers.FileInfo(settingsService.ExtensionSettings.MasterLanguageCode, selectedFilename);
