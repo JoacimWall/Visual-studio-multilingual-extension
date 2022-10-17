@@ -12,6 +12,7 @@ using MultilingualExtension.Shared.Models;
 using MultilingualExtension.Shared.Interfaces;
 using FileHelpers;
 using FileHelpers.ExcelNPOIStorage;
+using Microsoft.VisualStudio.RpcContracts.FileSystem;
 
 namespace MultilingualExtension.Services
 {
@@ -21,7 +22,7 @@ namespace MultilingualExtension.Services
         {
         }
 
-        public async Task<Result<Boolean>> ImportToResx(string selectedFilename, IProgressBar progress, ISettingsService settingsService)
+        public async Task<Result<Boolean>> ImportToResx(string selectedFilename, EnvDTE.OutputWindowPane outputPane, ISettingsService settingsService)
         {
 
             try
@@ -44,10 +45,12 @@ namespace MultilingualExtension.Services
                     int minus = checkfileResxCsv.Success || checkfileReswCsv.Success ? 4 : 5;
                     int filetype = checkfileResxCsv.Success || checkfileReswCsv.Success ? 1 : 2;
                     string updatePath = selectedFilename.Substring(0, selectedFilename.Length - minus);
-                    var reslut = await ImportToResxInternal(selectedFilename, updatePath, filetype, progress);
-                    return new Result<bool>(true);
-                }
+                    var result = await ImportToResxInternal(selectedFilename, updatePath, filetype, outputPane);
+                    var fileinfo = Res_Helpers.FileInfo(settingsService.ExtensionSettings.MasterLanguageCode, updatePath);
 
+                    OutputWindowHelper.WriteToOutputWindow(outputPane, string.Format("Import done for {0}-{1}: {2} rows updated", fileinfo.Model.LanguageBase, fileinfo.Model.LanguageCulture, result.Model.ToString()));
+                    return new Result<bool>(result.WasSuccessful);
+                }
             }
 
             catch (Exception ex)
@@ -57,9 +60,9 @@ namespace MultilingualExtension.Services
             }
 
         }
-        private async Task<Result<Boolean>> ImportToResxInternal(string masterPath, string updatePath, int exportFileType, IProgressBar progress)
+        private async Task<Result<int>> ImportToResxInternal(string masterPath, string updatePath, int exportFileType, EnvDTE.OutputWindowPane outputPane)
         {
-
+           int importCount = 0;
             XmlDocument updatedoc = new XmlDocument();
             updatedoc.Load(updatePath);
             XmlNode rootUpdate = updatedoc.DocumentElement;
@@ -90,6 +93,7 @@ namespace MultilingualExtension.Services
                     if (dataNode != null)
                     {
                         updatefilechanged = true;
+                        importCount++;
                         var dataNodeValue = dataNode.SelectSingleNode("value");
                         var dataNodeComment = dataNode.SelectSingleNode("comment");
                         if (dataNodeValue != null && dataNodeComment != null)
@@ -101,14 +105,14 @@ namespace MultilingualExtension.Services
                     }
 
                 }
-                progress.Pulse();
+              
 
             }
 
             if (updatefilechanged)
                 updatedoc.Save(updatePath);
 
-            return new Result<bool>(true);
+            return new Result<int>(importCount);
 
         }
 

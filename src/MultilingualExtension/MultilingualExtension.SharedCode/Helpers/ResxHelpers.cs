@@ -1,4 +1,5 @@
 ﻿using MultilingualExtension.Shared.Models;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,7 +15,7 @@ namespace MultilingualExtension.Shared.Helpers
             string folderSeperator = Environment.OSVersion.Platform == PlatformID.Win32NT ? "\\" : "/";
             int folderindex = selectedFilename.LastIndexOf(folderSeperator);
             string masterFolderPath = selectedFilename.Substring(0, folderindex);
-
+           
             Res_Files resxFiles = new Res_Files();
             var checkfile = RegExHelper.ValidateFilenameIsTargetType(selectedFilename);
             if (!checkfile.Success)

@@ -1,24 +1,31 @@
-﻿using Microsoft.VisualStudio;
+﻿using EnvDTE;
+using EnvDTE80;
+using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace MultilingualExtension.Helpers
 {
     public static class DevfileHelper
     {
+       
+        
         public static string GetSelectedFile()
         {
             IVsHierarchy hierarchy = null;
             uint itemid = VSConstants.VSITEMID_NIL;
 
-            if (!IsSingleProjectItemSelection(out hierarchy, out itemid)) return string.Empty ;
+            if (!IsSingleProjectItemSelection(out hierarchy, out itemid)) return string.Empty;
             // Get the file path
             string itemFullPath = null;
             ((IVsProject)hierarchy).GetMkDocument(itemid, out itemFullPath);
@@ -95,6 +102,26 @@ namespace MultilingualExtension.Helpers
                     Marshal.Release(hierarchyPtr);
                 }
             }
+        }
+
+        public static string GetProjectPath(DTE2 dte)
+        {
+            try
+            {
+                // Create a new namespace.  
+                ProjectItem projItem = dte.ActiveDocument.ProjectItem;
+                var pos = projItem.ContainingProject.FullName.LastIndexOf("\\");
+                return projItem.ContainingProject.FullName.Substring(0, pos);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return string.Empty;
+            }
+
+
+
         }
     }
 }

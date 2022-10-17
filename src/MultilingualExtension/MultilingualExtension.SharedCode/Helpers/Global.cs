@@ -48,7 +48,7 @@ namespace MultilingualExtension.Shared.Helpers
         public const string Import_Rows_Info = "Import rows where comment is 'Final'";
         public const string Import_Translation_Title = "Import translations";
 
-        public const string Show_Setting_Title = "Multilingual Settings";
+        //public const string Show_Setting_Title = "Multilingual Settings";
 
         public const string Translate_Rows_Info = "Translate rows where comment has value 'New'";
         public const string Translate_All_Files_Title = "Translate all language files";

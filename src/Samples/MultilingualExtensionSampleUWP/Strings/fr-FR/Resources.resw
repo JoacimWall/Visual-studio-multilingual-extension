@@ -117,19 +117,32 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Hello" xml:space="preserve">
-    <value>Hello</value>
-  <comment>Final</comment></data>
   <data name="Dog" xml:space="preserve">
     <value>Chien</value>
-  <comment>Need review</comment></data>
+    <comment>Need review</comment>
+  </data>
   <data name="Cat" xml:space="preserve">
     <value>Chat</value>
-  <comment>Need review</comment></data>
-  <data name="Password" xml:space="preserve">
-    <value>Mot de passe</value>
-  <comment>Need review</comment></data>
+    <comment>Need review</comment>
+  </data>
   <data name="Run if you like" xml:space="preserve">
     <value>Cours si tu veux</value>
-  <comment>Need review</comment></data>
+    <comment>Need review</comment>
+  </data>
+  <data name="Wood" xml:space="preserve">
+    <value>Bois</value>
+    <comment>Need review</comment>
+  </data>
+  <data name="Hello" xml:space="preserve">
+    <value>Bonjour</value>
+    <comment>Need review</comment>
+  </data>
+  <data name="House" xml:space="preserve">
+    <value>Loger</value>
+    <comment>Need review</comment>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Mot de passe</value>
+    <comment>Need review</comment>
+  </data>
 </root>

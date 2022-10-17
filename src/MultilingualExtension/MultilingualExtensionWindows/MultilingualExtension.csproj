@@ -49,6 +49,9 @@
     <Compile Include="..\MultilingualExtension.SharedCode\Helpers\Global.cs">
       <Link>Helpers\Global.cs</Link>
     </Compile>
+    <Compile Include="..\MultilingualExtension.SharedCode\Helpers\OutputWindowHelper.cs">
+      <Link>Helpers\OutputWindowHelper.cs</Link>
+    </Compile>
     <Compile Include="..\MultilingualExtension.SharedCode\Helpers\RegExHelper.cs">
       <Link>Helpers\RegExHelper.cs</Link>
     </Compile>

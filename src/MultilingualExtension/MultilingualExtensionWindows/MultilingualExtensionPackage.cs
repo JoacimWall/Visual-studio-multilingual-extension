@@ -52,7 +52,7 @@ namespace MultilingualExtension
         /// MultilingualExtensionPackage GUID string.
         /// </summary>
         public const string PackageGuidString = "a976f7e6-3c4b-4234-80aa-f8f5400443c0";
-
+       
         #region Package Members
 
         /// <summary>
@@ -76,9 +76,33 @@ namespace MultilingualExtension
             TranslateButton.Initialize(this, commandService);
             ExportButton.Initialize(this, commandService);
             ImportButton.Initialize(this, commandService);
+
+            //cerate windows for output
+            CreateOutputWindow();
+
+
             //SyncAndTranslateSelectedNodeButton.Initialize(this, commandService);
         }
+        public  void CreateOutputWindow()
+        {
+            ThreadHelper.ThrowIfNotOnUIThread();
+            IVsOutputWindowPane pane;
 
+            var guid = new Guid();
+            IVsOutputWindow output = (IVsOutputWindow)GetService(typeof(SVsOutputWindow));
+            // Create a new pane.
+            output.CreatePane(
+                ref guid,
+                "Multilingual extension",
+                Convert.ToInt32(true),
+                Convert.ToInt32(false));
+
+            // Retrieve the new pane.
+            output.GetPane(ref guid, out pane);
+            //pane.Activate();
+            //pane.OutputString("This is the Pane for Multingual toolkit \n");
+
+        }
         #endregion
     }
 }

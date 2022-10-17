@@ -14,7 +14,7 @@ namespace MultilingualExtension.Shared.Services
         public SyncFileService()
         {
         }
-        public async Task<Result<Boolean>> UpdateNodeStatus(string selectedFilename, UpdateStatusForTranslation updateStatusForTranslation,  IProgressBar progress, ISettingsService settingsService)
+        public async Task<Result<Boolean>> UpdateNodeStatus(string selectedFilename, UpdateStatusForTranslation updateStatusForTranslation, EnvDTE.OutputWindowPane outputPane, ISettingsService settingsService)
         {
             try
             {
@@ -36,7 +36,7 @@ namespace MultilingualExtension.Shared.Services
                         var checkfileInFolder = RegExHelper.ValidateFilenameIsTargetType(fileName);
                         if (checkfileInFolder.Success)
                         {
-                            var result = await UpdateStatusInternal(selectedFilename, fileName, updateStatusForTranslation, addCommentNodeToMasterResx, progress);
+                            var result = await UpdateStatusInternal(selectedFilename, fileName, updateStatusForTranslation, addCommentNodeToMasterResx, outputPane);
                             if (!result.WasSuccessful)
                                 return result;
                         }
@@ -46,7 +46,7 @@ namespace MultilingualExtension.Shared.Services
                 else
                 {
                     string masterPath = selectedFilename.Substring(0, checkfile.Index) + ".resx";
-                    var result = await UpdateStatusInternal(masterPath, selectedFilename, updateStatusForTranslation, addCommentNodeToMasterResx, progress);
+                    var result = await UpdateStatusInternal(masterPath, selectedFilename, updateStatusForTranslation, addCommentNodeToMasterResx, outputPane);
                     if (!result.WasSuccessful)
                         return result;
                 }
@@ -61,15 +61,14 @@ namespace MultilingualExtension.Shared.Services
             }
             finally
             {
-                progress.HideAll();
-                progress = null;
+                
                 Console.WriteLine("Sync file completed");
             }
 
 
         }
         
-        public async Task<Result<Boolean>> SyncFile(string selectedFilename, IProgressBar progress, ISettingsService settingsService)
+        public async Task<Result<Boolean>> SyncFile(string selectedFilename, EnvDTE.OutputWindowPane outputPane, ISettingsService settingsService)
         {
             try
             {
@@ -81,22 +80,34 @@ namespace MultilingualExtension.Shared.Services
                     if (!resultResw.WasSuccessful)
                         return new Result<bool>(resultResw.ErrorMessage);
 
+                    if (resultResw.Model.IsMasterFile)
+                        Helpers.OutputWindowHelper.WriteToOutputWindow(outputPane, "Sync all files with " + settingsService.ExtensionSettings.MasterLanguageCode);
+
                     foreach (var updatePath in resultResw.Model.UpdateFilepaths)
                     {
-                        await SyncFileInternal(resultResw.Model.MasterFilepath, updatePath, addCommentNodeToMasterResx, progress);
+                        var result = await SyncFileInternal(resultResw.Model.MasterFilepath, updatePath, addCommentNodeToMasterResx, outputPane);
+                         var fileinfo =Helpers.Res_Helpers.FileInfo(settingsService.ExtensionSettings.MasterLanguageCode,updatePath);
+                        Helpers.OutputWindowHelper.WriteToOutputWindow(outputPane, string.Format("Sync done for {0}-{1}: {2} rows added, {3} rows removed.",fileinfo.Model.LanguageBase, fileinfo.Model.LanguageCulture, result.Model.Item1.ToString(), result.Model.Item2.ToString())) ;
+
                     }
 
-                   return new Result<bool>(true);
+                    return new Result<bool>(true);
                 }
                 //------------------ RESX failes -------------------------------------------------// 
                 //validate file
                 var resultResx = ResxHelpers.GetBasInfo(selectedFilename, settingsService.ExtensionSettings.MasterLanguageCode);
                 if (!resultResx.WasSuccessful)
                     return new Result<bool>(resultResx.ErrorMessage);
+                if (resultResx.Model.IsMasterFile)
+                    Helpers.OutputWindowHelper.WriteToOutputWindow(outputPane,"Sync all files with " + resultResx.Model.MasterFilename);
 
                 foreach (var updatePath in resultResx.Model.UpdateFilepaths)
                 {
-                    await SyncFileInternal(resultResx.Model.MasterFilepath, updatePath, addCommentNodeToMasterResx, progress);
+                    
+                    var result = await SyncFileInternal(resultResx.Model.MasterFilepath, updatePath, addCommentNodeToMasterResx, outputPane);
+                    var fileinfo = Helpers.Res_Helpers.FileInfo(settingsService.ExtensionSettings.MasterLanguageCode, updatePath);
+                    Helpers.OutputWindowHelper.WriteToOutputWindow(outputPane, string.Format("Sync done for {0}-{1}: {2} rows added, {3} rows removed.", fileinfo.Model.LanguageBase, fileinfo.Model.LanguageCulture, result.Model.Item1.ToString(), result.Model.Item2.ToString()));
+
                 }
 
                 return new Result<bool>(true);
@@ -107,15 +118,14 @@ namespace MultilingualExtension.Shared.Services
             }
             finally
             {
-                progress.HideAll();
-                progress = null;
+                
                 Console.WriteLine("Sync file completed");
             }
 
 
         }
-
-        private async Task<Result<Boolean>> SyncFileInternal(string masterfilePath, string updatefilePath, bool addMasterCommentNode, IProgressBar progress)
+        
+        private async Task<Result<Tuple<int, int>>> SyncFileInternal(string masterfilePath, string updatefilePath, bool addMasterCommentNode, EnvDTE.OutputWindowPane outputPane)
         {
             XmlDocument masterdoc = new XmlDocument();
             masterdoc.Load(masterfilePath);
@@ -132,6 +142,8 @@ namespace MultilingualExtension.Shared.Services
             // Select all nodes data in Master
             bool updateFileChanged = false;
             bool masterFileChanged = false;
+            int removedCount = 0;
+            int AddedCount = 0;
             XmlNodeList nodeListMaster = rootMaster.SelectNodes("//data");
             foreach (XmlNode dataMaster in nodeListMaster)
             {
@@ -158,6 +170,7 @@ namespace MultilingualExtension.Shared.Services
                 {
                     //Add to file
                     updateFileChanged = true;
+                    AddedCount++;
                     XmlNode newEntry = updatedoc.ImportNode(dataMaster, true);
                     updatedoc.DocumentElement.AppendChild(newEntry);
                     //check if comment exist from master
@@ -195,7 +208,7 @@ namespace MultilingualExtension.Shared.Services
                 }
 
 
-                progress.Pulse();
+               
 
 
             }
@@ -213,11 +226,12 @@ namespace MultilingualExtension.Shared.Services
                 {
                     //remove from file
                     updateFileChanged = true;
+                    removedCount++;
                     rootUpdate.RemoveChild(dataUpdate);
 
                 }
 
-                progress.Pulse();
+              
 
 
 
@@ -228,11 +242,11 @@ namespace MultilingualExtension.Shared.Services
             if (masterFileChanged)
                 masterdoc.Save(masterfilePath);
 
-            return new Result<bool>(true);
+            return new Result<Tuple<int, int>>(new Tuple<int, int>(AddedCount, removedCount));
 
 
         }
-        private async Task<Result<Boolean>> UpdateStatusInternal(string masterfilePath, string updatefilePath, UpdateStatusForTranslation updateStatusForTranslation, bool addMasterCommentNode, IProgressBar progress)
+        private async Task<Result<Boolean>> UpdateStatusInternal(string masterfilePath, string updatefilePath, UpdateStatusForTranslation updateStatusForTranslation, bool addMasterCommentNode, EnvDTE.OutputWindowPane outputPane)
         {
 
             XmlDocument masterdoc = new XmlDocument();
@@ -293,7 +307,7 @@ namespace MultilingualExtension.Shared.Services
                 }
             }
 
-             progress.Pulse();
+            
 
 
             

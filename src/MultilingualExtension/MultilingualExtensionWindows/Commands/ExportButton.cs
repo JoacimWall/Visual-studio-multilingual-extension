@@ -9,6 +9,7 @@ using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using MultilingualExtension.Helpers;
 using MultilingualExtension.Services;
+using MultilingualExtension.Shared.Helpers;
 using MultilingualExtension.Shared.Interfaces;
 using MultilingualExtension.Shared.Services;
 
@@ -90,27 +91,6 @@ namespace MultilingualExtension
             ThreadHelper.ThrowIfNotOnUIThread();
 
 
-            //IProgressBar progress = new Helpers.ProgressBarHelper(Globals.Export_Rows_Info);
-            //            try
-            //            {
-            //                string statusToExport = dataItem as string;
-            //                ExportService exportService = new ExportService();
-            //                await IdeApp.Workbench.SaveAllAsync();
-            //                ProjectFile selectedItem = (ProjectFile)IdeApp.Workspace.CurrentSelectedItem;
-            //                ISettingsService settingsService = new Services.SettingsService();
-            //                string selectedFilename = selectedItem.Name;
-
-
-            //              var result = await exportService.ExportToFile(selectedFilename, statusToExport, progress, settingsService);
-            //            }
-
-
-
-
-
-
-            IProgressBar progress = new Helpers.ProgressBarHelper();
-
             try
             {
                 // Get the file path
@@ -122,10 +102,11 @@ namespace MultilingualExtension
                 ExportService exportFileService = new ExportService();
                 var dte = ServiceProvider.GetService(typeof(DTE)) as DTE2;
                 var projPath = System.IO.Path.GetDirectoryName(dte.Solution.FullName);
-                ISettingsService settingsService = new SettingsService(projPath);
-               
 
-                exportFileService.ExportToFile(selectedFilename, Shared.Helpers.Globals.STATUS_COMMENT_NEW_OR_NEED_REVIEW, progress, settingsService).GetAwaiter().GetResult();
+                ISettingsService settingsService = new SettingsService(projPath);
+                var outputPane = OutputWindowHelper.GetOutputWindow(dte);
+
+                exportFileService.ExportToFile(selectedFilename, Shared.Helpers.Globals.STATUS_COMMENT_NEW_OR_NEED_REVIEW, outputPane, settingsService).GetAwaiter().GetResult();
 
 
 
@@ -144,8 +125,7 @@ namespace MultilingualExtension
             }
             finally
             {
-                progress.HideAll();
-                progress = null;
+               
                 Console.WriteLine("Export file completed");
             }
         }

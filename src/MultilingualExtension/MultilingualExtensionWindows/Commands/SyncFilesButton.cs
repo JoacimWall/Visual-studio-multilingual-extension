@@ -3,12 +3,15 @@ using System.ComponentModel.Design;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using EnvDTE;
 using EnvDTE80;
+using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using MultilingualExtension.Helpers;
 using MultilingualExtension.Services;
+using MultilingualExtension.Shared.Helpers;
 using MultilingualExtension.Shared.Interfaces;
 using MultilingualExtension.Shared.Services;
 
@@ -89,22 +92,22 @@ namespace MultilingualExtension
         {
 
             ThreadHelper.ThrowIfNotOnUIThread();
-            IProgressBar progress = new ProgressBarHelper();
+           
+
             var dte = ServiceProvider.GetService(typeof(DTE)) as DTE2;
             var projPath = System.IO.Path.GetDirectoryName(dte.Solution.FullName);
             ISettingsService settingsService = new SettingsService(projPath);
             try
             {
                 // Get the file path
-                var selectedFilename = Helpers.DevfileHelper.GetSelectedFile();
+                var selectedFilename = DevfileHelper.GetSelectedFile();
                 if (String.IsNullOrEmpty(selectedFilename)) return;
 
-
-                //MultilingualExtension.Shared
-                SyncFileService syncFileService = new SyncFileService();
-
-               var result =  syncFileService.SyncFile(selectedFilename, progress, settingsService);
-
+                var pane = OutputWindowHelper.GetOutputWindow(dte);
+                
+               SyncFileService syncFileService = new SyncFileService();
+               var result =  syncFileService.SyncFile(selectedFilename, pane, settingsService);
+               
                 if (!result.Result.WasSuccessful)
                 {
 
@@ -131,8 +134,7 @@ namespace MultilingualExtension
             }
             finally
             {
-                progress.HideAll();
-                progress = null;
+                
                 Console.WriteLine("Sync file completed");
             }
         }

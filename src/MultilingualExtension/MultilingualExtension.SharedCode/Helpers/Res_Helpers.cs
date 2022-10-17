@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using MultilingualExtension.Shared.Models;
+using NPOI.SS.Formula.Functions;
 
 namespace MultilingualExtension.Shared.Helpers
 {
@@ -11,7 +12,8 @@ namespace MultilingualExtension.Shared.Helpers
             Res_Fileinfo info = new Res_Fileinfo();
             info.Filename = selectedFilename;
             string folderSeperator = Environment.OSVersion.Platform == PlatformID.Win32NT ? "\\" : "/";
-           
+            
+
             var result = RegExHelper.ValidateFileTypeIsResw(selectedFilename);
             //reswFile
             if (result.Success)
@@ -27,18 +29,21 @@ namespace MultilingualExtension.Shared.Helpers
                 {
                     info.MasterFilename = languageFilename;
                     info.IsMasterFile = true;
-
-
                 }
                 else
                 {
                     info.MasterFilename = languageFilename;
                     info.IsMasterFile = false;
                 }
+                int folderindexlang = selectedFilename.LastIndexOf( folderSeperator, folderindex - 1);
+                string foldernameLaguage = selectedFilename.Substring(folderindexlang+1,folderindex - (folderindexlang+1));
+                info.LanguageBase = foldernameLaguage.Substring(0, 2);
+                if (foldernameLaguage.Length == 5)
+                    info.LanguageCulture = foldernameLaguage.Substring(3, 2);
                 return new Result<Res_Fileinfo>(info);
             }
             var resultIsResx = RegExHelper.ValidateFileTypeIsResx(selectedFilename);
-            //reswFile
+            //resxFile
             if (resultIsResx.Success)
             {
                 info.IsResx = true;

@@ -60,13 +60,13 @@
 
 //            Instance = new ShowSettingsButton(package, commandService);
 //        }
-      
-        
+
+
 
 //        private void Execute(object sender, EventArgs e)
 //        {
-//            SettingsWindow frmSettings = new SettingsWindow();
-//            frmSettings.ShowDialog();
+//            //SettingsWindow frmSettings = new SettingsWindow();
+//            //frmSettings.ShowDialog();
 //        }
 //    }
 //}

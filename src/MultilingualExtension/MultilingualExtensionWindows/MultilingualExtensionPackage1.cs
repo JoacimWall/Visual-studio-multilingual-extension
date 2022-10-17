@@ -32,7 +32,7 @@ namespace MultilingualExtension
     /// </summary>
     internal sealed partial class PackageIds
     {
-        public const int MyMenuGroup = 0x1020;
+        //public const int MyMenuGroup = 0x1020;
         public const int MyGroupForSubMenuProjectPad = 0x1021;
         public const int MyGroupForEditor = 0x1022;
         public const int CommandIdShowSettings = 0x0100;

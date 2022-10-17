@@ -119,7 +119,8 @@
   </resheader>
   <data name="Cat" xml:space="preserve">
     <value>Cat</value>
-  <comment>Need review</comment></data>
+    <comment>Need review</comment>
+  </data>
   <data name="Dog" xml:space="preserve">
     <value>Dog</value>
     <comment>Need review</comment>
@@ -128,10 +129,19 @@
     <value>Hello</value>
     <comment>Need review</comment>
   </data>
+  <data name="House" xml:space="preserve">
+    <value>House</value>
+    <comment>Need review</comment>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
-  <comment>Need review</comment></data>
+    <comment>Need review</comment>
+  </data>
   <data name="Run if you like" xml:space="preserve">
     <value>Run if you like</value>
+    <comment>Need review</comment>
+  </data>
+  <data name="Wood" xml:space="preserve">
+    <value>Wood</value>
   <comment>Need review</comment></data>
 </root>

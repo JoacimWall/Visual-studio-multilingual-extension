@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Global.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\OutputWindowHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ReswHelpers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ResxHelpers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IProgressBar.cs" />

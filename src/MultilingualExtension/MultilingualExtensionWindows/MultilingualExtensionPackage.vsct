@@ -36,9 +36,9 @@
          group as the part of a menu contained between two lines. The parent of a group
          must be a menu. -->
     <Groups>
-      <Group guid="guidMultilingualExtensionPackageCmdSet" id="MyMenuGroup" priority="0x0600">
+      <!--<Group guid="guidMultilingualExtensionPackageCmdSet" id="MyMenuGroup" priority="0x0600">
         <Parent guid="guidSHLMainMenu" id="IDM_VS_MENU_TOOLS"/>
-      </Group>
+      </Group>-->
       <Group guid="guidMultilingualExtensionPackageCmdSet" id="MyGroupForSubMenuProjectPad" priority="0x0600">
         <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_ITEMNODE"/>
       </Group>
@@ -60,14 +60,14 @@
           If you do not want an image next to your command, remove the Icon node /> -->
       
       <!--Menu settings-->
-      <Button guid="guidMultilingualExtensionPackageCmdSet" id="CommandIdShowSettings" priority="0x0100" type="Button">
+      <!--<Button guid="guidMultilingualExtensionPackageCmdSet" id="CommandIdShowSettings" priority="0x0100" type="Button">
         <Parent guid="guidMultilingualExtensionPackageCmdSet" id="MyMenuGroup" />
         <CommandFlag>DynamicVisibility</CommandFlag>
-       
+		  <CommandFlag>DefaultInvisible</CommandFlag>
         <Strings>
           <ButtonText>Multilingual Settings</ButtonText>
         </Strings>
-      </Button>
+      </Button>-->
       <!--SyncFiles-->
       <Button guid="guidMultilingualExtensionPackageCmdSet" id="CommandIdUpdateFiles" priority="0x0100" type="Button">
         <Parent guid="guidMultilingualExtensionPackageCmdSet" id="MyGroupForSubMenuProjectPad" />
@@ -143,7 +143,7 @@
 
     <!-- This is the guid used to group the menu commands together -->
     <GuidSymbol name="guidMultilingualExtensionPackageCmdSet" value="{e86c9f19-293d-49ab-8b5b-f4039e5193db}">
-      <IDSymbol name="MyMenuGroup" value="0x1020" />
+      <!--<IDSymbol name="MyMenuGroup" value="0x1020" />-->
       <IDSymbol name="MyGroupForSubMenuProjectPad" value="0x1021" />
       <IDSymbol name="MyGroupForEditor" value="0x1022" />
       

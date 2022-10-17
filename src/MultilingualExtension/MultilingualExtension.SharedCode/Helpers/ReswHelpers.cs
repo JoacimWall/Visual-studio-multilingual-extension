@@ -32,7 +32,7 @@ namespace MultilingualExtension.Shared.Helpers
             if (currentFolderPath.EndsWith(masterLanguageCode))
             {
                 reswFiles.MasterFilepath = selectedFilename;
-
+                reswFiles.IsMasterFile = true;
                 string[] dirEntries = Directory.GetDirectories(folderStringsPath);
                 //Check that the masterfile eexist as folder in StringsFolder
                 var resultMasterLanguageCodeFolderExist = dirEntries.Any(x => x.EndsWith(masterLanguageCode));

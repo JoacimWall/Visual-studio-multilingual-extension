@@ -9,6 +9,7 @@ using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using MultilingualExtension.Helpers;
 using MultilingualExtension.Services;
+using MultilingualExtension.Shared.Helpers;
 using MultilingualExtension.Shared.Interfaces;
 using MultilingualExtension.Shared.Services;
 using VSLangProj;
@@ -89,9 +90,9 @@ namespace MultilingualExtension
         private void Execute(object sender, EventArgs e)
         {
             ThreadHelper.ThrowIfNotOnUIThread();
-            IProgressBar progress = new Helpers.ProgressBarHelper();
-           
             var dte = ServiceProvider.GetService(typeof(DTE)) as DTE2;
+            var outputPane = OutputWindowHelper.GetOutputWindow(dte);
+
             var projPath = System.IO.Path.GetDirectoryName(dte.Solution.FullName);
             ISettingsService settingsService = new SettingsService(projPath);
             try
@@ -104,7 +105,7 @@ namespace MultilingualExtension
                 //MultilingualExtension.Shared
                 TranslationService translationService = new TranslationService();
 
-                translationService.TranslateFile(selectedFilename, progress, settingsService);
+                translationService.TranslateFile(selectedFilename, outputPane, settingsService);
 
 
 
@@ -123,8 +124,7 @@ namespace MultilingualExtension
             }
             finally
             {
-                progress.HideAll();
-                progress = null;
+                
                 Console.WriteLine("Sync file completed");
             }
         }

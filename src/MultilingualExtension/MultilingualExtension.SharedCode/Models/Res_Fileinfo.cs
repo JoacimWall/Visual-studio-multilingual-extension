@@ -11,5 +11,7 @@ namespace MultilingualExtension.Shared.Models
         public string Filename { get; set; } //AppResources.fr-CA.resx or AppResources.fr.resx or AppResources.resx
         public string LanguageBase { get; set; } //AppResources.fr-CA.resx returns fr
         public string LanguageCulture { get; set; } //AppResources.fr-CA.resx returns CA
+
+       // public string FilenameDisplay { get; set; } //for print i log
     }
 }
