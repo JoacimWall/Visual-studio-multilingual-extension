@@ -13,7 +13,7 @@ namespace MultilingualExtension.Shared.Services
         {
         }
 
-        public async Task<Result<Boolean>> ImportToResx(string selectedFilename, IProgressBar progress, ISettingsService settingsService)
+        public async Task<Result<Boolean>> ImportToResx(string selectedFilename, EnvDTE.OutputWindowPane outputPane, ISettingsService settingsService)
         {
 
             try
@@ -36,7 +36,7 @@ namespace MultilingualExtension.Shared.Services
                     int minus = checkfileResxCsv.Success || checkfileReswCsv.Success ? 4 : 5;
                     int filetype = checkfileResxCsv.Success || checkfileReswCsv.Success ? 1 : 2;
                     string updatePath = selectedFilename.Substring(0, selectedFilename.Length - minus);
-                    var reslut = await ImportToResxInternal(selectedFilename, updatePath, filetype, progress);
+                    var reslut = await ImportToResxInternal(selectedFilename, updatePath, filetype, outputPane);
                     return new Result<bool>(true);
                 }
 
@@ -49,7 +49,7 @@ namespace MultilingualExtension.Shared.Services
             }
 
         }
-        private async Task<Result<Boolean>> ImportToResxInternal(string masterPath, string updatePath, int exportFileType, IProgressBar progress)
+        private async Task<Result<Boolean>> ImportToResxInternal(string masterPath, string updatePath, int exportFileType, EnvDTE.OutputWindowPane outputPane)
         {
 
             XmlDocument updatedoc = new XmlDocument();
@@ -98,7 +98,7 @@ namespace MultilingualExtension.Shared.Services
                     }
 
                 }
-                progress.Pulse();
+              
 
             }
 

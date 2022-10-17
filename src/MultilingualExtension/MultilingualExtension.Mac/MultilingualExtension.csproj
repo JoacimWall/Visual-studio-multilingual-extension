@@ -76,6 +76,9 @@
 		<Compile Include="..\MultilingualExtension.SharedCode\Services\SettingsService.cs">
 		  <Link>Services\SettingsService.cs</Link>
 		</Compile>
+		<Compile Include="..\MultilingualExtension.SharedCode\Helpers\OutputWindowHelper.cs">
+		  <Link>Helpers\OutputWindowHelper.cs</Link>
+		</Compile>
 	</ItemGroup>
 	<ItemGroup>
 	  <None Remove="Microsoft.VisualStudioMac.Sdk" />

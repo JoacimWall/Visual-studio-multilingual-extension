@@ -11,7 +11,9 @@ namespace MultilingualExtension.Shared.Helpers
 
         public static void WriteToOutputWindow(EnvDTE.OutputWindowPane outputPane, string text)
         {
-           
+            if (outputPane == null)
+                return;
+
             outputPane.Activate();
 
             outputPane.OutputString(text + Environment.NewLine);
@@ -35,6 +37,24 @@ namespace MultilingualExtension.Shared.Helpers
             return null;
 
         }
+        //Dummy for mac 
+        public static EnvDTE.OutputWindowPane GetOutputWindow()
+        {
 
+
+
+            //EnvDTE.OutputWindowPanes panes =
+            //    dte.ToolWindows.OutputWindow.OutputWindowPanes;
+            //foreach (EnvDTE.OutputWindowPane pane in panes)
+            //{
+            //    if (pane.Name.Contains("Multilingual extension"))
+            //    {
+
+            //        return pane;
+            //    }
+            //}
+            return null;
+
+        }
     }
 }

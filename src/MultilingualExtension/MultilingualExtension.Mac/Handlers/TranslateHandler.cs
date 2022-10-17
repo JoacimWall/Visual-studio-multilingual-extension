@@ -12,7 +12,7 @@ namespace MultilingualExtension
         
         protected async override void Run()
         {
-            IProgressBar progress = new Services.ProgressBar(Globals.Translate_Rows_Info);
+           
             var path = IdeApp.Workspace.CurrentSelectedSolution.FileName;
             var projPath = System.IO.Path.GetDirectoryName(path);
             ISettingsService settingsService = new Services.SettingsService(projPath);
@@ -22,8 +22,9 @@ namespace MultilingualExtension
                 await IdeApp.Workbench.SaveAllAsync();
                 ProjectFile selectedItem = (ProjectFile)IdeApp.Workspace.CurrentSelectedItem;
                 string selectedFilename = selectedItem.Name;
-
-              var result= await translationService.TranslateFile(selectedFilename, progress, settingsService);
+                //Dummy for mac 
+                var outputPane = OutputWindowHelper.GetOutputWindow();
+                var result= await translationService.TranslateFile(selectedFilename, outputPane, settingsService);
 
             }
 
@@ -34,8 +35,7 @@ namespace MultilingualExtension
             }
             finally
             {
-                progress.HideAll();
-                progress = null;
+               
                 Console.WriteLine("Translate file completed");
             }
 
