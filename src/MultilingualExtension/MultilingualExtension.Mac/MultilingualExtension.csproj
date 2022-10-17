@@ -73,6 +73,9 @@
 		<Compile Include="..\MultilingualExtension.SharedCode\Services\TranslationService.cs">
 			<Link>Services\TranslationService.cs</Link>
 		</Compile>
+		<Compile Include="..\MultilingualExtension.SharedCode\Services\SettingsService.cs">
+		  <Link>Services\SettingsService.cs</Link>
+		</Compile>
 	</ItemGroup>
 	<ItemGroup>
 	  <None Remove="Microsoft.VisualStudioMac.Sdk" />

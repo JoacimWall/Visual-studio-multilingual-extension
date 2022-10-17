@@ -1,6 +1,7 @@
 ﻿using System;
 using Gdk;
 using Gtk;
+using MonoDevelop.Ide;
 using MultilingualExtension;
 using MultilingualExtension.Services;
 using MultilingualExtension.Shared.Helpers;
@@ -23,7 +24,10 @@ namespace MultilingualExtension
 
         public SettingsWindow() : base(Globals.Multilingual_Extension_Title)
         {
-            SettingsService = new Services.SettingsService();
+            var path = IdeApp.Workspace.CurrentSelectedSolution.FileName;
+            var projPath = System.IO.Path.GetDirectoryName(path);
+            
+            SettingsService = new Services.SettingsService(projPath);
             this.DeleteEvent += delegate { HideAll(); };
             SetDefaultSize(590, 300);
             SetPosition(Gtk.WindowPosition.Center);

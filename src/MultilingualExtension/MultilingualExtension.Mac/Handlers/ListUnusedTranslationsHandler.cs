@@ -56,7 +56,9 @@ public class ListUnusedTranslationsHandler : CommandHandler
         {
 
             SyncFileService syncFileService = new SyncFileService();
-            ISettingsService settingsService = new Services.SettingsService();
+            var path = IdeApp.Workspace.CurrentSelectedSolution.FileName;
+            var projPath = System.IO.Path.GetDirectoryName(path);
+            ISettingsService settingsService = new Services.SettingsService(projPath);
             await IdeApp.Workbench.SaveAllAsync();
             ProjectFile selectedItem = (ProjectFile)IdeApp.Workspace.CurrentSelectedItem;
             var cancelSource = new CancellationTokenSource();
@@ -198,7 +200,9 @@ public class ListUnusedTranslationsHandler : CommandHandler
 
         ProjectFile selectedItem = (ProjectFile)IdeApp.Workspace.CurrentSelectedItem;
         string selectedFilename = selectedItem.Name;
-        ISettingsService settingsService = new Services.SettingsService();
+        var path = IdeApp.Workspace.CurrentSelectedSolution.FileName;
+        var projPath = System.IO.Path.GetDirectoryName(path);
+        ISettingsService settingsService = new Services.SettingsService(projPath);
         var res_Info = Res_Helpers.FileInfo(settingsService.ExtensionSettings.MasterLanguageCode, selectedFilename);
 
         if (res_Info.Model.IsMasterFile)

@@ -15,7 +15,9 @@ namespace MultilingualExtension
             try
             {
                 ImportService importService = new ImportService();
-                ISettingsService settingsService = new Services.SettingsService();
+                var path = IdeApp.Workspace.CurrentSelectedSolution.FileName;
+                var projPath = System.IO.Path.GetDirectoryName(path);
+                ISettingsService settingsService = new Services.SettingsService(projPath);
                 await IdeApp.Workbench.SaveAllAsync();
                 ProjectFile selectedItem = (ProjectFile)IdeApp.Workspace.CurrentSelectedItem;
                 string selectedFilename = selectedItem.Name;
