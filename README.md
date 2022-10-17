@@ -8,7 +8,7 @@
 #### Resw use the name of the folders for language recognize. If you have a masterfile in folder strings\en-US\Resources.resw then you shold put french file in strings\fr-FR\Resources.resw  
 
 ### View introduction video or download the sample app
-
+#### This video is for Mac but the windows and mac are very similar. What changed after this was done is that you now configure by changing values in the file MultiLingualExtensionSettings.json which is created in the same folder as the solution file.
 [![YouTube](https://i9.ytimg.com/vi/4OAhHpUpXmA/mq2.jpg?sqp=CLDSof8F&rs=AOn4CLAexsPpQzbUEi8Ud_7YgThQFXFwPg)](https://youtu.be/4OAhHpUpXmA)
 
 
@@ -55,7 +55,7 @@ Remember to set your master language in the menu Tools/multilinugal settings to 
 
  ## Explanation of functions
  ### Setting the preferred property's for the extension
- You can change settings for the plugin in the MultiLingualExtensionSettings.json file located in the root of the project. This file will be created the first time you run any function in the extension if it does not already exist. 
+ You can change settings for the plugin in the MultiLingualExtensionSettings.json file located in the root of the solution folder. This file will be created the first time you run any function in the extension if it does not already exist. 
  <img width=“150” height="300" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/MultilingualSettingsDialog.png">
 #### MasterLanguageCode
 Master language that is 'en-US' by default. This is the language code for the MasterFile and is used in the trnaslation service to specify the input language to be translated.
