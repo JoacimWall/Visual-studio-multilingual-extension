@@ -13,7 +13,9 @@ namespace MultilingualExtension
         protected async override void Run()
         {
             IProgressBar progress = new Services.ProgressBar(Globals.Translate_Rows_Info);
-            ISettingsService settingsService  = new Services.SettingsService();
+            var path = IdeApp.Workspace.CurrentSelectedSolution.FileName;
+            var projPath = System.IO.Path.GetDirectoryName(path);
+            ISettingsService settingsService = new Services.SettingsService(projPath);
             try
             {
                 TranslationService translationService = new TranslationService();
@@ -46,7 +48,9 @@ namespace MultilingualExtension
             string selectedFilename = selectedItem.Name;
 
             //validate file
-            ISettingsService settingsService = new Services.SettingsService();
+            var path = IdeApp.Workspace.CurrentSelectedSolution.FileName;
+            var projPath = System.IO.Path.GetDirectoryName(path);
+            ISettingsService settingsService = new Services.SettingsService(projPath);
             var res_Info = Res_Helpers.FileInfo(settingsService.ExtensionSettings.MasterLanguageCode, selectedFilename);
            
             if (res_Info.Model.IsMasterFile)

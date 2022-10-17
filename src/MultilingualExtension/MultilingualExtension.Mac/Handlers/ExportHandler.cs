@@ -22,7 +22,9 @@ namespace MultilingualExtension
                 ExportService exportService = new ExportService();
                 await IdeApp.Workbench.SaveAllAsync();
                 ProjectFile selectedItem = (ProjectFile)IdeApp.Workspace.CurrentSelectedItem;
-                ISettingsService settingsService = new Services.SettingsService();
+                var path = IdeApp.Workspace.CurrentSelectedSolution.FileName;
+                var projPath = System.IO.Path.GetDirectoryName(path);
+                ISettingsService settingsService = new Services.SettingsService(projPath);
                 string selectedFilename = selectedItem.Name;
 
 
@@ -48,7 +50,9 @@ namespace MultilingualExtension
             ProjectFile selectedItem = (ProjectFile)IdeApp.Workspace.CurrentSelectedItem;
             string selectedFilename = selectedItem.Name;
             var commandSet = new CommandInfoSet();
-            ISettingsService settingsService = new Services.SettingsService();
+            var path = IdeApp.Workspace.CurrentSelectedSolution.FileName;
+            var projPath = System.IO.Path.GetDirectoryName(path);
+            ISettingsService settingsService = new Services.SettingsService(projPath);
             var res_Info = Res_Helpers.FileInfo(settingsService.ExtensionSettings.MasterLanguageCode, selectedFilename);
 
             commandSet.CommandInfos.Add(new CommandInfo(Globals.STATUS_COMMENT_NEW_OR_NEED_REVIEW), Globals.STATUS_COMMENT_NEW_OR_NEED_REVIEW);
