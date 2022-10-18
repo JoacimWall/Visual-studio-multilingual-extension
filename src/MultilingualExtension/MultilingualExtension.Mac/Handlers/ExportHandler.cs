@@ -15,7 +15,7 @@ namespace MultilingualExtension
         protected async override void Run(object dataItem)
         {
             
-            IProgressBar progress = new Services.ProgressBar(Globals.Export_Rows_Info);
+            
             try
             {
                 string statusToExport = dataItem as string;
@@ -27,8 +27,11 @@ namespace MultilingualExtension
                 ISettingsService settingsService = new Services.SettingsService(projPath);
                 string selectedFilename = selectedItem.Name;
 
+                //Dummy for mac 
+                var outputPane = OutputWindowHelper.GetOutputWindow();
 
-              var result = await exportService.ExportToFile(selectedFilename, statusToExport, progress, settingsService);
+
+                var result = await exportService.ExportToFile(selectedFilename, statusToExport, outputPane, settingsService);
             }
 
             catch (Exception ex)
@@ -38,8 +41,7 @@ namespace MultilingualExtension
             }
             finally
             {
-                progress.HideAll();
-                progress = null;
+               
                 Console.WriteLine("Export file completed");
             }
 

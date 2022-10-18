@@ -1,4 +1,6 @@
 ﻿using System;
+using EnvDTE80;
+using Microsoft.VisualStudio.Shell;
 using MonoDevelop.Components.Commands;
 using MonoDevelop.Ide;
 using MonoDevelop.Projects;
@@ -11,7 +13,7 @@ namespace MultilingualExtension
     {
         protected override async void Run()
         {
-            IProgressBar progress = new Services.ProgressBar(Globals.Import_Rows_Info);
+            
             try
             {
                 ImportService importService = new ImportService();
@@ -21,7 +23,11 @@ namespace MultilingualExtension
                 await IdeApp.Workbench.SaveAllAsync();
                 ProjectFile selectedItem = (ProjectFile)IdeApp.Workspace.CurrentSelectedItem;
                 string selectedFilename = selectedItem.Name;
-                var result = await importService.ImportToResx(selectedFilename, progress, settingsService);
+                //MonoDevelop.Ide.Gui.PadContent pad = new MonoDevelop.Ide.Gui.PadContent();
+                //IdeApp.Workbench.AddPad(new Guid().)
+               // var dte =  ServiceProvider.GetService(typeof(DTE)) as DTE2;
+                var outputPane = OutputWindowHelper.GetOutputWindow();
+                var result = await importService.ImportToResx(selectedFilename, outputPane, settingsService);
 
 
 
@@ -34,8 +40,7 @@ namespace MultilingualExtension
             }
             finally
             {
-                progress.HideAll();
-                progress = null;
+                
                 Console.WriteLine("Import file completed");
             }
 

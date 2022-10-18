@@ -17,7 +17,7 @@ namespace MultilingualExtension
         
         protected async override void Run()
         {
-            IProgressBar progress = new ProgressBar(Globals.Synchronize_Rows_Info);
+           
 
             try
             {
@@ -30,8 +30,9 @@ namespace MultilingualExtension
                 await IdeApp.Workbench.SaveAllAsync();
 
                 ProjectFile selectedItem = (ProjectFile)IdeApp.Workspace.CurrentSelectedItem;
-
-                var result = await syncFileService.SyncFile(selectedItem.FilePath, progress, settingsService);
+                //Dummy for mac 
+                var outputPane = OutputWindowHelper.GetOutputWindow();
+                var result = await syncFileService.SyncFile(selectedItem.FilePath, outputPane, settingsService);
 
                 if (!result.WasSuccessful)
                 {
@@ -47,8 +48,7 @@ namespace MultilingualExtension
             }
             finally
             {
-                progress.HideAll();
-                progress = null;
+                
                 Console.WriteLine("Sync file completed");
             }
 

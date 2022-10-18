@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using MultilingualExtension.Shared.Models;
-using NPOI.SS.Formula.Functions;
 
 namespace MultilingualExtension.Shared.Helpers
 {
