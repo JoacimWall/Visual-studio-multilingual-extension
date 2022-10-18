@@ -3,7 +3,7 @@
   "TranslationService": 1,
   "ExportFileType": 2,
   "ExportMasterFileOnExport": false,
-  "TranslationServiceMsoftEndpoint": "",
-  "TranslationServiceMsoftLocation": "",
-  "TranslationServiceMsoftKey": ""
+  "TranslationServiceMsoftEndpoint": "https://api.cognitive.microsofttranslator.com/",
+  "TranslationServiceMsoftLocation": "northeurope",
+  "TranslationServiceMsoftKey": "xxxxxxxxxx"
 }
