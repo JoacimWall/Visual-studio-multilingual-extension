@@ -167,6 +167,15 @@ namespace MultilingualExtensionSampleConsoleApp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nice goal. Nice Shot..
+        /// </summary>
+        public static string Nice_Gool_Nice_Shot {
+            get {
+                return ResourceManager.GetString("Nice_Gool_Nice_Shot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
         public static string Password {
@@ -181,6 +190,16 @@ namespace MultilingualExtensionSampleConsoleApp.Resources {
         public static string Press_Any_Key_To_Exit {
             get {
                 return ResourceManager.GetString("Press_Any_Key_To_Exit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Read
+        ///Instructions.
+        /// </summary>
+        public static string Read_Instructions {
+            get {
+                return ResourceManager.GetString("Read_Instructions", resourceCulture);
             }
         }
         
