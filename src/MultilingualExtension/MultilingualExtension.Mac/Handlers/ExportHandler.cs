@@ -18,6 +18,7 @@ namespace MultilingualExtension
             
             try
             {
+                var test = IdeApp.Workbench.Pads;
                 string statusToExport = dataItem as string;
                 ExportService exportService = new ExportService();
                 await IdeApp.Workbench.SaveAllAsync();

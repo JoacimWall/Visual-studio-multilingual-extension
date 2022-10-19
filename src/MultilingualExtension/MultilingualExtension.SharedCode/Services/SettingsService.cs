@@ -3,7 +3,6 @@ using System.IO;
 using System.Text.Json;
 using MultilingualExtension.Shared.Helpers;
 using MultilingualExtension.Shared.Interfaces;
-using System.Text.Json;
 using EnvDTE80;
 using Microsoft.VisualStudio.Shell;
 

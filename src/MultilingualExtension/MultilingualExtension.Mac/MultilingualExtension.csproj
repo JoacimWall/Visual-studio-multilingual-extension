@@ -10,7 +10,7 @@
 		<IsAddin>True</IsAddin>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-	  <DebugType>full</DebugType>
+	  <DebugType>portable</DebugType>
 		<WarningLevel>4</WarningLevel>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -25,7 +25,6 @@
 		<Folder Include="Services\" />
 		<Folder Include="Models\" />
 		<Folder Include="RefDll\" />
-		<Folder Include="Views\" />
 	</ItemGroup>
 	<ItemGroup>
 		<Compile Include="..\MultilingualExtension.SharedCode\Helpers\Global.cs">
@@ -81,35 +80,15 @@
 		</Compile>
 	</ItemGroup>
 	<ItemGroup>
-	  <None Remove="Microsoft.VisualStudioMac.Sdk" />
-	  <None Remove="ICG.NetCore.Utilities.Spreadsheet" />
-	  <None Remove="Microsoft.Extensions.DependencyInjection" />
-	  <None Remove="Microsoft.Extensions.DependencyInjection.Abstractions" />
-	  <None Remove="System.IO.Packaging" />
-	  <None Remove="RefDll\" />
-	  <None Remove="DocumentFormat.OpenXml" />
-	  <None Remove="NetCore.Utilities.Spreadsheet" />
-	  <None Remove="NetCore.Utilities.SpreadsheetExample" />
-	  <None Remove="Views\" />
-	  <None Remove="AtkSharp" />
-	  <None Remove="CairoSharp" />
-	  <None Remove="GdkSharp" />
-	  <None Remove="GioSharp" />
-	  <None Remove="GLibSharp" />
-	  <None Remove="GtkSharp" />
-	  <None Remove="PangoSharp" />
+	  <PackageReference Include="Microsoft.VisualStudioMac.Sdk" Version="$(VisualStudioMacSdkNuGetVersion)" />
 	</ItemGroup>
 	<ItemGroup>
-	  <PackageReference Include="Microsoft.VisualStudioMac.Sdk" Version="17.0.0" />
-	</ItemGroup>
-	<ItemGroup>
-   <!-- <AddinReference Include="ICG.NetCore.Utilities.Spreadsheet" Version="7.0.0" />-->
+    <EmbeddedResource Update="Properties\MultlingualExtension.addin.xml">
+      <LogicalName>MultlingualExtension.addin.xml</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
 	<ItemGroup>
-		<Reference Include="Xamarin.Mac">
-        <HintPath>\Applications\Visual Studio %28Preview%29.app\Contents\MonoBundle\Xamarin.Mac.dll</HintPath>
-        <Private>False</Private>
-    </Reference>
+		
 	  <Reference Include="NetCore.Utilities.SpreadsheetExample">
 	    <HintPath>RefDll\NetCore.Utilities.SpreadsheetExample.dll</HintPath>
 	  </Reference>
