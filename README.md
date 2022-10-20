@@ -107,6 +107,10 @@ This file will then be Translate with the master file. The extension will only t
 ##### The log show the result.
 <img width=“100” height="200" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/TranslateLog.png">
 
+##### The log shows auto on windows to show it on mac click.
+<img width=“100” height="200" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/Mac_Log.png">
+
+
 ### Export of texts to Excel or csv file
 There are two ways to export the resx files to csv or xlsx. 
 Right-click the master file and select "Export all .xx-xx.resx files". Then all files that are in the same folder and follow the naming standard .xx-xx.resx will be processed and all rows with status 'New' or 'Need review' will be exported. You can change the preferd export file type in the settings dialog click tools/multilangual settings and select the preferd 'Export file type' and click save.  
