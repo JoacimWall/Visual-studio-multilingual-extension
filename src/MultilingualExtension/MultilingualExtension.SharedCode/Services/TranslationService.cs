@@ -140,7 +140,7 @@ namespace MultilingualExtension.Shared.Services
             //TranslatedTextLabel.Content = translation;
             //return translation;
         }
-        private async Task<Result<int>> TranslateFileInternal(bool useGoogle, string masterLanguageCode, string languageToCode, string updatefilePath, string endpoint, string location, string key, EnvDTE.OutputWindowPane outputPane)
+        private async Task<Result<int>> TranslateFileInternal(bool useGoogle, string masterLanguageCode, string languageToCode, string updatefilePath, string endpoint, string location, string key, IStatusPadLoger outputPane)
         {
             //get language code to translate to
 
@@ -210,7 +210,7 @@ namespace MultilingualExtension.Shared.Services
             return new Result<int>(translatedCount);
             
         }
-        private async Task<Result<Boolean>> TranslateNodeInternal(string masterfilePath,UpdateStatusForTranslation updateStatusForTranslation,bool useGoogle, string masterLanguageCode, string languageToCode, string updatefilePath, string endpoint, string location, string key, EnvDTE.OutputWindowPane outputPane)
+        private async Task<Result<Boolean>> TranslateNodeInternal(string masterfilePath,UpdateStatusForTranslation updateStatusForTranslation,bool useGoogle, string masterLanguageCode, string languageToCode, string updatefilePath, string endpoint, string location, string key, IStatusPadLoger outputPane)
         {
             //get language code to translate to
             XmlDocument masterdoc = new XmlDocument();
@@ -278,7 +278,7 @@ namespace MultilingualExtension.Shared.Services
 
         }
 
-        public async Task<Result<Boolean>> TranslateFile(string selectedFilename, EnvDTE.OutputWindowPane outputPane, ISettingsService settingsService)
+        public async Task<Result<Boolean>> TranslateFile(string selectedFilename, IStatusPadLoger outputPane, ISettingsService settingsService)
         {
             try
             {
@@ -300,7 +300,7 @@ namespace MultilingualExtension.Shared.Services
                         return new Result<bool>(resultResw.ErrorMessage);
 
                     if (resultResw.Model.IsMasterFile)
-                        OutputWindowHelper.WriteToOutputWindow(outputPane, "Translate all files with " + settingsService.ExtensionSettings.MasterLanguageCode);
+                        outputPane.WriteText("Translate all files with " + settingsService.ExtensionSettings.MasterLanguageCode);
 
 
                     foreach (var updatePath in resultResw.Model.UpdateFilepaths)
@@ -311,7 +311,7 @@ namespace MultilingualExtension.Shared.Services
                         {
                             var result =await TranslateFileInternal(useGoogle, masterLanguageCode.Substring(0, 2), checkfileInFolder.Value.Substring(1, 2), updatePath, endpoint, location, key, outputPane);
                             var fileinfo = Helpers.Res_Helpers.FileInfo(settingsService.ExtensionSettings.MasterLanguageCode, updatePath);
-                            OutputWindowHelper.WriteToOutputWindow(outputPane, string.Format("Translate done for {0}-{1}: {2} rows translated", fileinfo.Model.LanguageBase, fileinfo.Model.LanguageCulture, result.Model.ToString()));
+                            outputPane.WriteText(string.Format("Translate done for {0}-{1}: {2} rows translated", fileinfo.Model.LanguageBase, fileinfo.Model.LanguageCulture, result.Model.ToString()));
 
                         }
                     }
@@ -326,7 +326,7 @@ namespace MultilingualExtension.Shared.Services
                     return new Result<bool>(resultResx.ErrorMessage);
 
                 if (resultResx.Model.IsMasterFile)
-                    Helpers.OutputWindowHelper.WriteToOutputWindow(outputPane, "Translate all files with " + resultResx.Model.MasterFilename);
+                    outputPane.WriteText("Translate all files with " + resultResx.Model.MasterFilename);
 
                 foreach (var updatePath in resultResx.Model.UpdateFilepaths)
                 {
@@ -335,7 +335,7 @@ namespace MultilingualExtension.Shared.Services
                     {
                        var result = await TranslateFileInternal(useGoogle, masterLanguageCode, checkfileInFolder.Value.Substring(1, 2), updatePath, endpoint, location, key, outputPane);
                         var fileinfo = Helpers.Res_Helpers.FileInfo(settingsService.ExtensionSettings.MasterLanguageCode, updatePath);
-                        Helpers.OutputWindowHelper.WriteToOutputWindow(outputPane, string.Format("Translate done for {0}-{1}: {2} rows translated", fileinfo.Model.LanguageBase, fileinfo.Model.LanguageCulture, result.Model.ToString()));
+                        outputPane.WriteText(string.Format("Translate done for {0}-{1}: {2} rows translated", fileinfo.Model.LanguageBase, fileinfo.Model.LanguageCulture, result.Model.ToString()));
 
                     }
                 }
@@ -357,7 +357,7 @@ namespace MultilingualExtension.Shared.Services
 
 
         }
-        public async Task<Result<Boolean>> TranslateNode(string selectedFilename, UpdateStatusForTranslation updateStatusForTranslation, EnvDTE.OutputWindowPane outputPane, ISettingsService settingsService)
+        public async Task<Result<Boolean>> TranslateNode(string selectedFilename, UpdateStatusForTranslation updateStatusForTranslation, IStatusPadLoger outputPane, ISettingsService settingsService)
         {
             try
             {

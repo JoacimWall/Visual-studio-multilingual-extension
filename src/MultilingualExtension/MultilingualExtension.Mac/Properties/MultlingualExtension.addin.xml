@@ -2,11 +2,17 @@
     <Runtime>
         <Import assembly="MultilingualExtension.dll" />
     </Runtime>
-    <Extension path = "/MonoDevelop/Ide/Pads">
- 		<Pad id="MultilingualExtension.StatusPad"  _label="Multilingual Extension"
-                class="MultilingualExtension.StatusPad" defaultPlacement="Bottom"
-                />
-</Extension>
+
+    <Extension path="/MonoDevelop/Ide/Pads">
+		<Pad
+			id="MultilingualExtension.StatusPad"
+			defaultLayout="*"
+			defaultPlacement="Center Bottom"
+			defaultStatus="AutoHide"
+			icon="md-console"
+			class="MultilingualExtension.StatusPad"
+			_label="Multilingual Extension Log" />
+	</Extension>    
     <Extension path = "/MonoDevelop/Ide/Commands">
         <Command id = "MultilingualExtension.UpdateFiles"
                  _label = "Synchronizes language files"

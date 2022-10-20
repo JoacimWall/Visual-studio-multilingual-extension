@@ -143,7 +143,7 @@
   </data>
   <data name="Dog" xml:space="preserve">
     <value>Hund</value>
-    <comment>Need review</comment>
+    <comment>Final</comment>
   </data>
   <data name="Cat" xml:space="preserve">
     <value>Katt</value>
@@ -167,7 +167,7 @@
   </data>
   <data name="Street" xml:space="preserve">
     <value>Gata</value>
-    <comment>Need review</comment>
+    <comment>Final</comment>
   </data>
   <data name="Street_And_House2" xml:space="preserve">
     <value>Gata och Hus och Rum. senare denna dag var jag så ledsen att jag hoppade</value>

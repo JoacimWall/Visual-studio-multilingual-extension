@@ -14,7 +14,7 @@ namespace MultilingualExtension.Shared.Services
         public SyncFileService()
         {
         }
-        public async Task<Result<Boolean>> UpdateNodeStatus(string selectedFilename, UpdateStatusForTranslation updateStatusForTranslation, EnvDTE.OutputWindowPane outputPane, ISettingsService settingsService)
+        public async Task<Result<Boolean>> UpdateNodeStatus(string selectedFilename, UpdateStatusForTranslation updateStatusForTranslation, IStatusPadLoger outputPane, ISettingsService settingsService)
         {
             try
             {
@@ -68,7 +68,7 @@ namespace MultilingualExtension.Shared.Services
 
         }
         
-        public async Task<Result<Boolean>> SyncFile(string selectedFilename, EnvDTE.OutputWindowPane outputPane, ISettingsService settingsService)
+        public async Task<Result<Boolean>> SyncFile(string selectedFilename, IStatusPadLoger outputPane, ISettingsService settingsService)
         {
             try
             {
@@ -81,13 +81,13 @@ namespace MultilingualExtension.Shared.Services
                         return new Result<bool>(resultResw.ErrorMessage);
 
                     if (resultResw.Model.IsMasterFile)
-                        Helpers.OutputWindowHelper.WriteToOutputWindow(outputPane, "Sync all files with " + settingsService.ExtensionSettings.MasterLanguageCode);
+                        outputPane.WriteText("Sync all files with " + settingsService.ExtensionSettings.MasterLanguageCode);
 
                     foreach (var updatePath in resultResw.Model.UpdateFilepaths)
                     {
                         var result = await SyncFileInternal(resultResw.Model.MasterFilepath, updatePath, addCommentNodeToMasterResx, outputPane);
                          var fileinfo =Helpers.Res_Helpers.FileInfo(settingsService.ExtensionSettings.MasterLanguageCode,updatePath);
-                        Helpers.OutputWindowHelper.WriteToOutputWindow(outputPane, string.Format("Sync done for {0}-{1}: {2} rows added, {3} rows removed.",fileinfo.Model.LanguageBase, fileinfo.Model.LanguageCulture, result.Model.Item1.ToString(), result.Model.Item2.ToString())) ;
+                        outputPane.WriteText(string.Format("Sync done for {0}-{1}: {2} rows added, {3} rows removed.",fileinfo.Model.LanguageBase, fileinfo.Model.LanguageCulture, result.Model.Item1.ToString(), result.Model.Item2.ToString())) ;
 
                     }
 
@@ -99,14 +99,14 @@ namespace MultilingualExtension.Shared.Services
                 if (!resultResx.WasSuccessful)
                     return new Result<bool>(resultResx.ErrorMessage);
                 if (resultResx.Model.IsMasterFile)
-                    Helpers.OutputWindowHelper.WriteToOutputWindow(outputPane,"Sync all files with " + resultResx.Model.MasterFilename);
+                    outputPane.WriteText("Sync all files with " + resultResx.Model.MasterFilename);
 
                 foreach (var updatePath in resultResx.Model.UpdateFilepaths)
                 {
                     
                     var result = await SyncFileInternal(resultResx.Model.MasterFilepath, updatePath, addCommentNodeToMasterResx, outputPane);
                     var fileinfo = Helpers.Res_Helpers.FileInfo(settingsService.ExtensionSettings.MasterLanguageCode, updatePath);
-                    Helpers.OutputWindowHelper.WriteToOutputWindow(outputPane, string.Format("Sync done for {0}-{1}: {2} rows added, {3} rows removed.", fileinfo.Model.LanguageBase, fileinfo.Model.LanguageCulture, result.Model.Item1.ToString(), result.Model.Item2.ToString()));
+                    outputPane.WriteText(string.Format("Sync done for {0}-{1}: {2} rows added, {3} rows removed.", fileinfo.Model.LanguageBase, fileinfo.Model.LanguageCulture, result.Model.Item1.ToString(), result.Model.Item2.ToString()));
 
                 }
 
@@ -125,7 +125,7 @@ namespace MultilingualExtension.Shared.Services
 
         }
         
-        private async Task<Result<Tuple<int, int>>> SyncFileInternal(string masterfilePath, string updatefilePath, bool addMasterCommentNode, EnvDTE.OutputWindowPane outputPane)
+        private async Task<Result<Tuple<int, int>>> SyncFileInternal(string masterfilePath, string updatefilePath, bool addMasterCommentNode, IStatusPadLoger outputPane)
         {
             XmlDocument masterdoc = new XmlDocument();
             masterdoc.Load(masterfilePath);
@@ -246,7 +246,7 @@ namespace MultilingualExtension.Shared.Services
 
 
         }
-        private async Task<Result<Boolean>> UpdateStatusInternal(string masterfilePath, string updatefilePath, UpdateStatusForTranslation updateStatusForTranslation, bool addMasterCommentNode, EnvDTE.OutputWindowPane outputPane)
+        private async Task<Result<Boolean>> UpdateStatusInternal(string masterfilePath, string updatefilePath, UpdateStatusForTranslation updateStatusForTranslation, bool addMasterCommentNode, IStatusPadLoger outputPane)
         {
 
             XmlDocument masterdoc = new XmlDocument();

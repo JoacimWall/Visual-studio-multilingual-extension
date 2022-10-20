@@ -4,6 +4,7 @@ using MultilingualExtension.Shared.Models;
 using MultilingualExtension.Shared.Interfaces;
 using ICG.NetCore.Utilities.Spreadsheet;
 using Microsoft.Extensions.DependencyInjection;
+using Monodoc;
 
 namespace MultilingualExtension.Shared.Services
 {
@@ -13,7 +14,7 @@ namespace MultilingualExtension.Shared.Services
         {
         }
 
-        public async Task<Result<Boolean>> ImportToResx(string selectedFilename, EnvDTE.OutputWindowPane outputPane, ISettingsService settingsService)
+        public async Task<Result<Boolean>> ImportToResx(string selectedFilename, IStatusPadLoger outputPane, ISettingsService settingsService)
         {
 
             try
@@ -36,7 +37,11 @@ namespace MultilingualExtension.Shared.Services
                     int minus = checkfileResxCsv.Success || checkfileReswCsv.Success ? 4 : 5;
                     int filetype = checkfileResxCsv.Success || checkfileReswCsv.Success ? 1 : 2;
                     string updatePath = selectedFilename.Substring(0, selectedFilename.Length - minus);
-                    var reslut = await ImportToResxInternal(selectedFilename, updatePath, filetype, outputPane);
+                    var result = await ImportToResxInternal(selectedFilename, updatePath, filetype, outputPane);
+                    var fileinfo = Res_Helpers.FileInfo(settingsService.ExtensionSettings.MasterLanguageCode, updatePath);
+
+                    outputPane.WriteText(string.Format("Import done for {0}-{1}: {2} rows updated", fileinfo.Model.LanguageBase, fileinfo.Model.LanguageCulture, result.Model.ToString()));
+
                     return new Result<bool>(true);
                 }
 
@@ -49,33 +54,13 @@ namespace MultilingualExtension.Shared.Services
             }
 
         }
-        private async Task<Result<Boolean>> ImportToResxInternal(string masterPath, string updatePath, int exportFileType, EnvDTE.OutputWindowPane outputPane)
+        private async Task<Result<int>> ImportToResxInternal(string masterPath, string updatePath, int exportFileType, IStatusPadLoger outputPane)
         {
-
+            int importCount = 0;
             XmlDocument updatedoc = new XmlDocument();
             updatedoc.Load(updatePath);
             XmlNode rootUpdate = updatedoc.DocumentElement;
-            //TranslationsRow[] records;
-            //if (exportFileType == 1)
-            //{
-            //    var engine = new FileHelperEngine<TranslationsRow>();
-            //    engine.HeaderText = engine.GetFileHeader();
-            //    records = engine.ReadFile(masterPath);
-            //}
-            //else
-            //{
-            //    var provider = new ExcelNPOIStorage(typeof(TranslationsRow))
-            //    {
-            //        StartRow = 1,
-            //        StartColumn = 0,
-            //        FileName = masterPath
-            //    };
-            //    records = (TranslationsRow[])provider.ExtractRecords();
-
-            //var services = new ServiceCollection();
-            //services.UseIcgNetCoreUtilitiesSpreadsheet();
-            //var provider = services.BuildServiceProvider();
-            //var exportGenerator = provider.GetService<IOpenXmlSpreadsheetParser>();
+            
             var spreadsheetParser = new OpenXmlSpreadsheetParser();
             var result = spreadsheetParser.ParseDocument<TranslationsRow>(File.OpenRead(masterPath), 1, true);
             bool updatefilechanged = false;
@@ -87,6 +72,7 @@ namespace MultilingualExtension.Shared.Services
                     if (dataNode != null)
                     {
                         updatefilechanged = true;
+                        importCount++;
                         var dataNodeValue = dataNode.SelectSingleNode("value");
                         var dataNodeComment = dataNode.SelectSingleNode("comment");
                         if (dataNodeValue != null && dataNodeComment != null)
@@ -105,7 +91,7 @@ namespace MultilingualExtension.Shared.Services
             if (updatefilechanged)
                 updatedoc.Save(updatePath);
 
-            return new Result<bool>(true);
+            return new Result<int>(importCount);
 
         }
 

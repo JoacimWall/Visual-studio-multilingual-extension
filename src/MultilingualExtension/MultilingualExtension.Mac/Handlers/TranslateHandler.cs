@@ -1,6 +1,7 @@
 ﻿using MonoDevelop.Components.Commands;
 using MonoDevelop.Ide;
 using MonoDevelop.Projects;
+using MultilingualExtension.Services;
 using MultilingualExtension.Shared.Helpers;
 using MultilingualExtension.Shared.Interfaces;
 using MultilingualExtension.Shared.Services;
@@ -23,7 +24,7 @@ namespace MultilingualExtension
                 ProjectFile selectedItem = (ProjectFile)IdeApp.Workspace.CurrentSelectedItem;
                 string selectedFilename = selectedItem.Name;
                 //Dummy for mac 
-                var outputPane = OutputWindowHelper.GetOutputWindow();
+                var outputPane = new StatusPadLoger();
                 var result= await translationService.TranslateFile(selectedFilename, outputPane, settingsService);
 
             }

@@ -2,6 +2,7 @@
 using MonoDevelop.Components.Commands;
 using MonoDevelop.Ide;
 using MonoDevelop.Projects;
+using MultilingualExtension.Services;
 using MultilingualExtension.Shared.Helpers;
 
 using MultilingualExtension.Shared.Interfaces;
@@ -29,7 +30,7 @@ namespace MultilingualExtension
                 string selectedFilename = selectedItem.Name;
 
                 //Dummy for mac 
-                var outputPane = OutputWindowHelper.GetOutputWindow();
+                var outputPane = new StatusPadLoger();
 
 
                 var result = await exportService.ExportToFile(selectedFilename, statusToExport, outputPane, settingsService);

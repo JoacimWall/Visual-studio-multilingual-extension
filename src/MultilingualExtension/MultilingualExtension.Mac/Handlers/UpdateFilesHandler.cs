@@ -21,7 +21,8 @@ namespace MultilingualExtension
 
             try
             {
-
+                
+                //MultilingualExtension.StatusPad.Instance.FocusPad();
                 SyncFileService syncFileService = new SyncFileService();
                 //var dte = ServiceProvider.GetService(typeof(DTE)) as DTE2;
                 var path = IdeApp.Workspace.CurrentSelectedSolution.FileName;
@@ -31,8 +32,8 @@ namespace MultilingualExtension
 
                 ProjectFile selectedItem = (ProjectFile)IdeApp.Workspace.CurrentSelectedItem;
                 //Dummy for mac 
-                var outputPane = OutputWindowHelper.GetOutputWindow();
-                var result = await syncFileService.SyncFile(selectedItem.FilePath, outputPane, settingsService);
+                IStatusPadLoger statusPadLoger = new StatusPadLoger();
+                var result = await syncFileService.SyncFile(selectedItem.FilePath, statusPadLoger, settingsService);
 
                 if (!result.WasSuccessful)
                 {

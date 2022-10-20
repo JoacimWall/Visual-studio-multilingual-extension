@@ -5,6 +5,8 @@ using MultilingualExtension.Shared.Interfaces;
 using ICG.NetCore.Utilities.Spreadsheet;
 using Microsoft.Extensions.DependencyInjection;
 using MultilingualExtension.Services;
+using Monodoc;
+using CoreServices;
 
 namespace MultilingualExtension.Shared.Services
 {
@@ -13,11 +15,13 @@ namespace MultilingualExtension.Shared.Services
         public ExportService()
         {
         }
-        public async Task<Result<Boolean>> ExportToFile(string selectedFilename, string statusToExport, EnvDTE.OutputWindowPane outputPane, ISettingsService settingsService)
+        public async Task<Result<Boolean>> ExportToFile(string selectedFilename, string statusToExport, IStatusPadLoger outputPane, ISettingsService settingsService)
         {
             try
             {
                 int exportFileType = settingsService.ExtensionSettings.ExportFileType;
+                outputPane.WriteText( string.Format("Export all with status {0}", statusToExport));
+
                 //------------------------- ResW files --------------------------------------------------------------------
                 var checkfileResw = RegExHelper.ValidateFileTypeIsResw(selectedFilename);
                 if (checkfileResw.Success)
@@ -28,11 +32,19 @@ namespace MultilingualExtension.Shared.Services
 
                     foreach (var updatePath in resultResw.Model.UpdateFilepaths)
                     {
-                        await ExportToFileInternal(false, resultResw.Model.MasterFilepath, updatePath, resultResw.Model.MasterFilename, statusToExport, exportFileType, outputPane);
+                        var result = await ExportToFileInternal(false, resultResw.Model.MasterFilepath, updatePath, resultResw.Model.MasterFilename, statusToExport, exportFileType, outputPane);
+                        var fileinfo = Res_Helpers.FileInfo(settingsService.ExtensionSettings.MasterLanguageCode, updatePath);
+                        outputPane.WriteText(string.Format("Export done for {0}-{1}: {2} rows exported", fileinfo.Model.LanguageBase, fileinfo.Model.LanguageCulture, result.Model.ToString()));
+
                     }
 
                     if (settingsService.ExtensionSettings.ExportMasterFileOnExport)
-                        await ExportToFileInternal(true, resultResw.Model.MasterFilepath, resultResw.Model.MasterFilepath, resultResw.Model.MasterFilename, statusToExport, exportFileType, outputPane);
+                    {
+                        var result = await ExportToFileInternal(true, resultResw.Model.MasterFilepath, resultResw.Model.MasterFilepath, resultResw.Model.MasterFilename, statusToExport, exportFileType, outputPane);
+                        var fileinfo = Res_Helpers.FileInfo(settingsService.ExtensionSettings.MasterLanguageCode, resultResw.Model.MasterFilepath);
+                        outputPane.WriteText( string.Format("Export done for {0}-{1}: {2} rows exported", fileinfo.Model.LanguageBase, fileinfo.Model.LanguageCulture, result.Model.ToString()));
+
+                    }
                     return new Result<bool>(true);
                 }
                 // -------------------- ResX files --------------------------------------------------------
@@ -46,12 +58,21 @@ namespace MultilingualExtension.Shared.Services
                 {
                     var checkfileInFolder = RegExHelper.ValidateFilenameIsTargetType(updatePath);
                     if (checkfileInFolder.Success)
-                        await ExportToFileInternal(false, resultResx.Model.MasterFilepath, updatePath, resultResx.Model.MasterFilename, statusToExport, exportFileType, outputPane);
+                    {
+                        var result = await ExportToFileInternal(false, resultResx.Model.MasterFilepath, updatePath, resultResx.Model.MasterFilename, statusToExport, exportFileType, outputPane);
+                        var fileinfo = Res_Helpers.FileInfo(settingsService.ExtensionSettings.MasterLanguageCode, updatePath);
+                        outputPane.WriteText( string.Format("Export done for {0}-{1}: {2} rows exported", fileinfo.Model.LanguageBase, fileinfo.Model.LanguageCulture, result.Model.ToString()));
+
+                    }
                 }
                 //export Master
                 if (settingsService.ExtensionSettings.ExportMasterFileOnExport)
-                    await ExportToFileInternal(true, resultResx.Model.MasterFilepath, resultResx.Model.MasterFilepath, resultResx.Model.MasterFilename, statusToExport, exportFileType, outputPane);
+                {
+                    var result = await ExportToFileInternal(true, resultResx.Model.MasterFilepath, resultResx.Model.MasterFilepath, resultResx.Model.MasterFilename, statusToExport, exportFileType, outputPane);
+                    var fileinfo = Res_Helpers.FileInfo(settingsService.ExtensionSettings.MasterLanguageCode, resultResx.Model.MasterFilepath);
+                    outputPane.WriteText(string.Format("Export done for {0}-{1}: {2} rows exported", fileinfo.Model.LanguageBase, fileinfo.Model.LanguageCulture, result.Model.ToString()));
 
+                }
                 return new Result<bool>(true);
 
 
@@ -69,13 +90,13 @@ namespace MultilingualExtension.Shared.Services
 
         }
 
-        private async Task<Result<Boolean>> ExportToFileInternal(bool isMasterFile, string masterPath, string updatePath, string masterFilename, string statusToExport, int exportFileType, EnvDTE.OutputWindowPane outputPane)
+        private async Task<Result<int>> ExportToFileInternal(bool isMasterFile, string masterPath, string updatePath, string masterFilename, string statusToExport, int exportFileType, IStatusPadLoger outputPane)
         {
             string folderSeperator = Environment.OSVersion.Platform == PlatformID.Win32NT ? "\\" : "/";
             int folderindex = updatePath.LastIndexOf(folderSeperator);
 
             string masterFolderPath = updatePath.Substring(0, folderindex + 1);
-
+            int exportCount = 0;
 
             XmlDocument updatedoc = new XmlDocument();
             updatedoc.Load(updatePath);
@@ -148,7 +169,7 @@ namespace MultilingualExtension.Shared.Services
                                 //TODO: log error  
 
                             }
-
+                            exportCount++;
                             rows.Add(new TranslationsRow()
                             {
                                 Name = dataUpdate.Attributes.GetNamedItem("name").Value,
@@ -188,7 +209,7 @@ namespace MultilingualExtension.Shared.Services
             System.IO.File.WriteAllBytes(exportFileName + ".xlsx", fileContent);
 
 
-            return new Result<bool>(true);
+            return new Result<int>(exportCount);
         }
 
         

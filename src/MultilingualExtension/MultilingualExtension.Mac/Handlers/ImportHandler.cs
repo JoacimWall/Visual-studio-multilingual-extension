@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.Shell;
 using MonoDevelop.Components.Commands;
 using MonoDevelop.Ide;
 using MonoDevelop.Projects;
+using MultilingualExtension.Services;
 using MultilingualExtension.Shared.Helpers;
 using MultilingualExtension.Shared.Interfaces;
 using MultilingualExtension.Shared.Services;
@@ -26,7 +27,7 @@ namespace MultilingualExtension
                 //MonoDevelop.Ide.Gui.PadContent pad = new MonoDevelop.Ide.Gui.PadContent();
                 //IdeApp.Workbench.AddPad(new Guid().)
                // var dte =  ServiceProvider.GetService(typeof(DTE)) as DTE2;
-                var outputPane = OutputWindowHelper.GetOutputWindow();
+                var outputPane = new StatusPadLoger();
                 var result = await importService.ImportToResx(selectedFilename, outputPane, settingsService);
 
 
