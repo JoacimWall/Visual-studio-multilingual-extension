@@ -91,6 +91,8 @@ Right-click one of the language files (AppResources.fr-FR.resx) and select "Sync
 the synchronization will not only add translations to the language files it will also remove translation that are not present in the master file.
 ##### The log show the result.
 <img width=“100” height="200" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/SyncLog.png">
+##### The log shows auto on windows to show it on mac click.
+<img width=“100” height="400" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/Mac_Log.png">
 
 ## Translate of Resx or Resw Files
 There are two ways to translate the resx files. 
@@ -106,9 +108,6 @@ This file will then be Translate with the master file. The extension will only t
 
 ##### The log show the result.
 <img width=“100” height="200" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/TranslateLog.png">
-
-##### The log shows auto on windows to show it on mac click.
-<img width=“100” height="200" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/Mac_Log.png">
 
 
 ### Export of texts to Excel or csv file
