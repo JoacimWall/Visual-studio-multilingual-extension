@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:txt="clr-namespace:MultilingualExtensionSammpleMAUI.Resources.Translation"
              x:Class="MultilingualExtensionSammpleMAUI.MainPage">
 
     <ScrollView>
@@ -16,7 +17,7 @@
                 HorizontalOptions="Center" />
 
             <Label
-                Text="Hello, World!"
+                Text="{x:Static txt:Resource.House}"
                 SemanticProperties.HeadingLevel="Level1"
                 FontSize="32"
                 HorizontalOptions="Center" />

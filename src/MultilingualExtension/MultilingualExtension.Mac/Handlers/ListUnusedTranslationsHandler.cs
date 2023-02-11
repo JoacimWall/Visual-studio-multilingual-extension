@@ -24,10 +24,11 @@ public class ListUnusedTranslationsHandler : CommandHandler
 
         foreach (var project in IdeApp.Workspace.GetAllProjects())
         {
-            var conf = project.DefaultConfiguration?.Selector;
-            var files = project.GetSourceFilesAsync(conf).Result; //monitor
-            foreach (ProjectFile file in files)
+            //var conf = project.DefaultConfiguration?.Selector;
+            //var files = project.GetSourceFilesAsync(conf).Result; //monitor
+            foreach (var file in project.Files)
             {
+                Console.WriteLine(file.FilePath);
                 if (file.Include == null)
                     continue;
                 if ((file.Flags & ProjectItemFlags.Hidden) == ProjectItemFlags.Hidden)
@@ -41,7 +42,13 @@ public class ListUnusedTranslationsHandler : CommandHandler
 
 
                 returnlist.Add(new FileProvider(file.FilePath, project));
-                Console.WriteLine(file.FilePath);
+                if (file.FilePath.FileName.Contains(".xaml.cs"))
+                {
+                    
+                    var pathxaml = file.FilePath.ToString().Substring(0,file.FilePath.ToString().Length - 3);
+                    returnlist.Add(new FileProvider(pathxaml, project));
+                    Console.WriteLine(pathxaml);
+                }
 
             }
         }
