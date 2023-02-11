@@ -60,5 +60,16 @@
     </Extension>
     <Extension path="/MonoDevelop/Ide/StartupHandlers">
         <Class class="MultilingualExtension.StartupHandler" />
-    </Extension>    
+    </Extension>
+    <Extension path = "/MonoDevelop/Ide/Commands">
+        <Command id = "MultilingualExtension.ListUnusedTranslations"
+                 _label = "List unused translations"
+                 _description = "List unused translations" 
+                 defaultHandler = "MultilingualExtension.ListUnusedTranslationsHandler"/>
+    </Extension>
+     <Extension path = "/MonoDevelop/Ide/ContextMenu/ProjectPad">
+        <Condition id="FileType" fileExtensions=".resx,.resw">
+            <CommandItem id="MultilingualExtension.ListUnusedTranslations" />
+        </Condition>
+    </Extension>
 </ExtensionModel>

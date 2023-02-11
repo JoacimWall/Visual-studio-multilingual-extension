@@ -125,69 +125,9 @@
     <value>Press any key to exit</value>
     <comment>Need review</comment>
   </data>
-  <data name="Enter_Email" xml:space="preserve">
-    <value>Enter email please!</value>
-    <comment>Need review</comment>
-  </data>
-  <data name="Enter_Email_To_Be_The_Next_User_To_Be_Able_To_Login_To_The_Best_Office_System_In_The_World" xml:space="preserve">
-    <value>Enter email please!</value>
-    <comment>Need review</comment>
-  </data>
-  <data name="Password" xml:space="preserve">
-    <value>Password</value>
-    <comment>Need review</comment>
-  </data>
-  <data name="Home" xml:space="preserve">
-    <value>Home</value>
-    <comment>Need review</comment>
-  </data>
-  <data name="Dog" xml:space="preserve">
-    <value>Dog</value>
-    <comment>Need review</comment>
-  </data>
-  <data name="Cat" xml:space="preserve">
-    <value>Cat</value>
-    <comment>Need review</comment>
-  </data>
-  <data name="Bird" xml:space="preserve">
-    <value>Bird</value>
-    <comment>Need review</comment>
-  </data>
-  <data name="Cow" xml:space="preserve">
-    <value>Cow</value>
-    <comment>Need review</comment>
-  </data>
-  <data name="Love_Is" xml:space="preserve">
-    <value>Love is</value>
-    <comment>New</comment>
-  </data>
-  <data name="House" xml:space="preserve">
-    <value>House</value>
-    <comment>Need review</comment>
-  </data>
-  <data name="Street" xml:space="preserve">
-    <value>Street</value>
-    <comment>Need review</comment>
-  </data>
-  <data name="Street_And_House2" xml:space="preserve">
-    <value>Street and House and Room. later this day i was so sad that i jumped </value>
-    <comment>Need review</comment>
-  </data>
-  <data name="Computer" xml:space="preserve">
-    <value>Computer</value>
-    <comment>Need review</comment>
-  </data>
-    <data name="Cup" xml:space="preserve">
-    <value>Cup</value>
-    <comment>Need review</comment>
-  </data>
-    <data name="Read_Instructions" xml:space="preserve">
+  <data name="Read_Instructions" xml:space="preserve">
     <value>Read
 Instructions</value>
-    <comment>Need review</comment>
-  </data>
- <data name="Nice_Gool_Nice_Shot" xml:space="preserve">
-    <value>Nice goal. Nice Shot.</value>
     <comment>Need review</comment>
   </data>
 </root>

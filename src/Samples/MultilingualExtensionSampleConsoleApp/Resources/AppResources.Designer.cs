@@ -58,129 +58,11 @@ namespace MultilingualExtensionSampleConsoleApp.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bird.
-        /// </summary>
-        public static string Bird {
-            get {
-                return ResourceManager.GetString("Bird", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Cat.
-        /// </summary>
-        public static string Cat {
-            get {
-                return ResourceManager.GetString("Cat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Computer.
-        /// </summary>
-        public static string Computer {
-            get {
-                return ResourceManager.GetString("Computer", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Cow.
-        /// </summary>
-        public static string Cow {
-            get {
-                return ResourceManager.GetString("Cow", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Cup.
-        /// </summary>
-        public static string Cup {
-            get {
-                return ResourceManager.GetString("Cup", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Dog.
-        /// </summary>
-        public static string Dog {
-            get {
-                return ResourceManager.GetString("Dog", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enter email please!.
-        /// </summary>
-        public static string Enter_Email {
-            get {
-                return ResourceManager.GetString("Enter_Email", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enter email please!.
-        /// </summary>
-        public static string Enter_Email_To_Be_The_Next_User_To_Be_Able_To_Login_To_The_Best_Office_System_In_The_World {
-            get {
-                return ResourceManager.GetString("Enter_Email_To_Be_The_Next_User_To_Be_Able_To_Login_To_The_Best_Office_System_In_" +
-                        "The_World", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Hello.
         /// </summary>
         public static string Hello {
             get {
                 return ResourceManager.GetString("Hello", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Home.
-        /// </summary>
-        public static string Home {
-            get {
-                return ResourceManager.GetString("Home", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to House.
-        /// </summary>
-        public static string House {
-            get {
-                return ResourceManager.GetString("House", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Love is.
-        /// </summary>
-        public static string Love_Is {
-            get {
-                return ResourceManager.GetString("Love_Is", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Nice goal. Nice Shot..
-        /// </summary>
-        public static string Nice_Gool_Nice_Shot {
-            get {
-                return ResourceManager.GetString("Nice_Gool_Nice_Shot", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Password.
-        /// </summary>
-        public static string Password {
-            get {
-                return ResourceManager.GetString("Password", resourceCulture);
             }
         }
         
@@ -200,24 +82,6 @@ namespace MultilingualExtensionSampleConsoleApp.Resources {
         public static string Read_Instructions {
             get {
                 return ResourceManager.GetString("Read_Instructions", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Street.
-        /// </summary>
-        public static string Street {
-            get {
-                return ResourceManager.GetString("Street", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Street and House and Room. later this day i was so sad that i jumped .
-        /// </summary>
-        public static string Street_And_House2 {
-            get {
-                return ResourceManager.GetString("Street_And_House2", resourceCulture);
             }
         }
     }

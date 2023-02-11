@@ -5,8 +5,10 @@ using MonoDevelop.Core.Text;
 using MonoDevelop.Ide;
 using MonoDevelop.Ide.FindInFiles;
 using MonoDevelop.Projects;
+using MultilingualExtension.Services;
 using MultilingualExtension.Shared.Helpers;
 using MultilingualExtension.Shared.Interfaces;
+using MultilingualExtension.Shared.Models;
 using MultilingualExtension.Shared.Services;
 using System.Text;
 using System.Xml;
@@ -54,7 +56,7 @@ public class ListUnusedTranslationsHandler : CommandHandler
 
         try
         {
-
+            IStatusPadLoger statusPadLoger = new StatusPadLoger();
             SyncFileService syncFileService = new SyncFileService();
             var path = IdeApp.Workspace.CurrentSelectedSolution.FileName;
             var projPath = System.IO.Path.GetDirectoryName(path);
@@ -88,13 +90,13 @@ public class ListUnusedTranslationsHandler : CommandHandler
                     {
                         dataValues.Add(dataMaster.Attributes.GetNamedItem("name").Value);
                     }
-
+                    statusPadLoger.WriteText("Check for unused translations:");
                     var result = AnalyzeFiles(dataValues, namspacenameMaster, selectedItem); //, searchMonitor
                     if (result.Count > 0)
                     {
                         string questionMess = "You have " + dataValues.Count.ToString() + " translations strings and " + result.Count.ToString() +
-                        " of them are not used in any .cs or .xaml file." + Environment.NewLine + Environment.NewLine + "To remove them from the master resx file press 'Yes'." + Environment.NewLine + "Select 'No' to just show them in the Output windows." + Environment.NewLine +
-                        "Remember to select 'sync all Langiage ...' translation files to remove unused translations from other language files.";
+                        " of them are not used in any .cs or .xaml file." + Environment.NewLine + Environment.NewLine + "To remove them from the master resx file press 'Yes'." + Environment.NewLine + "Select 'No' to just show them in the 'Multlingual Extension log'" + Environment.NewLine +
+                        "Remember to select 'sync all Language ...' translation files to remove unused translations from other language files.";
                         var question = new QuestionMessage(questionMess);
                         question.Buttons.Add(new AlertButton("Yes"));
                         question.Buttons.Add(new AlertButton("No"));
@@ -109,6 +111,7 @@ public class ListUnusedTranslationsHandler : CommandHandler
                                 if (exist != null)
                                 {
                                     rootMaster.RemoveChild(exist);
+                                    statusPadLoger.WriteText("Removed translation: " + removeItem);
                                 }
                             }
                             masterdoc.Save(selectedItem.FilePath);
@@ -116,12 +119,16 @@ public class ListUnusedTranslationsHandler : CommandHandler
                         else
                         {
                             foreach (var removeItem in result)
-                                Console.WriteLine(removeItem);
+                                statusPadLoger.WriteText(removeItem);
+
+                            
                         }
                     }
                     else
+                    {
+                        statusPadLoger.WriteText("Did not find any unused translations.");
                         MessageService.GenericAlert(new GenericMessage { Text = "Did not find any unused translations." });
-                    //}
+                    }
                 }
             }).ContinueWith((t) =>
             {
