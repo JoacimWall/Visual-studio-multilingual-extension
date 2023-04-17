@@ -1,23 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFramework>net7.0</TargetFramework>
+		<EnablePreviewFeatures>True</EnablePreviewFeatures>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
+		<EnableNETAnalyzers>false</EnableNETAnalyzers>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
 	  <DebugType>portable</DebugType>
 		<WarningLevel>4</WarningLevel>
 	</PropertyGroup>
-	<ItemGroup>
-		<Folder Include="Properties\" />
-		<Folder Include="Handlers\" />
-		<Folder Include="Helpers\" />
-		<Folder Include="Interfaces\" />
-		<Folder Include="Services\" />
-		<Folder Include="Models\" />
-		<Folder Include="RefDll\" />
-	</ItemGroup>
 	<ItemGroup>
 		<Compile Include="..\MultilingualExtension.SharedCode\Helpers\Global.cs">
 			<Link>Helpers\Global.cs</Link>
@@ -72,31 +65,17 @@
 		</Compile>
 	</ItemGroup>
 	<ItemGroup>
-	  <PackageReference Include="Microsoft.VisualStudioMac.Sdk" Version="$(VisualStudioMacSdkNuGetVersion)" />
+	  <PackageReference Include="Microsoft.VisualStudioMac.Sdk" Version="17.5.0" />
+	  <PackageReference Include="ICG.NetCore.Utilities.Spreadsheet" Version="7.1.0" />
+	  <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
 	</ItemGroup>
+	<ItemGroup>
+    <AddinReference Include="MonoDevelop.Core" />
+	<AddinReference Include="MonoDevelop.Ide" />
+  </ItemGroup>
 	<ItemGroup>
     <EmbeddedResource Update="Properties\MultlingualExtension.addin.xml">
       <LogicalName>MultlingualExtension.addin.xml</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
-	<ItemGroup>
-	  <Reference Include="NetCore.Utilities.SpreadsheetExample">
-	    <HintPath>RefDll\NetCore.Utilities.SpreadsheetExample.dll</HintPath>
-	  </Reference>
-	  <Reference Include="NetCore.Utilities.Spreadsheet">
-	    <HintPath>RefDll\NetCore.Utilities.Spreadsheet.dll</HintPath>
-	  </Reference>
-	  <Reference Include="Microsoft.Extensions.DependencyInjection">
-	    <HintPath>RefDll\Microsoft.Extensions.DependencyInjection.dll</HintPath>
-	  </Reference>
-	  <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions">
-	    <HintPath>RefDll\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
-	  </Reference>
-	  <Reference Include="DocumentFormat.OpenXml">
-	    <HintPath>RefDll\DocumentFormat.OpenXml.dll</HintPath>
-	  </Reference>
-	  <Reference Include="System.IO.Packaging">
-	    <HintPath>RefDll\System.IO.Packaging.dll</HintPath>
-	  </Reference>
-	</ItemGroup>
 </Project>
