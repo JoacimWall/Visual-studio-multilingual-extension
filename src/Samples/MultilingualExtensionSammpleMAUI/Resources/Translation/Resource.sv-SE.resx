@@ -125,4 +125,10 @@
     <value>Läsa
 Instruktioner</value>
   <comment>Need review</comment></data>
+  <data name="Cat" xml:space="preserve">
+    <value>Katt</value>
+  <comment>Need review</comment></data>
+  <data name="Dog" xml:space="preserve">
+    <value>Hund</value>
+  <comment>Need review</comment></data>
 </root>

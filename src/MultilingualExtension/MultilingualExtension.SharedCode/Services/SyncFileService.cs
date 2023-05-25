@@ -6,6 +6,7 @@ using MultilingualExtension.Shared.Helpers;
 using MultilingualExtension.Shared.Interfaces;
 using MultilingualExtension.Shared.Models;
 using System.Linq;
+using MultilingualExtension.Services;
 
 namespace MultilingualExtension.Shared.Services
 {
@@ -14,7 +15,7 @@ namespace MultilingualExtension.Shared.Services
         public SyncFileService()
         {
         }
-        public async Task<Result<Boolean>> UpdateNodeStatus(string selectedFilename, UpdateStatusForTranslation updateStatusForTranslation, IStatusPadLoger outputPane, ISettingsService settingsService)
+        public async Task<Result<Boolean>> UpdateNodeStatus(string selectedFilename, UpdateStatusForTranslation updateStatusForTranslation, MultilingualExtension.Shared.Interfaces.IStatusPadLoger outputPane, ISettingsService settingsService)
         {
             try
             {

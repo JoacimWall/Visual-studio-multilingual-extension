@@ -15,62 +15,16 @@
   <data name="Hello" xml:space="preserve">
         <value>Hei</value>
     <comment>Final</comment></data>
-  <data name="Enter_Email" xml:space="preserve">
-    <value>Skriv inn e-post vennligst</value>
-  <comment>Need review</comment></data>
-  <data name="Enter_Email_To_Be_The_Next_User_To_Be_Able_To_Login_To_The_Best_Office_System_In_The_World" xml:space="preserve">
-    <value>Skriv inn e-post vær så snill!</value>
-  <comment>Need review</comment></data>
-  <data name="Password" xml:space="preserve">
-    <value>Passord</value>
-  <comment>Need review</comment></data>
-  <data name="Home" xml:space="preserve">
-    <value>Hjem</value>
-  <comment>Need review</comment></data>
-  <data name="Dog" xml:space="preserve">
-    <value>Hunden</value>
-  <comment>Need review</comment></data>
-  <data name="Cat" xml:space="preserve">
-    <value>Katten</value>
-  <comment>Need review</comment></data>
   <data name="Press_Any_Key_To_Exit" xml:space="preserve">
     <value>Trykk på en tast for å avslutte</value>
   <comment>Need review</comment></data>
-  <data name="Bird" xml:space="preserve">
-    <value>Fuglen</value>
-  <comment>Need review</comment></data>
-  <data name="Cow" xml:space="preserve">
-    <value>Kua</value>
-  <comment>Need review</comment></data>
-  <data name="Love_Is" xml:space="preserve">
-    <value>Kjærlighet er</value>
-    <comment>Need review</comment>
-  </data>
-  <data name="House" xml:space="preserve">
-    <value>Hus</value>
-  <comment>Need review</comment></data>
-  <data name="Street" xml:space="preserve">
-    <value>gate</value>
-  <comment>Need review</comment></data>
-  <data name="Street_And_House2" xml:space="preserve">
-    <value>Gate og Hus og Rom. senere denne dagen var jeg så trist at jeg hoppet</value>
-    <comment>Need review</comment>
-  </data>
-  <data name="Computer" xml:space="preserve">
-    <value></value>
-    <comment>Need review</comment>
-  </data>
-  <data name="Cup" xml:space="preserve">
-    <value>Kopp</value>
-    <comment>Need review</comment>
-  </data>
   <data name="Read_Instructions" xml:space="preserve">
     <value>Lese
 Bruksanvisning</value>
     <comment>Need review</comment>
   </data>
-  <data name="Nice_Gool_Nice_Shot" xml:space="preserve">
-    <value>Fin gool. Bra skudd.</value>
+  <data name="Bird" xml:space="preserve">
+    <value>Fugl</value>
     <comment>Need review</comment>
   </data>
 </root>

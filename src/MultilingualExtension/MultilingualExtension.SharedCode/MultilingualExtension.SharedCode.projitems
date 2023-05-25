@@ -13,8 +13,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\OutputWindowHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ReswHelpers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ResxHelpers.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IProgressBar.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Interfaces\ISettingsService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IStatusPadLoger.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\MicrosoftTranslationResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Result.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Res_Files.cs" />

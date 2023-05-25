@@ -103,4 +103,10 @@
   <data name="Read_Instructions" xml:space="preserve">
     <value>Lis\r\n</value>
   <comment>Need review</comment></data>
+  <data name="Cat" xml:space="preserve">
+    <value>Chat</value>
+  <comment>Need review</comment></data>
+  <data name="Dog" xml:space="preserve">
+    <value>Chien</value>
+  <comment>Need review</comment></data>
 </root>

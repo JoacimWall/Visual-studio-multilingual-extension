@@ -91,9 +91,8 @@ namespace MultilingualExtension
         {
             ThreadHelper.ThrowIfNotOnUIThread();
             var dte = ServiceProvider.GetService(typeof(DTE)) as DTE2;
-            var outputPane = OutputWindowHelper.GetOutputWindow(dte);
-
-            var projPath = System.IO.Path.GetDirectoryName(dte.Solution.FullName);
+          
+            var projPath = Path.GetDirectoryName(dte.Solution.FullName);
             ISettingsService settingsService = new SettingsService(projPath);
             try
             {
@@ -104,8 +103,8 @@ namespace MultilingualExtension
 
                 //MultilingualExtension.Shared
                 TranslationService translationService = new TranslationService();
-
-                translationService.TranslateFile(selectedFilename, outputPane, settingsService);
+                IStatusPadLoger statusPadLoger = new StatusPadLoger(dte);
+                translationService.TranslateFile(selectedFilename, statusPadLoger, settingsService);
 
 
 

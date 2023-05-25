@@ -106,7 +106,8 @@ namespace MultilingualExtension
                 var pane = OutputWindowHelper.GetOutputWindow(dte);
                 
                SyncFileService syncFileService = new SyncFileService();
-               var result =  syncFileService.SyncFile(selectedFilename, pane, settingsService);
+                IStatusPadLoger statusPadLoger = new StatusPadLoger(dte);
+                var result =  syncFileService.SyncFile(selectedFilename, statusPadLoger, settingsService);
                
                 if (!result.Result.WasSuccessful)
                 {

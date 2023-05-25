@@ -61,6 +61,24 @@ namespace MultilingualExtensionSammpleMAUI.Resources.Translation {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cat.
+        /// </summary>
+        internal static string Cat {
+            get {
+                return ResourceManager.GetString("Cat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dog.
+        /// </summary>
+        internal static string Dog {
+            get {
+                return ResourceManager.GetString("Dog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to House.
         /// </summary>
         internal static string House {
