@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:BaseContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:MultilingualClient.Views"
+             xmlns:vm="clr-namespace:MultilingualClient.ViewModels"
+             xmlns:controls="clr-namespace:MultilingualClient.Controls.TreeView"
+             xmlns:theming="clr-namespace:MultilingualClient.Resources.Styles"
+             x:Class="MultilingualClient.Views.MainPage"
+             x:DataType="vm:MainViewModel">
+
+   <Grid ColumnDefinitions="1*,3*" >
+        <controls:TreeView BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={x:Static theming:AppColors.Gray200Color}}" 
+                       x:Name="TheTreeView" RootNodes="{Binding Nodes}"
+                       Margin="4"/>
+        
+   </Grid>
+    
+</views:BaseContentPage>
