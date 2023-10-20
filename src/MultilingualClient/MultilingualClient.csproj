@@ -3,6 +3,7 @@
 	<PropertyGroup>
 		<TargetFrameworks>net8.0-maccatalyst</TargetFrameworks>
 		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
+		<OutputType>Exe</OutputType>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net8.0-tizen</TargetFrameworks> -->
 
@@ -12,8 +13,8 @@
 		The Mac App Store will NOT accept apps with ONLY maccatalyst-arm64 indicated;
 		either BOTH runtimes must be indicated or ONLY macatalyst-x64. -->
 		<!-- For example: <RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers> -->
-
-		<OutputType>Exe</OutputType>
+		<RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers>
+		
 		<RootNamespace>MultilingualClient</RootNamespace>
 		<UseMaui>true</UseMaui>
 		<SingleProject>true</SingleProject>
@@ -61,45 +62,70 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0-rc.2.23479.6" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
 		<PackageReference Include="Acr.UserDialogs" Version="8.0.1" />
+		<PackageReference Include="ICG.NetCore.Utilities.Spreadsheet" Version="7.2.0" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	</ItemGroup>
 
 	<!-- Build Properties must be defined within these property groups to ensure successful publishing
        to the Mac App Store. See: https://aka.ms/maui-publish-app-store#define-build-properties-in-your-project-file -->
 	<ItemGroup>
-	  <None Remove="Views\" />
-	  <None Remove="ViewModels\" />
-	  <None Remove="Controls\" />
-	  <None Remove="Controls\TreeView\" />
-	  <None Remove="Models\" />
-	  <None Remove="Controls\TreeView\Models\" />
-	  <None Remove="Services\" />
-	  <None Remove="Helpers\" />
-	  <None Remove="Resources\EmbeddedImages\" />
-	  <None Remove="Resources\EmbeddedImages\OpenGlyph.png" />
-	  <None Remove="Resources\EmbeddedImages\Blank.png" />
-	  <None Remove="Resources\EmbeddedImages\CollpsedGlyph.png" />
-	  <None Remove="Resources\EmbeddedImages\FolderClosed.png" />
-	  <None Remove="Resources\EmbeddedImages\FolderOpen.png" />
-	  <None Remove="Resources\EmbeddedImages\Item.png" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Views\" />
-	  <Folder Include="ViewModels\" />
-	  <Folder Include="Controls\" />
-	  <Folder Include="Controls\TreeView\" />
-	  <Folder Include="Models\" />
-	  <Folder Include="Controls\TreeView\Models\" />
-	  <Folder Include="Services\" />
-	  <Folder Include="Helpers\" />
-	  <Folder Include="Resources\EmbeddedImages\" />
-	</ItemGroup>
-	<ItemGroup>
-	  <EmbeddedResource Include="Resources\EmbeddedImages\OpenGlyph.png" />
-	  <EmbeddedResource Include="Resources\EmbeddedImages\Blank.png" />
-	  <EmbeddedResource Include="Resources\EmbeddedImages\CollpsedGlyph.png" />
-	  <EmbeddedResource Include="Resources\EmbeddedImages\FolderClosed.png" />
-	  <EmbeddedResource Include="Resources\EmbeddedImages\FolderOpen.png" />
-	  <EmbeddedResource Include="Resources\EmbeddedImages\Item.png" />
+	  <Compile Include="..\MultilingualExtension\MultilingualExtension.SharedCode\Helpers\Res_Helpers.cs">
+	    <Link>Helpers\Res_Helpers.cs</Link>
+	  </Compile>
+	  <Compile Include="..\MultilingualExtension\MultilingualExtension.SharedCode\Interfaces\IStatusPadLoger.cs">
+	    <Link>Interfaces\IStatusPadLoger.cs</Link>
+	  </Compile>
+	  <Compile Include="..\MultilingualExtension\MultilingualExtension.SharedCode\Interfaces\ISettingsService.cs">
+	    <Link>Interfaces\ISettingsService.cs</Link>
+	  </Compile>
+	  <Compile Include="..\MultilingualExtension\MultilingualExtension.SharedCode\Services\SettingsService.cs">
+	    <Link>Services\SettingsService.cs</Link>
+	  </Compile>
+	  <Compile Include="..\MultilingualExtension\MultilingualExtension.SharedCode\Helpers\Global.cs">
+	    <Link>Helpers\Global.cs</Link>
+	  </Compile>
+	  <Compile Include="..\MultilingualExtension\MultilingualExtension.SharedCode\Models\TranslationsRow.cs">
+	    <Link>Models\TranslationsRow.cs</Link>
+	  </Compile>
+	  <Compile Include="..\MultilingualExtension\MultilingualExtension.SharedCode\Models\Res_Fileinfo.cs">
+	    <Link>Models\Res_Fileinfo.cs</Link>
+	  </Compile>
+	  <Compile Include="..\MultilingualExtension\MultilingualExtension.SharedCode\Models\UpdateStatusForTranslation.cs">
+	    <Link>Models\UpdateStatusForTranslation.cs</Link>
+	  </Compile>
+	  <Compile Include="..\MultilingualExtension\MultilingualExtension.SharedCode\Models\Translations.cs">
+	    <Link>Models\Translations.cs</Link>
+	  </Compile>
+	  <Compile Include="..\MultilingualExtension\MultilingualExtension.SharedCode\Models\Result.cs">
+	    <Link>Models\Result.cs</Link>
+	  </Compile>
+	  <Compile Include="..\MultilingualExtension\MultilingualExtension.SharedCode\Models\Res_Files.cs">
+	    <Link>Models\Res_Files.cs</Link>
+	  </Compile>
+	  <Compile Include="..\MultilingualExtension\MultilingualExtension.SharedCode\Models\MicrosoftTranslationResponse.cs">
+	    <Link>Models\MicrosoftTranslationResponse.cs</Link>
+	  </Compile>
+	  <Compile Include="..\MultilingualExtension\MultilingualExtension.SharedCode\Helpers\ResxHelpers.cs">
+	    <Link>Helpers\ResxHelpers.cs</Link>
+	  </Compile>
+	  <Compile Include="..\MultilingualExtension\MultilingualExtension.SharedCode\Helpers\ReswHelpers.cs">
+	    <Link>Helpers\ReswHelpers.cs</Link>
+	  </Compile>
+	  <Compile Include="..\MultilingualExtension\MultilingualExtension.SharedCode\Helpers\RegExHelper.cs">
+	    <Link>Helpers\RegExHelper.cs</Link>
+	  </Compile>
+	  <Compile Include="..\MultilingualExtension\MultilingualExtension.SharedCode\Services\SyncFileService.cs">
+	    <Link>Services\SyncFileService.cs</Link>
+	  </Compile>
+	  <Compile Include="..\MultilingualExtension\MultilingualExtension.SharedCode\Services\TranslationService.cs">
+	    <Link>Services\TranslationService.cs</Link>
+	  </Compile>
+	  <Compile Include="..\MultilingualExtension\MultilingualExtension.Mac\Services\ImportService.cs">
+	    <Link>Services\ImportService.cs</Link>
+	  </Compile>
+	  <Compile Include="..\MultilingualExtension\MultilingualExtension.Mac\Services\ExportService.cs">
+	    <Link>Services\ExportService.cs</Link>
+	  </Compile>
 	</ItemGroup>
   <PropertyGroup Condition="$(TargetFramework.Contains('-maccatalyst')) and '$(Configuration)' == 'Debug'">
     <CodesignEntitlements>Platforms/MacCatalyst/Entitlements.Debug.plist</CodesignEntitlements>
@@ -116,4 +142,24 @@
     <CreatePackage>false</CreatePackage>
     <CodesignEntitlements>Platforms\MacCatalyst\Entitlements.Debug.plist</CodesignEntitlements>
   </PropertyGroup>
+
+  <ItemGroup>
+	  <EmbeddedResource Include="Resources\EmbeddedImages\OpenGlyph.png" />
+	  <EmbeddedResource Include="Resources\EmbeddedImages\Blank.png" />
+	  <EmbeddedResource Include="Resources\EmbeddedImages\CollpsedGlyph.png" />
+	  <EmbeddedResource Include="Resources\EmbeddedImages\FolderClosed.png" />
+	  <EmbeddedResource Include="Resources\EmbeddedImages\FolderOpen.png" />
+	  <EmbeddedResource Include="Resources\EmbeddedImages\Item.png" />
+	</ItemGroup>
+	
+  <ItemGroup>
+    <None Remove="Interfaces\" />
+    <None Remove="Models\" />
+    <None Remove="Messages\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+    <Folder Include="Models\" />
+    <Folder Include="Messages\" />
+  </ItemGroup>
 </Project>

@@ -6,6 +6,7 @@ public partial class MainPage : BaseContentPage
 	{
 		InitializeComponent();
         BindingContext = vm;
+        ((MainViewModel)this.BindingContext).LogText = this.LogText;
     }
 
     void OnWebViewGoToRepoClicked(System.Object sender, System.EventArgs e)

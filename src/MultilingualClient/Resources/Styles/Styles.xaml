@@ -21,7 +21,7 @@
     </Style>
 
     <Style TargetType="BoxView">
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={x:Static theming:AppColors.Gray200Color}}" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={x:Static theming:AppColors.TransparentColor}, Dark={x:Static theming:AppColors.TransparentColor}}" />
     </Style>
 
     <Style TargetType="Button">

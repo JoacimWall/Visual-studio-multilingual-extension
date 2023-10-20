@@ -1,10 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Text.Json;
-using MultilingualExtension.Shared.Helpers;
-using MultilingualExtension.Shared.Interfaces;
-using EnvDTE80;
-using Microsoft.VisualStudio.Shell;
+﻿using System.Text.Json;
 
 namespace MultilingualExtension.Services
 {
@@ -22,11 +16,19 @@ namespace MultilingualExtension.Services
     public  class SettingsService : ISettingsService
     {
         private string filename = "MultiLingualExtensionSettings.json";
-        public ExtensionSettings ExtensionSettings { get; set; } 
-
+        public ExtensionSettings ExtensionSettings { get; set; }
+        public SettingsService()
+        {
+        }
         public SettingsService(string pathProj)
         {
-            
+
+            ReInit(pathProj);
+
+        }
+        public bool ReInit(string pathProj)
+        {
+
             //var path = IdeApp.Workspace.CurrentSelectedProject.BaseDirectory.FullPath;
             if (File.Exists(Path.Combine(pathProj, filename)))
             {
@@ -39,14 +41,13 @@ namespace MultilingualExtension.Services
                 string jsonString = JsonSerializer.Serialize(this.ExtensionSettings);
                 File.WriteAllText(Path.Combine(pathProj, filename), jsonString);
             }
-
+            return true;
         }
-
         //public  bool AddCommentNodeMasterResx
         //{
         //    get
         //    {
-                
+
         //        var addCommenttoMaster = MonoDevelop.Core.PropertyService.Get<string>(Globals.PROP_ADDCOMMENTNODEMASTERRESX);
         //        if (String.IsNullOrEmpty(addCommenttoMaster) || addCommenttoMaster == "1")
         //            return true;

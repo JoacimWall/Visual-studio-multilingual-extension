@@ -9,7 +9,10 @@ global using System.Collections.Specialized;
 global using CommunityToolkit.Mvvm.ComponentModel;
 global using CommunityToolkit.Mvvm.Messaging;
 global using CommunityToolkit.Mvvm.Messaging.Messages;
-
+//Shared
+global using MultilingualExtension.Services;
+global using MultilingualExtension.Shared.Interfaces;
+//Local
 global using MultilingualClient.Resources.Styles;
 global using MultilingualClient.Views;
 global using MultilingualClient.ViewModels;

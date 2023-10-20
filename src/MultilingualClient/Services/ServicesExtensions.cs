@@ -1,4 +1,6 @@
-﻿namespace MultilingualClient.Services;
+﻿
+
+namespace MultilingualClient.Services;
 
 public static class ServicesExtensions
 {
@@ -8,8 +10,10 @@ public static class ServicesExtensions
         builder.Services.AddSingleton<IDialogService, DialogService>();
         
         builder.Services.AddSingleton<IFileService, FileService>();
+        builder.Services.AddSingleton<ISettingsService, SettingsService>();
+        builder.Services.AddSingleton<IStatusPadLoger, StatusPadLoger>();
         //Transient
-       // builder.Services.AddTransient<IRestClient, RestClient>();
+        // builder.Services.AddTransient<IRestClient, RestClient>();
 
         return builder;
     }

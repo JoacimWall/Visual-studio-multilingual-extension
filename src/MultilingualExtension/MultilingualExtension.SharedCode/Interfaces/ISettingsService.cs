@@ -1,13 +1,10 @@
-﻿using System;
-using MultilingualExtension.Services;
-using MultilingualExtension.Shared.Services;
-
-namespace MultilingualExtension.Shared.Interfaces
+﻿namespace MultilingualExtension.Shared.Interfaces
 {
     public interface ISettingsService
     {
 
         ExtensionSettings ExtensionSettings { get; set; }
+        bool ReInit(string pathProj);
        //int TranslationService { get; set; }
        //string MasterLanguageCode { get; set; }
        //string MsoftEndpoint { get; set; }

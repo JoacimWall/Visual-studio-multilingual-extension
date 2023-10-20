@@ -8,11 +8,23 @@
              x:Class="MultilingualClient.Views.MainPage"
              x:DataType="vm:MainViewModel">
 
-   <Grid ColumnDefinitions="1*,3*" >
-        <controls:TreeView BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={x:Static theming:AppColors.Gray200Color}}" 
+   <Grid ColumnDefinitions="1*,3*" RowDefinitions="Auto,3*,Auto,Auto,1*" >
+        <controls:TreeView Grid.Row="1" Grid.RowSpan="4" BackgroundColor="{AppThemeBinding Light={x:Static  theming:AppColors.WhiteColor}, Dark={x:Static theming:AppColors.Gray700Color}}" 
                        x:Name="TheTreeView" RootNodes="{Binding Nodes}"
                        Margin="4"/>
-        
-   </Grid>
+       
+       <Label  Grid.Row="0" Grid.Column="1" Text="File Editor" FontSize="21" VerticalTextAlignment="End" />
+       <Button Grid.Row="0" Grid.Column="1" Text="Save" FontSize="21" HorizontalOptions="End" Command="{Binding SaveCommnd}"/>
+       <Editor Grid.Row="1" Grid.Column="2"  VerticalOptions="Fill" Text="{Binding EditFileText}" FontSize="20" 
+               BackgroundColor="{AppThemeBinding Light={x:Static  theming:AppColors.Gray900Color}, Dark={x:Static theming:AppColors.Gray900Color}}">
+
+
+       </Editor >
+       <BoxView BackgroundColor="{AppThemeBinding Light={x:Static theming:AppColors.Gray900Color}, Dark={x:Static theming:AppColors.BlackColor}}"/>
+        <Label  Grid.Row="3" Grid.Column="2" Text="Log" FontSize="21" />
+       <Label x:Name="LogText" Grid.Row="4" Grid.Column="2" LineBreakMode="WordWrap" VerticalTextAlignment="End"
+              BackgroundColor="{AppThemeBinding Light={x:Static theming:AppColors.Gray900Color}, Dark={x:Static theming:AppColors.Gray900Color}}"/>
+
+    </Grid>
     
 </views:BaseContentPage>

@@ -3,7 +3,7 @@
 public class TreeView : ScrollView
 {
     #region Fields
-    private readonly StackLayout _StackLayout = new StackLayout { Orientation = StackOrientation.Vertical };
+    private readonly StackLayout _StackLayout = new StackLayout { Orientation = StackOrientation.Vertical,BackgroundColor = MultilingualClientGlobals.App.PlatformAppTheme == AppTheme.Light ? Colors.White : AppColors.Gray900Color };
 
     //TODO: This initialises the list, but there is nothing listening to INotifyCollectionChanged so no nodes will get rendered
     private ObservableCollection<TreeViewNode> _itemSource = new ObservableCollection<TreeViewNode>();

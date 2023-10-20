@@ -1,12 +1,15 @@
 ﻿
 
+using MultilingualClient.Controls.TreeView.Model;
+using MultilingualClient.Messages;
+
 namespace MultilingualClient.Controls.TreeView;
 
 public class TreeViewNode : StackLayout
 {
     #region Image source for icons
-    private DataTemplate _ExpandButtonTemplate=null;
-   
+    private DataTemplate _ExpandButtonTemplate = null;
+
     #endregion
 
     #region Fields
@@ -15,13 +18,13 @@ public class TreeViewNode : StackLayout
     private DateTime _ExpandButtonClickedTime;
 
     private readonly BoxView _SpacerBoxView = new BoxView();
-    private readonly BoxView _EmptyBox = new BoxView { BackgroundColor=Colors.Blue, Opacity = .5 };
+    private readonly BoxView _EmptyBox = new BoxView { BackgroundColor = Colors.Blue, Opacity = .5 };
 
 
-private const int ExpandButtonWidth = 32;
-    private  ContentView _ExpandButtonContent = new ContentView();
+    private const int ExpandButtonWidth = 32;
+    private ContentView _ExpandButtonContent = new ContentView();
 
-   private readonly Grid _MainGrid = new Grid
+    private readonly Grid _MainGrid = new Grid
     {
         VerticalOptions = LayoutOptions.StartAndExpand,
         HorizontalOptions = LayoutOptions.FillAndExpand,
@@ -60,8 +63,8 @@ private const int ExpandButtonWidth = 32;
     private int Depth => ParentTreeViewItem?.Depth + 1 ?? 0;
 
     private bool _ShowExpandButtonIfEmpty = false;
-    private Color _SelectedBackgroundColor= Colors.Blue;
-    private double _SelectedBackgroundOpacity= .3;
+    private Color _SelectedBackgroundColor = Colors.Blue;
+    private double _SelectedBackgroundOpacity = .3;
     #endregion
 
     #region Events
@@ -111,7 +114,7 @@ private const int ExpandButtonWidth = 32;
         get { return _ShowExpandButtonIfEmpty; }
         set { _ShowExpandButtonIfEmpty = value; }
     }
-  
+
     /// <summary>
     /// set BackgroundColor when node is tapped/selected
     /// </summary>
@@ -138,7 +141,12 @@ private const int ExpandButtonWidth = 32;
         get { return _ExpandButtonTemplate; }
         set { _ExpandButtonTemplate = value; }
     }
-
+    //private string fullPath;
+    //public string FullPath
+    //{
+    //    get { return fullPath; }
+    //    set { fullPath = value; }
+    //}
     public View Content
     {
         get => _ContentView.Content;
@@ -204,7 +212,7 @@ private const int ExpandButtonWidth = 32;
         _ContentStackLayout.Children.Add(_SpacerBoxView);
         _ContentStackLayout.Children.Add(_ExpandButtonContent);
         _ContentStackLayout.Children.Add(_ContentView);
-      
+
         SetExpandButtonContent(_ExpandButtonTemplate);
 
         _ExpandButtonGestureRecognizer.Tapped += ExpandButton_Tapped;
@@ -219,7 +227,7 @@ private const int ExpandButtonWidth = 32;
         _MainGrid.SetRow(_ChildrenStackLayout, 1);
         //_MainGrid.SetColumn(_ChildrenStackLayout, 0);
         _MainGrid.Add(_ChildrenStackLayout);//, 0, 1);
-        
+
         base.Children.Add(_MainGrid);
 
         HorizontalOptions = LayoutOptions.FillAndExpand;
@@ -278,10 +286,10 @@ private const int ExpandButtonWidth = 32;
             _ExpandButtonContent.Content = (View)new ContentView { Content = _EmptyBox };
         }
     }
-        #endregion
+    #endregion
 
-        #region Event Handlers
-        private void ExpandButton_Tapped(object sender, EventArgs e)
+    #region Event Handlers
+    private void ExpandButton_Tapped(object sender, EventArgs e)
     {
         _ExpandButtonClickedTime = DateTime.Now;
         IsExpanded = !IsExpanded;
@@ -300,6 +308,9 @@ private const int ExpandButtonWidth = 32;
     private void DoubleClick(object sender, EventArgs e)
     {
         DoubleClicked?.Invoke(this, new EventArgs());
+        XamlItem selectedItem = (XamlItem)this.BindingContext;
+        if (selectedItem != null)
+            WeakReferenceMessenger.Default.Send(new StartEditMessage(selectedItem.FullPath));
     }
 
     private void ItemsSource_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
