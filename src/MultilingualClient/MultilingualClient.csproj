@@ -30,12 +30,9 @@
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
 		<ApplicationVersion>1</ApplicationVersion>
 
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">13.1</SupportedOSPlatformVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -61,6 +58,7 @@
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0-rc.2.23479.6" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="6.0.0" />
 		<PackageReference Include="Acr.UserDialogs" Version="8.0.1" />
 		<PackageReference Include="ICG.NetCore.Utilities.Spreadsheet" Version="7.2.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
@@ -151,15 +149,10 @@
 	  <EmbeddedResource Include="Resources\EmbeddedImages\FolderOpen.png" />
 	  <EmbeddedResource Include="Resources\EmbeddedImages\Item.png" />
 	</ItemGroup>
-	
   <ItemGroup>
-    <None Remove="Interfaces\" />
-    <None Remove="Models\" />
-    <None Remove="Messages\" />
+    <None Remove="Services\FileConverters\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Interfaces\" />
-    <Folder Include="Models\" />
-    <Folder Include="Messages\" />
+    <Folder Include="Services\FileConverters\" />
   </ItemGroup>
 </Project>

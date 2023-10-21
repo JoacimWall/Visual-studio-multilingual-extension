@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using CommunityToolkit.Maui;
+using Microsoft.Extensions.Logging;
 
 namespace MultilingualClient;
 
@@ -9,7 +10,7 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
-			
+            .UseMauiCommunityToolkit()
             .ConfigureServices()
             .ConfigureViewModels()
             .ConfigureViews()
@@ -17,6 +18,8 @@ public static class MauiProgram
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                fonts.AddFont("CascadiaCode.ttf", "CascadiaCode");
+                
                 fonts.AddFont("appicons.ttf", "AppIconFont");
             });
 

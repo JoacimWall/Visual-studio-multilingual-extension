@@ -28,9 +28,9 @@ public partial class App : Application
         await initApp(false);
         // Get information about the source directory
        
-        this.settingsService = ServiceHelper.GetService<ISettingsService>();
-        MultilingualClientGlobals.CurrentRootPath = "/Users/joacimwall/GitRepos/NbcMaui/LiberoClub/";
-        this.settingsService.ReInit(MultilingualClientGlobals.CurrentRootPath);
+        //this.settingsService = ServiceHelper.GetService<ISettingsService>();
+        //MultilingualClientGlobals.CurrentRootPath = "/Users/joacimwall/GitRepos/NbcMaui/LiberoClub/";
+        //this.settingsService.ReInit(MultilingualClientGlobals.CurrentRootPath);
         MultilingualClientGlobals.ApplicationState = ApplicationState.Active;
     }
     protected override async void OnResume()

@@ -11,9 +11,10 @@ namespace MultilingualExtension.Services
         public string TranslationServiceMsoftEndpoint { get; set; } = "";
         public string TranslationServiceMsoftLocation { get; set; } = "";
         public string TranslationServiceMsoftKey { get; set; } = "";
-
+        public string AndroidResourcesOutPutFolder { get; set; } = "Android";
+        public string IosResourcesOutPutFolder { get; set; } = "Ios";
     }
-    public  class SettingsService : ISettingsService
+    public class SettingsService : ISettingsService
     {
         private string filename = "MultiLingualExtensionSettings.json";
         public ExtensionSettings ExtensionSettings { get; set; }
@@ -28,18 +29,29 @@ namespace MultilingualExtension.Services
         }
         public bool ReInit(string pathProj)
         {
-
-            //var path = IdeApp.Workspace.CurrentSelectedProject.BaseDirectory.FullPath;
-            if (File.Exists(Path.Combine(pathProj, filename)))
+            try
             {
 
-                this.ExtensionSettings = JsonSerializer.Deserialize<ExtensionSettings>(File.ReadAllText(Path.Combine(pathProj, filename)));
+              
+                //var path = IdeApp.Workspace.CurrentSelectedProject.BaseDirectory.FullPath;
+                if (File.Exists(Path.Combine(pathProj, filename)))
+                {
+                    ExtensionSettings defaultsettings = new ExtensionSettings();
+                    this.ExtensionSettings = JsonSerializer.Deserialize<ExtensionSettings>(File.ReadAllText(Path.Combine(pathProj, filename)));
+                    
+                }
+                else
+                {
+                    this.ExtensionSettings = new ExtensionSettings();
+                    string jsonString = JsonSerializer.Serialize(this.ExtensionSettings);
+                    File.WriteAllText(Path.Combine(pathProj, filename), jsonString);
+
+                }
+               
             }
-            else
+            catch (Exception ex)
             {
-                this.ExtensionSettings = new ExtensionSettings();
-                string jsonString = JsonSerializer.Serialize(this.ExtensionSettings);
-                File.WriteAllText(Path.Combine(pathProj, filename), jsonString);
+
             }
             return true;
         }

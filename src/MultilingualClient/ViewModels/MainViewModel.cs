@@ -1,15 +1,8 @@
-﻿using System;
-using DocumentFormat.OpenXml.EMMA;
-using DocumentFormat.OpenXml.Office2010.CustomUI;
-using Microsoft.Maui;
-using Microsoft.Maui.Graphics.Text;
-using MultilingualClient.Controls.TreeView;
-using MultilingualClient.Controls.TreeView.Model;
-using MultilingualClient.Messages;
-using MultilingualExtension.Shared.Helpers;
-using MultilingualExtension.Shared.Interfaces;
-using MultilingualExtension.Shared.Models;
-using MultilingualExtension.Shared.Services;
+﻿
+
+using System;
+using MultilingualClient.Services;
+using ResxConverter.Mobile;
 
 namespace MultilingualClient.ViewModels;
 
@@ -20,7 +13,7 @@ public class MainViewModel : BaseViewModel
     IStatusPadLoger statusPadLoger;
     public Label LogText;
     private string currentOpenFilePath = "";
-    private string text;
+
     public MainViewModel(IFileService fileService, ISettingsService settingsService)
     {
         this.fileService = fileService;
@@ -31,11 +24,9 @@ public class MainViewModel : BaseViewModel
             {
                 currentOpenFilePath = m.Value;
                 using Stream fileStream = System.IO.File.OpenRead(m.Value);
-                using StreamReader reader = new StreamReader(fileStream,System.Text.Encoding.Default);
-               
-                var c = await reader.ReadToEndAsync();
-              
-               EditFileText = c;
+                using StreamReader reader = new StreamReader(fileStream, System.Text.Encoding.UTF8);
+
+                EditFileText = await reader.ReadToEndAsync();
                 //text = c;
             }
             catch (Exception ex)
@@ -46,31 +37,21 @@ public class MainViewModel : BaseViewModel
         });
 
     }
+    public ICommand OpenCommand => new Command(async () => await OpenFolder());
+    public ICommand SaveCommand => new Command(async () => await Save());
 
-    public ICommand UpdateFilesCommand => new Microsoft.Maui.Controls.Command(async (e) => await UpdateFiles(e));
-    public ICommand TranslateFilesCommand => new Microsoft.Maui.Controls.Command(async (e) => await TranslateFiles(e));
-    public ICommand ImportFileCommand => new Microsoft.Maui.Controls.Command(async (e) => await ImportFile(e));
-    public ICommand SaveCommnd => new Microsoft.Maui.Controls.Command(async () => await Save());
+    public ICommand UpdateFilesCommand => new Command(async (e) => await UpdateFiles(e));
+    public ICommand TranslateFilesCommand => new Command(async (e) => await TranslateFiles(e));
+    public ICommand ImportFileCommand => new Command(async (e) => await ImportFile(e));
 
-    private async Task Save()
-    {
-        using var dlg = DialogService.GetProgress("");
-        using FileStream outputStream = System.IO.File.OpenWrite(currentOpenFilePath);
-        using StreamWriter streamWriter = new StreamWriter(outputStream,System.Text.Encoding.Default);
-        await streamWriter.WriteAsync(editFileText);
-       // await streamWriter.WriteAsync(text);
-    }
+    public ICommand GenerateAndroidFilesCommand => new Command(async (e) => await GenerateAndroidFiles(e));
+    public ICommand GenerateIosFilesCommand => new Command(async (e) => await GenerateIosFiles(e));
 
-    //commandSet.CommandInfos.Add(new CommandInfo(Globals.STATUS_COMMENT_NEW_OR_NEED_REVIEW), Globals.STATUS_COMMENT_NEW_OR_NEED_REVIEW);
-    //commandSet.CommandInfos.Add(new CommandInfo(Globals.STATUS_COMMENT_NEW), Globals.STATUS_COMMENT_NEW);
-    //commandSet.CommandInfos.Add(new CommandInfo(Globals.STATUS_COMMENT_NEED_REVIEW), Globals.STATUS_COMMENT_NEED_REVIEW);
-    //commandSet.CommandInfos.Add(new CommandInfo(Globals.STATUS_COMMENT_FINAL), Globals.STATUS_COMMENT_FINAL);
-    //commandSet.CommandInfos.Add(new CommandInfo(Globals.STATUS_COMMENT_ALL_ROWS), Globals.STATUS_COMMENT_ALL_ROWS);
-    public ICommand ExportFileNewOrNeeReviewCommand => new Microsoft.Maui.Controls.Command(async (e) => await ExportFile(e, Globals.STATUS_COMMENT_NEW_OR_NEED_REVIEW));
-    public ICommand ExportFileNewCommand => new Microsoft.Maui.Controls.Command(async (e) => await ExportFile(e, Globals.STATUS_COMMENT_NEW));
-    public ICommand ExportFileNeedReviewCommand => new Microsoft.Maui.Controls.Command(async (e) => await ExportFile(e, Globals.STATUS_COMMENT_NEED_REVIEW));
-    public ICommand ExportFileFinalCommand => new Microsoft.Maui.Controls.Command(async (e) => await ExportFile(e, Globals.STATUS_COMMENT_FINAL));
-    public ICommand ExportFileAllCommand => new Microsoft.Maui.Controls.Command(async (e) => await ExportFile(e, Globals.STATUS_COMMENT_ALL_ROWS));
+    public ICommand ExportFileNewOrNeeReviewCommand => new Command(async (e) => await ExportFile(e, Globals.STATUS_COMMENT_NEW_OR_NEED_REVIEW));
+    public ICommand ExportFileNewCommand => new Command(async (e) => await ExportFile(e, Globals.STATUS_COMMENT_NEW));
+    public ICommand ExportFileNeedReviewCommand => new Command(async (e) => await ExportFile(e, Globals.STATUS_COMMENT_NEED_REVIEW));
+    public ICommand ExportFileFinalCommand => new Command(async (e) => await ExportFile(e, Globals.STATUS_COMMENT_FINAL));
+    public ICommand ExportFileAllCommand => new Command(async (e) => await ExportFile(e, Globals.STATUS_COMMENT_ALL_ROWS));
 
 
     private ObservableCollection<TreeViewNode> nodes;
@@ -91,17 +72,7 @@ public class MainViewModel : BaseViewModel
         try
         {
             XamlItem selectedItem = (XamlItem)e;
-            //MultilingualExtension.StatusPad.Instance.FocusPad();
             SyncFileService syncFileService = new SyncFileService();
-            //var dte = ServiceProvider.GetService(typeof(DTE)) as DTE2;
-            //var path = IdeApp.Workspace.CurrentSelectedSolution.FileName;
-            //var projPath = System.IO.Path.GetDirectoryName(path);
-            //ISettingsService settingsService = new Services.SettingsService(projPath);
-            //await IdeApp.Workbench.SaveAllAsync();
-
-            //ProjectFile selectedItem = (ProjectFile)IdeApp.Workspace.CurrentSelectedItem;
-            //Dummy for mac 
-
             var result = await syncFileService.SyncFile(selectedItem.FullPath, statusPadLoger, settingsService);
 
             if (!result.WasSuccessful)
@@ -204,13 +175,121 @@ public class MainViewModel : BaseViewModel
             Console.WriteLine("Sync file completed");
         }
     }
+    private static readonly Dictionary<string, ResxConverter.Core.ResxConverter> Converters = new Dictionary<string, ResxConverter.Core.ResxConverter>(StringComparer.OrdinalIgnoreCase)
+    {
+        { "android", ResxConverters.Android },
+        { "ios", ResxConverters.iOS },
+    };
+
+    private async Task GenerateAndroidFiles(object e)
+    {
+
+        try
+        {
+            XamlItem selectedItem = (XamlItem)e;
+
+            string inputFolder = selectedItem.FullPath.Substring(0, selectedItem.FullPath.Count() - selectedItem.Name.Count());
+            string outFolder;
+            if (Directory.Exists(settingsService.ExtensionSettings.AndroidResourcesOutPutFolder))
+                outFolder = settingsService.ExtensionSettings.AndroidResourcesOutPutFolder;
+            else
+            {
+                statusPadLoger.WriteText(string.Format("Output folder {0} does not exist use standard", settingsService.ExtensionSettings.AndroidResourcesOutPutFolder));
+                outFolder = Path.Combine(inputFolder, "Android");
+            }
+            ResxConverter.Core.ResxConverter converter;
+            if (Converters.TryGetValue("android", out converter))
+            {
+                statusPadLoger.WriteText(string.Format("Start export all Android transaltions to the folder {0}", outFolder));
+                converter.Convert(inputFolder, outFolder, statusPadLoger);
+                return;
+            }
+           
+
+        }
+        catch (Exception ex)
+        {
+
+            await DialogService.ShowAlertAsync(ex.Message, "", "Ok");
+        }
+        finally
+        {
+
+            Console.WriteLine("Sync file completed");
+        }
+    }
+    private async Task GenerateIosFiles(object e)
+    {
+
+        try
+        {
+            XamlItem selectedItem = (XamlItem)e;
+
+            string inputFolder = selectedItem.FullPath.Substring(0, selectedItem.FullPath.Count() - selectedItem.Name.Count());
+            string outFolder;
+            if (Directory.Exists(settingsService.ExtensionSettings.IosResourcesOutPutFolder))
+                outFolder = settingsService.ExtensionSettings.IosResourcesOutPutFolder;
+            else
+            {
+                statusPadLoger.WriteText(string.Format("Output folder {0} does not exist use standard", settingsService.ExtensionSettings.AndroidResourcesOutPutFolder));
+                outFolder = Path.Combine(inputFolder, "Ios");
+            }
+            ResxConverter.Core.ResxConverter converter;
+            if (Converters.TryGetValue("ios", out converter))
+            {
+                statusPadLoger.WriteText(string.Format("Start export all Ios transaltions to the folder {0}", outFolder));
+                converter.Convert(inputFolder, outFolder, statusPadLoger);
+                return;
+            }
+            
+
+        }
+        catch (Exception ex)
+        {
+
+            await DialogService.ShowAlertAsync(ex.Message, "", "Ok");
+        }
+        finally
+        {
+
+            Console.WriteLine("Sync file completed");
+        }
+    }
+    
+
     public override async Task OnAppearingAsync()
     {
-        using var dlg = DialogService.GetProgress("");
-        await Task.Delay(300);
-        await SetNodes();
+
         statusPadLoger = new StatusPadLoger(LogText);
         await base.OnAppearingAsync();
+    }
+
+
+    private async Task Save()
+    {
+        using var dlg = DialogService.GetProgress("");
+        using FileStream outputStream = File.OpenWrite(currentOpenFilePath);
+        using StreamWriter streamWriter = new StreamWriter(outputStream, System.Text.Encoding.UTF8);
+        string output = editFileText.Replace("“", "\"").Replace("”", "\"");
+        await streamWriter.WriteAsync(output);
+        // await streamWriter.WriteAsync(text);
+    }
+    async Task OpenFolder()
+    {
+        var result = await FolderPicker.Default.PickAsync(MultilingualClientGlobals.CurrentRootPath, default);
+        if (result.IsSuccessful)
+        {
+            await Toast.Make($"The folder was picked: Name - {result.Folder.Name}, Path - {result.Folder.Path}", ToastDuration.Long).Show(default);
+            using var dlg = DialogService.GetProgress("");
+            await Task.Delay(300);
+            MultilingualClientGlobals.CurrentRootPath = result.Folder.Path;
+            this.settingsService.ReInit(MultilingualClientGlobals.CurrentRootPath);
+            await SetNodes();
+        }
+        else
+        {
+            await Toast.Make($"The folder was not picked with error: {result.Exception.Message}").Show(default);
+        }
     }
     private async Task<bool> SetNodes()
     {
@@ -228,7 +307,7 @@ public class MainViewModel : BaseViewModel
         var groupTreeViewNode = CreateTreeViewNode(xamlItemGroups, label, false);
 
         rootNodes.Add(groupTreeViewNode);
-        
+
         groupTreeViewNode.Children = ProcessXamlItemGroups(xamlItemGroups);
 
         foreach (var xamlItem in xamlItemGroups.XamlItems)
@@ -266,7 +345,7 @@ public class MainViewModel : BaseViewModel
             var groupTreeViewNode = CreateTreeViewNode(xamlItemGroup, label, false);
 
             rootNodes.Add(groupTreeViewNode);
-           
+
             groupTreeViewNode.Children = ProcessXamlItemGroups(xamlItemGroup);
 
             foreach (var xamlItem in xamlItemGroup.XamlItems)
@@ -298,7 +377,11 @@ public class MainViewModel : BaseViewModel
 
             menuElements.Add(new MenuFlyoutItem() { Text = res_Info.Model.IsMasterFile ? Globals.Synchronize_All_Files_Title : Globals.Synchronize_Seleted_File_Title, Command = UpdateFilesCommand, CommandParameter = xamlItem });
             menuElements.Add(new MenuFlyoutItem() { Text = res_Info.Model.IsMasterFile ? Globals.Translate_All_Files_Title : Globals.Translate_Seleted_File_Title, Command = UpdateFilesCommand, CommandParameter = xamlItem });
-
+            if (res_Info.Model.IsMasterFile)
+            {
+                menuElements.Add(new MenuFlyoutItem() { Text = Globals.Generate_Android_Files_Title, Command = GenerateAndroidFilesCommand, CommandParameter = xamlItem });
+                menuElements.Add(new MenuFlyoutItem() { Text = Globals.Generate_Ios_Files_Title, Command = GenerateIosFilesCommand, CommandParameter = xamlItem });
+            }
             var flyoutSubItem = new MenuFlyoutSubItem() { Text = res_Info.Model.IsMasterFile ? Globals.Export_All_Files_Title : Globals.Export_Seleted_File_Title };
             flyoutSubItem.Add(new MenuFlyoutItem() { Text = Globals.STATUS_COMMENT_NEW_OR_NEED_REVIEW, Command = ExportFileNewOrNeeReviewCommand, CommandParameter = xamlItem });
             flyoutSubItem.Add(new MenuFlyoutItem() { Text = Globals.STATUS_COMMENT_NEW, Command = ExportFileNewCommand, CommandParameter = xamlItem });
@@ -343,12 +426,6 @@ public class MainViewModel : BaseViewModel
             {
                 Children =
                     {
-                        //new ResourceImage
-                        //{
-                        //    Resource = isItem? "MultilingualClient.Resources.EmbeddedImages.Item.png" :"MultilingualClient.Resources.EmbeddedImages.FolderOpen.png" ,
-                        //    HeightRequest= 20,
-                        //    WidthRequest = 20
-                        //},
                          new Label { FontFamily = "AppIconFont", FontSize = isItem ? 0 : 20,
                                     Text = isItem ? AppIconFont.Empty_plate : AppIconFont.Folder_open,
                                     TextColor = isItem ? AppColors.TransparentColor : AppColors.WhiteColor},
@@ -386,22 +463,12 @@ public class ExpandButtonContent : ContentView
                 TextColor = isLeafNode ? AppColors.TransparentColor : AppColors.WhiteColor
             };
 
-            //Content = new ResourceImage
-            //{
-            //    Resource = isLeafNode ? "MultilingualClient.Resources.EmbeddedImages.Blank.png" : "MultilingualClient.Resources.EmbeddedImages.FolderOpen.png",
-            //    HeightRequest = 20,
-            //    WidthRequest = 20
-            //};
+
         }
         else
         {
             Content = new Label { FontFamily = "AppIconFont", FontSize = 20, Text = node.IsExpanded ? AppIconFont.Angle_down : AppIconFont.Angle_right };
-            //Content = new ResourceImage
-            //{
-            //    Resource = node.IsExpanded ? "MultilingualClient.Resources.EmbeddedImages.OpenGlyph.png" : "MultilingualClient.Resources.EmbeddedImages.CollpsedGlyph.png",
-            //    HeightRequest = 20,
-            //    WidthRequest = 20
-            //};
+
         }
     }
 

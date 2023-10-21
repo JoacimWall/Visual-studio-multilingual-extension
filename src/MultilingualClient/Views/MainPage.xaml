@@ -7,24 +7,63 @@
              xmlns:theming="clr-namespace:MultilingualClient.Resources.Styles"
              x:Class="MultilingualClient.Views.MainPage"
              x:DataType="vm:MainViewModel">
+    <ContentPage.MenuBarItems>
+        <MenuBarItem Text="File">
+            <MenuFlyoutItem Text="Open Folder" 
+                            Command="{Binding OpenCommand}" >
+                <MenuFlyoutItem.KeyboardAccelerators>
+                    <KeyboardAccelerator  Key="O" Modifiers="Cmd"/>
+                </MenuFlyoutItem.KeyboardAccelerators>
 
-   <Grid ColumnDefinitions="1*,3*" RowDefinitions="Auto,3*,Auto,Auto,1*" >
+            </MenuFlyoutItem>
+
+        </MenuBarItem>
+        <MenuBarItem Text="Edit File">
+            <MenuFlyoutItem Text="Save"
+                            Command="{Binding SaveCommand}" >
+                <MenuFlyoutItem.KeyboardAccelerators>
+                    <KeyboardAccelerator  Key="S" Modifiers="Cmd"/>
+                </MenuFlyoutItem.KeyboardAccelerators>
+
+            </MenuFlyoutItem>
+        </MenuBarItem>
+
+    </ContentPage.MenuBarItems>
+    <Grid ColumnDefinitions="1*,3*" RowDefinitions="40,3*,Auto,Auto,1*" >
+        <Label  Margin="8,0,0,0" Text="Solution" FontSize="21" VerticalTextAlignment="End" />
+        <Label  Margin="8,0,16,0" Text="{x:Static theming:AppIconFont.Folder_open}" FontFamily="AppIconFont" FontSize="30" VerticalTextAlignment="End" HorizontalTextAlignment="End" >
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding OpenCommand}"/>
+            </Label.GestureRecognizers>
+
+        </Label>
         <controls:TreeView Grid.Row="1" Grid.RowSpan="4" BackgroundColor="{AppThemeBinding Light={x:Static  theming:AppColors.WhiteColor}, Dark={x:Static theming:AppColors.Gray700Color}}" 
                        x:Name="TheTreeView" RootNodes="{Binding Nodes}"
                        Margin="4"/>
-       
-       <Label  Grid.Row="0" Grid.Column="1" Text="File Editor" FontSize="21" VerticalTextAlignment="End" />
-       <Button Grid.Row="0" Grid.Column="1" Text="Save" FontSize="21" HorizontalOptions="End" Command="{Binding SaveCommnd}"/>
-       <Editor Grid.Row="1" Grid.Column="2"  VerticalOptions="Fill" Text="{Binding EditFileText}" FontSize="20" 
+        <!--Toolbar-->
+        <HorizontalStackLayout Padding="2" Grid.Row="0" Grid.Column="1" Spacing="8" >
+            <Label  Margin="4,0,16,0" Text="File Editor" FontSize="21" VerticalTextAlignment="End" />
+            <Label  Margin="8,0,0,0" Text="{x:Static theming:AppIconFont.Save}" FontFamily="AppIconFont" FontSize="30" VerticalTextAlignment="End" >
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding SaveCommand}"/>
+            </Label.GestureRecognizers>
+
+        </Label>
+            <!--<Button Margin="4" Text="Open Folder" FontSize="21"   Command="{Binding OpenCommnd}"/>
+            <Button Margin="4"  Text="Save" FontSize="21"  Command="{Binding SaveCommnd}"/>-->
+
+
+        </HorizontalStackLayout>
+
+        <Editor Grid.Row="1" Grid.Column="2"  VerticalOptions="Fill" Text="{Binding EditFileText}" FontSize="20" FontFamily="CascadiaCode"
                BackgroundColor="{AppThemeBinding Light={x:Static  theming:AppColors.Gray900Color}, Dark={x:Static theming:AppColors.Gray900Color}}">
 
 
-       </Editor >
-       <BoxView BackgroundColor="{AppThemeBinding Light={x:Static theming:AppColors.Gray900Color}, Dark={x:Static theming:AppColors.BlackColor}}"/>
-        <Label  Grid.Row="3" Grid.Column="2" Text="Log" FontSize="21" />
-       <Label x:Name="LogText" Grid.Row="4" Grid.Column="2" LineBreakMode="WordWrap" VerticalTextAlignment="End"
+        </Editor >
+        <Label Margin="4,8,4,4" Grid.Row="3" Grid.Column="2" Text="Log" FontSize="21" />
+        <Label x:Name="LogText" Grid.Row="4" Grid.Column="2" LineBreakMode="WordWrap" VerticalTextAlignment="End"
               BackgroundColor="{AppThemeBinding Light={x:Static theming:AppColors.Gray900Color}, Dark={x:Static theming:AppColors.Gray900Color}}"/>
 
     </Grid>
-    
+
 </views:BaseContentPage>

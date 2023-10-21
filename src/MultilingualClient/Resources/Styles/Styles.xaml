@@ -26,13 +26,13 @@
 
     <Style TargetType="Button">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Primary}}" />
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={x:Static theming:AppColors.Gray700Color}}" />
         <Setter Property="FontFamily" Value="OpenSansRegular"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="BorderWidth" Value="0"/>
         <Setter Property="CornerRadius" Value="8"/>
-        <Setter Property="Padding" Value="14,10"/>
-        <Setter Property="MinimumHeightRequest" Value="44"/>
+        <Setter Property="Padding" Value="8,4"/>
+        <Setter Property="MinimumHeightRequest" Value="30"/>
         <Setter Property="MinimumWidthRequest" Value="44"/>
         <Setter Property="VisualStateManager.VisualStateGroups">
             <VisualStateGroupList>

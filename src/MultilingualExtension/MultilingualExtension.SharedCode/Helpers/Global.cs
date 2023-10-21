@@ -42,9 +42,10 @@ namespace MultilingualExtension.Shared.Helpers
         public const string Close = "Close";
 
         public const string Export_Rows_Info = "Export rows where comment is 'New' or 'Need review'";
-        public const string Export_All_Files_Title = "Export all rows with status";
-        public const string Export_Seleted_File_Title = "Export rows with status";
-
+        public const string Export_All_Files_Title = "Excel export all lang's rows with status";
+        public const string Export_Seleted_File_Title = "Excel export selected lang rows with status";
+        public const string Generate_Android_Files_Title = "Generate Android files";
+        public const string Generate_Ios_Files_Title = "Generate iOS files";
         public const string Import_Rows_Info = "Import rows where comment is 'Final'";
         public const string Import_Translation_Title = "Import translations";
 
