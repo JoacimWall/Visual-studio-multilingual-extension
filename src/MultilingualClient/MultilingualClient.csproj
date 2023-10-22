@@ -124,6 +124,36 @@
 	  <Compile Include="..\MultilingualExtension\MultilingualExtension.Mac\Services\ExportService.cs">
 	    <Link>Services\ExportService.cs</Link>
 	  </Compile>
+	  <Compile Include="..\MultilingualExtension\MultilingualExtension.SharedCode\Services\FileConverters\AndroidResxConverterOutput.cs">
+	    <Link>Services\FileConverters\AndroidResxConverterOutput.cs</Link>
+	  </Compile>
+	  <Compile Include="..\MultilingualExtension\MultilingualExtension.SharedCode\Services\FileConverters\ResxConverters.cs">
+	    <Link>Services\FileConverters\ResxConverters.cs</Link>
+	  </Compile>
+	  <Compile Include="..\MultilingualExtension\MultilingualExtension.SharedCode\Services\FileConverters\ResxConverter.cs">
+	    <Link>Services\FileConverters\ResxConverter.cs</Link>
+	  </Compile>
+	  <Compile Include="..\MultilingualExtension\MultilingualExtension.SharedCode\Services\FileConverters\IResxConverterOutput.cs">
+	    <Link>Services\FileConverters\IResxConverterOutput.cs</Link>
+	  </Compile>
+	  <Compile Include="..\MultilingualExtension\MultilingualExtension.SharedCode\Services\FileConverters\iOSResxConverterOutput.cs">
+	    <Link>Services\FileConverters\iOSResxConverterOutput.cs</Link>
+	  </Compile>
+	  <Compile Include="..\MultilingualExtension\MultilingualExtension.SharedCode\Services\FileConverters\StringExtensions.cs">
+	    <Link>Services\FileConverters\StringExtensions.cs</Link>
+	  </Compile>
+	  <Compile Include="..\MultilingualExtension\MultilingualExtension.SharedCode\Services\FileConverters\ResxString.cs">
+	    <Link>Services\FileConverters\ResxString.cs</Link>
+	  </Compile>
+	  <Compile Include="..\MultilingualExtension\MultilingualExtension.SharedCode\Services\FileConverters\ResxConverterOutputFactory.cs">
+	    <Link>Services\FileConverters\ResxConverterOutputFactory.cs</Link>
+	  </Compile>
+	  <Compile Include="..\MultilingualExtension\MultilingualExtension.SharedCode\Services\FileConverters\IResxConverterOutputFactory.cs">
+	    <Link>Services\FileConverters\IResxConverterOutputFactory.cs</Link>
+	  </Compile>
+	  <Compile Include="..\MultilingualExtension\MultilingualExtension.SharedCode\Services\FileConverters\StringExtensionsMobile.cs">
+	    <Link>Services\FileConverters\StringExtensionsMobile.cs</Link>
+	  </Compile>
 	</ItemGroup>
   <PropertyGroup Condition="$(TargetFramework.Contains('-maccatalyst')) and '$(Configuration)' == 'Debug'">
     <CodesignEntitlements>Platforms/MacCatalyst/Entitlements.Debug.plist</CodesignEntitlements>

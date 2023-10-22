@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace ResxConverter.Mobile
+namespace MultilingualExtension.Shared.Services.FileConverters
 {
     /// <summary>
     /// Extensions for <see cref="string"/>.

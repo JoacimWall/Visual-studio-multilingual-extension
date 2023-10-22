@@ -1,9 +1,7 @@
-﻿using System.IO;
-using System.Xml.Linq;
-using System.Linq;
-using System;
+﻿using System.Xml.Linq;
+using MultilingualExtension.Shared.Interfaces;
 
-namespace ResxConverter.Core
+namespace MultilingualExtension.Shared.Services.FileConverters
 {
     /// <summary>
     /// Converts RESX files using outputs created by the suplied <see cref="IResxConverterOutputFactory"/>.

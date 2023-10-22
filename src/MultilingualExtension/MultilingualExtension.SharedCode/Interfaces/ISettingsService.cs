@@ -1,4 +1,6 @@
-﻿namespace MultilingualExtension.Shared.Interfaces
+﻿using MultilingualExtension.Services;
+
+namespace MultilingualExtension.Shared.Interfaces
 {
     public interface ISettingsService
     {

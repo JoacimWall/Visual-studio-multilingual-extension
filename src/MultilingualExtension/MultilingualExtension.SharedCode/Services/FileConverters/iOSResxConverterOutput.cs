@@ -1,8 +1,4 @@
-﻿using ResxConverter.Core;
-using System;
-using System.IO;
-
-namespace ResxConverter.Mobile
+﻿namespace MultilingualExtension.Shared.Services.FileConverters
 {
     /// <summary>
     /// iOS Resx converter output.

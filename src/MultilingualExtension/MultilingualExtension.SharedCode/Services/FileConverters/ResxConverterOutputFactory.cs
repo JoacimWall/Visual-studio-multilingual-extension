@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ResxConverter.Core
+namespace MultilingualExtension.Shared.Services.FileConverters
 {
     /// <summary>
     /// RESX converter output factory.

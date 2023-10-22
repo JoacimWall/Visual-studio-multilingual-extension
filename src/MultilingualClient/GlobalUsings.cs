@@ -21,6 +21,7 @@ global using MultilingualExtension.Services;
 global using MultilingualExtension.Shared.Interfaces;
 global using MultilingualExtension.Shared.Helpers;
 global using MultilingualExtension.Shared.Services;
+global using MultilingualExtension.Shared.Services.FileConverters;
 
 //Local
 global using MultilingualClient.Controls.TreeView;

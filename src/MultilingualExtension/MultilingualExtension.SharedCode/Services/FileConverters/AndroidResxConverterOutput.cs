@@ -1,10 +1,7 @@
-﻿using ResxConverter.Core;
-using System;
-using System.Globalization;
-using System.IO;
+﻿using System.Globalization;
 using System.Xml.Linq;
 
-namespace ResxConverter.Mobile
+namespace MultilingualExtension.Shared.Services.FileConverters
 {
     /// <summary>
     /// <see cref="IResxConverterOutput"/> for Android. Produces Android <code>strings.xml</code> files.

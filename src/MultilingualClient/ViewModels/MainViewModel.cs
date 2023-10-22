@@ -1,10 +1,4 @@
-﻿
-
-using System;
-using MultilingualClient.Services;
-using ResxConverter.Mobile;
-
-namespace MultilingualClient.ViewModels;
+﻿namespace MultilingualClient.ViewModels;
 
 public class MainViewModel : BaseViewModel
 {
@@ -175,7 +169,7 @@ public class MainViewModel : BaseViewModel
             Console.WriteLine("Sync file completed");
         }
     }
-    private static readonly Dictionary<string, ResxConverter.Core.ResxConverter> Converters = new Dictionary<string, ResxConverter.Core.ResxConverter>(StringComparer.OrdinalIgnoreCase)
+    private static readonly Dictionary<string, ResxConverter> Converters = new Dictionary<string, ResxConverter>(StringComparer.OrdinalIgnoreCase)
     {
         { "android", ResxConverters.Android },
         { "ios", ResxConverters.iOS },
@@ -197,7 +191,7 @@ public class MainViewModel : BaseViewModel
                 statusPadLoger.WriteText(string.Format("Output folder {0} does not exist use standard", settingsService.ExtensionSettings.AndroidResourcesOutPutFolder));
                 outFolder = Path.Combine(inputFolder, "Android");
             }
-            ResxConverter.Core.ResxConverter converter;
+            ResxConverter converter;
             if (Converters.TryGetValue("android", out converter))
             {
                 statusPadLoger.WriteText(string.Format("Start export all Android transaltions to the folder {0}", outFolder));
@@ -234,7 +228,7 @@ public class MainViewModel : BaseViewModel
                 statusPadLoger.WriteText(string.Format("Output folder {0} does not exist use standard", settingsService.ExtensionSettings.AndroidResourcesOutPutFolder));
                 outFolder = Path.Combine(inputFolder, "Ios");
             }
-            ResxConverter.Core.ResxConverter converter;
+            ResxConverter converter;
             if (Converters.TryGetValue("ios", out converter))
             {
                 statusPadLoger.WriteText(string.Format("Start export all Ios transaltions to the folder {0}", outFolder));

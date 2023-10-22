@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ResxConverter.Core
+﻿namespace MultilingualExtension.Shared.Services.FileConverters
 {
     /// <summary>
     /// Represents how a string and comment must be materialized. Disposed after all content is written.

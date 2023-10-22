@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <!--AppResources.nb-NO.resx-->
+  <string name="hello">Hei\n    Final</string>
+  <string name="press__any__key__to__exit">Trykk på en tast for å avslutte\n  Need review</string>
+  <string name="read__instructions">Lese\nBruksanvisning\n    Need review</string>
+  <string name="bird">Fugl\n    Need review</string>
+</resources>

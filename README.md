@@ -9,6 +9,10 @@
 
 ### View introduction video or download the sample app
 #### This video is for Mac but the windows and mac are very similar. What changed after this was done is that you now configure by changing values in the file MultiLingualExtensionSettings.json which is created in the same folder as the solution file.
+
+### Support for Native Android and Ios (only Mac os)
+#### In case you want to use this to have a master language file for native Android and Ios. do you need to use .resx files. To get the translation to land in your native projects, set the path to these in MultiLingualExtensionSettings.json and the property AndroidResourcesOutPutFolder and IosResourcesOutPutFolder.
+
 [![YouTube](https://i9.ytimg.com/vi/4OAhHpUpXmA/mq2.jpg?sqp=CLDSof8F&rs=AOn4CLAexsPpQzbUEi8Ud_7YgThQFXFwPg)](https://youtu.be/4OAhHpUpXmA)
 
 
@@ -77,6 +81,11 @@ your preferred export format, csv or xslt.
 If you also want to handle the status for the texts in the master resx file then sett this to true.
 This will add Comment node to master Resx file on sync and also export the master Resx on export.
 
+#### AndroidResourcesOutPutFolder
+If you want to convert your resx files to Native android translation files, you specify here where you want them to be saved. default is that they are saved in a directory under the same as the master resx file.
+
+#### IosResourcesOutPutFolder
+If you want to convert your resx files to Native Ios translation files, you specify here where you want them to be saved. default is that they are saved in a directory under the same as the master resx file.
 
  ### Synchronization of Resx or Resw files
  There are two ways to sync the language files. 
@@ -111,6 +120,10 @@ This file will then be Translate with the master file. The extension will only t
 <img width=“100” height="200" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/TranslateLog.png">
 
 
+### Export of translation to native Android and Ios files 
+In case you want to use this to have a master language file for native Android and Ios. do you need to use .resx files. To get the translation to land in your native projects, set the path to these in MultiLingualExtensionSettings.json and the property AndroidResourcesOutPutFolder and IosResourcesOutPutFolder. 
+ 
+<img  width=“100” height="400" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/ExportToNativeDialog.png">
 ### Export of texts to Excel or csv file
 There are two ways to export the resx files to csv or xlsx. 
 Right-click the master file and select "Export all .xx-xx.resx files". Then all files that are in the same folder and follow the naming standard .xx-xx.resx will be processed and all rows with status 'New' or 'Need review' will be exported. You can change the preferd export file type in the settings dialog click tools/multilangual settings and select the preferd 'Export file type' and click save.  

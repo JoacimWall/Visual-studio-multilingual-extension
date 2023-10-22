@@ -47,6 +47,22 @@
             <CommandItem id="MultilingualExtension.ExportFiles" />
         </Condition>
     </Extension>
+
+        <Extension path = "/MonoDevelop/Ide/Commands">
+        <Command id = "MultilingualExtension.ConvertToMobileNativeHandler"
+                 _label = "Export files"
+                 _description = "Export rows to use in Android or iOS"
+                 type="array"
+                 defaultHandler = "MultilingualExtension.ConvertToMobileNativeHandler"/>
+    </Extension>
+     <Extension path = "/MonoDevelop/Ide/ContextMenu/ProjectPad">
+        <Condition id="FileType" fileExtensions=".resx">
+            <CommandItem id="MultilingualExtension.ConvertToMobileNativeHandler" />
+        </Condition>
+    </Extension>
+
+
+
  <Extension path = "/MonoDevelop/Ide/Commands">
         <Command id = "MultilingualExtension.ImportFiles"
                  _label = "Import files"

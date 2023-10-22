@@ -63,6 +63,36 @@
 		<Compile Include="..\MultilingualExtension.SharedCode\Interfaces\IStatusPadLoger.cs">
 		  <Link>Interfaces\IStatusPadLoger.cs</Link>
 		</Compile>
+		<Compile Include="..\MultilingualExtension.SharedCode\Services\FileConverters\IResxConverterOutputFactory.cs">
+		  <Link>Services\FileConverters\IResxConverterOutputFactory.cs</Link>
+		</Compile>
+		<Compile Include="..\MultilingualExtension.SharedCode\Services\FileConverters\ResxConverterOutputFactory.cs">
+		  <Link>Services\FileConverters\ResxConverterOutputFactory.cs</Link>
+		</Compile>
+		<Compile Include="..\MultilingualExtension.SharedCode\Services\FileConverters\StringExtensionsMobile.cs">
+		  <Link>Services\FileConverters\StringExtensionsMobile.cs</Link>
+		</Compile>
+		<Compile Include="..\MultilingualExtension.SharedCode\Services\FileConverters\ResxConverters.cs">
+		  <Link>Services\FileConverters\ResxConverters.cs</Link>
+		</Compile>
+		<Compile Include="..\MultilingualExtension.SharedCode\Services\FileConverters\IResxConverterOutput.cs">
+		  <Link>Services\FileConverters\IResxConverterOutput.cs</Link>
+		</Compile>
+		<Compile Include="..\MultilingualExtension.SharedCode\Services\FileConverters\ResxConverter.cs">
+		  <Link>Services\FileConverters\ResxConverter.cs</Link>
+		</Compile>
+		<Compile Include="..\MultilingualExtension.SharedCode\Services\FileConverters\ResxString.cs">
+		  <Link>Services\FileConverters\ResxString.cs</Link>
+		</Compile>
+		<Compile Include="..\MultilingualExtension.SharedCode\Services\FileConverters\AndroidResxConverterOutput.cs">
+		  <Link>Services\FileConverters\AndroidResxConverterOutput.cs</Link>
+		</Compile>
+		<Compile Include="..\MultilingualExtension.SharedCode\Services\FileConverters\StringExtensions.cs">
+		  <Link>Services\FileConverters\StringExtensions.cs</Link>
+		</Compile>
+		<Compile Include="..\MultilingualExtension.SharedCode\Services\FileConverters\iOSResxConverterOutput.cs">
+		  <Link>Services\FileConverters\iOSResxConverterOutput.cs</Link>
+		</Compile>
 	</ItemGroup>
 	<ItemGroup>
 	  <PackageReference Include="Microsoft.VisualStudioMac.Sdk" Version="17.5.0" />
@@ -92,5 +122,11 @@
 	  <Reference Include="System.IO.Packaging">
 	    <HintPath>RefDll\System.IO.Packaging.dll</HintPath>
 	  </Reference>
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="Services\FileConverters\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Services\FileConverters\" />
 	</ItemGroup>
 </Project>

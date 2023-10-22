@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <!--AppResources.fr-FR.resx-->
+  <string name="hello">Bonjour\n   Need review</string>
+  <string name="press__any__key__to__exit">Appuyez sur n’importe quelle clé pour sortir\n  Need review</string>
+  <string name="read__instructions">Lis\nDes instructions\n    Need review</string>
+  <string name="bird">Oiseau\n    Need review</string>
+</resources>

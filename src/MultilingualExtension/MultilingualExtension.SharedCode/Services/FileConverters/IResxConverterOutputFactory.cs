@@ -1,4 +1,4 @@
-﻿namespace ResxConverter.Core
+﻿namespace MultilingualExtension.Shared.Services.FileConverters
 {
     /// <summary>
     /// Represents a factory for the converter output.

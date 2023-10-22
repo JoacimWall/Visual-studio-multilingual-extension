@@ -5,5 +5,7 @@
   "ExportMasterFileOnExport": false,
   "TranslationServiceMsoftEndpoint": "https://api.cognitive.microsofttranslator.com/",
   "TranslationServiceMsoftLocation": "northeurope",
-  "TranslationServiceMsoftKey": "xxxxxxxxxx"
+  "TranslationServiceMsoftKey": "xxxxxxxxxx",
+  "AndroidResourcesOutPutFolder": "Android",
+  "IosResourcesOutPutFolder": "Ios"
 }

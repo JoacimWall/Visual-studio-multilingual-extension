@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace ResxConverter.Core
+namespace MultilingualExtension.Shared.Services.FileConverters
 {
     internal static class StringExtensions
     {
