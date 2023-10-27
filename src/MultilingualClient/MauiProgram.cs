@@ -21,6 +21,17 @@ public static class MauiProgram
                 fonts.AddFont("CascadiaCode.ttf", "CascadiaCode");
                 
                 fonts.AddFont("appicons.ttf", "AppIconFont");
+            })
+            .ConfigureMauiHandlers(_ =>
+            {
+#if MACCATALYST
+                Microsoft.Maui.Handlers.EditorHandler.Mapper.AppendToMapping("Smart", (h, v) =>
+                {
+                    h.PlatformView.SmartQuotesType = UIKit.UITextSmartQuotesType.No;
+                    h.PlatformView.SmartDashesType = UIKit.UITextSmartDashesType.No;
+                    h.PlatformView.SmartInsertDeleteType = UIKit.UITextSmartInsertDeleteType.No;
+                });
+#endif
             });
 
 #if DEBUG

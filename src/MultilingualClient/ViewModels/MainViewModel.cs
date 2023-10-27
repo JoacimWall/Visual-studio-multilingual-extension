@@ -264,8 +264,8 @@ public class MainViewModel : BaseViewModel
         using var dlg = DialogService.GetProgress("");
         using FileStream outputStream = File.OpenWrite(currentOpenFilePath);
         using StreamWriter streamWriter = new StreamWriter(outputStream, System.Text.Encoding.UTF8);
-        string output = editFileText.Replace("“", "\"").Replace("”", "\"");
-        await streamWriter.WriteAsync(output);
+        //string output = editFileText.Replace("“", "\"").Replace("”", "\"");
+        await streamWriter.WriteAsync(editFileText);
         // await streamWriter.WriteAsync(text);
     }
     async Task OpenFolder()

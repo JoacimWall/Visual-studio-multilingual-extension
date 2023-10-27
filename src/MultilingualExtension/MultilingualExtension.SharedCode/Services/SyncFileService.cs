@@ -1,11 +1,7 @@
-﻿using System;
-using System.IO;
-using System.Threading.Tasks;
-using System.Xml;
+﻿using System.Xml;
 using MultilingualExtension.Shared.Helpers;
 using MultilingualExtension.Shared.Interfaces;
 using MultilingualExtension.Shared.Models;
-using System.Linq;
 using MultilingualExtension.Services;
 
 namespace MultilingualExtension.Shared.Services
@@ -86,7 +82,7 @@ namespace MultilingualExtension.Shared.Services
 
                     foreach (var updatePath in resultResw.Model.UpdateFilepaths)
                     {
-                        var result = await SyncFileInternal(resultResw.Model.MasterFilepath, updatePath, addCommentNodeToMasterResx, outputPane);
+                        var result = await SyncFileInternal(resultResw.Model, updatePath, settingsService.ExtensionSettings, outputPane);
                          var fileinfo =Helpers.Res_Helpers.FileInfo(settingsService.ExtensionSettings.MasterLanguageCode,updatePath);
                         outputPane.WriteText(string.Format("Sync done for {0}-{1}: {2} rows added, {3} rows removed.",fileinfo.Model.LanguageBase, fileinfo.Model.LanguageCulture, result.Model.Item1.ToString(), result.Model.Item2.ToString())) ;
 
@@ -105,7 +101,7 @@ namespace MultilingualExtension.Shared.Services
                 foreach (var updatePath in resultResx.Model.UpdateFilepaths)
                 {
                     
-                    var result = await SyncFileInternal(resultResx.Model.MasterFilepath, updatePath, addCommentNodeToMasterResx, outputPane);
+                    var result = await SyncFileInternal(resultResx.Model, updatePath, settingsService.ExtensionSettings, outputPane);
                     var fileinfo = Helpers.Res_Helpers.FileInfo(settingsService.ExtensionSettings.MasterLanguageCode, updatePath);
                     outputPane.WriteText(string.Format("Sync done for {0}-{1}: {2} rows added, {3} rows removed.", fileinfo.Model.LanguageBase, fileinfo.Model.LanguageCulture, result.Model.Item1.ToString(), result.Model.Item2.ToString()));
 
@@ -126,19 +122,17 @@ namespace MultilingualExtension.Shared.Services
 
         }
         
-        private async Task<Result<Tuple<int, int>>> SyncFileInternal(string masterfilePath, string updatefilePath, bool addMasterCommentNode, IStatusPadLoger outputPane)
+        private async Task<Result<Tuple<int, int>>> SyncFileInternal(Res_Files masterfileInfo, string updatefilePath, ExtensionSettings settings, IStatusPadLoger outputPane)
         {
             XmlDocument masterdoc = new XmlDocument();
-            masterdoc.Load(masterfilePath);
+            masterdoc.Load(masterfileInfo.MasterFilepath);
             XmlNode rootMaster = masterdoc.DocumentElement;
 
             XmlDocument updatedoc = new XmlDocument();
             updatedoc.Load(updatefilePath);
             XmlNode rootUpdate = updatedoc.DocumentElement;
 
-            // Add the namespace.  
-            //XmlNamespaceManager nsmgr = new XmlNamespaceManager(doc.NameTable);
-            //nsmgr.AddNamespace("bk", "urn:newbooks-schema");
+            List<string> ListEnums = new List<string>();
 
             // Select all nodes data in Master
             bool updateFileChanged = false;
@@ -148,6 +142,9 @@ namespace MultilingualExtension.Shared.Services
             XmlNodeList nodeListMaster = rootMaster.SelectNodes("//data");
             foreach (XmlNode dataMaster in nodeListMaster)
             {
+                //used to create a enum file for all translations
+                ListEnums.Add(dataMaster.Attributes.GetNamedItem("name").Value);
+
                 var masterCommentNode = dataMaster.SelectSingleNode("comment");
                 //Check if we are shold not translat this node
                 if (masterCommentNode != null && masterCommentNode.InnerText == Globals.STATUS_COMMENT_NO_TRANSLATION)
@@ -155,7 +152,7 @@ namespace MultilingualExtension.Shared.Services
 
                 //Add comment node to master if that is set in settings
 
-                if (addMasterCommentNode)
+                if (settings.ExportMasterFileOnExport)
                 {
                     if (masterCommentNode == null)
                     {
@@ -232,16 +229,34 @@ namespace MultilingualExtension.Shared.Services
 
                 }
 
-              
-
-
-
             }
             if (updateFileChanged)
                 updatedoc.Save(updatefilePath);
 
             if (masterFileChanged)
-                masterdoc.Save(masterfilePath);
+                masterdoc.Save(masterfileInfo.MasterFilepath);
+
+            if (!string.IsNullOrEmpty(settings.TranslationEnumNamespace))
+            {
+                string body = string.Empty;
+                foreach (var item in ListEnums)
+                    body = body + string.Format("{0}{1}{2}", item, ",", Environment.NewLine);
+
+
+                //Create enum file
+               
+                string enumfileBody = string.Format("{0} {1}public enum {2} {3}", "namespace " + settings.TranslationEnumNamespace, Environment.NewLine, masterfileInfo.MasterFilename.Replace(".resx", "Enums"), Environment.NewLine);
+                enumfileBody = enumfileBody  + "{" + Environment.NewLine + body + Environment.NewLine + "}";
+
+                string newFilename = masterfileInfo.MasterFilename.Replace(".resx", "Enums.cs");
+                string enumFileSavePath = Path.Combine(masterfileInfo.MasterFilepath.Replace(masterfileInfo.MasterFilename, ""), newFilename);
+                using FileStream outputStream = File.OpenWrite(enumFileSavePath);
+                using StreamWriter streamWriter = new StreamWriter(outputStream, System.Text.Encoding.UTF8);
+                //string output = editFileText.Replace("“", "\"").Replace("”", "\"");
+                await streamWriter.WriteAsync(enumfileBody);
+                outputPane.WriteText("Translation Enum file created, " + newFilename);
+            }
+            
 
             return new Result<Tuple<int, int>>(new Tuple<int, int>(AddedCount, removedCount));
 

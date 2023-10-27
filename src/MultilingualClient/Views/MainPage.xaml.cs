@@ -7,10 +7,13 @@ public partial class MainPage : BaseContentPage
 		InitializeComponent();
         BindingContext = vm;
         ((MainViewModel)this.BindingContext).LogText = this.LogText;
+        Loaded += MainPage_Loaded;
     }
 
-    void OnWebViewGoToRepoClicked(System.Object sender, System.EventArgs e)
+    private void MainPage_Loaded(object sender, EventArgs e)
     {
+        fileEditor.Focus();
+        fileEditor.Unfocus();
     }
 }
 

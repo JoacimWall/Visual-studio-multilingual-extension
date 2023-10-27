@@ -55,7 +55,7 @@
 
         </HorizontalStackLayout>
 
-        <Editor Grid.Row="1" Grid.Column="2"  VerticalOptions="Fill" Text="{Binding EditFileText}" FontSize="20" FontFamily="CascadiaCode"
+        <Editor x:Name="fileEditor" Grid.Row="1" Grid.Column="2"  VerticalOptions="Fill" Text="{Binding EditFileText}" FontSize="20" FontFamily="CascadiaCode"
                BackgroundColor="{AppThemeBinding Light={x:Static  theming:AppColors.Gray900Color}, Dark={x:Static theming:AppColors.Gray900Color}}">
 
 

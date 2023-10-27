@@ -3,7 +3,7 @@
 [assembly: Addin(
     "MultilingualExtension",
     Namespace = "MultilingualExtension",
-    Version = "2.0.16"
+    Version = "2.0.18"
 
 )]
 

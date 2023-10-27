@@ -14,6 +14,7 @@ namespace MultilingualExtension.Services
         public string TranslationServiceMsoftKey { get; set; } = "";
         public string AndroidResourcesOutPutFolder { get; set; } = "Android";
         public string IosResourcesOutPutFolder { get; set; } = "Ios";
+        public string TranslationEnumNamespace { get; set; } = "";
     }
     public class SettingsService : ISettingsService
     {
