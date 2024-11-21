@@ -370,7 +370,7 @@ public class MainViewModel : BaseViewModel
             var res_Info = Res_Helpers.FileInfo(ServiceHelper.GetService<ISettingsService>().ExtensionSettings.MasterLanguageCode, xamlItem.Name);
 
             menuElements.Add(new MenuFlyoutItem() { Text = res_Info.Model.IsMasterFile ? Globals.Synchronize_All_Files_Title : Globals.Synchronize_Seleted_File_Title, Command = UpdateFilesCommand, CommandParameter = xamlItem });
-            menuElements.Add(new MenuFlyoutItem() { Text = res_Info.Model.IsMasterFile ? Globals.Translate_All_Files_Title : Globals.Translate_Seleted_File_Title, Command = UpdateFilesCommand, CommandParameter = xamlItem });
+            menuElements.Add(new MenuFlyoutItem() { Text = res_Info.Model.IsMasterFile ? Globals.Translate_All_Files_Title : Globals.Translate_Seleted_File_Title, Command = TranslateFilesCommand, CommandParameter = xamlItem });
             if (res_Info.Model.IsMasterFile)
             {
                 menuElements.Add(new MenuFlyoutItem() { Text = Globals.Generate_Android_Files_Title, Command = GenerateAndroidFilesCommand, CommandParameter = xamlItem });

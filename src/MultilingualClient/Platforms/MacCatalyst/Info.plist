@@ -13,8 +13,14 @@
     <!-- <string>public.app-category.YOUR-CATEGORY-HERE</string> -->
 	<key>UIDeviceFamily</key>
 	<array>
-		<integer>2</integer>
+		<integer>6</integer>
 	</array>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>Walltec © 2024</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>arm64</string>
