@@ -12,7 +12,7 @@ namespace MultilingualClient.Services
         
         public void WriteText(string logtext)
         {
-            Logger.Text = Logger.Text + Environment.NewLine + logtext;
+            Logger.Text = logtext + Environment.NewLine + Logger.Text;
         }
     }
 }

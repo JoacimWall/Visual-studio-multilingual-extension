@@ -62,7 +62,7 @@
 
         </Editor >
         <!--<Label Margin="4,8,4,4" Grid.Row="1" Grid.Column="2" Text="Log" FontSize="21" />-->
-        <Label Margin="4,4" x:Name="LogText" Grid.Row="1" Grid.RowSpan="5" Grid.Column="2" FontSize="15" LineBreakMode="WordWrap" VerticalTextAlignment="End"
+        <Label Margin="4,4" x:Name="LogText"  Grid.Row="1" Grid.RowSpan="5" Grid.Column="2" FontSize="15" LineBreakMode="WordWrap" VerticalTextAlignment="Start"
                BackgroundColor="{AppThemeBinding Light={x:Static theming:AppColors.WhiteColor}, Dark={x:Static theming:AppColors.Gray900Color}}"/>
 
     </Grid>

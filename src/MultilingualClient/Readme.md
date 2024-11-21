@@ -6,8 +6,8 @@ https://support.apple.com/en-us/102654
 steg1.1:
 cd artifacts
 steg2:
-xcrun notarytool submit MultilingualClient-1.0.3.pkg --wait --apple-id joacim.wall@tietoevry.com --password aldd-eesi-pyhc-zdkv --team-id EMV34W7ZW5
+xcrun notarytool submit MultilingualClient-1.0.5.pkg --wait --apple-id joacim.wall@tietoevry.com --password aldd-eesi-pyhc-zdkv --team-id EMV34W7ZW5
 steg3:
-xcrun stapler staple MultilingualClient-1.0.3.pkg
+xcrun stapler staple MultilingualClient-1.0.5.pkg
 steg4:
-xcrun stapler validate MultilingualClient-1.0.2.pkg
+xcrun stapler validate MultilingualClient-1.0.5.pkg
