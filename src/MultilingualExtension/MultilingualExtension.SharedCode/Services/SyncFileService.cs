@@ -245,7 +245,7 @@ namespace MultilingualExtension.Shared.Services
 
                 //Create enum file
                
-                string enumfileBody = string.Format("{0} {1}public enum {2} {3};", "namespace " + settings.TranslationEnumNamespace, Environment.NewLine, masterfileInfo.MasterFilename.Replace(".resx", "Enums"), Environment.NewLine);
+                string enumfileBody = string.Format("{0}; {1}public enum {2} {3}", "namespace " + settings.TranslationEnumNamespace, Environment.NewLine, masterfileInfo.MasterFilename.Replace(".resx", "Enums"), Environment.NewLine);
                 enumfileBody = enumfileBody  + "{" + Environment.NewLine + body + Environment.NewLine + "}";
 
                 string newFilename = masterfileInfo.MasterFilename.Replace(".resx", "Enums.cs");
