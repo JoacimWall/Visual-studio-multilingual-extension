@@ -1,4 +1,9 @@
 # Visual Studio For Mac/Windows Multilingual Extension
+### Visual Studio for Mac Retirement
+For mac i have done a simple client where you can do the same as you did in Visual studio for mac.
+Edit the resx file in you preferd editor like Rider or VS Code and save. Then use the ML client to sync, translate, export, import files. 
+You can download the app under Releases.
+
 #### This extension is for handling multilingual support in visual studio.
 #### For it to work, it requires that you start from a Resx or Resw file that is the master.
 #### Resx files use the filename for language recognize. You name all the other files according to the masterfile name .xx-xx.resx or .xx.resx. For example AppResources.resx for master and AppResources.fr.resx for shared translations for French. And AppResources.fr-FR.resx,AppResources.fr-CA.resx if you would like to have different translation for France or Canadian culture. 
