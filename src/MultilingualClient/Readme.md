@@ -5,8 +5,8 @@ Notarizing macOS software before distribution
 https://support.apple.com/en-us/102654
 steg1.1:
 cd artifacts
-steg2:
-xcrun notarytool submit MultilingualClient-1.0.5.pkg --wait --apple-id joacim.wall@tietoevry.com --password aldd-eesi-pyhc-zdkv --team-id EMV34W7ZW5
+steg2: (Password is in private keyvalt under tietoevry)
+xcrun notarytool submit MultilingualClient-1.0.5.pkg --wait --apple-id joacim.wall@tietoevry.com --password  --team-id EMV34W7ZW5
 steg3:
 xcrun stapler staple MultilingualClient-1.0.5.pkg
 steg4:
