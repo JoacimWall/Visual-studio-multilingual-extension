@@ -1,0 +1,32 @@
+name: Send ready issue to factory
+
+# Lives in each app repo. scripts/install-trigger.mjs fills in the placeholders
+# and opens a pull request that adds this file.
+#
+# Only "labeled": creating an issue with the label already on sends "opened"
+# and "labeled" together, and listening to both starts the factory twice.
+on:
+  issues:
+    types: [labeled]
+
+permissions:
+  contents: read
+
+jobs:
+  notify:
+    # Only these people may start the factory and spend the agent subscription.
+    if: >-
+      github.event.label.name == 'ready' &&
+      github.event.issue.state == 'open' &&
+      contains(fromJSON('["JoacimWall"]'), github.actor)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Start the factory
+        env:
+          GH_TOKEN: ${{ secrets.FACTORY_GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          gh api --method POST repos/JoacimWall/walltech-factory/dispatches \
+            -f event_type=issue-ready \
+            -f "client_payload[repo]=$GITHUB_REPOSITORY" \
+            -F "client_payload[issue]=$ISSUE_NUMBER"
