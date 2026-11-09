@@ -5,19 +5,18 @@ namespace MultilingualClient;
 
 public partial class App : Application
 {
-    ISettingsService settingsService;
-
     public App()
 	{
 		InitializeComponent();
         //this.settingsService = ServiceHelper.GetService<ISettingsService>();
         MultilingualClientGlobals.App = this;
-        MainPage = new StartupView();
 	}
+    protected override Window CreateWindow(IActivationState activationState) => new Window(new StartupView());
+
     private async Task<bool> initApp(bool fromResume)
     {
         
-        App.Current.MainPage = new AppShell();//
+        Windows[0].Page = new AppShell();
         
         return true;
     }

@@ -51,9 +51,9 @@ namespace MultilingualExtension.Shared.Services
 
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
 
             }
             finally

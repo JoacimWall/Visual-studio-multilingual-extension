@@ -26,8 +26,8 @@ public class TreeViewNode : StackLayout
 
     private readonly Grid _MainGrid = new Grid
     {
-        VerticalOptions = LayoutOptions.StartAndExpand,
-        HorizontalOptions = LayoutOptions.FillAndExpand,
+        VerticalOptions = LayoutOptions.Start,
+        HorizontalOptions = LayoutOptions.Fill,
         RowSpacing = 3
     };
 
@@ -35,7 +35,7 @@ public class TreeViewNode : StackLayout
 
     private readonly ContentView _ContentView = new ContentView
     {
-        HorizontalOptions = LayoutOptions.FillAndExpand
+        HorizontalOptions = LayoutOptions.Fill
     };
 
     private readonly StackLayout _ChildrenStackLayout = new StackLayout
@@ -97,6 +97,8 @@ public class TreeViewNode : StackLayout
         set
         {
             _ChildrenStackLayout.IsVisible = value;
+            if (value)
+                TreeView.RenderNodes(_Children, _ChildrenStackLayout, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset), this);
 
             Render();
             if (value)
@@ -153,7 +155,7 @@ public class TreeViewNode : StackLayout
         set => _ContentView.Content = value;
     }
 
-    public IList<TreeViewNode> Children
+    public new IList<TreeViewNode> Children
     {
         get => _Children;
         set
@@ -170,7 +172,9 @@ public class TreeViewNode : StackLayout
                 notifyCollectionChanged2.CollectionChanged += ItemsSource_CollectionChanged;
             }
 
-            TreeView.RenderNodes(_Children, _ChildrenStackLayout, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset), this);
+            // Child views are attached on first expand (see IsExpanded); building them all up front froze the UI on large folders.
+            if (IsExpanded)
+                TreeView.RenderNodes(_Children, _ChildrenStackLayout, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset), this);
 
             Render();
         }
@@ -230,7 +234,7 @@ public class TreeViewNode : StackLayout
 
         base.Children.Add(_MainGrid);
 
-        HorizontalOptions = LayoutOptions.FillAndExpand;
+        HorizontalOptions = LayoutOptions.Fill;
         VerticalOptions = LayoutOptions.Start;
 
         Render();
@@ -265,6 +269,10 @@ public class TreeViewNode : StackLayout
         }
 
         SetExpandButtonContent(_ExpandButtonTemplate);
+
+        // Collapsed children are invisible; IsExpanded calls Render() again when they become visible.
+        if (!IsExpanded)
+            return;
 
         foreach (var item in Children)
         {
@@ -315,7 +323,8 @@ public class TreeViewNode : StackLayout
 
     private void ItemsSource_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
     {
-        TreeView.RenderNodes(_Children, _ChildrenStackLayout, e, this);
+        if (IsExpanded)
+            TreeView.RenderNodes(_Children, _ChildrenStackLayout, e, this);
         Render();
     }
 

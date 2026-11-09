@@ -31,33 +31,10 @@ namespace MultilingualExtension.Shared.Services
         private SortedDictionary<string, string> languageCodesAndTitles =
             new SortedDictionary<string, string>(Comparer<string>.Create((a, b) => string.Compare(a, b, true)));
 
-        // ***** GET TRANSLATABLE LANGUAGE CODES
-        private void GetLanguagesForTranslate(string endpoint)
-        {
-            // Send request to get supported language codes
-            string uri = string.Format(endpoint + "{0}?api-version=3.0&scope={1}", "languages", "translation");
-
-            WebRequest WebRequest = WebRequest.Create(uri);
-            WebRequest.Headers.Add("Accept-Language", "en");
-            WebResponse response = null;
-            // Read and parse the JSON response
-            response = WebRequest.GetResponse();
-            using (var reader = new StreamReader(response.GetResponseStream(), UnicodeEncoding.UTF8))
-            {
-                //var result = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, Dictionary<string, string>>>>(reader.ReadToEnd());
-                //var languages = result["translation"];
-
-                //languageCodes = languages.Keys.ToArray();
-                //foreach (var kv in languages)
-                //{
-                //    languageCodesAndTitles.Add(kv.Value["name"], kv.Key);
-                //}
-            }
-        }
         private async Task<Result<Translations>> GoogleTranslateText(string textToTranslate, string fromLanguageCode, string toLanguageCode)
         {
             // Set the language from/to in the url (or pass it into this function)
-            string url = String.Format("https://translate.googleapis.com/translate_a/single?client=gtx&sl={0}&tl={1}&dt=t&q={2}", fromLanguageCode, toLanguageCode, Uri.EscapeUriString(textToTranslate));
+            string url = String.Format("https://translate.googleapis.com/translate_a/single?client=gtx&sl={0}&tl={1}&dt=t&q={2}", fromLanguageCode, toLanguageCode, Uri.EscapeDataString(textToTranslate));
 
 
             using (var client = new HttpClient())
@@ -344,9 +321,9 @@ namespace MultilingualExtension.Shared.Services
 
             }
 
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
 
             }
             finally
@@ -418,9 +395,9 @@ namespace MultilingualExtension.Shared.Services
 
             }
 
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
 
             }
             finally

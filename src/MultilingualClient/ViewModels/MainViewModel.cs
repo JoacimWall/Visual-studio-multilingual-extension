@@ -23,7 +23,7 @@ public class MainViewModel : BaseViewModel
                 EditFileText = await reader.ReadToEndAsync();
                 //text = c;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // Handle this as you will 
             }
@@ -367,7 +367,7 @@ public class MainViewModel : BaseViewModel
         {
 
             addMenu = true;
-            var res_Info = Res_Helpers.FileInfo(ServiceHelper.GetService<ISettingsService>().ExtensionSettings.MasterLanguageCode, xamlItem.Name);
+            var res_Info = Res_Helpers.FileInfo(ServiceHelper.GetService<ISettingsService>().ExtensionSettings.MasterLanguageCode, xamlItem.FullPath);
 
             menuElements.Add(new MenuFlyoutItem() { Text = res_Info.Model.IsMasterFile ? Globals.Synchronize_All_Files_Title : Globals.Synchronize_Seleted_File_Title, Command = UpdateFilesCommand, CommandParameter = xamlItem });
             menuElements.Add(new MenuFlyoutItem() { Text = res_Info.Model.IsMasterFile ? Globals.Translate_All_Files_Title : Globals.Translate_Seleted_File_Title, Command = TranslateFilesCommand, CommandParameter = xamlItem });

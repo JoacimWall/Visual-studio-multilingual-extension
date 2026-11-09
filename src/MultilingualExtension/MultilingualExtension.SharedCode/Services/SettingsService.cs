@@ -52,7 +52,7 @@ namespace MultilingualExtension.Services
                 }
                
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }

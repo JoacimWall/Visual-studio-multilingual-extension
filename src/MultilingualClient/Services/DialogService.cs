@@ -19,7 +19,7 @@ public class DialogService : IDialogService
     {
         await MainThread.InvokeOnMainThreadAsync(async () =>
        {
-           await Application.Current.MainPage.DisplayAlert(title, message, buttonLabel);
+           await Application.Current.Windows[0].Page.DisplayAlertAsync(title, message, buttonLabel);
        });
 
 
@@ -28,7 +28,7 @@ public class DialogService : IDialogService
     {
         return await MainThread.InvokeOnMainThreadAsync(async () =>
         {
-            return await Application.Current.MainPage.DisplayAlert(title, message, buttonAccept, buttonCancel);
+            return await Application.Current.Windows[0].Page.DisplayAlertAsync(title, message, buttonAccept, buttonCancel);
         });
 
 
@@ -44,7 +44,7 @@ public class DialogService : IDialogService
 
         await MainThread.InvokeOnMainThreadAsync(async () =>
        {
-           result = await Application.Current.MainPage.DisplayActionSheet(title, cancel, destructive, buttons);
+           result = await Application.Current.Windows[0].Page.DisplayActionSheetAsync(title, cancel, destructive, buttons);
        });
 
 
@@ -59,7 +59,7 @@ public class DialogService : IDialogService
     {
         return await MainThread.InvokeOnMainThreadAsync(async () =>
         {
-            return await Application.Current.MainPage.DisplayPromptAsync(title, message, ok, cancel, initialValue: initvalue);
+            return await Application.Current.Windows[0].Page.DisplayPromptAsync(title, message, ok, cancel, initialValue: initvalue);
         });
 
 
@@ -69,7 +69,7 @@ public class DialogService : IDialogService
     {
         return await MainThread.InvokeOnMainThreadAsync(async () =>
         {
-            return await Application.Current.MainPage.DisplayAlert(title, message, ok, cancel);
+            return await Application.Current.Windows[0].Page.DisplayAlertAsync(title, message, ok, cancel);
         });
 
     }

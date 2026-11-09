@@ -19,7 +19,7 @@ public class BaseContentPage : ContentPage
         //döljer warnings då vi kräver IOS 12.4 så det är lugnt  
         this.HideSoftInputOnTapped = true;
       
-        On<iOS>().SetUseSafeArea(true);
+        SafeAreaEdges = new SafeAreaEdges(SafeAreaRegions.Container);
         
     }
     public Color StatusbarBackgroundColor { get; set; } = AppColors.StatusbarBackgroundColor;
@@ -46,22 +46,6 @@ public class BaseContentPage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        bool darkStatusBarBackground = true;
-        if (this.StatusbarBackgroundColor == AppColors.WhiteColor
-                || StatusbarBackgroundColor == AppColors.Gray100Color
-                || StatusbarBackgroundColor == AppColors.Primary200Color)
-            darkStatusBarBackground = false;
-
-
-#pragma warning disable CA1416
-        //if (darkStatusBarBackground)
-        //    this.Behaviors.Add(new CommunityToolkit.Maui.Behaviors.StatusBarBehavior { StatusBarColor = StatusbarBackgroundColor, StatusBarStyle = CommunityToolkit.Maui.Core.StatusBarStyle.LightContent });
-        //else
-        //    this.Behaviors.Add(new CommunityToolkit.Maui.Behaviors.StatusBarBehavior { StatusBarColor = StatusbarBackgroundColor, StatusBarStyle = CommunityToolkit.Maui.Core.StatusBarStyle.DarkContent });
-#pragma warning restore CA1416
-
-
-
         if (BindingContext != null)
         {
             await (BindingContext as BaseViewModel)?.OnAppearingAsync();

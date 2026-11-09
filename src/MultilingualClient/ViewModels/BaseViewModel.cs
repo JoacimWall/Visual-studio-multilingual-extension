@@ -129,7 +129,7 @@ public partial class BaseViewModel : ObservableObject, IQueryAttributable
         {
             await MainThread.InvokeOnMainThreadAsync(async () =>
             {
-                var shellRoot = Application.Current.MainPage as Shell;
+                var shellRoot = Application.Current.Windows[0].Page as Shell;
                 if (shellRoot != null && shellRoot.Navigation != null)
                 {
                     var result = await RunNavbackIsAllowed(shellRoot.CurrentPage);
@@ -141,7 +141,7 @@ public partial class BaseViewModel : ObservableObject, IQueryAttributable
                 }
                 else
                 {
-                    var navigationPage = Application.Current.MainPage as NavigationPage;
+                    var navigationPage = Application.Current.Windows[0].Page as NavigationPage;
                     var result = await RunNavbackIsAllowed(navigationPage.CurrentPage);
                     if (!result)
                         return;
@@ -166,7 +166,7 @@ public partial class BaseViewModel : ObservableObject, IQueryAttributable
             await MainThread.InvokeOnMainThreadAsync(async () =>
             {
 
-                var shellRoot = Application.Current.MainPage as Shell;
+                var shellRoot = Application.Current.Windows[0].Page as Shell;
                 if (shellRoot != null && shellRoot.Navigation != null)
                 {
                     RunCleanUp(shellRoot.CurrentPage);
@@ -174,7 +174,7 @@ public partial class BaseViewModel : ObservableObject, IQueryAttributable
                 }
                 else
                 {
-                    var navigationPage = Application.Current.MainPage as NavigationPage;
+                    var navigationPage = Application.Current.Windows[0].Page as NavigationPage;
                     RunCleanUp(navigationPage.CurrentPage);
                     await navigationPage.Navigation.PopAsync();
                 }
@@ -194,7 +194,7 @@ public partial class BaseViewModel : ObservableObject, IQueryAttributable
         try
         {
             
-                if (Application.Current.MainPage is Shell mainPage)
+                if (Application.Current.Windows[0].Page is Shell mainPage)
                 {
                     // We cannot remove root page so lets check the count before we remove
                     var indexToRemove = mainPage.Navigation.NavigationStack.Count - 2;
