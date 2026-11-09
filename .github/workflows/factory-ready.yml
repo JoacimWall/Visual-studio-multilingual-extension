@@ -30,3 +30,19 @@ jobs:
             -f event_type=issue-ready \
             -f "client_payload[repo]=$GITHUB_REPOSITORY" \
             -F "client_payload[issue]=$ISSUE_NUMBER"
+      # The factory VM runs on this Mac. Keep the Mac awake until the factory has
+      # no queued or running jobs (at most 7 hours), so it does not sleep mid-job.
+      # Detached, because the runner stops a job's processes when the job ends.
+      # A closed laptop lid without an external display still sleeps.
+      - name: Keep this Mac awake while the factory works
+        if: runner.os == 'macOS'
+        env:
+          GH_TOKEN: ${{ secrets.FACTORY_GITHUB_TOKEN }}
+        run: |
+          RUNNER_TRACKING_ID="" nohup caffeinate -ims bash -c '
+            sleep 120
+            for i in $(seq 1 210); do
+              active=$(gh run list --repo JoacimWall/walltech-factory --workflow factory.yml --limit 20 --json status -q "[.[] | select(.status != \"completed\")] | length" 2>/dev/null || echo 1)
+              [ "$active" = "0" ] && exit 0
+              sleep 120
+            done' > /dev/null 2>&1 &
