@@ -1,0 +1,32 @@
+<idea-plugin>
+    <id>se.walltec.multilingual</id>
+    <name>Multilingual Extension</name>
+    <vendor>Walltec</vendor>
+    <description><![CDATA[
+        Sync, translate, export, import and generate native Android/iOS files for .resx / .resw resource files.
+        Runs the bundled <code>multilingual</code> command line tool (needs the .NET 10 runtime).
+    ]]></description>
+
+    <depends>com.intellij.modules.rider</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <notificationGroup id="Multilingual Extension" displayType="BALLOON"/>
+    </extensions>
+
+    <actions>
+        <group id="se.walltec.multilingual.Menu" text="Multilingual Extension" popup="true">
+            <action id="se.walltec.multilingual.Sync" class="se.walltec.multilingual.SyncAction" text="Sync"/>
+            <action id="se.walltec.multilingual.Translate" class="se.walltec.multilingual.TranslateAction" text="Translate"/>
+            <action id="se.walltec.multilingual.SyncTranslate" class="se.walltec.multilingual.SyncTranslateAction" text="Sync and translate"/>
+            <action id="se.walltec.multilingual.Export" class="se.walltec.multilingual.ExportAction" text="Export..."/>
+            <action id="se.walltec.multilingual.Import" class="se.walltec.multilingual.ImportAction" text="Import..."/>
+            <action id="se.walltec.multilingual.Native" class="se.walltec.multilingual.NativeAction" text="Generate native Android/iOS files"/>
+            <action id="se.walltec.multilingual.SyncAll" class="se.walltec.multilingual.SyncAllAction" text="Sync all"/>
+            <action id="se.walltec.multilingual.TranslateAll" class="se.walltec.multilingual.TranslateAllAction" text="Translate all"/>
+            <action id="se.walltec.multilingual.SyncTranslateAll" class="se.walltec.multilingual.SyncTranslateAllAction" text="Sync and translate all"/>
+            <action id="se.walltec.multilingual.OpenSettings" class="se.walltec.multilingual.OpenSettingsAction" text="Open settings"/>
+            <add-to-group group-id="SolutionExplorerPopupMenu" anchor="last"/>
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
+        </group>
+    </actions>
+</idea-plugin>

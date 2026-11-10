@@ -17,6 +17,8 @@ namespace MultilingualExtension.Shared.Services
 
             try
             {
+                if (selectedFilename.EndsWith(".csv", StringComparison.OrdinalIgnoreCase))
+                    return new Result<bool>("CSV import is not supported, export as xlsx");
 
                 //validate file
                 var checkfileResxCsv = RegExHelper.ValidateFilenameIsTargetTypeResx_Csv(selectedFilename);
@@ -87,7 +89,7 @@ namespace MultilingualExtension.Shared.Services
             }
 
             if (updatefilechanged)
-                updatedoc.Save(updatePath);
+                FileWriteHelper.Save(updatePath, updatedoc);
 
             return new Result<int>(importCount);
 

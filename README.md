@@ -31,6 +31,42 @@ Under src/sample you will find a Xamarin forms sample and a UWP sample. In the x
 Download the Multilingual Client pkg from the latest release and install it.  
 [Latest release](https://github.com/JoacimWall/Visual-studio-multilingual-extension/releases)
 
+## Install for Rider (macOS, Windows, Linux)
+The Rider plugin adds a "Multilingual Extension" submenu to the context menu of `.resx` / `.resw` files and of the solution node. Each action saves all open documents, runs the bundled `multilingual` CLI and streams the log into a Run console tab (use its Stop button to cancel safely). A balloon shows success or failure.
+
+- Needs the **.NET 10 runtime** to run, and the **.NET 10 SDK** to build.
+- Build: `cd src/MultilingualRider && ./gradlew buildPlugin` (the zip lands in `build/distributions`, with `cli/multilingual.dll` inside).
+- Install: Settings > Plugins > gear icon > *Install Plugin from Disk...* and pick the zip.
+- On a `.resx` / `.resw` file: Sync, Translate, Sync and translate, Export... (asks for a status), Import... (asks for an `.xlsx` file), and Generate native Android/iOS files (master `.resx` only).
+- On the solution node: Sync all, Translate all, Sync and translate all, Open settings (opens `MultiLingualExtensionSettings.json` in the solution folder; it is created on the first run of any command).
+
+## Command line tool (CI)
+Install from the same project: `dotnet pack src/MultilingualRider/cli/Multilingual.Cli -o nupkg` then `dotnet tool install -g Walltec.Multilingual.Cli --add-source nupkg`.
+
+```
+multilingual sync <file|solution-folder>            [--solution-dir <dir>]
+multilingual translate <file|solution-folder>       [--solution-dir <dir>]
+multilingual sync-translate <file|solution-folder>  [--solution-dir <dir>]
+multilingual export <file> --status <New|NeedReview|Final|All> [--solution-dir <dir>]
+multilingual import <masterfile> --file <xlsx>      [--solution-dir <dir>]
+multilingual native <file>                          [--solution-dir <dir>]
+multilingual --help
+```
+
+- A folder finds every master `.resx` / `.resw` below it (skipping `bin`, `obj` and dot-folders), keeps going after a failure and reports all failures at the end.
+- Exit code 0 on success, 1 on any failure (also unknown command or option). Log lines go to stdout, errors to stderr.
+- Settings: with `--solution-dir` that folder's `MultiLingualExtensionSettings.json` is used (and created with defaults if missing). Without it the CLI searches upward from the file or folder and fails if none is found; it never creates settings in a guessed place.
+- `MULTILINGUAL_TRANSLATION_KEY` overrides `TranslationServiceMsoftKey` from the settings file.
+- Export writes `<file>.xlsx` next to each resource file. Import applies only "Final" rows to the language file the spreadsheet is named after.
+- `native` writes Android and iOS files; relative output folders in the settings resolve against the master file's folder.
+
+Tests: `dotnet test src/MultilingualRider/cli/Multilingual.Cli.sln`.
+
+### Known limits
+- CSV export/import is not supported in the CLI (export writes xlsx, importing a `.csv` is rejected).
+- Two commands running at once on the same files can overwrite each other's changes.
+- Files are now written through a temp file and a rename. The Windows extension compiles this helper, so it needs a Windows build and smoke test before its next release.
+
 ## Install for Windows 
 Go to Extension Manager and search for Multilingual Extension or Walltec and you will find it or use the link below.   
 [Multilingual extension](https://marketplace.visualstudio.com/items?itemName=Walltec.MultilingualExtension)

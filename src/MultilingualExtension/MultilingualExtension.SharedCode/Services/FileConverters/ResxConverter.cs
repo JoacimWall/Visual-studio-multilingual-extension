@@ -79,6 +79,7 @@ namespace MultilingualExtension.Shared.Services.FileConverters
                         }
                         outputPane.WriteText(string.Format("Create native file for {0}", resxCulture.FileName));
                     }
+                    output.Commit();
                 }
             }
         }

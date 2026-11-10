@@ -231,10 +231,10 @@ namespace MultilingualExtension.Shared.Services
 
             }
             if (updateFileChanged)
-                updatedoc.Save(updatefilePath);
+                FileWriteHelper.Save(updatefilePath, updatedoc);
 
             if (masterFileChanged)
-                masterdoc.Save(masterfileInfo.MasterFilepath);
+                FileWriteHelper.Save(masterfileInfo.MasterFilepath, masterdoc);
 
             if (!string.IsNullOrEmpty(settings.TranslationEnumNamespace))
             {
@@ -250,10 +250,7 @@ namespace MultilingualExtension.Shared.Services
 
                 string newFilename = masterfileInfo.MasterFilename.Replace(".resx", "Enums.cs");
                 string enumFileSavePath = Path.Combine(masterfileInfo.MasterFilepath.Replace(masterfileInfo.MasterFilename, ""), newFilename);
-                using FileStream outputStream = File.OpenWrite(enumFileSavePath);
-                using StreamWriter streamWriter = new StreamWriter(outputStream, System.Text.Encoding.UTF8);
-                //string output = editFileText.Replace("“", "\"").Replace("”", "\"");
-                await streamWriter.WriteAsync(enumfileBody);
+                FileWriteHelper.WriteText(enumFileSavePath, enumfileBody);
                 outputPane.WriteText("Translation Enum file created, " + newFilename);
             }
             
@@ -328,7 +325,7 @@ namespace MultilingualExtension.Shared.Services
 
             
             if (updateFileChanged)
-                updatedoc.Save(updatefilePath);
+                FileWriteHelper.Save(updatefilePath, updatedoc);
 
            
 

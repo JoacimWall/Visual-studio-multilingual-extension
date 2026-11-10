@@ -1,0 +1,5 @@
+bin/
+obj/
+.gradle/
+build/
+.intellijPlatform/

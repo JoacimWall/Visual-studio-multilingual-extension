@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using System.Xml.Linq;
+using MultilingualExtension.Shared.Helpers;
 
 namespace MultilingualExtension.Shared.Services.FileConverters
 {
@@ -55,10 +56,17 @@ namespace MultilingualExtension.Shared.Services.FileConverters
         /// <summary>
         /// Writes the accumulated data to the output file.
         /// </summary>
-        public void Dispose()
+        public void Commit()
         {
             Directory.CreateDirectory(Path.GetDirectoryName(OutputFilePath));
-            _xDocument.Save(OutputFilePath);
+            FileWriteHelper.Save(OutputFilePath, _xDocument);
+        }
+
+        /// <summary>
+        /// Nothing is written before <see cref="Commit"/>, so there is nothing to clean up.
+        /// </summary>
+        public void Dispose()
+        {
         }
 
         /// <summary>

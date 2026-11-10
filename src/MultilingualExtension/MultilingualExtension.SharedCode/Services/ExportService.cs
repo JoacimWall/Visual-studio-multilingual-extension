@@ -203,7 +203,7 @@ namespace MultilingualExtension.Shared.Services
                 WorksheetName = "Transaltions"
             };
             var fileContent = exportGenerator.CreateSingleSheetSpreadsheet(exportDefinition);
-            System.IO.File.WriteAllBytes(exportFileName + ".xlsx", fileContent);
+            FileWriteHelper.WriteBytes(exportFileName + ".xlsx", fileContent);
 
 
             return new Result<int>(exportCount);

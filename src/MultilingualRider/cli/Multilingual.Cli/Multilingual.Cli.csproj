@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net10.0</TargetFramework>
+		<RollForward>Major</RollForward>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>disable</Nullable>
+		<AssemblyName>multilingual</AssemblyName>
+		<RootNamespace>Multilingual.Cli</RootNamespace>
+		<PackAsTool>true</PackAsTool>
+		<ToolCommandName>multilingual</ToolCommandName>
+		<PackageId>Walltec.Multilingual.Cli</PackageId>
+		<Description>Command line tool for the Multilingual Extension: sync, translate, export, import and native generation for .resx / .resw files.</Description>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="ICG.NetCore.Utilities.Spreadsheet" Version="7.4.0" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+	</ItemGroup>
+
+	<!-- Link the shared sources one by one: the .projitems lacks the file converters and has the Windows-only OutputWindowHelper. -->
+	<PropertyGroup>
+		<Shared>..\..\..\MultilingualExtension\MultilingualExtension.SharedCode\</Shared>
+	</PropertyGroup>
+	<ItemGroup>
+		<Compile Include="$(Shared)Helpers\*.cs" Exclude="$(Shared)Helpers\OutputWindowHelper.cs" LinkBase="Shared\Helpers" />
+		<Compile Include="$(Shared)Interfaces\*.cs" LinkBase="Shared\Interfaces" />
+		<Compile Include="$(Shared)Models\*.cs" LinkBase="Shared\Models" />
+		<Compile Include="$(Shared)Services\*.cs" LinkBase="Shared\Services" />
+		<Compile Include="$(Shared)Services\FileConverters\*.cs" LinkBase="Shared\Services\FileConverters" />
+	</ItemGroup>
+
+</Project>

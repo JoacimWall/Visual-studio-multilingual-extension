@@ -112,6 +112,15 @@
 	  <Compile Include="..\MultilingualExtension\MultilingualExtension.SharedCode\Helpers\RegExHelper.cs">
 	    <Link>Helpers\RegExHelper.cs</Link>
 	  </Compile>
+	  <Compile Include="..\MultilingualExtension\MultilingualExtension.SharedCode\Services\ExportService.cs">
+	    <Link>Services\ExportService.cs</Link>
+	  </Compile>
+	  <Compile Include="..\MultilingualExtension\MultilingualExtension.SharedCode\Services\ImportService.cs">
+	    <Link>Services\ImportService.cs</Link>
+	  </Compile>
+	  <Compile Include="..\MultilingualExtension\MultilingualExtension.SharedCode\Helpers\FileWriteHelper.cs">
+	    <Link>Helpers\FileWriteHelper.cs</Link>
+	  </Compile>
 	  <Compile Include="..\MultilingualExtension\MultilingualExtension.SharedCode\Services\SyncFileService.cs">
 	    <Link>Services\SyncFileService.cs</Link>
 	  </Compile>
