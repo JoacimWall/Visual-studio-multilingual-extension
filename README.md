@@ -52,7 +52,7 @@ Install from the same project: `dotnet pack src/MultilingualRider/cli/Multilingu
 multilingual sync <file|solution-folder>            [--solution-dir <dir>]
 multilingual translate <file|solution-folder>       [--solution-dir <dir>]
 multilingual sync-translate <file|solution-folder>  [--solution-dir <dir>]
-multilingual export <file> --status <New|NeedReview|Final|All> [--solution-dir <dir>]
+multilingual export <file> --status <NewOrNeedReview|New|NeedReview|Final|All> [--solution-dir <dir>]
 multilingual import <masterfile> --file <xlsx>      [--solution-dir <dir>]
 multilingual native <file>                          [--solution-dir <dir>]
 multilingual --help
