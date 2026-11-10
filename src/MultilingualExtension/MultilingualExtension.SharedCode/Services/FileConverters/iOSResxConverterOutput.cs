@@ -1,4 +1,6 @@
-﻿namespace MultilingualExtension.Shared.Services.FileConverters
+﻿using MultilingualExtension.Shared.Helpers;
+
+namespace MultilingualExtension.Shared.Services.FileConverters
 {
     /// <summary>
     /// iOS Resx converter output.
@@ -11,6 +13,7 @@
         public string OutputFilePath { get; }
 
         private readonly StreamWriter _streamWriter;
+        private readonly string _tempPath;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="iOSResxConverterOutput"/> class.
@@ -27,13 +30,18 @@
             culture = string.IsNullOrEmpty(culture) ? "Base" : culture;
             OutputFilePath = Path.Combine(outputFolder, $"{culture}.lproj", "Localizable.strings");
             Directory.CreateDirectory(Path.GetDirectoryName(OutputFilePath));
-            _streamWriter = new StreamWriter(OutputFilePath);
+            _tempPath = FileWriteHelper.GetTempPath(OutputFilePath);
+            _streamWriter = new StreamWriter(_tempPath);
         }
 
         /// <summary>
         /// Flushes the accumulated data to the output file.
         /// </summary>
-        public void Dispose() => _streamWriter.Dispose();
+        public void Dispose()
+        {
+            _streamWriter.Dispose();
+            FileWriteHelper.Commit(_tempPath, OutputFilePath);
+        }
 
         /// <summary>
         /// Writes a comment.

@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using System.Xml.Linq;
+using MultilingualExtension.Shared.Helpers;
 
 namespace MultilingualExtension.Shared.Services.FileConverters
 {
@@ -58,7 +59,7 @@ namespace MultilingualExtension.Shared.Services.FileConverters
         public void Dispose()
         {
             Directory.CreateDirectory(Path.GetDirectoryName(OutputFilePath));
-            _xDocument.Save(OutputFilePath);
+            FileWriteHelper.Save(OutputFilePath, _xDocument);
         }
 
         /// <summary>

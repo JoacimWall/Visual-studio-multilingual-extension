@@ -9,6 +9,7 @@
     <Import_RootNamespace>MultilingualExtension.SharedCode</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\FileWriteHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Global.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\OutputWindowHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ReswHelpers.cs" />

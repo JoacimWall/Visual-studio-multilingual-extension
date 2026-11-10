@@ -182,7 +182,7 @@ namespace MultilingualExtension.Shared.Services
 
 
             if (updatefilechanged)
-                updatedoc.Save(updatefilePath);
+                FileWriteHelper.Save(updatefilePath, updatedoc);
 
             return new Result<int>(translatedCount);
             
@@ -249,7 +249,7 @@ namespace MultilingualExtension.Shared.Services
 
 
             if (updatefilechanged)
-                updatedoc.Save(updatefilePath);
+                FileWriteHelper.Save(updatefilePath, updatedoc);
 
             return new Result<bool>(true);
 
