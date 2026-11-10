@@ -24,7 +24,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\SyncFileService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\TranslationService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\UpdateStatusForTranslation.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Helpers\TextViewHelpers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)..\MultilingualExtension.SharedCode\Helpers\RegExHelper.cs">
       <Link>Helpers\RegExHelper.cs</Link>
     </Compile>

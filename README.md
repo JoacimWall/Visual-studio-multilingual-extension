@@ -1,8 +1,8 @@
-# Visual Studio For Mac/Windows Multilingual Extension
-### Visual Studio for Mac Retirement
-For mac i have done a simple client where you can do the same as you did in Visual studio for mac.
-Edit the resx file in you preferd editor like Rider or VS Code and save. Then use the ML client to sync, translate, export, import files. 
-You can download the app under Releases.
+# Visual Studio Multilingual Extension
+### Multilingual Client for Mac
+For Mac there is a simple client (MultilingualClient) that does the same thing as the Windows extension.
+Edit the resx file in your preferred editor like Rider or VS Code and save. Then use the ML client to sync, translate, export, import files and generate native Android and iOS files.
+You can download the app under [Releases](https://github.com/JoacimWall/Visual-studio-multilingual-extension/releases).
 
 #### This extension is for handling multilingual support in visual studio.
 #### For it to work, it requires that you start from a Resx or Resw file that is the master.
@@ -12,30 +12,23 @@ You can download the app under Releases.
 
 #### Resw use the name of the folders for language recognize. If you have a masterfile in folder strings\en-US\Resources.resw then you shold put french file in strings\fr-FR\Resources.resw  
 
-### View introduction video or download the sample app
-#### This video is for Mac but the windows and mac are very similar. What changed after this was done is that you now configure by changing values in the file MultiLingualExtensionSettings.json which is created in the same folder as the solution file.
-
-### Support for Native Android and Ios (only Mac os)
+### Support for Native Android and Ios (Multilingual Client)
 #### In case you want to use this to have a master language file for native Android and Ios. do you need to use .resx files. To get the translation to land in your native projects, set the path to these in MultiLingualExtensionSettings.json and the property AndroidResourcesOutPutFolder and IosResourcesOutPutFolder.
-
-[![YouTube](https://i9.ytimg.com/vi/4OAhHpUpXmA/mq2.jpg?sqp=CLDSof8F&rs=AOn4CLAexsPpQzbUEi8Ud_7YgThQFXFwPg)](https://youtu.be/4OAhHpUpXmA)
 
 
 Under src/sample you will find a Xamarin forms sample and a UWP sample. In the xamarin sample you will see how you can implement multilingual support for Xamarin and how to access the translation from code and in xaml. This is a standard implementation of multilangual suport. If you install the extension you can test the translation features of the extension.
 
-### It has five main functions.
+### It has four main functions.
 
 * Synchronization of language files
 * Translation of texts by Google translate or Microsoft translate
 * Export of translations into csv or xlsx file for final translation by external stakeholder
 * Import of final translations from external stakholder
-* List all unused translations to keep your resource files clean (only Mac).
 
-<img width=“100” height="200" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/SolutionExample.png">
 <img width=“100” height="200" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/SolutionExample_win.png">
 
 ## Install for Mac
-The Visual studio for Mac team has closed the signup for new developers to publish extensions. So you need to download the latest release from this page then go to visual studio mac and click "install from file" in the Exstension Mananger. Remember to restart you visual studio after install for the extension to load.  
+Download the Multilingual Client pkg from the latest release and install it.  
 [Latest release](https://github.com/JoacimWall/Visual-studio-multilingual-extension/releases)
 
 ## Install for Windows 
@@ -105,9 +98,6 @@ Right-click one of the language files (AppResources.fr-FR.resx) and select "Sync
 the synchronization will not only add translations to the language files it will also remove translation that are not present in the master file.
 ##### The log show the result.
 <img width=“100” height="200" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/SyncLog.png">
-##### The log shows auto on windows to show it on Mac.
-Go to View/other Windows/Multilingual Extension Log
-<img width=“100” height="400" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/MacLog.png">
 
 ## Translate of Resx or Resw Files
 There are two ways to translate the resx files. 
@@ -144,24 +134,6 @@ Right-click one of the csv or xlsx language files (AppResources.fr-FR.resx.csv) 
 
 <img  width=“100” height="400" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/ImportFilePopUpDialog.png">
 
-### List unused translation
-Right-click the master(AppResources.resx) file and select "List unused translations". The extension will search trow all .cs and .xaml files and check if the translations in the master file is used. When done it will report all translations that are not used in the app to the search result windows and prompt you with dialog asking if you want to remove all unused translations.
-
-<img  width=“400” height="400" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/ListUnusedTransaltions.png">
-
-
-### Update status for a previously translated node 
-If you change the text in an existing node in the Master resx file and want to change the translation status. Right click somewhere on the <data name = 'xxxxx' node and select "Change Translation Status ..." and chose the status you would like to change to. This will change the status in all language files ((AppResources.fr-FR.resx) to the bew status. If you changed to 'New' then you can right click the master file and select translate to make new translations.    
-This feature is only iplemented on mac in current version.
-
-<img  width=“100” height="200" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/ChangeStatusOnExisting.png">
-
-### Retranslate of a previously translated node 
-If you change the text in an existing node or add a new node in the Master resx file and want to sync and translate this to all the language files. Right click somewhere on the <data name = 'xxxxx' node and select "Sync and translate this node in all .xx-xx.resx files". This will translate this node in all language files ((AppResources.fr-FR.resx) and change status to need review.
-This feature is only implemented on mac in current version.
-
-<img  width=“100” height="200" src="https://github.com/JoacimWall/Visual-studio-multilingual-extension/blob/main/Images/SyncAndTranslateThisNode.png">
-
 ## How the extension works 
 This extension use the comment field in the target resx files(AppResources.fr-FR.resx) to keep track of the status of row/translation. It has three different status that it can have in it's comment field.
 * New
@@ -182,4 +154,4 @@ In this first version all files need to be in the same folder, export and import
 
 ## Converting from windows multilangual toolkit
 if you have used the windows multilangual toolkit before you can use this. The first time you sync the master file with the target files (AppResources.fr-FR.resx) all existings rows in the target file will get status "Final". 
-There is a Windows version of this extension also so you can work i projects where users are on both Mac and Windows.  
+Use the Multilingual Client on Mac and the extension on Windows if you work in projects where users are on both Mac and Windows.  

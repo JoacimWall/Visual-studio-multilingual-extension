@@ -118,12 +118,6 @@
 	  <Compile Include="..\MultilingualExtension\MultilingualExtension.SharedCode\Services\TranslationService.cs">
 	    <Link>Services\TranslationService.cs</Link>
 	  </Compile>
-	  <Compile Include="..\MultilingualExtension\MultilingualExtension.Mac\Services\ImportService.cs">
-	    <Link>Services\ImportService.cs</Link>
-	  </Compile>
-	  <Compile Include="..\MultilingualExtension\MultilingualExtension.Mac\Services\ExportService.cs">
-	    <Link>Services\ExportService.cs</Link>
-	  </Compile>
 	  <Compile Include="..\MultilingualExtension\MultilingualExtension.SharedCode\Services\FileConverters\AndroidResxConverterOutput.cs">
 	    <Link>Services\FileConverters\AndroidResxConverterOutput.cs</Link>
 	  </Compile>
