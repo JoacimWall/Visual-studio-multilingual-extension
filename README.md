@@ -4,6 +4,10 @@ For Mac there is a simple client (MultilingualClient) that does the same thing a
 Edit the resx file in your preferred editor like Rider or VS Code and save. Then use the ML client to sync, translate, export, import files and generate native Android and iOS files.
 You can download the app under [Releases](https://github.com/JoacimWall/Visual-studio-multilingual-extension/releases).
 
+### Multilingual plugin for Rider
+For JetBrains Rider (macOS, Windows, Linux) there is a plugin that adds the same sync, translate, export, import and native Android/iOS functions to the context menu of `.resx` / `.resw` files and of the solution node.
+Download `MultilingualRider-x.y.z.zip` under [Releases](https://github.com/JoacimWall/Visual-studio-multilingual-extension/releases) (releases named `Rider_x_y_z`). See [Install for Rider](#install-for-rider-macos-windows-linux).
+
 #### This extension is for handling multilingual support in visual studio.
 #### For it to work, it requires that you start from a Resx or Resw file that is the master.
 #### Resx files use the filename for language recognize. You name all the other files according to the masterfile name .xx-xx.resx or .xx.resx. For example AppResources.resx for master and AppResources.fr.resx for shared translations for French. And AppResources.fr-FR.resx,AppResources.fr-CA.resx if you would like to have different translation for France or Canadian culture. 
@@ -34,9 +38,10 @@ Download the Multilingual Client pkg from the latest release and install it.
 ## Install for Rider (macOS, Windows, Linux)
 The Rider plugin adds a "Multilingual Extension" submenu to the context menu of `.resx` / `.resw` files and of the solution node. Each action saves all open documents, runs the bundled `multilingual` CLI and streams the log into a Run console tab (use its Stop button to cancel safely). A balloon shows success or failure.
 
-- Needs the **.NET 10 runtime** to run, and the **.NET 10 SDK** to build.
-- Build: `cd src/MultilingualRider && ./gradlew buildPlugin` (the zip lands in `build/distributions`, with `cli/multilingual.dll` inside).
-- Install: Settings > Plugins > gear icon > *Install Plugin from Disk...* and pick the zip.
+- Needs **Rider 2026.2 or later** and the **.NET 10 runtime** to run.
+- Download: get `MultilingualRider-x.y.z.zip` from the latest `Rider_x_y_z` release under [Releases](https://github.com/JoacimWall/Visual-studio-multilingual-extension/releases). Do not unzip it.
+- Install: Settings > Plugins > gear icon > *Install Plugin from Disk...* and pick the zip, then restart Rider.
+- Build it yourself: needs the **.NET 10 SDK** and **JDK 21** (Gradle fails on newer JDKs such as 26). Run `cd src/MultilingualRider && JAVA_HOME="$(/usr/libexec/java_home -v 21)" ./gradlew buildPlugin` on macOS, or point `JAVA_HOME` at a JDK 21 on Windows/Linux. The zip lands in `build/distributions`, with `cli/multilingual.dll` inside.
 - On a `.resx` / `.resw` file: Sync, Translate, Sync and translate, Export... (asks for a status), Import... (asks for an `.xlsx` file), and Generate native Android/iOS files (master `.resx` only).
 - On the solution node: Sync all, Translate all, Sync and translate all, Open settings (opens `MultiLingualExtensionSettings.json` in the solution folder; it is created on the first run of any command).
 
