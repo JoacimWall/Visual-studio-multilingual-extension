@@ -18,7 +18,7 @@ public static class Cli
           multilingual sync <file|solution-folder>            [--solution-dir <dir>]
           multilingual translate <file|solution-folder>       [--solution-dir <dir>]
           multilingual sync-translate <file|solution-folder>  [--solution-dir <dir>]
-          multilingual export <file> --status <New|NeedReview|Final|All> [--solution-dir <dir>]
+          multilingual export <file> --status <NewOrNeedReview|New|NeedReview|Final|All> [--solution-dir <dir>]
           multilingual import <masterfile> --file <csv|xlsx>  [--solution-dir <dir>]
           multilingual native <file>                          [--solution-dir <dir>]
           multilingual --help
@@ -106,6 +106,7 @@ public static class Cli
 
     static string MapStatus(string status) => status switch
     {
+        "NewOrNeedReview" => Globals.STATUS_COMMENT_NEW_OR_NEED_REVIEW,
         "New" => Globals.STATUS_COMMENT_NEW,
         "NeedReview" => Globals.STATUS_COMMENT_NEED_REVIEW,
         "Final" => Globals.STATUS_COMMENT_FINAL,

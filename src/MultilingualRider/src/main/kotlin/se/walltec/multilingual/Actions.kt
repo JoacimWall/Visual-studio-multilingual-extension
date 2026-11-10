@@ -64,9 +64,9 @@ class NativeAction : MultilingualAction({ it.isMasterResx() }) {
 
 class ExportAction : MultilingualAction({ it.isResource() }) {
     override fun perform(e: AnActionEvent, project: com.intellij.openapi.project.Project, file: VirtualFile) {
-        val labels = arrayOf("New", "Need review", "Final", "All")
-        val values = arrayOf("New", "NeedReview", "Final", "All")
-        val index = Messages.showChooseDialog(project, "Export rows with status:", "Export", null, labels, "All")
+        val labels = arrayOf("New or Need review", "New", "Need review", "Final", "All")
+        val values = arrayOf("NewOrNeedReview", "New", "NeedReview", "Final", "All")
+        val index = Messages.showChooseDialog(project, "Export rows with status:", "Export", null, labels, labels[0])
         if (index < 0) return
         MultilingualRunner.run(project, "export", File(file.path).path, listOf("--status", values[index]))
     }

@@ -95,6 +95,18 @@ public class CliTests : IDisposable
     }
 
     [Fact]
+    public void Export_accepts_new_or_need_review_and_rejects_unknown_status()
+    {
+        var dir = CopySample();
+        var fr = Path.Combine(dir, "Resource.fr.resx");
+        Assert.Equal(0, Run("sync", Path.Combine(dir, "Resource.resx"), "--solution-dir", dir).Code);
+
+        Assert.Equal(0, Run("export", fr, "--status", "NewOrNeedReview").Code);
+        Assert.True(File.Exists(fr + ".xlsx"));
+        Assert.Equal(1, Run("export", fr, "--status", "Bogus").Code);
+    }
+
+    [Fact]
     public void Unknown_command_fails_on_stderr()
     {
         var result = Run("bogus", "x");
