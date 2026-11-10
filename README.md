@@ -35,7 +35,7 @@ Download the Multilingual Client pkg from the latest release and install it.
 The Rider plugin adds a "Multilingual Extension" submenu to the context menu of `.resx` / `.resw` files and of the solution node. Each action saves all open documents, runs the bundled `multilingual` CLI and streams the log into a Run console tab (use its Stop button to cancel safely). A balloon shows success or failure.
 
 - Needs the **.NET 10 runtime** to run, and the **.NET 10 SDK** to build.
-- Build: `cd src/MultilingualRider && ./gradlew buildPlugin` (the zip lands in `build/distributions`, with `cli/multilingual.dll` inside). If the repo has no Gradle wrapper yet, run `gradle wrapper` once.
+- Build: `cd src/MultilingualRider && ./gradlew buildPlugin` (the zip lands in `build/distributions`, with `cli/multilingual.dll` inside).
 - Install: Settings > Plugins > gear icon > *Install Plugin from Disk...* and pick the zip.
 - On a `.resx` / `.resw` file: Sync, Translate, Sync and translate, Export... (asks for a status), Import... (asks for an `.xlsx` file), and Generate native Android/iOS files (master `.resx` only).
 - On the solution node: Sync all, Translate all, Sync and translate all, Open settings (opens `MultiLingualExtensionSettings.json` in the solution folder; it is created on the first run of any command).

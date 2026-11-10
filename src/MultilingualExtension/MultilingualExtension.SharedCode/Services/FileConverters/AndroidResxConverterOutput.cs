@@ -56,10 +56,17 @@ namespace MultilingualExtension.Shared.Services.FileConverters
         /// <summary>
         /// Writes the accumulated data to the output file.
         /// </summary>
-        public void Dispose()
+        public void Commit()
         {
             Directory.CreateDirectory(Path.GetDirectoryName(OutputFilePath));
             FileWriteHelper.Save(OutputFilePath, _xDocument);
+        }
+
+        /// <summary>
+        /// Nothing is written before <see cref="Commit"/>, so there is nothing to clean up.
+        /// </summary>
+        public void Dispose()
+        {
         }
 
         /// <summary>

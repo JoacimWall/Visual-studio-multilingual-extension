@@ -84,7 +84,7 @@ object MultilingualRunner {
 
     private fun findDotnet(): String? {
         val exe = if (SystemInfo.isWindows) "dotnet.exe" else "dotnet"
-        PathEnvironmentVariableUtil.findInPath("dotnet", EnvironmentUtil.getValue("PATH"), null)?.let { return it.path }
+        PathEnvironmentVariableUtil.findInPath(exe, EnvironmentUtil.getValue("PATH"), null)?.let { return it.path }
         val roots = listOfNotNull(
             System.getenv("DOTNET_ROOT"),
             if (SystemInfo.isWindows) "C:\\Program Files\\dotnet" else null,

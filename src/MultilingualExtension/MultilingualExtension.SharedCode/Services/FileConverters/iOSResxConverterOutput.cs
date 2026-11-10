@@ -37,10 +37,19 @@ namespace MultilingualExtension.Shared.Services.FileConverters
         /// <summary>
         /// Flushes the accumulated data to the output file.
         /// </summary>
-        public void Dispose()
+        public void Commit()
         {
             _streamWriter.Dispose();
             FileWriteHelper.Commit(_tempPath, OutputFilePath);
+        }
+
+        /// <summary>
+        /// Discards the temp file when <see cref="Commit"/> was not reached, so a failed run leaves the real file untouched.
+        /// </summary>
+        public void Dispose()
+        {
+            _streamWriter.Dispose();
+            FileWriteHelper.DeleteQuietly(_tempPath);
         }
 
         /// <summary>

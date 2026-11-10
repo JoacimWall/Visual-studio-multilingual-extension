@@ -20,14 +20,14 @@ kotlin {
 
 dependencies {
     intellijPlatform {
-        rider("2025.2")
+        rider("2026.2")
     }
 }
 
 intellijPlatform {
     pluginConfiguration {
         ideaVersion {
-            sinceBuild = "252"
+            sinceBuild = "262"
             untilBuild = provider { null }
         }
     }

@@ -154,10 +154,19 @@ public static class Cli
         foreach (var master in masters)
         {
             var ok = true;
-            if (command is "sync" or "sync-translate")
-                ok = Check(await new SyncFileService().SyncFile(master, log, settings), master, error);
-            if (ok && command is "translate" or "sync-translate")
-                ok = Check(await new TranslationService().TranslateFile(master, log, settings), master, error);
+            try
+            {
+                if (command is "sync" or "sync-translate")
+                    ok = Check(await new SyncFileService().SyncFile(master, log, settings), master, error);
+                if (ok && command is "translate" or "sync-translate")
+                    ok = Check(await new TranslationService().TranslateFile(master, log, settings), master, error);
+            }
+            catch (Exception ex)
+            {
+                // A failure in one resource set must not stop the rest of the run.
+                error.WriteLine($"{master}: {ex.Message}");
+                ok = false;
+            }
             if (!ok) failed++;
         }
         if (failed > 0)
