@@ -21,7 +21,7 @@ private val LANGUAGE_FILE = Regex("""([.][a-zA-Z]{2}-[a-zA-Z]{2}\.resx$)|([.][a-
 
 private fun VirtualFile?.isResource() = this != null && !isDirectory && extension?.lowercase() in RESOURCE_EXTENSIONS
 private fun VirtualFile?.isSolution() = this != null && !isDirectory && extension?.lowercase() in SOLUTION_EXTENSIONS
-private fun VirtualFile?.isMasterResx() = isResource() && extension.equals("resx", true) && !LANGUAGE_FILE.containsMatchIn(name)
+private fun VirtualFile?.isMasterResx() = this != null && isResource() && extension.equals("resx", true) && !LANGUAGE_FILE.containsMatchIn(name)
 
 /** Visible only when [visibleFor] accepts the selected file. */
 abstract class MultilingualAction(private val visibleFor: (VirtualFile?) -> Boolean) : AnAction() {
