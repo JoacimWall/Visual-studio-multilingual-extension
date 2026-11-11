@@ -3,11 +3,13 @@ name: Send ready issue to factory
 # Lives in each app repo. scripts/install-trigger.mjs fills in the placeholders
 # and opens a pull request that adds this file.
 #
-# Only "labeled": creating an issue with the label already on sends "opened"
-# and "labeled" together, and listening to both starts the factory twice.
+# "labeled", not "opened": creating an issue with the label already on sends
+# both, and listening to both starts the factory twice.
+# "closed": an issue that waited on this one as its blocker (and still has
+# ready) is sent again; the factory checks its other blockers itself.
 on:
   issues:
-    types: [labeled]
+    types: [labeled, closed]
 
 permissions:
   contents: read
@@ -16,26 +18,41 @@ jobs:
   notify:
     # Only these people may start the factory and spend the agent subscription.
     if: >-
-      github.event.label.name == 'ready' &&
-      github.event.issue.state == 'open' &&
-      contains(fromJSON('["JoacimWall"]'), github.actor)
+      contains(fromJSON('["JoacimWall"]'), github.actor) &&
+      ((github.event.action == 'labeled' && github.event.label.name == 'ready' && github.event.issue.state == 'open') ||
+       github.event.action == 'closed')
     runs-on: ubuntu-latest
     steps:
       - name: Start the factory
+        id: start
         env:
           GH_TOKEN: ${{ secrets.FACTORY_GITHUB_TOKEN }}
+          ACTION: ${{ github.event.action }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
         run: |
-          gh api --method POST repos/JoacimWall/walltech-factory/dispatches \
-            -f event_type=issue-ready \
-            -f "client_payload[repo]=$GITHUB_REPOSITORY" \
-            -F "client_payload[issue]=$ISSUE_NUMBER"
+          if [ "$ACTION" = labeled ]; then
+            issues="$GITHUB_REPOSITORY $ISSUE_NUMBER"
+          else
+            issues=$(gh api "repos/$GITHUB_REPOSITORY/issues/$ISSUE_NUMBER/dependencies/blocking" \
+              --jq '.[] | select(.state == "open" and any(.labels[]; .name == "ready")) | "\(.repository_url | sub(".*/repos/"; "")) \(.number)"')
+          fi
+          sent=0
+          while read -r repo number; do
+            [ -n "$number" ] || continue
+            echo "Sending $repo#$number"
+            gh api --method POST repos/JoacimWall/walltech-factory/dispatches \
+              -f event_type=issue-ready \
+              -f "client_payload[repo]=$repo" \
+              -F "client_payload[issue]=$number"
+            sent=$((sent + 1))
+          done <<< "$issues"
+          echo "sent=$sent" >> "$GITHUB_OUTPUT"
       # The factory VM runs on this Mac. Keep the Mac awake until the factory has
       # no queued or running jobs (at most 7 hours), so it does not sleep mid-job.
       # Detached, because the runner stops a job's processes when the job ends.
       # A closed laptop lid without an external display still sleeps.
       - name: Keep this Mac awake while the factory works
-        if: runner.os == 'macOS'
+        if: runner.os == 'macOS' && steps.start.outputs.sent != '0'
         env:
           GH_TOKEN: ${{ secrets.FACTORY_GITHUB_TOKEN }}
         run: |
