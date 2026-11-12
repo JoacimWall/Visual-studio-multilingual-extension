@@ -172,6 +172,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net11.0-maccatalyst|AnyCPU'">
     <CreatePackage>false</CreatePackage>
+    <MtouchLink>None</MtouchLink>
     <CodesignEntitlements>Platforms\MacCatalyst\Entitlements.Debug.plist</CodesignEntitlements>
   </PropertyGroup>
 

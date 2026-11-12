@@ -82,6 +82,9 @@ public partial class BaseViewModel : ObservableObject, IQueryAttributable
     public async virtual Task OnDisappearingAsync() => await Task.FromResult(true);
     public async virtual Task OnAppearingAsync() => await Task.FromResult(true);
 
+    // Runs after the page is pushed (NavigatedTo); Appearing fires too early on Mac Catalyst.
+    public virtual Task OnNavigationSettledAsync() => Task.CompletedTask;
+
     public async virtual Task RefreshAsync(object layoutState) => await Task.FromResult(false);
     public async virtual Task<bool> NavbackIsAllowed() => await Task.FromResult(true);
     //Void

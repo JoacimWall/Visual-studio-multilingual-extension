@@ -3,7 +3,9 @@
                         xmlns:views="clr-namespace:MultilingualClient.Views"
                           xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                         xmlns:vm="clr-namespace:MultilingualClient.ViewModels"
                          xmlns:theming="clr-namespace:MultilingualClient.Resources.Styles"
+                         x:DataType="vm:BaseViewModel"
                          BackgroundColor="{x:Static theming:AppColors.Primary500Color}">
     <Grid>
         
