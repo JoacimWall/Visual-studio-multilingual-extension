@@ -70,13 +70,13 @@ public class BaseContentPage : ContentPage
             });
         }
     }
-    protected override void OnNavigatedTo(NavigatedToEventArgs args)
+    protected override async void OnNavigatedTo(NavigatedToEventArgs args)
     {
         base.OnNavigatedTo(args);
-        if (BindingContext != null)
+        if (BindingContext is BaseViewModel vm)
         {
-            (BindingContext as BaseViewModel)?.OnNavigatedTo(args);
-           
+            vm.OnNavigatedTo(args);
+            await vm.OnNavigationSettledAsync();
         }
     }
 }
