@@ -95,6 +95,23 @@ public class CliTests : IDisposable
     }
 
     [Fact]
+    public void Import_accepts_the_xlsx_itself_as_path()
+    {
+        // The Rider plugin passes the right-clicked xlsx as both path and --file.
+        var dir = CopySample();
+        var master = Path.Combine(dir, "Resource.resx");
+        var fr = Path.Combine(dir, "Resource.fr.resx");
+        Assert.Equal(0, Run("sync", master, "--solution-dir", dir).Code);
+        var before = Rows(fr);
+        Assert.Equal(0, Run("export", fr, "--status", "All").Code);
+
+        var import = Run("import", fr + ".xlsx", "--file", fr + ".xlsx");
+
+        Assert.Equal(0, import.Code);
+        Assert.Equal(before, Rows(fr));
+    }
+
+    [Fact]
     public void Export_accepts_new_or_need_review_and_rejects_unknown_status()
     {
         var dir = CopySample();
