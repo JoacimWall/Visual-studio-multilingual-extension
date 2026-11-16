@@ -19,6 +19,10 @@ private val SOLUTION_EXTENSIONS = setOf("sln", "slnx")
 // Same pattern as the shared code: AppResources.fr.resx or AppResources.fr-FR.resx is a language file.
 private val LANGUAGE_FILE = Regex("""([.][a-zA-Z]{2}-[a-zA-Z]{2}\.resx$)|([.][a-zA-Z]{2}\.resx$)""")
 
+// Export output, e.g. AppResources.fr-FR.resx.xlsx or Resources.resw.xlsx: importable as is.
+private val IMPORT_FILE = Regex("""(\w+[.][a-zA-Z]{2}(-[a-zA-Z]{2})?[.]resx|\w+[.]resw)[.]xlsx$""", RegexOption.IGNORE_CASE)
+
+private fun VirtualFile?.isImportFile() = this != null && !isDirectory && IMPORT_FILE.containsMatchIn(name)
 private fun VirtualFile?.isResource() = this != null && !isDirectory && extension?.lowercase() in RESOURCE_EXTENSIONS
 private fun VirtualFile?.isSolution() = this != null && !isDirectory && extension?.lowercase() in SOLUTION_EXTENSIONS
 private fun VirtualFile?.isMasterResx() = this != null && isResource() && extension.equals("resx", true) && !LANGUAGE_FILE.containsMatchIn(name)
@@ -72,8 +76,11 @@ class ExportAction : MultilingualAction({ it.isResource() }) {
     }
 }
 
-class ImportAction : MultilingualAction({ it.isResource() }) {
+class ImportAction : MultilingualAction({ it.isResource() || it.isImportFile() }) {
     override fun perform(e: AnActionEvent, project: com.intellij.openapi.project.Project, file: VirtualFile) {
+        // Right-clicked the exported xlsx itself: import it straight away, like the standalone client.
+        if (file.isImportFile())
+            return MultilingualRunner.run(project, "import", File(file.path).path, listOf("--file", File(file.path).path))
         val descriptor = FileChooserDescriptorFactory.createSingleFileDescriptor()
             .withExtensionFilter("Spreadsheet", "xlsx", "csv")
         val chosen = FileChooser.chooseFile(descriptor, project, file.parent) ?: return
